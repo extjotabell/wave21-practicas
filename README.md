@@ -1,9 +1,9 @@
-# practicas-w20 🚀
+# practicas-w21 🚀
 by Digital House 💗
 
 way to work 🎯
 
-Repositorio de practicas de Bootcamp DH Java Wave 20
+Repositorio de practicas de Bootcamp DH Java Wave 21
 
 ## Directrices de creación de ramas
 
