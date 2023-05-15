@@ -46,3 +46,9 @@ Cada desarrolador cuenta con un branch con la estructura ya creada a su nombre p
    `git commit -m "mensaje de commit"`
    
    `git push`
+
+-----------
+
+## Estructura de carpetas en proyectos
+
+![](https://res.cloudinary.com/dgt2h7onu/image/upload/v1684190033/folder_structure_ibfbv5.png)
