@@ -51,3 +51,11 @@
 ### Pushear rama
 
 *git push -u origin nombreRama*
+
+### Eliminar rama local
+
+*git branch -d rama_a_borrar*
+
+### Eliminar rama en remoto
+
+*git push origin --delete rama_a_borrar*
