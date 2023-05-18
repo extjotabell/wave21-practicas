@@ -50,7 +50,7 @@
 
 ### Pushear rama
 
-*git push -u origin nombreRama*
+*git push origin nombreRama*
 
 ### Eliminar rama local
 
