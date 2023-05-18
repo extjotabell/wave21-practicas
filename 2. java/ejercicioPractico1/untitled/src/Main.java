@@ -1,6 +1,6 @@
 public class Main {
     public static void main(String[] args) {
-        String ciudades[] = new String[10];
+        String[] ciudades = new String[10];
         ciudades[0] = "Londres";
         ciudades[1] = "Madrid";
         ciudades[2] = "Nueva York";
@@ -12,7 +12,7 @@ public class Main {
         ciudades[8] = "Lisboa";
         ciudades[9] = "Tokio";
 
-        int temperaturas[][] = new int[10][10];
+        int[][] temperaturas = new int[10][10];
         temperaturas[0][0] = -2;
         temperaturas[0][1] = 33;
         temperaturas[1][0] = -3;
