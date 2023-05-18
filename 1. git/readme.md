@@ -26,7 +26,7 @@
 
 ### Para pushear
 
-*git push -u origin main*
+*git push origin main*
 
 ### Para traer los archivos al local
 
