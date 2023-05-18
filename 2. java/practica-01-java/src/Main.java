@@ -42,7 +42,7 @@ public class Main {
         int posMenorTemp = 0;
         int posMayorTemp = 0;
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < vectorCiudades.length; i++) {
                 if(matrizTemperaturas[posMenorTemp][0] > matrizTemperaturas[i][0]){
                     posMenorTemp = i;
                 }
