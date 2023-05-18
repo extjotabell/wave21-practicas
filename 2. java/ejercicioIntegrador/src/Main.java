@@ -43,7 +43,7 @@ public class Main {
                 indfiMax = f;
             }
         }
-        System.out.println("La menor temperatura la tuvo "+ countries[indfiMin] + ", con " + min + "º C.");
-        System.out.println("La mayor temperatura la tuvo "+ countries[indfiMax] + ", con " + max + "º C.");
+        System.out.println(String.format("La menor temperatura la tuvo %s, con %d º C.", countries[indfiMin], min));
+        System.out.println(String.format("La mayor temperatura la tuvo %s, con %d º C.", countries[indfiMax], max));
     }
 }
