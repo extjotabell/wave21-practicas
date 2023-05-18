@@ -1,7 +1,12 @@
+import java.util.List;
+
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
+
+        List<String> listaPersonas = new Arraylist<String>();
+
         // Press Opt+Enter with your caret at the highlighted text to see how
         String[] ciudades = {"Londres", "Madrid", "Nueva York", "Buenos Aires", "Asucion", "Sao Paulo", "Lima",
 
@@ -35,5 +40,7 @@ public class Main {
 
         System.out.println("La ciudad con mayor temperatura es " + ciudadMayorTemp + " con: "+ mayorTemp + " grados");
         System.out.println("La ciudad con menor temperatura es " + ciudadMenorTemp + " con: "+ menorTemp + " grados");
+
+
     }
 }
