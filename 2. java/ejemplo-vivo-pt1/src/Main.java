@@ -10,8 +10,6 @@ public class Main {
                 menor = temperaturas[i][0];
                 indiceCiudadMenor = i;
             }
-        }
-        for (int i = 0; i < temperaturas.length; i++) {
             if (temperaturas[i][1] > mayor) {
                 mayor = temperaturas[i][1];
                 indiceCiudadMayor = i;
