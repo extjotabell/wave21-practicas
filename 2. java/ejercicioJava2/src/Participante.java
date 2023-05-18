@@ -93,6 +93,24 @@ public class Participante {
         this.grupoSanguineo = grupoSanguineo;
         this.categoria = categoria;
     }
+    public int calcularMonto(){
+        int monto = 0;
+        if(this.getCategoria() == 1 && this.getEdad() > 18){
+            monto = 1500;
+        } else if(this.getCategoria() == 1 && this.getEdad() < 18){
+            monto = 1300;
+        } else if(this.getCategoria() == 2 && this.getEdad() > 18) monto = 2300;
+        if(this.getCategoria() == 2 && this.getEdad() < 18){
+            monto = 2000;
+        } else if(this.getCategoria() == 3 && this.getEdad() > 18 ){
+            monto = 2800;
+        } else if(this.getCategoria() == 3 && this.getEdad() < 18 ) {
+            System.out.println("NO SE PERMITE MENORES PARA ESTA CATEGORIA\n");
+            monto = -1;
+        }
+
+        return monto;
+    }
 
 }
 

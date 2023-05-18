@@ -5,7 +5,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
 
-        List<String> listaPersonas = new Arraylist<String>();
+
 
         // Press Opt+Enter with your caret at the highlighted text to see how
         String[] ciudades = {"Londres", "Madrid", "Nueva York", "Buenos Aires", "Asucion", "Sao Paulo", "Lima",

@@ -1,15 +1,15 @@
 public class Incripcion {
-    private int inscripcion;
+    private int numInscripcion;
     private Categoria categoria;
     private Participante participante;
-    private double monto;
+    private int monto;
 
-    public int getInscripcion() {
-        return inscripcion;
+    public int getnumInscripcion() {
+        return numInscripcion;
     }
 
-    public void setInscripcion(int inscripcion) {
-        this.inscripcion = inscripcion;
+    public void setnumInscripcion(int inscripcion) {
+        this.numInscripcion = inscripcion;
     }
 
     public Categoria getCategoria() {
@@ -32,7 +32,7 @@ public class Incripcion {
         return monto;
     }
 
-    public void setMonto(double monto) {
+    public void setMonto(int monto) {
         this.monto = monto;
     }
 
