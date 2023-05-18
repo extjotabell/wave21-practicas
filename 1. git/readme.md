@@ -1,3 +1,4 @@
+https://huogerac.hashnode.dev/most-useful-git-commands-by-git-stages
 git init para inicializar el repositorio local
 
 git config --global user.name "mi nombre" para setear mi nombre por unica 
