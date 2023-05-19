@@ -31,5 +31,49 @@ public class Main {
                     ":" + ingresantes.get(i).getEdad() + " abonara: "+ ingresantes.get(i).calcularMonto() );
         }
 
+        //mostrar participantes por categoria
+        //categoria 1
+        System.out.println("\n CATEGORIA 1: \n");
+        int totalCategoria1 = 0;
+        for(int i = 0; i< ingresantes.size() ; i++){
+            if(ingresantes.get(i).getCategoria() == 1){
+                System.out.println("Num Participante: "+ ingresantes.get(i).getNumeroParticipante());
+                System.out.println("Nombre y Apellido : "+ ingresantes.get(i).getNombre() + " " + ingresantes.get(i).getApellido());
+                System.out.println("DNI: "+ ingresantes.get(i).getDni());
+                System.out.println("Categoria: "+ ingresantes.get(i).getCategoria() + "\n");
+                totalCategoria1+= ingresantes.get(i).calcularMonto();
+            }
+        }
+        System.out.println("\t TOTAL RECAUDADO CAT 1 = $ "+ totalCategoria1+ "\n\n");
+
+        System.out.println("\n CATEGORIA 2: \n");
+        int totalCategoria2 = 0;
+        for(int i = 0; i< ingresantes.size() ; i++){
+            if(ingresantes.get(i).getCategoria() == 2){
+                System.out.println("Num Participante: "+ ingresantes.get(i).getNumeroParticipante());
+                System.out.println("Nombre y Apellido : "+ ingresantes.get(i).getNombre() + " " + ingresantes.get(i).getApellido());
+                System.out.println("DNI: "+ ingresantes.get(i).getDni());
+                System.out.println("Categoria: "+ ingresantes.get(i).getCategoria() + "\n");
+                totalCategoria2+= ingresantes.get(i).calcularMonto();
+
+            }
+        }
+        System.out.println("\t TOTAL RECAUDADO CAT 2 = $ "+ totalCategoria2+ "\n\n");
+        System.out.println("\n CATEGORIA 3: \n");
+        int totalCategoria3 = 0;
+        for(int i = 0; i< ingresantes.size() ; i++){
+            if(ingresantes.get(i).getCategoria() == 3){
+                System.out.println("Num Participante: "+ ingresantes.get(i).getNumeroParticipante());
+                System.out.println("Nombre y Apellido : "+ ingresantes.get(i).getNombre() + " " + ingresantes.get(i).getApellido());
+                System.out.println("DNI: "+ ingresantes.get(i).getDni());
+                System.out.println("Categoria: "+ ingresantes.get(i).getCategoria() + "\n");
+                totalCategoria3 += ingresantes.get(i).calcularMonto();
+            }
+        }
+        System.out.println("\t TOTAL RECAUDADO CAT 3 = $ "+ totalCategoria3+ "\n\n");
+
+        System.out.println("\n\t TOTAL GENERAL: $" + (totalCategoria1+totalCategoria2+ totalCategoria3));
     }
+
+
 }
