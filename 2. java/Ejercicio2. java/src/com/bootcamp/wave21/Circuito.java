@@ -55,4 +55,8 @@ public class Circuito {
     public void setMonto_menor(double monto_menor) {
         this.monto_menor = monto_menor;
     }
+
+    public String mostrarCircuito(){
+        return " Nombre Circuito: " + this.getNombre() + " Descripcion: " + this.getDescripcion();
+    }
 }

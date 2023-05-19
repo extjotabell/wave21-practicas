@@ -7,6 +7,12 @@ public class Carrera {
     private String nombre;
     private List<Circuito> circuitos = new ArrayList<Circuito>();
     private List<Inscripcion> inscripciones = new ArrayList<Inscripcion>();
+    private int cantidadParticipantes ;
+
+
+    public Carrera() {
+        this.cantidadParticipantes = 0;
+    }
 
     public List<Circuito> getCircuitos() {
         return circuitos;
@@ -30,6 +36,13 @@ public class Carrera {
 
     }
 
+    public int getCantidadParticipantes() {
+        return cantidadParticipantes;
+    }
+
+    public void setCantidadParticipantes(int cantidadParticipantes) {
+        this.cantidadParticipantes = cantidadParticipantes;
+    }
 
     public String getNombre() {
         return nombre;
@@ -40,9 +53,36 @@ public class Carrera {
     }
 
    public void mostrar_totales(){
-
+        List<Inscripcion> inscriptosC1 = new ArrayList<Inscripcion>();
+       List<Inscripcion> inscriptosC2 = new ArrayList<Inscripcion>();
+       List<Inscripcion> inscriptosC3 = new ArrayList<Inscripcion>();
         System.out.println("TOTAL DE PARTICIPANTES POR CIRCUITO");
-        //ARMAR TOTALES
+        for(Inscripcion inscripcion : inscripciones){
+            if(inscripcion.getCircuito().getId() == 0){
+                inscriptosC1.add(inscripcion);
+            }else if (inscripcion.getCircuito().getId() == 1){
+                inscriptosC2.add(inscripcion);
+            }else{
+                inscriptosC3.add(inscripcion);
+            }
+
+        }
+        System.out.println("CIRCUITO CHICO");
+        for(Inscripcion inscripcion: inscriptosC1){
+            System.out.println(inscripcion.mostrarInscripcion());
+        }
+
+       System.out.println("CIRCUITO MEDIO");
+       for(Inscripcion inscripcion: inscriptosC2){
+           System.out.println(inscripcion.mostrarInscripcion());
+
+       }
+
+       System.out.println("CIRCUITO GRANDE");
+       for(Inscripcion inscripcion: inscriptosC3){
+           System.out.println(inscripcion.mostrarInscripcion());
+
+       }
 
        System.out.println("TOTAL RECAUDADO");
        System.out.println(this.getTotalMonto());

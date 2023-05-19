@@ -32,4 +32,9 @@ public class Inscripcion {
     public void setCircuito(Circuito circuito) {
         this.circuito = circuito;
     }
+
+    public String mostrarInscripcion(){
+
+        return participante.mostrarParticipante() + " Categoria: " + this.getCircuito().mostrarCircuito() + " Monto: " + this.getMonto();
+    }
 }

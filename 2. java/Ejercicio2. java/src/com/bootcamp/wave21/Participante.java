@@ -73,4 +73,9 @@ public class Participante {
     public void setGrupo_sanguineo(String grupo_sanguineo) {
         this.grupo_sanguineo = grupo_sanguineo;
     }
+
+    public String mostrarParticipante(){
+
+        return "id: " + this.id_participante + " Nombre: " + this.nombre + " Edad: " + this.edad;
+    }
 }

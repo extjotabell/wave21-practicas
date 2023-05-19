@@ -49,6 +49,9 @@ public class Main {
             case 1:
                 Inscripcion inscripcion = new Inscripcion();
                 Participante participante = new Participante();
+                System.out.println("Participante numero: " + carrera.getCantidadParticipantes() + 1);
+                participante.setId_participante(carrera.getCantidadParticipantes() + 1);
+                carrera.setCantidadParticipantes(carrera.getCantidadParticipantes() + 1);
                 System.out.println("Ingrese DNI:  ");
                 participante.setDni(persona.nextInt());
                 persona.nextLine();
