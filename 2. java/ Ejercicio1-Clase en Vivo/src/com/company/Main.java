@@ -11,7 +11,6 @@ public class Main {
     double temp_min = temp[0][0];
     double temp_max = temp[1][0];
 
-
     for(int i = 0 ; i < temp.length; i ++){
     // Aca busco los minimos
     if (temp[i][0] < temp_min){
