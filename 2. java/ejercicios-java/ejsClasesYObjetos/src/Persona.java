@@ -4,7 +4,7 @@ public class Persona {
     public int edad;
     public String dni;
     public int peso;
-    public int altura;
+    public double altura;
 
     public Persona(){}
 
@@ -14,7 +14,7 @@ public class Persona {
         this.dni = dni;
     }
 
-    public Persona(String nombre, int edad, String dni, int peso, int altura) {
+    public Persona(String nombre, int edad, String dni, int peso, double altura) {
         this.nombre = nombre;
         this.edad = edad;
         this.dni = dni;
@@ -23,20 +23,18 @@ public class Persona {
     }
 
     public int calcularIMC(){
-        int IMC = (this.peso / (this.altura*this.altura));
+        double IMC = (this.peso / Math.pow(this.altura,2));
         if(IMC < 20){
-            System.out.println("Bajo peso");
             return -1;
         } else if (20 <= IMC && IMC <= 25) {
-            System.out.println("Peso saludable");
             return 0;
         }else{
-            System.out.println("sobrepeso");
             return 1;
         }
     }
 
     public boolean esMayorDeEdad(){
+
         return edad >= 18;
     }
 
