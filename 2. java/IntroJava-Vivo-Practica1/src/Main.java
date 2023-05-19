@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class Main {
     public static void main(String[] args) {
         // Declaracion de las Ciudades
@@ -18,7 +20,7 @@ public class Main {
                 {-1, 31}, // Lisboa
                 {-10, 35} // Tokyo
         };
-
+        
         // Declaracion - Inicializacion de variables
         int menorTemperatura = temperaturas[0][0];
         int mayorTemperatura = temperaturas[0][1];
