@@ -1,0 +1,10 @@
+package org.example;
+
+public abstract class Categorizable {
+	int id;
+	int nombre;
+	String descripcion;
+
+	double monto();
+}
+
