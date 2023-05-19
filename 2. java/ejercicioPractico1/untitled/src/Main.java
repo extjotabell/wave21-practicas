@@ -34,10 +34,9 @@ public class Main {
         temperaturas[9][0] = -10;
         temperaturas[9][1] = 35;
 
-        int menort = 0, mayort = 0;
+        int menort = temperaturas[0][0], mayort = temperaturas[0][0];
         String ciudad_menor = null;
         String ciudad_mayor = null;
-        // Press Ctrl+R or click the green arrow button in the gutter to run the code.
         for (int f = 0; f < 10; f++) {
             for (int c = 0; c < 2; c++){
                 if (temperaturas[f][c] < menort){
