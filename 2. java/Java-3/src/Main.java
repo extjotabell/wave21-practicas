@@ -7,19 +7,11 @@ public class Main {
         System.out.println(carlos);
         if(carlos.esMayorDeEdad()) System.out.println("Es mayor de edad.");
 
-        switch (carlos.cacularIMC()){
-            case -1:
-                System.out.println("Indice de masa corporal (IMC): Bajo peso");
-                break;
-            case 0:
-                System.out.println("Indice de masa corporal (IMC): Peso saludable");
-                break;
-            case 1:
-                System.out.println("Indice de masa corporal (IMC): Sobrepeso");
-                break;
-            default:
-                System.out.println("Error al calcular el indice de masa corporal (IMC)");
-                break;
+        switch (carlos.cacularIMC()) {
+            case -1 -> System.out.println("Indice de masa corporal (IMC): Bajo peso");
+            case 0 -> System.out.println("Indice de masa corporal (IMC): Peso saludable");
+            case 1 -> System.out.println("Indice de masa corporal (IMC): Sobrepeso");
+            default -> System.out.println("Error al calcular el indice de masa corporal (IMC)");
         }
     }
 }
