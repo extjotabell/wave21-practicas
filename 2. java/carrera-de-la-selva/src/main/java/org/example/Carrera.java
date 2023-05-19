@@ -44,7 +44,7 @@ public class Carrera {
     List<Participante> participantes = this.crearParticipantes();
 
     for(int i=1000;i<1010;++i){
-      Inscripcion inscripcion = new Inscripcion(i, this.circuitoForFun, participantes.get(i%participantes.size()));
+      Inscripcion inscripcion = new Inscripcion(i, this.circuitoChico, participantes.get(i%participantes.size()));
       this.inscripciones.add(inscripcion);
     }
 
@@ -57,12 +57,13 @@ public class Carrera {
       Inscripcion inscripcion = new Inscripcion(i, this.circuitoAvanzado, participantes.get(i%participantes.size()));
       this.inscripciones.add(inscripcion);
     }
+  }
 
+  public void invalidarInscripciones() {
     for(int i=0;i<this.inscripciones.size();i+=4){
       Inscripcion inscripcion = this.inscripciones.get(i);
-      //inscripcion.invalidarInscripcion();
+      inscripcion.invalidarInscripcion();
     }
-
   }
 
   public void informeCierre() {
@@ -88,11 +89,10 @@ public class Carrera {
       }
     }
 
-    System.out.println("Listado por Categoria Circuito for fun");
+    System.out.println("Listado por Categoria Circuito Chico");
     for(int i=0;i<this.inscripciones.size();++i) {
       Inscripcion inscripcion = this.inscripciones.get(i);
-      if(inscripcion.esValido() && inscripcion.getCategoria().getId() == this.circuitoForFun.getId()) {
-
+      if(inscripcion.esValido() && inscripcion.getCategoria().getId() == this.circuitoChico.getId()) {
         String participante = inscripcion.getParticipanteInfo();
 
         totalCicuitoChico += inscripcion.getMonto();
@@ -163,7 +163,7 @@ public class Carrera {
       new Participante(15, 32340503, "Silvina", "De Bellis", 12, "11-2399-5157", "11-1111-111", "A+"),
       new Participante(16, 42340512, "Luciano", "De Bellis", 12, "11-2399-5157", "11-1111-111", "A+"),
       new Participante(17, 42340501, "Graciela", "De Bellis", 12, "11-2399-5157", "11-1111-111", "A+"),
-      new Participante(18, 52340587, "Osvaldo", "De Bellis", 18, "11-2399-5157", "11-1111-111", "A+"),
+      new Participante(18, 52340587, "Osvaldo", "De Bellis", 18, "11-2399-5157", "11-1111-111", "O+"),
       new Participante(19, 52340472, "German", "De Bellis", 18, "11-2399-5157", "11-1111-111", "O+")
     );
   }
