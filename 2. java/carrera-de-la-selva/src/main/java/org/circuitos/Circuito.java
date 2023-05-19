@@ -4,9 +4,8 @@ import org.example.Participante;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-public class Circuito  implements Pagable {
+public abstract class Circuito implements Pagable, Habilitable {
   int id;
   String nombre;
   String descripcion;
@@ -18,20 +17,7 @@ public class Circuito  implements Pagable {
     this.descripcion = descripcion;
   }
 
-  public Map<Habilita, Float> monto() {
-    return new HashMap<Habilita, Float>();
-  }
-
-  /**
-   * Determina el monto a pagar por participante. Si no tiene un monto definido retorna 0f
-   * @param p Participante
-   * @return
-   */
-  public float habilita(Participante p) {
-    return 0f;
-  }
-
-  public String getNombre(){
+  public String getNombre() {
     return this.nombre;
   }
 
