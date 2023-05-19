@@ -10,7 +10,8 @@ public class Persona {
     //constructores
 
     public Persona(){
-
+        this.nombre="";
+        this.dni="";
     }
 
     public Persona(String nombre, int edad, String dni) {
