@@ -17,28 +17,28 @@ public class Main {
             System.out.println("3: Mostrar informacion de la persona ingresada");
             System.out.println("4: Salir");
             option = keyboar.nextInt();
-        switch (option){
-            case 1: {
-                int imc = p3.calcularIMC();
-                if(imc == -1){
-                    System.out.println("Bajo Peso");
-                }
-                else if(imc == 0){
-                    System.out.println("Peso Saludable");
-                }
-                else
-                    System.out.println("Sobrepeso");
-            }break;
-            case 2: {
-                if(p3.esMayorDeEdad())
-                    System.out.println("La persona ingresada es mayor de edad.");
-                else
-                    System.out.println("La persona ingresada es menor de edad");
-            }break;
-            case 3 : {
-                System.out.println(p3.toString());
-            }break;
-        }
+            switch (option){
+                case 1: {
+                    int imc = p3.calcularIMC();
+                    if(imc == -1){
+                        System.out.println("Bajo Peso");
+                    }
+                    else if(imc == 0){
+                        System.out.println("Peso Saludable");
+                    }
+                    else
+                        System.out.println("Sobrepeso");
+                }break;
+                case 2: {
+                    if(p3.esMayorDeEdad())
+                        System.out.println("La persona ingresada es mayor de edad.");
+                    else
+                        System.out.println("La persona ingresada es menor de edad");
+                }break;
+                case 3 : {
+                    System.out.println(p3.toString());
+                }break;
+            }
         }while(option != 4);
 
 
