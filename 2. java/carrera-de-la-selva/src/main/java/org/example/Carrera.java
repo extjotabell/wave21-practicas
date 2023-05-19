@@ -9,6 +9,7 @@ import org.circuitos.medio.CircuitoMedio;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
@@ -51,22 +52,29 @@ public class Carrera {
 
   public void informeCierre() {
     float total = 0;
+
     for(Circuito circuito : circuitos) {
       float totalCircuito = 0;
+
+      float totalFuncionalWay = inscripciones
+        .stream()
+        .filter(i -> i.esValido() && i.getCategoria().getId() == circuito.getId())
+        .map(i -> i.getMonto())
+        .reduce(0f, (sum, aa) -> sum+aa);
+
       for(Inscripcion inscripcion : inscripciones) {
+
         if(inscripcion.esValido() && inscripcion.getCategoria().getId() == circuito.getId()) {
           String participante = inscripcion.getParticipanteInfo();
           totalCircuito += inscripcion.getMonto();
 
-          String cartelInfo = String.format(
+          System.out.println(String.format(
             "Inscripcion a circuito %s numero: %s a nombre de %s por: $%s",
             inscripcion.getCategoria().getNombre(),
             inscripcion.getId(),
             participante,
             inscripcion.getMonto()
-          );
-
-          System.out.println(cartelInfo);
+          ));
         }
       }
 
