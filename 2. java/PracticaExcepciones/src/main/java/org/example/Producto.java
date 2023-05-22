@@ -4,6 +4,7 @@ public class Producto {
   private String nombre;
   private double precio;
 
+
   public Producto(String nombre, double precio) {
     this.nombre = nombre;
     this.precio = precio;
@@ -21,4 +22,7 @@ public class Producto {
     return this.precio;
   }
 
+  public String toString() {
+    return this.nombre+" a $"+this.precio;
+  }
 }

@@ -14,17 +14,20 @@ public class Perecedero extends Producto {
     return diasPorCaducar;
   }
 
-  public String toString() {
-    return "Product: "+this.getNombre()+". A: $"+this.getPrecio();
-  }
-
   @Override
   public double calcular(int cantidadDeProductos) {
     if(this.diasPorCaducar == 1)
-      return this.getPrecio()*0.25;
+      return this.getPrecio()*cantidadDeProductos*0.25;
     if(this.diasPorCaducar == 2)
-      return this.getPrecio()*0.33;
-    if(this.diasPorCaducar == 3) {}
-      return this.getPrecio()-this.getPrecio()*0.5;
+      return this.getPrecio()*cantidadDeProductos*0.333;
+    if(this.diasPorCaducar == 3)
+      return this.getPrecio()*cantidadDeProductos*0.5;
+
+    return 0d;
   }
+
+  public String toString() {
+    return "Producto: "+this.getNombre()+" a $"+this.getPrecio();
+  }
+
 }
