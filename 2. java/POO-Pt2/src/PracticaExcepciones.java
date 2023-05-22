@@ -11,16 +11,14 @@ public class PracticaExcepciones {
         double result = 0;
         try{
             result = b / a;
-            return result;
         }catch (ArithmeticException e){
-            e.printStackTrace();
-            System.out.println("Se ha producido un error");
-            return -1;
+            //System.out.println("Se ha producido un error");
+            throw new IllegalArgumentException("No Se puede dividir por cero");
         }
         finally {
             System.out.println("Programa finalizado");
-
         }
+        return result;
     }
     public int getA() {
         return a;
