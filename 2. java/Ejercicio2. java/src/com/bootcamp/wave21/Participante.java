@@ -2,13 +2,13 @@ package com.bootcamp.wave21;
 
 public class Participante {
 
-    int id_participante;
-    String nombre;
-    String apellido;
-    int dni;
-    int edad;
-    String celular;
-    String grupo_sanguineo;
+    private int id_participante;
+    private String nombre;
+    private String apellido;
+    private int dni;
+    private int edad;
+    private String celular;
+    private String grupo_sanguineo;
 
 
     public Participante() {

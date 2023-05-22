@@ -55,47 +55,55 @@ public class Main {
                 System.out.println("Ingrese DNI:  ");
                 participante.setDni(persona.nextInt());
                 persona.nextLine();
-                System.out.println("Ingrese nombre: ");
-                participante.setNombre(persona.nextLine());
-                System.out.println("Ingrese apellido: ");
-                participante.setApellido(persona.nextLine());
-                System.out.println("Ingrese edad: ");
-                participante.setEdad(persona.nextInt());
-                if(participante.es_menor()) {
-                    System.out.println("Elija Circuito:");
+                if(carrera.getInscripcionesDNI().contains(participante.getDni())){
+                    System.out.println("Participante ya inscripto :S");
+                }else {
+                    System.out.println("Ingrese nombre: ");
+                    participante.setNombre(persona.nextLine());
+                    System.out.println("Ingrese apellido: ");
+                    participante.setApellido(persona.nextLine());
+                    System.out.println("Ingrese edad: ");
+                    participante.setEdad(persona.nextInt());
+                    if (participante.es_menor()) {
+                        System.out.println("Elija Circuito:");
 
-                    for(Circuito circuito:  carrera.getCircuitos()){
-                        if(circuito.isHabilitada_menores()){
-                            System.out.println(indiceCircuitos+ "-" + circuito.getNombre());
-                            indiceCircuitos ++;
+                        for (Circuito circuito : carrera.getCircuitos()) {
+                            if (circuito.isHabilitada_menores()) {
+                                System.out.println(indiceCircuitos + "-" + circuito.getNombre());
+                                indiceCircuitos++;
+                            }
+                        }
+
+                    } else {
+                        for (Circuito circuito : carrera.getCircuitos()) {
+                            System.out.println(indiceCircuitos + "-" + circuito.getNombre());
+                            indiceCircuitos++;
                         }
                     }
-
-                }else {
-                    for(Circuito circuito:  carrera.getCircuitos()){
-                            System.out.println(indiceCircuitos+ "-" + circuito.getNombre());
-                            indiceCircuitos ++;
-                        }
+                    System.out.println(":>");
+                    inscripcion.setParticipante(participante);
+                    inscripcion.setCircuito(carrera.getCircuitos().get(persona.nextInt() - 1));
+                    if (participante.es_menor()) {
+                        System.out.println("El monto a pagar es " + inscripcion.getCircuito().getMonto_menor());
+                        inscripcion.setMonto(inscripcion.getCircuito().getMonto_menor());
+                    } else {
+                        System.out.println("El monto a pagar es " + inscripcion.getCircuito().getMonto_mayor());
+                        inscripcion.setMonto(inscripcion.getCircuito().getMonto_mayor());
+                    }
+                    System.out.println("Presione Enter para confirmar inscripcion");
+                    while(persona.hasNextLine()){}
+                    carrera.addInscripcion(inscripcion);
+                    carrera.setInscripcionesDNI(participante.getDni());
+                    System.out.println("Gracias por inscribirse!!! ");
                 }
-                System.out.println(":>");
-                inscripcion.setParticipante(participante);
-                inscripcion.setCircuito(carrera.getCircuitos().get(persona.nextInt() - 1));
-                if(participante.es_menor()){
-                    System.out.println("El monto a pagar es " + inscripcion.getCircuito().getMonto_menor());
-                    inscripcion.setMonto(inscripcion.getCircuito().getMonto_menor());
-                }else{
-                    System.out.println("El monto a pagar es " + inscripcion.getCircuito().getMonto_mayor());
-                    inscripcion.setMonto(inscripcion.getCircuito().getMonto_mayor());
-                }
-                System.out.println("Presione Enter para continuar");
-                carrera.addInscripcion(inscripcion);
-                System.out.println("Gracias por inscribirse!!! " );
                 indiceCircuitos = 1 ;
                 persona.reset();
                 break;
             case 2:
                 System.out.println("*****TOTALIZADORES ********");
                 carrera.mostrar_totales();
+                System.out.println("Presione Enter para confirmar inscripcion");
+                while(persona.hasNextLine()){}
                 break;
             case 3:
                 System.out.println("Hasta la proxima!! ");

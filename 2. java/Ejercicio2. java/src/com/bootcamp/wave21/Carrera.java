@@ -1,14 +1,16 @@
 package com.bootcamp.wave21;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Carrera {
     private String nombre;
     private List<Circuito> circuitos = new ArrayList<Circuito>();
     private List<Inscripcion> inscripciones = new ArrayList<Inscripcion>();
     private int cantidadParticipantes ;
-
+    private HashSet<Integer> inscripcionesDNI = new HashSet<Integer>();
 
     public Carrera() {
         this.cantidadParticipantes = 0;
@@ -28,6 +30,14 @@ public class Carrera {
 
     public void setInscripciones(List<Inscripcion> inscripciones) {
         this.inscripciones = inscripciones;
+    }
+
+    public HashSet<Integer> getInscripcionesDNI() {
+        return inscripcionesDNI;
+    }
+
+    public void setInscripcionesDNI(int dni) {
+        this.inscripcionesDNI.add(dni);
     }
 
     public void addInscripcion(Inscripcion inscripcion){
@@ -56,6 +66,7 @@ public class Carrera {
         List<Inscripcion> inscriptosC1 = new ArrayList<Inscripcion>();
        List<Inscripcion> inscriptosC2 = new ArrayList<Inscripcion>();
        List<Inscripcion> inscriptosC3 = new ArrayList<Inscripcion>();
+       int indiceParaMostrar = 1;
         System.out.println("TOTAL DE PARTICIPANTES POR CIRCUITO");
         for(Inscripcion inscripcion : inscripciones){
             if(inscripcion.getCircuito().getId() == 0){
@@ -69,23 +80,24 @@ public class Carrera {
         }
         System.out.println("CIRCUITO CHICO");
         for(Inscripcion inscripcion: inscriptosC1){
-            System.out.println(inscripcion.mostrarInscripcion());
+            System.out.println(indiceParaMostrar + ": " + inscripcion.mostrarInscripcion());
+            indiceParaMostrar ++;
         }
-
+       indiceParaMostrar = 1;
        System.out.println("CIRCUITO MEDIO");
        for(Inscripcion inscripcion: inscriptosC2){
-           System.out.println(inscripcion.mostrarInscripcion());
-
+           System.out.println(indiceParaMostrar + ": " + inscripcion.mostrarInscripcion());
+           indiceParaMostrar ++;
        }
-
+       indiceParaMostrar = 1;
        System.out.println("CIRCUITO GRANDE");
        for(Inscripcion inscripcion: inscriptosC3){
-           System.out.println(inscripcion.mostrarInscripcion());
-
+           System.out.println(indiceParaMostrar + ": " +inscripcion.mostrarInscripcion());
+           indiceParaMostrar ++;
        }
 
        System.out.println("TOTAL RECAUDADO");
-       System.out.println(this.getTotalMonto());
+       System.out.println("$" + this.getTotalMonto());
 
    }
  private double getTotalMonto(){
@@ -96,4 +108,6 @@ public class Carrera {
         }
         return montoTotal;
  }
+
+
 }
