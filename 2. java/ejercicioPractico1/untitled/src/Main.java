@@ -34,6 +34,7 @@ public class Main {
         temperaturas[9][0] = -10;
         temperaturas[9][1] = 35;
 
+
         int menort = 0, mayort = 0;
         String ciudad_menor = null;
         String ciudad_mayor = null;
