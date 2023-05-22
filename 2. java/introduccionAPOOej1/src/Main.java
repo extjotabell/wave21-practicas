@@ -12,6 +12,7 @@ public class Main {
         else
             System.out.println("es menor de edad");
 
+        
         int IMC = martin3.calcularIMC();
         switch (IMC) {
             case -1:
