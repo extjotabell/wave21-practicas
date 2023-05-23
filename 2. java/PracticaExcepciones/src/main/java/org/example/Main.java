@@ -3,7 +3,6 @@ package org.example;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Stream;
 
 public class Main {
@@ -13,6 +12,7 @@ public class Main {
   public static void main(String[] args) {
     try {
       PracticaExcepciones e = new PracticaExcepciones(0, 300);
+
       double cociente = e.cociente();
     } catch(IllegalArgumentException e) {
       System.out.println(e.getMessage());
@@ -51,6 +51,7 @@ public class Main {
       };
 
       totales.add(new Total(tipo, Main.calcularTotal(p)));
+
       System.out.println("=======================");
     }
 
