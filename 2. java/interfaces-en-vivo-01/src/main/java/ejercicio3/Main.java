@@ -23,17 +23,16 @@ public class Main {
     }
 
     private static void comerAnimal(Animal animal){
-        try{
+
+        if(animal instanceof Gato){
+            Gato gato = (Gato) animal;
+            System.out.println(gato.comerCarne());
+        }else if (animal instanceof Perro){
             Perro perro = (Perro) animal;
             System.out.println(perro.comerCarne());
-        }catch (ClassCastException e){
-            try {
-                Gato gato = (Gato) animal;
-                System.out.println(gato.comerCarne());
-            }catch (ClassCastException ex){
-                Vaca vaca = (Vaca) animal;
-                System.out.println(vaca.comerHierba());
-            }
+        }else if (animal instanceof Vaca){
+            Vaca vaca = (Vaca) animal;
+            System.out.println(vaca.comerHierba());
         }
     }
 }
