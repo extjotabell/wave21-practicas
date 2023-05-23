@@ -1,6 +1,6 @@
 package com.bootcamp.wave21;
 
-public class PDF extends TipoDocumento  implements Imprimible {
+public class PDF extends TipoDocumento {
     /*Incluyen atributos como cantidad de páginas, nombre del autor, título y género.*/
     private int cantidadDePaginas;
     private String nombreDelAutor;
@@ -55,11 +55,6 @@ public class PDF extends TipoDocumento  implements Imprimible {
 
 
     @Override
-    public void imprimir() {
-        System.out.println(mostrarFormatoImprimible());
-    }
-
-    @Override
     public String toString() {
         return "PDF{" +
                 "cantidadDePaginas=" + cantidadDePaginas +
@@ -70,7 +65,7 @@ public class PDF extends TipoDocumento  implements Imprimible {
     }
 
     public String mostrarFormatoImprimible(){
-        return this.toString();
+        return  this.toString();
     }
 }
 

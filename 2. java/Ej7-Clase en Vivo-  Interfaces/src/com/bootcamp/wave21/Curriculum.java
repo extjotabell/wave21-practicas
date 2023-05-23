@@ -1,7 +1,7 @@
 package com.bootcamp.wave21;
 import java.util.List;
 
-public class Curriculum extends TipoDocumento implements  Imprimible{
+public class Curriculum extends TipoDocumento{
 
     /*incluye a una persona con todos sus atributos más una lista de sus habilidades.*/
     private Persona persona;
@@ -30,10 +30,6 @@ public class Curriculum extends TipoDocumento implements  Imprimible{
         this.habilidades = habilidades;
     }
 
-    @Override
-    public void imprimir() {
-        System.out.println(mostrarFormatoImprimible());
-    }
 
     @Override
     public String toString() {

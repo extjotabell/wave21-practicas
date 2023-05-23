@@ -2,22 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="40126cb2-2cab-4229-8989-ec4971d3536a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/com/bootcamp/wave21/Curriculum.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/bootcamp/wave21/Habilidad.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/bootcamp/wave21/Imprimible.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/bootcamp/wave21/Informe.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/bootcamp/wave21/PDF.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/bootcamp/wave21/Persona.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/bootcamp/wave21/TipoDocumento.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/bootcamp/wave21/Animal.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/bootcamp/wave21/Carnivoro.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/bootcamp/wave21/Gato.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/bootcamp/wave21/Herviboro.java" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/bootcamp/wave21/Impresora.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/bootcamp/wave21/Curriculum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/bootcamp/wave21/Curriculum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/bootcamp/wave21/Imprimible.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/bootcamp/wave21/Imprimible.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/bootcamp/wave21/Informe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/bootcamp/wave21/Informe.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/bootcamp/wave21/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/bootcamp/wave21/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/bootcamp/wave21/Perro.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/bootcamp/wave21/Vaca.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/bootcamp/wave21/PDF.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/bootcamp/wave21/PDF.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/bootcamp/wave21/Persona.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/bootcamp/wave21/Persona.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/bootcamp/wave21/TipoDocumento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/bootcamp/wave21/TipoDocumento.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,8 +107,8 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.customizations" />
   </component>
   <component name="RunManager">
@@ -155,6 +148,11 @@
       <option name="presentableId" value="Default" />
       <updated>1684775583663</updated>
       <workItem from="1684775586446" duration="3259000" />
+      <workItem from="1684784699963" duration="1605000" />
+      <workItem from="1684844726411" duration="952000" />
+      <workItem from="1684849370690" duration="917000" />
+      <workItem from="1684850362792" duration="612000" />
+      <workItem from="1684854247834" duration="1350000" />
     </task>
     <servers />
   </component>

@@ -1,6 +1,6 @@
 package com.bootcamp.wave21;
 
-public class Informe extends TipoDocumento implements Imprimible{
+public class Informe extends TipoDocumento {
     /*Incluyen un texto de n longitud, cantidad de páginas, autor, y revisor. */
     private String texto ;
     private int cantPaginas;
@@ -49,10 +49,6 @@ public class Informe extends TipoDocumento implements Imprimible{
         this.revisor = revisor;
     }
 
-    @Override
-    public void imprimir() {
-        System.out.println(mostrarFormatoImprimible());
-    }
 
     @Override
     public String toString() {
