@@ -12,6 +12,10 @@ public class Main {
 
         Persona persona1 = new Persona("Ana", "Perez", 25, 123445);
         List habilidades = new ArrayList();
+        habilidades.add("Responsable");
+        habilidades.add("Inteligente");
+        habilidades.add("Puntual");
+        habilidades.add("Sociable");
         Informe informe1 = new Informe("Lorem Ipsum", 54,"Perez", "Gonzalez");
         LibroPdf libroPdf1 = new LibroPdf(40, "Java 1.1", "Fernandez", "terror");
         Curriculum curriculum1 = new Curriculum(persona1, habilidades);
