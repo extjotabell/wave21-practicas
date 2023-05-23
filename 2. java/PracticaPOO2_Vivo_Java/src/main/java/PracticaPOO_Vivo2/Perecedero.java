@@ -37,6 +37,8 @@ public class Perecedero extends Producto{
             case 3:
                 total = (int)((this.getPrecio()* cantidadDeProductos) /2);
                 break;
+            default:
+                total = (int)this.getPrecio();
         }
         return total;
     }
