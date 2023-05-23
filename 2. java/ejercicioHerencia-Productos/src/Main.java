@@ -10,7 +10,7 @@ public class Main {
         ArrayList<Producto> listado = dist.getListado();
         int precioFinal = 0;
         for(Producto elemento : listado){
-            precioFinal+= elemento.getPrecio();
+            precioFinal+= elemento.calcular(elemento.getPrecio(), 5);
         }
         System.out.println("el Total vendido es : "+ precioFinal);
     }
