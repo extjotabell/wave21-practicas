@@ -14,5 +14,16 @@ public class Main {
 
         milky.emitirSonido();
         milky.comerHierba();
+
+        comerAnimal(doggy);
+    }
+
+    public static void comerAnimal(Animal animal){
+        if (animal instanceof Perro)
+            ((Perro) animal).comerCarne();
+        else if (animal instanceof Gato)
+            ((Gato) animal).comerCarne();
+        else if (animal instanceof Vaca)
+            ((Vaca) animal).comerHierba();
     }
 }
