@@ -1,4 +1,4 @@
-package interfaces02;
+package streamsYLambdas;
 
 import java.util.List;
 

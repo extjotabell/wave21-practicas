@@ -1,4 +1,4 @@
-package interfaces02;
+package streamsYLambdas;
 
 public class Vehiculo {
     //Ejercicio 1
