@@ -35,4 +35,10 @@ public class Vehiculo {
     }
 
     //Clase tostring para imprimir los vehiculos
+    @Override
+    public String toString() {
+        return "Marca: " + this.marca + "|| " +
+                "Modelo: " + this.modelo + "|| " +
+                "Precio: " + this.costo  ;
+    }
 }
