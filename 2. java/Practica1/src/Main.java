@@ -14,7 +14,7 @@ public class Main {
         ciudades[7] = "Lima";
         ciudades[8] = "Lisboa";
         ciudades[9] = "Tokio";
-
+        
         short [][] temperaturas = {
                 { -2, 33 },
                 { -3, 32 },
