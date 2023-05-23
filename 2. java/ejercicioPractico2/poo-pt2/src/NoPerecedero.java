@@ -20,6 +20,4 @@ public class NoPerecedero extends Producto {
                 "tipo='" + tipo + '\'' +
                 '}';
     }
-
-
 }
