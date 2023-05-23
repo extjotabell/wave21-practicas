@@ -45,7 +45,7 @@ public class Carrera {
 
   private void llenarInscripciones(int indexInicio, int indexFinal, Circuito c) {
     for(int i=indexInicio;i<indexFinal;++i){
-      Inscripcion inscripcion = new Inscripcion(i, c, this.participantes.get(i%this.participantes.size()));
+      Inscripcion inscripcion = new Inscripcion(i, c, Carrera.participantes.get(i%Carrera.participantes.size()));
       this.inscripciones.add(inscripcion);
     }
   }

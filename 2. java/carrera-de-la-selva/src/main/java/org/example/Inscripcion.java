@@ -1,10 +1,6 @@
 package org.example;
 
 import org.circuitos.Circuito;
-import org.circuitos.Habilita;
-import org.circuitos.Pagable;
-
-import java.util.Map;
 
 public class Inscripcion {
 	int id;
