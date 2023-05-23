@@ -19,6 +19,7 @@ public class Main {
 
         for (Animal animal:animales) {
             imprimirAnimal(animal);
+
         }
 
     }
