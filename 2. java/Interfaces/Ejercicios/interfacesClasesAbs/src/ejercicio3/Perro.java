@@ -10,4 +10,5 @@ public class Perro extends Animal implements Carnivoro{
     public void comerCarne(){
         System.out.println("Come carne");
     }
+
 }
