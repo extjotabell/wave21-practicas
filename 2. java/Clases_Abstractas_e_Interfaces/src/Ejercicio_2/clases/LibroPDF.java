@@ -2,11 +2,11 @@ package Ejercicio_2.clases;
 
 import Ejercicio_2.interfaces.Imprimible;
 
-public class LibroPDF implements Imprimible<LibroPDF> {
-    int cantPaginas;
-    String autor;
-    String titulo;
-    String genero;
+public class LibroPDF implements Imprimible {
+    private int cantPaginas;
+    private String autor;
+    private String titulo;
+    private String genero;
 
     public LibroPDF(int cantPaginas, String autor, String titulo, String genero) {
         this.cantPaginas = cantPaginas;
@@ -16,8 +16,8 @@ public class LibroPDF implements Imprimible<LibroPDF> {
     }
 
     @Override
-    public void imprimir(LibroPDF documento) {
-        System.out.println(String.format("Cantidad de Paginas: %d\nAutor: %s\nTitulo: %s\nGenero: %s\n", documento.getCantPaginas(), documento.getAutor(), documento.getTitulo(), documento.getGenero()));
+    public void imprimir() {
+        System.out.println(String.format("Cantidad de Paginas: %d\nAutor: %s\nTitulo: %s\nGenero: %s\n", this.getCantPaginas(), this.getAutor(), this.getTitulo(), this.getGenero()));
     }
 
     public int getCantPaginas() {

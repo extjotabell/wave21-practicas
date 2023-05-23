@@ -2,11 +2,11 @@ package Ejercicio_2.clases;
 
 import Ejercicio_2.interfaces.Imprimible;
 
-public class Informe implements Imprimible<Informe> {
-    String texto;
-    int cantPaginas;
-    String autor;
-    String revisor;
+public class Informe implements Imprimible {
+    private String texto;
+    private int cantPaginas;
+    private String autor;
+    private String revisor;
 
     public Informe(String texto, int cantPaginas, String autor, String revisor) {
         this.texto = texto;
@@ -16,8 +16,8 @@ public class Informe implements Imprimible<Informe> {
     }
 
     @Override
-    public void imprimir(Informe documento) {
-        System.out.println(String.format("Cantidad de Paginas: %d\nAutor: %s\nRevisor: %s\nTexto: %s", documento.getCantPaginas(), documento.getAutor(), documento.getRevisor(), documento.getTexto()));
+    public void imprimir() {
+        System.out.println(String.format("Cantidad de Paginas: %d\nAutor: %s\nRevisor: %s\nTexto: %s", this.getCantPaginas(), this.getAutor(), this.getRevisor(), this.getTexto()));
     }
 
     public String getTexto() {

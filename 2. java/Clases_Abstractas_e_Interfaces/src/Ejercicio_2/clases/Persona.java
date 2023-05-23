@@ -3,10 +3,10 @@ package Ejercicio_2.clases;
 import java.util.ArrayList;
 
 public class Persona {
-    String nombre;
-    String apellido;
-    int edad;
-    ArrayList<String> habilidades;
+    private String nombre;
+    private String apellido;
+    private int edad;
+    private ArrayList<String> habilidades;
 
     public Persona(String nombre, String apellido, int edad, ArrayList<String> habilidades) {
         this.nombre = nombre;
