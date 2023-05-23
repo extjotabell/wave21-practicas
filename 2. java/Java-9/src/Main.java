@@ -28,12 +28,12 @@ public class Main {
                 .stream()
                 .map(Vehiculo::getPrecio)
                 .sorted()
-                .forEach(vehiculo -> System.out.println(vehiculo));
+                .forEach(System.out::println);
 
         garage.getVehiculos()
                 .stream()
                 .sorted(Comparator.comparing(Vehiculo::getMarca).thenComparing(Vehiculo::getPrecio))
-                .forEach(vehiculo -> System.out.println(vehiculo));
+                .forEach(System.out::println);
 
 
         List<Vehiculo> vehiculosMenor = garage.getVehiculos()
