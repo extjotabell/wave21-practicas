@@ -1,0 +1,16 @@
+Justificación del modelado de cada elemento
+
+1. Transacción(interfaz): es una interfaz para que todas tengan en común los métodos transaccionOk, transacción noOk y realizar.
+El método realizar() va a ser overrideado por cada objeto que implemente la interfaz para que este pueda mostrar el mensaje correcto.
+
+2. A cada uno de los objetos que implementa la interfaz, se le agregaron los atributos para que tenga sentido
+hacer un comportamiento diferencial (es decir, reescribir el metodo realizar()).
+
+3. Cliente es una clase abstracta para que todos puedan implementar métodos diferentes en
+ su implementación particular y no una interfaz que sobreescribe comportamiento.
+
+
+COSAS QUE PODRÍAN MEJORARSE
+
+1. se repite el código de realizarConsultaSaldo() y realizarRetiro(double monto).
+2. basic y cobrador tienen las mismas funcionalidades.
