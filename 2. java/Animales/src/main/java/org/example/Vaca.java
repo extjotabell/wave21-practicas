@@ -1,6 +1,6 @@
 package org.example;
 
-public class Vaca extends Animal {
+public class Vaca extends Hervivoro {
 
   @Override
   public void sonido() {

@@ -1,5 +1,5 @@
 package org.example;
 
-public interface Hervivoro extends Comible {
+public abstract class Hervivoro extends Animal {
 
 }
