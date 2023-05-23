@@ -1,10 +1,8 @@
 public class Perecedero extends Producto{
     int diasPorCaducar;
 
-    public Perecedero() {
-    }
-
-    public Perecedero(int diasPorCaducar) {
+    public Perecedero(String nombre, double precio, int diasPorCaducar) {
+        super(nombre, precio);
         this.diasPorCaducar = diasPorCaducar;
     }
 

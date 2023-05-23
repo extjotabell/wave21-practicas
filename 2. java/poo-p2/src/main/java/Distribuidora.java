@@ -6,11 +6,11 @@ import java.util.List;
 public class Distribuidora {
     public static void main(String[] args) {
         List<Producto> listaProductos = new LinkedList<>();
-        Producto Platano = new Producto("Platano", 2500);
-        Producto Pepsi = new Producto("Pepsi", 990);
-        Producto Coca = new Producto("Coca Cola", 1250);
-        Producto Fanta = new Producto("Fanta", 960);
-        Producto Coliflor = new Producto("Coliflor", 450);
+        Producto Platano = new Perecedero("Platano", 2500, 2);
+        Producto Pepsi = new Perecedero("Pepsi", 990, 5);
+        Producto Coca = new NoPerecedero("Coca Cola", 1250, "NP");
+        Producto Fanta = new NoPerecedero("Fanta", 960, "NP");
+        Producto Coliflor = new Perecedero("Coliflor", 450, 3);
 
         listaProductos.add(0, Pepsi);
         listaProductos.add(1, Platano);
