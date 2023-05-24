@@ -1,5 +1,6 @@
 package org.example.AgenciaTurismo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Cliente {
@@ -8,9 +9,17 @@ public class Cliente {
 
     private List<Localizador> localizadores;
 
+    public void imprimirLocalizadores(){
+        System.out.println("El cliente "+nombre+ " DNI Nª: "+dni+ " tiene los siguientes localizadores contratados:");
+        for (int i = 0; i<this.localizadores.size(); i++){
+            System.out.println("-" + this.localizadores.get(i));
+        }
+    }
+
     public Cliente(String nombre, int dni) {
         this.nombre = nombre;
         this.dni = dni;
+        this.localizadores= new ArrayList<>();
     }
 
     public String getNombre() {

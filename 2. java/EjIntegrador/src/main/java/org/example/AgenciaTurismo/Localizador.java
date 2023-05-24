@@ -13,10 +13,10 @@ public class Localizador {
     private double total;
     private List<Reserva> reservas;
 
-    public Localizador(Cliente cliente, double total, List<Reserva> reservas) {
+    public Localizador(Cliente cliente, List<Reserva> reservas) {
         this.cliente = cliente;
-        this.total = total;
         this.reservas = reservas;
+        this.total= calcularTotal();
     }
 
     public Cliente getCliente() {
@@ -54,7 +54,7 @@ se aplicará un descuento de 5% en esas reservas.
     public void esPaqueteCompleto(){
 
     }
-    public void calcularTotal(){
+    public double calcularTotal(){
         double costoNeto= 0;
 
         int cantHotel=0;
@@ -90,15 +90,23 @@ se aplicará un descuento de 5% en esas reservas.
         }
         costoNeto = sumComida+sumHotel+sumTransporte+sumBoletosViaje;
 
+        double desc= 0.0;
         if (cantComida >0 && cantHotel>0 && cantTransporte>0 && cantBoletosViaje>0){
+            desc += costoNeto*0.1;
             costoNeto *=0.90;
         }
         if (this.cliente.tieneDescuento()){
+            desc += costoNeto*0.05;
             costoNeto *=0.95;
         };
 
-        System.out.println("El total a pagar con descuentos es " + costoNeto);
-
+        System.out.println("El total a pagar con descuentos es " + costoNeto+ "$.");
+        return costoNeto;
     };
 
+    @Override
+    public String toString() {
+        return "Localizador: reservas: {" + reservas+
+                ". El costo total es de " + total+ "$.";
+    }
 }
