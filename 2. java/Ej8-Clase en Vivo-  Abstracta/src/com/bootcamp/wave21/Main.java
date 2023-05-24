@@ -13,5 +13,9 @@ public class Main {
         gato.comer();
         vaca.emitirSonido();
         vaca.comer();
+        System.out.println("AHORA CON EL METODO DE LA CLASE ");
+        Animal.comerAnimal(perro);
+        Animal.comerAnimal(gato);
+        Animal.comerAnimal(vaca);
     }
 }
