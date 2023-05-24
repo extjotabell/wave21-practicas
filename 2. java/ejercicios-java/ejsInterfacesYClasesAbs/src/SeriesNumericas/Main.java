@@ -1,4 +1,4 @@
-package EjercicioClasesAbstractas;
+package SeriesNumericas;
 
 public class Main {
     public static void main(String[] args) {

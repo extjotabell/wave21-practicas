@@ -1,4 +1,4 @@
-package EjercicioIntegradorParte1;
+package Supermercado;
 
 public class Item {
     private Long codigo;

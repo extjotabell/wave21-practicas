@@ -1,4 +1,4 @@
-package EjercicioIntegradorParte1;
+package Supermercado;
 
 import java.util.List;
 

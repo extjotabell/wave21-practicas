@@ -1,4 +1,4 @@
-package EjercicioClasesAbstractas;
+package SeriesNumericas;
 
 public abstract class Prototipo <T>{
     public abstract void next();

@@ -1,4 +1,4 @@
-package EjercicioClasesAbstractas;
+package SeriesNumericas;
 
 public class ParaInts extends Prototipo<Integer> {
     Integer currentInSeries;
