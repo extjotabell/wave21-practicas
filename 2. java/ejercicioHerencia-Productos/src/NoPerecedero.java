@@ -14,4 +14,8 @@ public class NoPerecedero extends Producto{
         this.tipo = tipo;
     }
 
+    @Override
+    public double calcular(double precio, int cantidadDeProductos) {
+        return precio *cantidadDeProductos;
+    }
 }

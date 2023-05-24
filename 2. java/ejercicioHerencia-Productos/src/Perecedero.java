@@ -16,8 +16,9 @@ public class Perecedero extends Producto{
 
 
     @Override
-    public double calcular(double precio, int cantidadDeProductos){
-        double precioSinDescuento = super.calcular(precio, cantidadDeProductos);
+    public double calcular(int cantidadDeProductos){
+
+        double precioSinDescuento = this.getPrecio()* cantidadDeProductos;
         if(this.diasPorCaducar == 1 ) {
             return precioSinDescuento / 4;
         }else if(this.diasPorCaducar == 2 ) {

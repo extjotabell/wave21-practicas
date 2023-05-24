@@ -1,4 +1,4 @@
-public class Producto {
+public abstract class Producto {
     private String nombre;
     private double precio;
 
@@ -26,7 +26,5 @@ public class Producto {
     public String toOneString(){
        return  this.toString();
     }
-    public double calcular(double precio, int cantidadDeProductos){
-        return precio *cantidadDeProductos;
-    }
+    public abstract double calcular(int cantidadDeProductos);
 }
