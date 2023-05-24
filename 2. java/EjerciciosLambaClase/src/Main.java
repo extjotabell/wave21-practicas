@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
@@ -39,8 +41,48 @@ public class Main {
         garaje.getVehiculo().sort(Comparator.comparing(Vehiculo::getMarca).thenComparingDouble(Vehiculo::getCosto));
         for (Vehiculo vehiculo : garaje.getVehiculo()) {
             System.out.print(vehiculo.getMarca());
-            System.out.println(vehiculo.getCosto());
+            System.out.println(" "+vehiculo.getCosto());
         }
+
+        // Crear lista de vehculos con precios no mayores a 1000
+        List<Vehiculo> vehiculosMenor1000 = new ArrayList<>();
+        for (Vehiculo vehiculo : garaje.getVehiculo()) {
+            if (vehiculo.getCosto() <= 1000) {
+                vehiculosMenor1000.add(vehiculo);
+            }
+        }
+
+        // Crear lista de Vehiculos con precios mayores o iguales a 1000
+        List<Vehiculo> vehiculosMayor1000 = new ArrayList<>();
+        for (Vehiculo vehiculo : garaje.getVehiculo()) {
+            if (vehiculo.getCosto() >= 1000) {
+                vehiculosMayor1000.add(vehiculo);
+            }
+        }
+
+        // Calcular el promedio total de precios de toda la lista de Vehiculos
+        double sumaPrecios = 0;
+        for (Vehiculo vehiculo : garaje.getVehiculo()) {
+            sumaPrecios += vehiculo.getCosto();
+        }
+        double promedioPrecios = sumaPrecios / garaje.getVehiculo().size();
+
+        // Mostrar los Vehiculos con precios no mayores a 1000
+        System.out.println("Vehiculos con precios no mayores a 1000:");
+        for (Vehiculo vehiculo : vehiculosMenor1000) {
+            System.out.print(vehiculo.getMarca());
+            System.out.println(" "+vehiculo.getCosto());
+        }
+
+        // Mostrar los Vehiculos con precios mayores o iguales a 1000
+        System.out.println("Vehiculos con precios mayores o iguales a 1000:");
+        for (Vehiculo vehiculo : vehiculosMayor1000) {
+            System.out.print(vehiculo.getMarca());
+            System.out.println(" "+vehiculo.getCosto());
+        }
+
+        // Mostrar el promedio total de precios de toda la lista de Vehiculos
+        System.out.println("Promedio total de precios de los Vehiculos: " + promedioPrecios);
 
     }
 }
