@@ -14,14 +14,26 @@ public class Main {
         repoClientes.add(cacho);
 
         List<Reserva> reservasCacho = new ArrayList<>();
-        reservasCacho.add(new ReservaHotel("Hotel iguazu",2000));
+        reservasCacho.add(new ReservaHotel("Hotel iguazu",1000));
         reservasCacho.add(new ReservaComida("Desayuno",1000));
-        reservasCacho.add(new ReservaBoletoViaje("AerolineasArg",1200));
-        reservasCacho.add(new ReservaBoletoTransporte("Auto",800));
+        reservasCacho.add(new ReservaBoletoViaje("AerolineasArg",1000));
+        reservasCacho.add(new ReservaBoletoTransporte("Auto",1000));
 
         repoLocalizadores.add(cacho,reservasCacho);
-        repoLocalizadores.add(cacho,reservasCacho);
+
+        List<Reserva> reservacacho2 = new ArrayList<>();
+        reservacacho2.add(new ReservaHotel("Hotel iguazu",1000));
+        reservacacho2.add(new ReservaHotel("Hotel iguazu",1000));
+        reservacacho2.add(new ReservaBoletoViaje("AerolineasArg",1000));
+        reservacacho2.add(new ReservaBoletoViaje("AerolineasArg",1000));
+        repoLocalizadores.add(cacho,reservacacho2);
+
+        List<Reserva> reservacacho3 = new ArrayList<>();
+        reservacacho3.add(new ReservaBoletoViaje("AerolineasArg",1000));
+        repoLocalizadores.add(cacho,reservacacho3);
+
         System.out.println(repoLocalizadores);
+
 
     }
 }
