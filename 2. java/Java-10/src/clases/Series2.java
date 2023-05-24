@@ -9,9 +9,8 @@ public class Series2 extends Prototipe {
 
     @Override
     public int getNext() {
-        int returnValue = this.value;
         this.value += 2;
 
-        return returnValue;
+        return this.value;
     }
 }
