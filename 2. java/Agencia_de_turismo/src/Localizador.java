@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Localizador {
 
@@ -11,14 +12,26 @@ public class Localizador {
     public Localizador(Cliente cliente, List<Reserva> reservas) {
         this.cliente = cliente;
         this.reservas = reservas;
-        this.calcularTotal();
+        this.total=0d;
+        this.calcularTotal(reservas);
     }
 
-    public void calcularTotal(){
+    public void calcularTotal(List<Reserva> reservas){
         for (Reserva reserva:reservas
              ) {
             this.total += reserva.getCosto();
         }
+    }
+
+    public void imprimirLocalizador() {
+        System.out.print("Localizador{" +
+                "cliente="+cliente.toString());
+        System.out.print(
+                ", total=" + total +
+                ", reservas= ");
+        String reservasString = reservas.stream().map(n->n.getNombre()).collect(Collectors.joining(", "));
+        System.out.print(reservasString);
+        System.out.print("}\n");
     }
 
     public Cliente getCliente() {
