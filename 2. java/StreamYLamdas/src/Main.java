@@ -42,8 +42,7 @@ public class Main {
         System.out.println("--------------------------------------------------------------------------");
         GarageCorrientes.getVehiculos()
                 .stream()
-                .sorted((x, y) -> x.getMarca().compareTo(y.getMarca()))
-                .sorted((i, j) -> i.getCosto().compareTo(j.getCosto()))
+                .sorted(Comparator.comparing(Vehiculo::getMarca).thenComparing(Vehiculo::getCosto))
                 .forEach(vehiculo -> System.out.println(vehiculo));
         System.out.println("--------------------------------------------------------------------------"+"\n");
 
