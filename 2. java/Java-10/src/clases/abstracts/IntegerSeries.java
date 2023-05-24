@@ -9,7 +9,7 @@ public class IntegerSeries extends Prototipe<Integer>{
     }
     @Override
     public Integer getNext() {
-        this.value = this.value + this.initialValue;
+        this.value = this.value + this.increment;
 
         return value;
     }
