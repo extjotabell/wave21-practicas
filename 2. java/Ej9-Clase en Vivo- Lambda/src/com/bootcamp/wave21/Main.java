@@ -48,7 +48,24 @@ public class Main {
         /**EJERCICIO5**/
         System.out.println("EJERCICIO 5");
 
+        List<Vehiculo> vehiculosMenorAMil = garage.getVehiculos().stream()
+                .filter(c->c.getCosto() < 1000)
+                .sorted(Comparator.comparing(Vehiculo::getCosto))
+                .collect(Collectors.toList());
+        System.out.println("VEHICULOS CUYO COSTO ES MENOR A MIL");
+        for(Vehiculo vehi : vehiculosMenorAMil){
+            System.out.println(vehi.toString());
+        }
 
+        List<Vehiculo> vehiculosMedio = garage.getVehiculos().stream()
+                .filter(c->c.getCosto() > 1000)
+                .filter(c->c.getCosto() < 2000)
+                .sorted(Comparator.comparing(Vehiculo::getCosto))
+                .collect(Collectors.toList());
+        System.out.println("VEHICULOS CUYO COSTO SE ENCUENTRA ENTRE MIL y  DOS MIL ");
+        for(Vehiculo vehi : vehiculosMedio){
+            System.out.println(vehi.toString());
+        }
 
         System.out.println("Promedio Total");
 
@@ -64,4 +81,5 @@ public class Main {
         }
         System.out.println("El promedio validado da: " + promedio/8);
     }
+    
 }
