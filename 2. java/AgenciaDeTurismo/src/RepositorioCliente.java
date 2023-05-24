@@ -10,7 +10,8 @@ public class RepositorioCliente {
     }
 
     public void add(Cliente cli){
-        clienteList.add(cli);
+        if(search(cli.getNombre()) == null)
+            clienteList.add(cli);
     }
 
     public Cliente search(String nombre){

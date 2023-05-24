@@ -34,6 +34,8 @@ public class Main {
 
         System.out.println(repoLocalizadores);
 
-
+        ServiceLocalizadores.cantidadDeLocalizadores(repoLocalizadores);
+        ServiceLocalizadores.cantidadDeReservas(repoLocalizadores);
+        ServiceLocalizadores.listarReservasPorTipo(repoLocalizadores);
     }
 }

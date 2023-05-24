@@ -17,36 +17,39 @@ public class RepositorioLocalizador {
     }
 
     private double calcularTotal(Cliente cli, List<Reserva> reservaList){
-        double monto = 0;
-        //calculo el monto base
-        monto = reservaList.stream().mapToDouble(Reserva::getMonto).sum();
+        double total = 0;
+        //calculo el total base
+        total = reservaList.stream().mapToDouble(Reserva::getMonto).sum();
 
-        // descuento para mas de 2 localizadores anteriores
+        // descuento para mas de 2 localizadores anteriores 5% de descuento
         if(get(cli).size()>=2)
-            monto *= 0.95;
+            total *= 0.95;
 
-        //si tiene paquete completo
+        //si tiene paquete completo 10% de descuento
         if(reservaList.stream().anyMatch(reserva -> Objects.equals(reserva.getClass(), ReservaComida.class)) &&
                 reservaList.stream().anyMatch(reserva -> Objects.equals(reserva.getClass(), ReservaHotel.class)) &&
                 reservaList.stream().anyMatch(reserva -> Objects.equals(reserva.getClass(), ReservaBoletoTransporte.class)) &&
                 reservaList.stream().anyMatch(reserva -> Objects.equals(reserva.getClass(), ReservaBoletoViaje.class)))
         {
-            monto*= 0.9;
+            total*= 0.9;
         }
-        //si tiene 2 reservas de hotel o dos reserva de boleto de viaje
+        //si tiene 2 reservas de hotel o dos reserva de boleto de viaje 5% de descuento
         if(reservaList.stream().filter(reserva -> Objects.equals(reserva.getClass(), ReservaHotel.class)).count() > 1 ||
                 reservaList.stream().filter(reserva -> Objects.equals(reserva.getClass(), ReservaBoletoViaje.class)).count() > 1)
         {
-            monto*= 0.95;
+            total*= 0.95;
         }
 
-
-        return monto;
+        return total;
     }
 
     public List<Localizador> get(Cliente cliente){
         return localizadorList.stream().filter(localizador -> localizador.getCliente() == cliente).toList();
     }
+    public List<Localizador> get(){
+        return localizadorList;
+    }
+
 
     @Override
     public String toString() {
