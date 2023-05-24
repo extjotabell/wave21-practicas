@@ -4,7 +4,7 @@ public class Main {
         Perro perro = new Perro();
         Gato gato = new Gato();
         Vaca vaca = new Vaca();
-
+        
         // Metodos de que comen
         System.out.println("--- Animales Comen ---");
         System.out.println(perro.comerCarne());
@@ -22,6 +22,8 @@ public class Main {
         System.out.println(comerAnimal(gato));
         System.out.println(comerAnimal(perro));
         System.out.println(comerAnimal(vaca));
+
+
 
     }
 

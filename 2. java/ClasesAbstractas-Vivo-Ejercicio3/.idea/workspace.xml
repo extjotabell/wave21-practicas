@@ -5,23 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6d12bdf3-b1af-4e99-87c2-1419781854a3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../ClasesAbstractas-Vivo-Ejercicio2/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ClasesAbstractas-Vivo-Ejercicio2/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ClasesAbstractas-Vivo-Ejercicio2/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ClasesAbstractas-Vivo-Ejercicio2/src/Curriculum.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ClasesAbstractas-Vivo-Ejercicio2/src/Documento.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ClasesAbstractas-Vivo-Ejercicio2/src/Informe.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ClasesAbstractas-Vivo-Ejercicio2/src/LibroPdf.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ClasesAbstractas-Vivo-Ejercicio2/src/Persona.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Animal.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Gato.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Interfaces/Carnivoro.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Interfaces/Herviboro.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Perro.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Vaca.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Interfaces/Herviboro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interfaces/Herbivoro.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Vaca.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Vaca.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +40,10 @@
     &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;/Users/gomarquez/Desktop/Workspace/Bootcamp/wave21-practicas/2. java/ClasesAbstractas-Vivo-Ejercicio3/src/Main.java&quot;
+    &quot;onboarding.tips.debug.path&quot;: &quot;/Users/gomarquez/Desktop/Workspace/Bootcamp/wave21-practicas/2. java/ClasesAbstractas-Vivo-Ejercicio3/src/Main.java&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
   }
 }</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -74,7 +65,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Main.java</url>
-          <line>25</line>
+          <line>27</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>

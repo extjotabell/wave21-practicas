@@ -1,6 +1,6 @@
-import Interfaces.Herviboro;
+import Interfaces.Herbivoro;
 
-public class Vaca extends Animal implements Herviboro {
+public class Vaca extends Animal implements Herbivoro {
 
     @Override
     public void emitirSonido() {

@@ -1,5 +1,5 @@
 package Interfaces;
 
-public interface Herviboro {
+public interface Herbivoro {
     public String comerHierba();
 }
