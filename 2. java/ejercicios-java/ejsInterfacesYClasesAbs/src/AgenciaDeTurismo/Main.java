@@ -31,21 +31,25 @@ public class Main {
         localizador1.agregarReserva(transporte1);
         localizador1.total();
 
-        Localizador localizador2 = new Localizador(cli2);
+        Localizador localizador2 = new Localizador(cli1);
         localizador2.agregarReserva(hotel1);
-        localizador2.agregarReserva(comida2);
+        localizador2.agregarReserva(hotel2);
+        localizador2.agregarReserva(boleto1);
+        localizador2.agregarReserva(boleto2);
         localizador2.total();
 
-
-        Localizador localizador3 = new Localizador(cli2);
-        localizador3.agregarReserva(hotel1);
-        localizador3.agregarReserva(hotel2);
+        Localizador localizador3 = new Localizador(cli1);
+        localizador3.agregarReserva(transporte2);
         localizador3.total();
 
+        Localizador localizador4 = new Localizador(cli2);
+        localizador4.agregarReserva(hotel2);
+        localizador4.agregarReserva(boleto1);
+        localizador4.agregarReserva(boleto2);
+        localizador4.total();
 
         //Se crea un repositorio de localizadores y se agregan localizadores a su lista.
         RepositorioLocalizador repoLocalizadores = new RepositorioLocalizador();
-
         repoLocalizadores.agregarAlRepositorio(localizador1);
         repoLocalizadores.agregarAlRepositorio(localizador2);
         repoLocalizadores.agregarAlRepositorio(localizador3);

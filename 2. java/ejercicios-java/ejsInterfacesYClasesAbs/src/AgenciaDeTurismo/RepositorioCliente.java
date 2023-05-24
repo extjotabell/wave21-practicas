@@ -3,16 +3,13 @@ package AgenciaDeTurismo;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RepositorioCliente implements Repositorio<Cliente> {
+public class RepositorioCliente {
     List<Cliente> listaClientes;
 
-    @Override
     public void agregarAlRepositorio(Cliente obj) {
         listaClientes.add(obj);
         System.out.println(obj.toString());
     }
-
-    @Override
     public void search(Cliente obj) {
         boolean flag = false;
         for (Cliente c : listaClientes){
