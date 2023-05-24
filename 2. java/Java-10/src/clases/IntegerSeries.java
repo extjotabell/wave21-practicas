@@ -1,6 +1,8 @@
-package clases.abstracts;
+package clases;
 
-public class IntegerSeries extends Prototipe<Integer>{
+import clases.abstracts.Prototipe;
+
+public class IntegerSeries extends Prototipe<Integer> {
 
     public IntegerSeries(Integer initailValue, Integer increment){
         this.value = initailValue;

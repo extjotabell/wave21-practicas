@@ -1,4 +1,4 @@
-import clases.abstracts.IntegerSeries;
+import clases.IntegerSeries;
 
 public class Main {
     public static void main(String[] args) {
