@@ -48,7 +48,7 @@ public class Main {
         //lista un localizador con un paquete completo para un cliente
         Localizador localizador10 = new Localizador(cliente5, Arrays.asList(reservaHotel1,reservaBoletos1,reservaTransporte1,reservaComida1));
         repositorio.agregarLocalizador(localizador10);
-        System.out.println("LOCALIZADOR CON TODOS LOS SERVICIOS");
+        System.out.println("LOCALIZADOR CON TODAS LAS RESERVAS");
         localizador10.imprimirLocalizador();
 
         //listar los localizadores de un cliente
@@ -66,7 +66,29 @@ public class Main {
         //lista todos los localizadores de un cliente
         repositorio.mostrarLocalizadoresPorCliente(cliente5);
 
+        //muestra los descuentos del cliente
+        System.out.println("\nDESCUENTOS DEL CLIENTE ");
+        repositorio.mostrarDescuentos(cliente5);
 
+        //cantidad de localizadores vendidos
+        System.out.print("\nCANTIDAD DE LOCALIZADORES VENDIDOS = ");
+        repositorio.cantidadLocalizadoresVendidos();
+
+        //cantidad de reservas realizadas
+        System.out.print("\nCANTIDAD TOTAL DE RESERVAS = ");
+        repositorio.cantidadReservas();
+
+        //mostrar diccionario de reservas
+        System.out.print("\nMAPA DE RESERVAS = ");
+        repositorio.mostrarDiccionarioReservas();
+
+        //Total de ventas
+        System.out.println("\nTOTAL DE VENTAS");
+        repositorio.mostrarTotalDeVentas();
+
+        //Promedio de todas las ventas
+        System.out.println("\nPROMEDIO DE TODAS LAS VENTAS");
+        repositorio.mostrarPromedioDeVentas();
 
 
     }
