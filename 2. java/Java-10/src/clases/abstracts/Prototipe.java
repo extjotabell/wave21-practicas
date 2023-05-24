@@ -1,21 +1,17 @@
 package clases.abstracts;
 
-public abstract class Prototipe {
-    protected int value;
-    protected int initialValue;
-
-    public Prototipe(){
-        this.initialValue   = 0;
-        this.value          = 0;
-    }
+public abstract class Prototipe<T extends Number> {
+    protected T value;
+    protected T initialValue;
+    protected T increment;
 
     public void init(){
         this.value = this.initialValue;
     }
-    public void init(int initialValue) {
+    public void init(T initialValue) {
         this.initialValue   = initialValue;
         this.value          = initialValue;
     }
 
-    public abstract int getNext();
+    public abstract T getNext();
 }

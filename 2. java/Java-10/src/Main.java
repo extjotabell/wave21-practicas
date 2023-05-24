@@ -1,6 +1,3 @@
-import clases.Series2;
-import clases.Series3;
-
 public class Main {
     public static void main(String[] args) {
         Series2 series2 = new Series2();
