@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -12,7 +9,7 @@ public class Repositorio {
     private Double descuento;
 
     public Repositorio(){
-        repositorioClientes= new HashMap<Cliente, List<Localizador>>();
+        repositorioClientes= new LinkedHashMap<Cliente, List<Localizador>>();
         descuento=0d;
     }
 
@@ -35,6 +32,13 @@ public class Repositorio {
                         listaLocalizadores.forEach(Localizador::imprimirLocalizador);
                     }
                 }
+        );
+    }
+
+    public void mostrarLocalizadores() {
+        System.out.println("\nLISTA DE TODOS LOS LOCALIZADORES");
+        this.repositorioClientes.forEach((clienteLista, listaLocalizadores) ->
+                        listaLocalizadores.forEach(Localizador::imprimirLocalizador)
         );
     }
 
@@ -64,12 +68,12 @@ public class Repositorio {
         localizadores.forEach(l->{
             List<Reserva> reservas= l.getReserva();
             reservas.forEach(r->{
-                        if(r instanceof Hotel) contador.addAndGet(1);
-                        else if (r instanceof Comida) contador.addAndGet(2);
-                        else if(r instanceof Boletos) contador.addAndGet(4);
-                        else if(r instanceof Transporte) contador.addAndGet(8);
+                        if(r instanceof Hotel) contador.addAndGet(100);
+                        else if (r instanceof Comida) contador.addAndGet(200);
+                        else if(r instanceof Boletos) contador.addAndGet(400);
+                        else if(r instanceof Transporte) contador.addAndGet(800);
                     });
-            if(contador.get()==15) paqueteCompleto.set(true);
+            if(contador.get()==1500) paqueteCompleto.set(true);
         });
         System.out.println("Descuento en la próxima compra por tener paquete completo = "+(paqueteCompleto.get()?"10% en la factura":"0%"));
 
@@ -83,12 +87,12 @@ public class Repositorio {
         localizadores.forEach(l->{
             List<Reserva> reservas= l.getReserva();
             reservas.forEach(r->{
-                if(r instanceof Hotel) contador.addAndGet(1);
-                else if(r instanceof Boletos) contador.addAndGet(4);
+                if(r instanceof Hotel) contador.addAndGet(100);
+                else if(r instanceof Boletos) contador.addAndGet(400);
             });
-            if(contador.get()==10) descuentoHotelyBoletos.set(true);
+            if(contador.get()==1000) descuentoHotelyBoletos.set(true);
         });
-        System.out.println("Descuento en la próxima compra por tener paquete completo = "+(descuentoHotelyBoletos.get()?"10% en la factura":"0%"));
+        System.out.println("Descuento en la próxima compra por tener reserva de hotel y de boletos = "+(descuentoHotelyBoletos.get()?"10% en la factura":"0%"));
 
     }
 
@@ -117,9 +121,6 @@ public class Repositorio {
 
     public void mostrarDiccionarioReservas(){
         Map<String,Integer> reservasDicc = new HashMap<String,Integer>();
-        List<Localizador> localizadores;
-        AtomicReference<Boolean> descuentoHotelyBoletos = new AtomicReference<>(false);
-        AtomicInteger contador= new AtomicInteger();
         repositorioClientes.values().stream().forEach(lista->lista.stream().forEach(l->{
             List<Reserva> reservas= l.getReserva();
             reservas.forEach(r->{
@@ -127,7 +128,7 @@ public class Repositorio {
                     reservasDicc.put(r.getNombre(),reservasDicc.get(r.getNombre())+1);
                 }
                 else{
-                    reservasDicc.put(r.getNombre(),0);
+                    reservasDicc.put(r.getNombre(),1);
                 }
             });
         }));

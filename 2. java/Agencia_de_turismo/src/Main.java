@@ -70,6 +70,9 @@ public class Main {
         System.out.println("\nDESCUENTOS DEL CLIENTE ");
         repositorio.mostrarDescuentos(cliente5);
 
+        //mostrar localizadores
+        repositorio.mostrarLocalizadores();
+
         //cantidad de localizadores vendidos
         System.out.print("\nCANTIDAD DE LOCALIZADORES VENDIDOS = ");
         repositorio.cantidadLocalizadoresVendidos();
@@ -89,6 +92,8 @@ public class Main {
         //Promedio de todas las ventas
         System.out.println("\nPROMEDIO DE TODAS LAS VENTAS");
         repositorio.mostrarPromedioDeVentas();
+
+
 
 
     }
