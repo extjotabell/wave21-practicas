@@ -27,5 +27,5 @@ public class RepositorioCliente {
     public void setLocalizadores(List<Localizador> localizadores) {
         this.localizadores = localizadores;
     }
-    
+
 }
