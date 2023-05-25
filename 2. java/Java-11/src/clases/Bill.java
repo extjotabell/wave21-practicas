@@ -12,4 +12,12 @@ public class Bill {
         this.products = products;
         this.totalPrice = totalPrice;
     }
+
+    @Override
+    public String toString(){
+        return new StringBuilder("Cliente de la factura: ").append(this.client).append("\n")
+                .append("Productos: ").append(this.products).append("\n")
+                .append("Precio total: ").append(this.totalPrice).append("\n")
+                .toString();
+    }
 }
