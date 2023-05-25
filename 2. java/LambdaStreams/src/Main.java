@@ -39,4 +39,8 @@ public class Main {
 
         System.out.println("Promedio:" + garage.getVehiculos().stream().mapToDouble(Vehiculo::getCosto).average().orElse(0));
     }
+
+    public static int[] burbuja(int[] array) {
+        return Arrays.stream(array).sorted().toArray();
+    }
 }
