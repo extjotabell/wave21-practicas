@@ -1,6 +1,15 @@
 package agencia_turismo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Cliente implements Identificable {
+    private int id;
+    private final String nombre;
+    private final String apellido;
+    private final int edad;
+    private final String dni;
+    private final List<Localizador> localizadores;
 
     public Cliente(int id, String nombre, String apellido, int edad, String dni) {
         this.id = id;
@@ -8,6 +17,17 @@ public class Cliente implements Identificable {
         this.apellido = apellido;
         this.edad = edad;
         this.dni = dni;
+        this.localizadores = new ArrayList<>();
+    }
+
+    @Override
+    public int getId() {
+        return this.id;
+    }
+
+    @Override
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNombre() {
@@ -26,19 +46,11 @@ public class Cliente implements Identificable {
         return dni;
     }
 
-    @Override
-    public int getId() {
-        return this.id;
+    public List<Localizador> getLocalizadores() {
+        return localizadores;
     }
 
-    @Override
-    public void setId(int id) {
-        this.id = id;
+    public void agregarLocalizador(Localizador localizador) {
+        this.localizadores.add(localizador);
     }
-
-    private int id;
-    private String nombre;
-    private String apellido;
-    private int edad;
-    private String dni;
 }
