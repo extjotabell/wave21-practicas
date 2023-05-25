@@ -1,4 +1,6 @@
 import model.Cliente;
+import model.Factura;
+import model.Item;
 import repository.ClienteImp;
 import repository.FacturaImp;
 import repository.ItemImp;
@@ -13,13 +15,23 @@ public class Main {
         FacturaImp factImp = new FacturaImp();
         ItemImp itemImp = new ItemImp();
 
+        //Precargamos algunos datos al sistema
+        Item item1 = new Item(1234L, "PS4", 1, 500.0);
+        Item item2 = new Item(5678L, "XBOX", 1, 400.0);
+        Item item3 = new Item(9101L, "PC", 1, 1500.0);
+        itemImp.save(item1);
+        itemImp.save(item2);
+        itemImp.save(item3);
+
         Cliente cliente1 = new Cliente(1234567L, "Marcos", "Rodriguez");
         Cliente cliente2 = new Cliente(3454677L, "Sofia", "Perez");
         Cliente cliente3 = new Cliente(8796554L, "Marcelo", "Fabiani");
-
         cliImp.save(cliente1);
         cliImp.save(cliente2);
         cliImp.save(cliente3);
+
+        Factura factura1 = new Factura(1L, cliente1, itemImp.traerTodos(), 2400.0);
+        factImp.save(factura1);
 
         Scanner keyboard = new Scanner(System.in);
 /*
@@ -50,13 +62,13 @@ public class Main {
                         String op1 = keyboard.next();
                         switch (op1){
                             case "1":
-                                //Crear
+                                cliImp.save(cliImp.crearObjeto());
                                 break;
                             case "2":
                                 cliImp.mostrarPantalla();
                                 break;
                             case "3":
-                                //Modificar
+                                cliImp.modificar();
                                 break;
                             case "4":
                                 cliImp.mostrarPantalla();
@@ -90,7 +102,10 @@ public class Main {
                                 //Modificar
                                 break;
                             case "4":
-                                //Eliminar
+                                factImp.mostrarPantalla();
+                                System.out.println("Ingrese la Factura que desea eliminar:");
+                                Long toDelete = keyboard.nextLong();
+                                factImp.eliminar(toDelete);
                                 break;
                             case "5":
                                 salir2 = true;
@@ -112,13 +127,16 @@ public class Main {
                                 //Crear
                                 break;
                             case "2":
-                                //Mostrar
+                                itemImp.mostrarPantalla();
                                 break;
                             case "3":
                                 //Modificar
                                 break;
                             case "4":
-                                //Eliminar
+                                itemImp.mostrarPantalla();
+                                System.out.println("Ingrese el Item que desea eliminar:");
+                                Long toDelete = keyboard.nextLong();
+                                itemImp.eliminar(toDelete);
                                 break;
                             case "5":
                                 salir3 = true;

@@ -5,10 +5,31 @@ import model.Cliente;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Scanner;
 
 public class ClienteImp implements CRUDRepository<Cliente> {
 
     List<Cliente> clientes = new ArrayList<Cliente>();
+
+    public Cliente crearObjeto() {
+        Cliente cli = new Cliente();
+
+        System.out.println("Se esta creando un cliente.\n");
+        System.out.println("DNI: \n");
+        Scanner keyboard = new Scanner(System.in);
+        Long op = keyboard.nextLong();
+        cli.setDni(op);
+
+        System.out.println("Nombre: \n");
+        String name = keyboard.next();
+        cli.setNombre(name);
+
+        System.out.println("Apellido: \n");
+        String surname = keyboard.next();
+        cli.setApelido(surname);
+
+        return cli;
+    }
 
     @Override
     public void save(Cliente obj) {
@@ -38,7 +59,7 @@ public class ClienteImp implements CRUDRepository<Cliente> {
         }
 
         if (flag == false) {
-            System.out.println("No se encontro el model.Cliente!");
+            System.out.println("No se encontro el Cliente!");
         }
 
         return Optional.empty();
@@ -53,6 +74,28 @@ public class ClienteImp implements CRUDRepository<Cliente> {
         } else{
             clientes.remove(cli.get());
             System.out.println("Cliente eliminado con éxito!");
+        }
+    }
+
+    public void modificar(){
+        this.mostrarPantalla();
+        System.out.println("Elija un Cliente a modificar:");
+        Scanner keyboard = new Scanner(System.in);
+        Long cod = keyboard.nextLong();
+        int index = 0
+                ;
+        boolean flag = false;
+        for(int i = 0; i < clientes.size(); i++){
+            if (clientes.get(i).getDni().equals(cod)){
+                index = i;
+                flag = true;
+                break;
+            }
+        }
+        if(!flag){
+            System.out.println("No se encontro el Cliente.");
+        }else{
+            clientes.set(index, this.crearObjeto());
         }
     }
 

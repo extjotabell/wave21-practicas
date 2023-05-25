@@ -5,6 +5,8 @@ import java.util.Optional;
 
 public interface CRUDRepository <T> {
 
+
+    //public Optional<T> crearObjeto();
     public void save(T obj);
     public void mostrarPantalla();
     public Optional<T> buscar(Long id);
