@@ -1,3 +1,5 @@
+package model;
+
 public class Cliente {
     private Long dni;
     private String nombre;
@@ -38,7 +40,7 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return "Cliente{" +
+        return "model.Cliente{" +
                 "dni='" + dni + '\'' +
                 ", nombre='" + nombre + '\'' +
                 ", apelido='" + apelido + '\'' +

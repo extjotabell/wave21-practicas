@@ -1,7 +1,9 @@
+package model;
 
 import java.util.List;
 
 public class Factura {
+    private Long codigo;
     private Cliente cliente;
     private List<Item> items;
     private double total;
@@ -9,10 +11,19 @@ public class Factura {
     public Factura() {
     }
 
-    public Factura(Cliente cliente, List<Item> items, double total) {
+    public Factura(Long codigo, Cliente cliente, List<Item> items, double total) {
+        this.codigo = codigo;
         this.cliente = cliente;
         this.items = items;
         this.total = total;
+    }
+
+    public Long getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(Long codigo) {
+        this.codigo = codigo;
     }
 
     public Cliente getCliente() {
@@ -42,7 +53,8 @@ public class Factura {
     @Override
     public String toString() {
         return "Factura{" +
-                "cliente=" + cliente +
+                "codigo=" + codigo +
+                ", cliente=" + cliente +
                 ", items=" + items +
                 ", total=" + total +
                 '}';

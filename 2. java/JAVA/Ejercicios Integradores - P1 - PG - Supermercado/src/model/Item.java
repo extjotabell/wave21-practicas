@@ -1,3 +1,5 @@
+package model;
+
 public class Item {
     private Long codigo;
     private String nombre;
@@ -48,7 +50,7 @@ public class Item {
 
     @Override
     public String toString() {
-        return "Item{" +
+        return "model.Item{" +
                 "codigo=" + codigo +
                 ", nombre='" + nombre + '\'' +
                 ", cantidad=" + cantidad +
