@@ -16,9 +16,28 @@ public class Main {
             add(cliente3);
         }};
 
+
         listaClientes.forEach(System.out::println);
 
-        buscarCliente(listaClientes);
+//        buscarCliente(listaClientes);
+
+        Factura factura = new Factura(cliente1);
+
+        if(!validarCliente(listaClientes, factura)){
+            listaClientes.add(factura.getCliente());
+        }
+
+        Item item1 = new Item("1", "Leche", 2, 10);
+        Item item2 = new Item("2", "Yerba Mate", 5, 5);
+
+        List<Item> itemList = new ArrayList<>(){{
+            add(item1);
+            add(item2);
+        }};
+
+        factura.setItemsYCalcularTotal(itemList);
+
+        System.out.println(factura);
     }
 
     public static void buscarCliente(List<Cliente> clientes) {
@@ -39,5 +58,9 @@ public class Main {
             System.out.println(clienteBuscado);
         }
 
+    }
+
+    public static boolean validarCliente(List<Cliente> clientesActuales, Factura factura){
+        return clientesActuales.contains(factura.getCliente());
     }
 }

@@ -12,4 +12,22 @@ public class Item {
         this.cantidadComprada = cantidadComprada;
         this.costoUnitario = costoUnitario;
     }
+
+    public int getCantidadComprada() {
+        return cantidadComprada;
+    }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "codigo='" + codigo + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", cantidadComprada=" + cantidadComprada +
+                ", costoUnitario=" + costoUnitario +
+                '}';
+    }
+
+    public double getCostoUnitario() {
+        return costoUnitario;
+    }
 }
