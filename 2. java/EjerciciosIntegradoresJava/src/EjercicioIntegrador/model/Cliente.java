@@ -1,4 +1,4 @@
-package EjercicioIntegrador;
+package EjercicioIntegrador.model;
 
 public class Cliente {
     String dni;

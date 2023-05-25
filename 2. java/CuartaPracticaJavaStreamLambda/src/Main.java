@@ -73,8 +73,8 @@ public class Main {
         //promedio total de precios
         double promedio =0;
         promedio = vehiculoList.stream().mapToDouble(Vehiculo::getCosto)
-                        .average()
-                                .orElse(0.0);
+                .average()
+                .orElse(0.0);
 
         System.out.println("Promedio: " + promedio);
     }
