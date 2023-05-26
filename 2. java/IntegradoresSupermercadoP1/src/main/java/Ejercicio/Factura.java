@@ -37,4 +37,5 @@ public class Factura {
         this.totalCompra = totalCompra;
     }
 
+
 }

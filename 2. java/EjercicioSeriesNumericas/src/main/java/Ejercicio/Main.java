@@ -16,7 +16,7 @@ public class Main {
 
         if(numeroSerie == 2)
         {
-            while (seguirCalculando){
+            //while (seguirCalculando){
             Prototipo prototipo = new SeriesDeDos<>();
             prototipo.valorInicial(nroInicial);
             prototipo.valorSiguiente(nroInicial);
@@ -24,8 +24,12 @@ public class Main {
 
                 System.out.println("Volver a ejecutar? S/N");
                 String respuesta = leer.next();
+                if(respuesta.compareToIgnoreCase("Y") == 0) {
+                    
+                }
+
             }
-            
+
         }
     }
 }

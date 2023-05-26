@@ -35,6 +35,10 @@ public class Cliente {
         this.apellido = apellido;
     }
 
+    public Cliente(String dni) {
+        this.dni = dni;
+    }
+
     @Override
     public String toString() {
         return "El cliente con documento " + this.getDni() + " se llama: " + this.getNombre() + " " + this.getApellido();

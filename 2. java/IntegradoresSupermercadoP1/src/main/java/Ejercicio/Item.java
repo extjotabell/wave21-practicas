@@ -4,7 +4,7 @@ public class Item {
     private String codigo;
     private String nombre;
     private int cantidadComprada;
-    private double costoUnitario;
+    private int costoUnitario;
 
     public void setCodigo(String codigo) {
         this.codigo = codigo;
@@ -18,7 +18,7 @@ public class Item {
         this.cantidadComprada = cantidadComprada;
     }
 
-    public void setCostoUnitario(double costoUnitario) {
+    public void setCostoUnitario(int costoUnitario) {
         this.costoUnitario = costoUnitario;
     }
 
@@ -34,11 +34,11 @@ public class Item {
         return cantidadComprada;
     }
 
-    public double getCostoUnitario() {
+    public int getCostoUnitario() {
         return costoUnitario;
     }
 
-    public Item(String codigo, String nombre, int cantidadComprada, double costoUnitario) {
+    public Item(String codigo, String nombre, int cantidadComprada, int costoUnitario) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.cantidadComprada = cantidadComprada;
