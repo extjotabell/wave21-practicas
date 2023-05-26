@@ -47,5 +47,6 @@ public class Main {
 
         //Crear nueva Factura
         repositorioFactura.crear(new Factura(9999999L,cliente2, repositorioProducto.obtnerTodos(), total));
+        repositorioFactura.obtnerTodos().forEach(System.out::println);
     }
 }
