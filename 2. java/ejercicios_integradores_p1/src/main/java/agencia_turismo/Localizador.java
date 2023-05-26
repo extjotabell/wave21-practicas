@@ -1,12 +1,11 @@
 package agencia_turismo;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.DoubleStream;
 
 public class Localizador implements Identificable {
     private final Map<Class<? extends Reserva>, List<Reserva>> reservas;
+    private final Map<Class<? extends Reserva>, Double> subTotalesPorTipoDeReserva;
     private int id;
     private int clienteId;
     private int reservasHechas;
@@ -14,6 +13,7 @@ public class Localizador implements Identificable {
     public Localizador(int idCliente) {
         this.clienteId = idCliente;
         this.reservas = new HashMap<>();
+        this.subTotalesPorTipoDeReserva = new HashMap<>();
     }
 
     @Override
@@ -31,7 +31,7 @@ public class Localizador implements Identificable {
     }
 
     public Map<Class<? extends Reserva>, List<Reserva>> getReservas() {
-        return reservas;
+        return  Collections.unmodifiableMap(reservas);
     }
 
     public int getCantidadReservasHechas() {
@@ -42,43 +42,36 @@ public class Localizador implements Identificable {
         this.agregarAReserva(reserva);
     }
 
-    private void agregarAReserva(Reserva reserva) {
-        this.reservas.computeIfAbsent(reserva.getClass(), k -> new ArrayList<>()).add(reserva);
+    private void agregarAReserva(Reserva reservaNueva) {
+        this.reservas.computeIfAbsent(reservaNueva.getClass(), k -> new ArrayList<>()).add(reservaNueva);
+        List<Reserva> reservasDeUnTipo = this.reservas.get(reservaNueva.getClass());
+        if (correspondeDescuentoPorDupla(reservaNueva) && reservasDeUnTipo.size() > 0 && reservasDeUnTipo.size() % 2 == 0 ) {
+                Reserva reservaPrevia = reservasDeUnTipo.get(reservasDeUnTipo.size() - 1);
+                double sumaCostos = reservaNueva.getCosto() + reservaPrevia.getCosto();
+                this.subTotalesPorTipoDeReserva.computeIfPresent(reservaNueva.getClass(), (k, v) -> v - reservaPrevia.getCosto() + (0.95 * sumaCostos));
+        } else {
+            this.subTotalesPorTipoDeReserva.compute(reservaNueva.getClass(), (k, v) -> (v == null) ? reservaNueva.getCosto() : v + reservaNueva.getCosto());
+        }
         this.reservasHechas++;
+    }
+    private boolean correspondeDescuentoPorDupla(Reserva reserva) {
+        return reserva instanceof ReservaVuelo || reserva instanceof ReservaHotel;
     }
 
     public void agregarMultiplesReservas(List<Reserva> reservas) {
         reservas.forEach(this::agregarAReserva);
     }
 
-    public double getCostoTotal() {
-        double[] subtotal = {0};
-        aplicarDescuentoPorCadaDupla(this.reservas.get(ReservaVuelo.class), 5);
-        aplicarDescuentoPorCadaDupla(this.reservas.get(ReservaHotel.class), 5);
-        this.reservas.forEach((tr, lr) -> lr.forEach(r -> subtotal[0] += r.getCosto()));
-        return subtotal[0];
-    }
-
-    private void aplicarDescuentoPorCadaDupla(List<Reserva> reservas, int porcentajeDescuento) {
-        if (reservas == null) {
-            return;
+    public double getCostoConDescuentosDeLocalizadorAplicados() {
+        double costoTotal = this.subTotalesPorTipoDeReserva.values().stream().flatMapToDouble(DoubleStream::of).sum();
+        if (esPaqueteCompleto()){
+            costoTotal *= 0.9;
         }
-        int reservaPrevia = -1;
-        for (int i = 0; i < reservas.size(); i++) {
-            if (reservaPrevia == -1) {
-                reservaPrevia = i;
-            } else {
-                reservas.get(reservaPrevia).aplicarDescuento(porcentajeDescuento);
-                reservas.get(i).aplicarDescuento(porcentajeDescuento);
-                reservaPrevia = -1;
-            }
-        }
+        return costoTotal;
     }
-
-    public boolean esPaqueteCompleto() {
-        final boolean[] esCompleto = {true};
-        this.reservas.forEach((r, lr) -> esCompleto[0] = esCompleto[0] && lr.size() > 0);
-        return esCompleto[0];
+    private boolean esPaqueteCompleto() {
+        int catidadDeTiposDeReservas = 4;
+        return this.reservas.size() == catidadDeTiposDeReservas;
     }
 
     @Override
@@ -87,7 +80,7 @@ public class Localizador implements Identificable {
                 "id=" + id +
                 ", clienteId=" + clienteId +
                 ", reservas=" + reservas +
-                ", costoTotal=" + this.getCostoTotal() +
+                ", costoTotal=" + this.getCostoConDescuentosDeLocalizadorAplicados() +
                 '}';
     }
 }

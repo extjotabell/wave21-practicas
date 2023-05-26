@@ -24,13 +24,13 @@ public class Main {
         int idLocalizador = agregarPrimerLocalizador(idCliente);
         Localizador primerLocalizador = repositorioLocalizadores.getElemento(idLocalizador);
         System.out.println("Unico descuento aplicado es por ser paquete completo 10%");
-        System.out.printf("%s%.2f%n", "Costo total solo con paquete completo es: ", primerLocalizador.getCostoTotal());
+        System.out.printf("%s%.2f%n", "Costo total solo con paquete completo es: ", primerLocalizador.getCostoConDescuentosDeLocalizadorAplicados());
         clienteEnRepo.agregarLocalizador(primerLocalizador);
 
         idLocalizador = agregarSegundoLocalizador(idCliente);
         Localizador segundoLocalizadorDesdeRepositorio = repositorioLocalizadores.getElemento(idLocalizador);
         System.out.println("Aplica descuento 5% a cada una de las 4 reservas");
-        System.out.printf("%s%.2f%n", "Costo total con reservas de vuelos y hotel es: ", segundoLocalizadorDesdeRepositorio.getCostoTotal());
+        System.out.printf("%s%.2f%n", "Costo total con reservas de vuelos y hotel es: ", segundoLocalizadorDesdeRepositorio.getCostoConDescuentosDeLocalizadorAplicados());
         clienteEnRepo.agregarLocalizador(segundoLocalizadorDesdeRepositorio);
 
         idLocalizador = agregarTercerLocalizador(idCliente);
@@ -38,7 +38,7 @@ public class Main {
         clienteEnRepo.agregarLocalizador(tercerLocalizador);
 
         System.out.println("Aplica descuento 5% por tener 2 localizadores previos");
-        System.out.printf("%s%.2f%n", "Costo total es: ", tercerLocalizador.getCostoTotal());
+        System.out.printf("%s%.2f%n", "Costo total es: ", tercerLocalizador.getCostoConDescuentosDeLocalizadorAplicados());
     }
 
     private static int agregarClienteDeEjemploARepo() {
@@ -87,17 +87,19 @@ public class Main {
         System.out.println("Ejecución parte 2, clase consultor de localizadores");
         consultor.mostrarLocalizadoresVendidos();
         consultor.mostrarReservasHechas();
-        imprimirMapa(consultor.getReservasPorTipo(2));
+        imprimirMapa(consultor.getReservasPorTipo());
         consultor.mostrarTotalDeLasVentas();
         consultor.mostrarPromedioDeLasVentas();
     }
 
     private static void imprimirMapa(Map<Class<? extends Reserva>, List<Reserva>> mapa) {
         mapa.forEach((tr, lr) -> {
-            System.out.println("Tipo: " + tr.getSimpleName());
-            System.out.println("[");
-            lr.forEach(System.out::println);
-            System.out.println("]");
+            StringBuilder sb = new StringBuilder();
+            sb.append("Tipo: ").append(tr.getSimpleName()).append("\n");
+            sb.append("[ ");
+            lr.forEach(x -> sb.append(x).append(", "));
+            sb.replace(sb.length() -2, sb.length(), " ]\n");
+            System.out.print(sb);
         });
     }
 }
