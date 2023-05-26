@@ -1,2 +1,4 @@
-package EjercicioVivo1;public class Cliente {
+package EjercicioVivo1;
+
+public class Cliente {
 }

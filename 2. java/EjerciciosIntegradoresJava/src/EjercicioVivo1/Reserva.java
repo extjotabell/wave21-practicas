@@ -1,2 +1,4 @@
-package EjercicioVivo1;public class Reserva {
+package EjercicioVivo1;
+
+public class Reserva {
 }

@@ -1,2 +1,7 @@
-package EjercicioVivo1;public class Localizador {
+package EjercicioVivo1;
+
+import java.util.List;
+
+public class Localizador {
+    List<Reserva> listaReservas;
 }
