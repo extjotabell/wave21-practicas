@@ -22,6 +22,16 @@ public class Main {
         System.out.println("Mostrando lista luego de la eliminación");
         clientes.forEach(System.out::println);
 
+        buscarClienteDesdeTeclado(clientes);
+
+        //Segundo Sprint
+        Item producto1 = new Item(1,"Producto 1", 3, 25);
+        Item producto2 = new Item(2,"Producto 2", 5, 10);
+        Factura factura = new Factura(cliente1,List.of(producto1,producto2));
+        System.out.println(factura);
+    }
+
+    private static void buscarClienteDesdeTeclado(List<Cliente> clientes){
         Scanner sc = new Scanner(System.in);
         System.out.print("Ingrese un dni: ");
         String dni = sc.next();
@@ -31,7 +41,6 @@ public class Main {
         } else {
             System.out.println(clienteBuscado);
         }
-
-
     }
+
 }

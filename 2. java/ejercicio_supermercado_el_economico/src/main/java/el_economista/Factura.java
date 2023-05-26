@@ -8,10 +8,10 @@ public class Factura {
     private List<Item> productos;
     private double costoTotal;
 
-    public Factura(Cliente cliente, List<Item> productos, double costoTotal) {
+    public Factura(Cliente cliente, List<Item> productos) {
         this.cliente = cliente;
         this.productos = productos;
-        this.costoTotal = costoTotal;
+        productos.forEach(i -> this.costoTotal += i.getCostoUnitario() * i.getCantidadComprada());
     }
 
     public Cliente getCliente() {
