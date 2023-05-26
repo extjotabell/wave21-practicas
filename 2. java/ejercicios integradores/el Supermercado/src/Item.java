@@ -42,4 +42,13 @@ public class Item {
     public void setCosto(int costo) {
         this.costo = costo;
     }
+
+    @Override
+    public String toString() {
+        return
+                "codigo=" + codigo +
+                ", nombre='" + nombre + '\'' +
+                ", cantidad=" + cantidad +
+                ", costo=" + costo;
+    }
 }

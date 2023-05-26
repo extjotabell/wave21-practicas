@@ -34,4 +34,10 @@ public class Factura {
     public void setTotal(int total) {
         this.total = total;
     }
+
+    public void calcularTotal(){
+        for(Item item: items){
+            this.total+=item.getCosto()*item.getCantidad();
+        }
+    }
 }
