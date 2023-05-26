@@ -21,18 +21,23 @@ public class Main {
         int idCliente = agregarClienteDeEjemploARepo();
         Cliente clienteEnRepo = repositorioClientes.getElemento(idCliente);
 
+        System.out.println("Primer Localizador:");
         int idLocalizador = agregarPrimerLocalizador(idCliente);
         Localizador primerLocalizador = repositorioLocalizadores.getElemento(idLocalizador);
         System.out.println("Unico descuento aplicado es por ser paquete completo 10%");
         System.out.printf("%s%.2f%n", "Costo total solo con paquete completo es: ", primerLocalizador.getCostoConDescuentosDeLocalizadorAplicados());
         clienteEnRepo.agregarLocalizador(primerLocalizador);
 
+        System.out.println();
+        System.out.println("Segundo Localizador:");
         idLocalizador = agregarSegundoLocalizador(idCliente);
         Localizador segundoLocalizadorDesdeRepositorio = repositorioLocalizadores.getElemento(idLocalizador);
         System.out.println("Aplica descuento 5% a cada una de las 4 reservas");
         System.out.printf("%s%.2f%n", "Costo total con reservas de vuelos y hotel es: ", segundoLocalizadorDesdeRepositorio.getCostoConDescuentosDeLocalizadorAplicados());
         clienteEnRepo.agregarLocalizador(segundoLocalizadorDesdeRepositorio);
 
+        System.out.println();
+        System.out.println("Tercer Localizador:");
         idLocalizador = agregarTercerLocalizador(idCliente);
         Localizador tercerLocalizador = repositorioLocalizadores.getElemento(idLocalizador);
         clienteEnRepo.agregarLocalizador(tercerLocalizador);
@@ -52,13 +57,14 @@ public class Main {
         ReservaHotel reservaHotel = new ReservaHotel(250);
         ReservaVuelo reservaVuelo = new ReservaVuelo(400);
         ReservaTransporte reservaTransporte = new ReservaTransporte(120);
-        paqueteCompleto.agregarMultiplesReservas(List.of(
-                        reservaComida,
-                        reservaHotel,
-                        reservaVuelo,
-                        reservaTransporte
-                )
+        List<Reserva> reservas = List.of(
+                reservaComida,
+                reservaHotel,
+                reservaVuelo,
+                reservaTransporte
         );
+        paqueteCompleto.agregarMultiplesReservas(reservas);
+        System.out.println("Costo sin descuento: " + reservas.stream().mapToDouble(Reserva::getCosto).sum());
         return repositorioLocalizadores.agregarElemento(paqueteCompleto);
     }
 
@@ -70,19 +76,22 @@ public class Main {
         ReservaVuelo reservaVuelo2 = new ReservaVuelo(120);
 
         Localizador nuevasReservas = new Localizador(idCliente);
-        nuevasReservas.agregarMultiplesReservas(List.of(reservaHotel1, reservaHotel2, reservaVuelo1, reservaVuelo2));
-
+        List<Reserva> reservas = List.of(reservaHotel1, reservaHotel2, reservaVuelo1, reservaVuelo2);
+        nuevasReservas.agregarMultiplesReservas(reservas);
+        System.out.println("Costo sin descuento: " + reservas.stream().mapToDouble(Reserva::getCosto).sum());
         return repositorioLocalizadores.agregarElemento(nuevasReservas);
     }
 
     private static int agregarTercerLocalizador(int idCliente) {
         Localizador tercerLocalizador = new Localizador(idCliente);
-        ReservaComida reservaComida1 = new ReservaComida(50);
-        tercerLocalizador.agregarReserva(reservaComida1);
+        ReservaComida reservaComida = new ReservaComida(50);
+        tercerLocalizador.agregarReserva(reservaComida);
+        System.out.println("Costo sin descuento: " + reservaComida.getCosto());
         return repositorioLocalizadores.agregarElemento(tercerLocalizador);
     }
 
     private static void ejectuarParte2() {
+        System.out.println();
         ConsultorDeLocalizadores consultor = new ConsultorDeLocalizadores(repositorioLocalizadores);
         System.out.println("Ejecución parte 2, clase consultor de localizadores");
         consultor.mostrarLocalizadoresVendidos();
