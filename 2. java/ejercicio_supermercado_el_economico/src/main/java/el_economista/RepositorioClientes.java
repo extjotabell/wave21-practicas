@@ -25,6 +25,11 @@ public class RepositorioClientes implements CRUD<Cliente> {
     }
 
     @Override
+    public boolean existeElemento(Cliente elem) {
+        return this.clientes.contains(elem);
+    }
+
+    @Override
     public void agregarElemento(Cliente elem) {
         elem.setId(this.nextId++);
         this.clientes.add(elem);

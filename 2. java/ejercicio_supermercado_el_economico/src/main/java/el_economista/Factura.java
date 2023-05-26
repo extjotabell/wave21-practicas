@@ -43,10 +43,11 @@ public class Factura {
 
     @Override
     public String toString() {
-        return "Factura{" +
-                "cliente=" + getCliente() +
-                ", productos=" + getProductos() +
-                ", costoTotal=" + getCostoTotal() +
-                '}';
+        return "\tFactura {" +
+                "\n\t\tid= " + getId() +
+                ",\n\t\tcliente=" + getCliente() +
+                ",\n\t\tproductos=" + getProductos() +
+                ",\n\t\tcostoTotal=" + getCostoTotal() +
+                "\n\t}";
     }
 }

@@ -25,6 +25,11 @@ public class RepositorioFacturas implements CRUD<Factura>{
     }
 
     @Override
+    public boolean existeElemento(Factura elem) {
+        return this.facturas.contains(elem);
+    }
+
+    @Override
     public void agregarElemento(Factura elem) {
         elem.setId(this.nextId++);
         this.facturas.add(elem);
