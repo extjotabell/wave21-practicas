@@ -3,14 +3,25 @@ package el_economista;
 import java.util.Objects;
 
 public class Cliente {
+
+    private int id;
     private String dni;
     private String nombre;
     private String apellido;
 
     public Cliente(String dni, String nombre, String apellido) {
+        this.id = 0;
         this.dni = dni;
         this.nombre = nombre;
         this.apellido = apellido;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getDni() {

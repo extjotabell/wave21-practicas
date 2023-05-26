@@ -4,15 +4,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Factura {
-
+    private int id;
     private Cliente cliente;
     private List<Item> productos;
     private double costoTotal;
 
     public Factura(Cliente cliente) {
+        this.id = 0;
         this.cliente = cliente;
         this.productos = new ArrayList<>();
         this.costoTotal = 0;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    void setId(int id) {
+        this.id = id;
     }
 
     public Cliente getCliente() {
