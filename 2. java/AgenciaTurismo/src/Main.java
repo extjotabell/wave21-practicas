@@ -1,17 +1,41 @@
+import java.util.ArrayList;
+import java.util.Comparator;
+
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
-        // Press Opt+Enter with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        ClienteRepositorio clienteRepositorio = new ClienteRepositorioImplementacion();
+        Cliente cliente1 = new Cliente("123456789", "Pedro");
+        Localizador localizador1 = new Localizador(cliente1);
+        localizador1.nuevaReserva(new Hotel(30));
+        localizador1.nuevaReserva(new Comida(10));
+        localizador1.nuevaReserva(new VoletoViaje(25));
+        localizador1.nuevaReserva(new Transporte(15));
+        clienteRepositorio.agregarLocalizador(localizador1);
+        localizador1.imprimir();
 
-        // Press Ctrl+R or click the green arrow button in the gutter to run the code.
-        for (int i = 1; i <= 5; i++) {
+        Localizador localizador2 = new Localizador(cliente1);
+        localizador2.nuevaReserva(new Hotel(45));
+        localizador2.nuevaReserva(new Hotel(25));
+        localizador2.nuevaReserva(new VoletoViaje(10));
+        localizador2.nuevaReserva(new VoletoViaje(10));
+        clienteRepositorio.agregarLocalizador(localizador2);
+        localizador2.imprimir();
 
-            // Press Ctrl+D to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Cmd+F8.
-            System.out.println("i = " + i);
-        }
+        Localizador localizador3 = new Localizador(cliente1);
+        localizador3.nuevaReserva(new Hotel(200));
+        clienteRepositorio.agregarLocalizador(localizador3);
+        localizador3.imprimir();
+        ArrayList<Reserva> reservas = new ArrayList<Reserva>();
+        clienteRepositorio.getLocalizadores().forEach(localizador -> reservas.addAll(localizador.getReservas()));
+        System.out.println(" ");
+        System.out.println("Cantidad localizadore vendidos: " + clienteRepositorio.getLocalizadores().size());
+        System.out.println(" ");
+        System.out.println("Cantidad total reservas: " + reservas.size());
+        System.out.println(" ");
+        System.out.println("Reservas clasificadas por tipo:");
+        reservas.stream().sorted(Comparator.comparing(Reserva::getNombre)).forEach(System.out::println);
+        System.out.println("Promedio total ventas:" + reservas.stream().mapToDouble(Reserva::getPrecio).average().orElse(0));
     }
 }
