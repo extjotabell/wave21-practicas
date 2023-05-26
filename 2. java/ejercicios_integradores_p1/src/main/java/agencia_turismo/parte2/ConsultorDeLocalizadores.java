@@ -4,6 +4,8 @@ import agencia_turismo.Localizador;
 import agencia_turismo.Repositorio;
 import agencia_turismo.Reserva;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,18 +27,20 @@ public class ConsultorDeLocalizadores {
         System.out.println("Se realizaron un total de " + totalReservasHechas[0] + " reservas");
     }
 
-    public Map<Class<? extends Reserva>, List<Reserva>> getReservasPorTipo(int idLocalizador) {
-        //Asumo de la letra que son para un localizador determinado.
-        return repoLocalizadores.getElemento(idLocalizador).getReservas();
+    public Map<Class<? extends Reserva>, List<Reserva>> getReservasPorTipo() {
+        Map<Class<? extends Reserva>, List<Reserva>> reservas = new HashMap<>();
+        repoLocalizadores.getElementos().forEach(l -> l.getReservas().forEach((k,v) -> reservas.computeIfAbsent(k, k1 -> new ArrayList<>()).addAll(v)));
+        return reservas;
+
     }
 
     public void mostrarTotalDeLasVentas() {
-        double totalDeLasVentas = this.repoLocalizadores.getElementos().stream().mapToDouble(Localizador::getCostoTotal).sum();
+        double totalDeLasVentas = this.repoLocalizadores.getElementos().stream().mapToDouble(Localizador::getCostoConDescuentosDeLocalizadorAplicados).sum();
         System.out.printf("%s%.2f%n", "El valor total de las ventas realizadas es de ", totalDeLasVentas);
     }
 
     public void mostrarPromedioDeLasVentas() {
-        double promedioDeVentas =  this.repoLocalizadores.getElementos().stream().mapToDouble(Localizador::getCostoTotal).average().orElse(0D);
+        double promedioDeVentas =  this.repoLocalizadores.getElementos().stream().mapToDouble(Localizador::getCostoConDescuentosDeLocalizadorAplicados).average().orElse(0D);
         System.out.printf("%s%.2f%n", "El valor promedio de las ventas realizadas es de ", promedioDeVentas);
     }
 }
