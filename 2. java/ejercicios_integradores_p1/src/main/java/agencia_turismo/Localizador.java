@@ -33,7 +33,7 @@ public class Localizador implements Identificable {
     }
 
     public Map<Class<? extends Reserva>, List<Reserva>> getReservas() {
-        return  Collections.unmodifiableMap(reservas);
+        return Collections.unmodifiableMap(reservas);
     }
 
     public int getCantidadReservasHechas() {
@@ -47,15 +47,16 @@ public class Localizador implements Identificable {
     private void agregarAReserva(Reserva reservaNueva) {
         this.reservas.computeIfAbsent(reservaNueva.getClass(), k -> new ArrayList<>()).add(reservaNueva);
         List<Reserva> reservasDeUnTipo = this.reservas.get(reservaNueva.getClass());
-        if (correspondeDescuentoPorDupla(reservaNueva) && reservasDeUnTipo.size() > 0 && reservasDeUnTipo.size() % 2 == 0 ) {
-                Reserva reservaPrevia = reservasDeUnTipo.get(reservasDeUnTipo.size() - 1);
-                double sumaCostos = reservaNueva.getCosto() + reservaPrevia.getCosto();
-                this.subTotalesPorTipoDeReserva.computeIfPresent(reservaNueva.getClass(), (k, v) -> v - reservaPrevia.getCosto() + (0.95 * sumaCostos));
+        if (correspondeDescuentoPorDupla(reservaNueva) && reservasDeUnTipo.size() > 0 && reservasDeUnTipo.size() % 2 == 0) {
+            Reserva reservaPrevia = reservasDeUnTipo.get(reservasDeUnTipo.size() - 1);
+            double sumaCostos = reservaNueva.getCosto() + reservaPrevia.getCosto();
+            this.subTotalesPorTipoDeReserva.computeIfPresent(reservaNueva.getClass(), (k, v) -> v - reservaPrevia.getCosto() + (0.95 * sumaCostos));
         } else {
             this.subTotalesPorTipoDeReserva.compute(reservaNueva.getClass(), (k, v) -> (v == null) ? reservaNueva.getCosto() : v + reservaNueva.getCosto());
         }
         this.reservasHechas++;
     }
+
     private boolean correspondeDescuentoPorDupla(Reserva reserva) {
         return reserva instanceof ReservaVuelo || reserva instanceof ReservaHotel;
     }
@@ -66,14 +67,15 @@ public class Localizador implements Identificable {
 
     public double getCostoConDescuentosAplicados() {
         double costoTotal = this.subTotalesPorTipoDeReserva.values().stream().flatMapToDouble(DoubleStream::of).sum();
-        if (esPaqueteCompleto()){
+        if (esPaqueteCompleto()) {
             costoTotal *= 0.9;
         }
-        if(this.correspondeDescuentoPorComprasReiteradas){
+        if (this.correspondeDescuentoPorComprasReiteradas) {
             costoTotal *= 0.9;
         }
         return costoTotal;
     }
+
     private boolean esPaqueteCompleto() {
         int catidadDeTiposDeReservas = 4;
         return this.reservas.size() == catidadDeTiposDeReservas;

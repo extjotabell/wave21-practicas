@@ -29,7 +29,7 @@ public class ConsultorDeLocalizadores {
 
     public Map<Class<? extends Reserva>, List<Reserva>> getReservasPorTipo() {
         Map<Class<? extends Reserva>, List<Reserva>> reservas = new HashMap<>();
-        repoLocalizadores.getElementos().forEach(l -> l.getReservas().forEach((k,v) -> reservas.computeIfAbsent(k, k1 -> new ArrayList<>()).addAll(v)));
+        repoLocalizadores.getElementos().forEach(l -> l.getReservas().forEach((k, v) -> reservas.computeIfAbsent(k, k1 -> new ArrayList<>()).addAll(v)));
         return reservas;
 
     }
@@ -40,7 +40,7 @@ public class ConsultorDeLocalizadores {
     }
 
     public void mostrarPromedioDeLasVentas() {
-        double promedioDeVentas =  this.repoLocalizadores.getElementos().stream().mapToDouble(Localizador::getCostoConDescuentosAplicados).average().orElse(0D);
+        double promedioDeVentas = this.repoLocalizadores.getElementos().stream().mapToDouble(Localizador::getCostoConDescuentosAplicados).average().orElse(0D);
         System.out.printf("%s%.2f%n", "El valor promedio de las ventas realizadas es de ", promedioDeVentas);
     }
 }

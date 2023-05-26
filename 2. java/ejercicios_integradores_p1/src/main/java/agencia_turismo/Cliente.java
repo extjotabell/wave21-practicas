@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Cliente implements Identificable {
-    private int id;
     private final String nombre;
     private final String apellido;
     private final int edad;
     private final String dni;
     private final List<Localizador> localizadores;
+    private int id;
 
     public Cliente(int id, String nombre, String apellido, int edad, String dni) {
         this.id = id;

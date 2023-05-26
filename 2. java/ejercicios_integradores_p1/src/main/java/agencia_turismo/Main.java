@@ -92,14 +92,16 @@ public class Main {
         System.out.println("Costo sin descuento: " + reservaComida.getCosto());
         return repositorioLocalizadores.agregarElemento(tercerLocalizador);
     }
-    private static void verificarResultado(Localizador localizador, double costoEsperado){
+
+    private static void verificarResultado(Localizador localizador, double costoEsperado) {
         System.out.println("Verificación de resultado para localizador de id: " + localizador.getId());
-        if (localizador.getCostoConDescuentosAplicados() == costoEsperado){
+        if (localizador.getCostoConDescuentosAplicados() == costoEsperado) {
             System.out.println("Se esperaba " + costoEsperado + " y se obtuvo correctamente " + localizador.getCostoConDescuentosAplicados());
-        }else {
+        } else {
             System.out.println("Se esperaba " + costoEsperado + " y se obtuvo incorrectamente " + localizador.getCostoConDescuentosAplicados());
         }
     }
+
     private static void ejectuarParte2() {
         System.out.println();
         ConsultorDeLocalizadores consultor = new ConsultorDeLocalizadores(repositorioLocalizadores);
@@ -117,7 +119,7 @@ public class Main {
             sb.append("Tipo: ").append(tr.getSimpleName()).append("\n");
             sb.append("[ ");
             lr.forEach(x -> sb.append(x).append(", "));
-            sb.replace(sb.length() -2, sb.length(), " ]\n");
+            sb.replace(sb.length() - 2, sb.length(), " ]\n");
             System.out.print(sb);
         });
     }
