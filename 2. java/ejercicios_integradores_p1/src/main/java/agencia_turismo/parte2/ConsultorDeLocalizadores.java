@@ -35,12 +35,12 @@ public class ConsultorDeLocalizadores {
     }
 
     public void mostrarTotalDeLasVentas() {
-        double totalDeLasVentas = this.repoLocalizadores.getElementos().stream().mapToDouble(Localizador::getCostoConDescuentosDeLocalizadorAplicados).sum();
+        double totalDeLasVentas = this.repoLocalizadores.getElementos().stream().mapToDouble(Localizador::getCostoConDescuentosAplicados).sum();
         System.out.printf("%s%.2f%n", "El valor total de las ventas realizadas es de ", totalDeLasVentas);
     }
 
     public void mostrarPromedioDeLasVentas() {
-        double promedioDeVentas =  this.repoLocalizadores.getElementos().stream().mapToDouble(Localizador::getCostoConDescuentosDeLocalizadorAplicados).average().orElse(0D);
+        double promedioDeVentas =  this.repoLocalizadores.getElementos().stream().mapToDouble(Localizador::getCostoConDescuentosAplicados).average().orElse(0D);
         System.out.printf("%s%.2f%n", "El valor promedio de las ventas realizadas es de ", promedioDeVentas);
     }
 }

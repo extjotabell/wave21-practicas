@@ -7,13 +7,15 @@ public class Localizador implements Identificable {
     private final Map<Class<? extends Reserva>, List<Reserva>> reservas;
     private final Map<Class<? extends Reserva>, Double> subTotalesPorTipoDeReserva;
     private int id;
-    private int clienteId;
+    private Cliente cliente;
+    private boolean correspondeDescuentoPorComprasReiteradas;
     private int reservasHechas;
 
-    public Localizador(int idCliente) {
-        this.clienteId = idCliente;
+    public Localizador(Cliente cliente) {
+        this.cliente = cliente;
         this.reservas = new HashMap<>();
         this.subTotalesPorTipoDeReserva = new HashMap<>();
+        this.correspondeDescuentoPorComprasReiteradas = cliente.getLocalizadores().size() >= 2;
     }
 
     @Override
@@ -26,8 +28,8 @@ public class Localizador implements Identificable {
         this.id = id;
     }
 
-    public int getClienteId() {
-        return clienteId;
+    public Cliente getCliente() {
+        return cliente;
     }
 
     public Map<Class<? extends Reserva>, List<Reserva>> getReservas() {
@@ -62,9 +64,12 @@ public class Localizador implements Identificable {
         reservas.forEach(this::agregarAReserva);
     }
 
-    public double getCostoConDescuentosDeLocalizadorAplicados() {
+    public double getCostoConDescuentosAplicados() {
         double costoTotal = this.subTotalesPorTipoDeReserva.values().stream().flatMapToDouble(DoubleStream::of).sum();
         if (esPaqueteCompleto()){
+            costoTotal *= 0.9;
+        }
+        if(this.correspondeDescuentoPorComprasReiteradas){
             costoTotal *= 0.9;
         }
         return costoTotal;
@@ -78,9 +83,9 @@ public class Localizador implements Identificable {
     public String toString() {
         return "Localizador{" +
                 "id=" + id +
-                ", clienteId=" + clienteId +
+                ", cliente=" + cliente +
                 ", reservas=" + reservas +
-                ", costoTotal=" + this.getCostoConDescuentosDeLocalizadorAplicados() +
+                ", costoTotal=" + this.getCostoConDescuentosAplicados() +
                 '}';
     }
 }
