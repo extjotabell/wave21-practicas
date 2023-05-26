@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         List<Cliente> clientes = new ArrayList<>();
+        List<Factura> facturas = new ArrayList<>();
 
         Cliente cliente1 = new Cliente("1", "Juan", "Pérez");
         Cliente cliente2 = new Cliente("2", "Carlos", "Cabal");
@@ -25,13 +26,22 @@ public class Main {
         buscarClienteDesdeTeclado(clientes);
 
         //Segundo Sprint
-        Item producto1 = new Item(1,"Producto 1", 3, 25);
-        Item producto2 = new Item(2,"Producto 2", 5, 10);
-        Factura factura = new Factura(cliente1,List.of(producto1,producto2));
+        Item producto1 = new Item(1, "Producto 1", 3, 25);
+        Item producto2 = new Item(2, "Producto 2", 5, 10);
+        Factura factura = new Factura(cliente1);
+        factura.setProductos(List.of(producto1, producto2));
         System.out.println(factura);
+
+        System.out.println("Agregando factura a coleccion");
+        if (!clientes.contains(factura.getCliente())) {
+            System.out.println("Cliente no se encontro en la coleccion, sera agregado");
+            clientes.add(factura.getCliente());
+        }
+        facturas.add(factura);
+        System.out.println("Factura agregada correctamente");
     }
 
-    private static void buscarClienteDesdeTeclado(List<Cliente> clientes){
+    private static void buscarClienteDesdeTeclado(List<Cliente> clientes) {
         Scanner sc = new Scanner(System.in);
         System.out.print("Ingrese un dni: ");
         String dni = sc.next();

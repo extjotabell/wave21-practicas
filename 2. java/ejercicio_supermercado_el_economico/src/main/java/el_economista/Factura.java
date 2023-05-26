@@ -1,5 +1,6 @@
 package el_economista;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Factura {
@@ -8,18 +9,14 @@ public class Factura {
     private List<Item> productos;
     private double costoTotal;
 
-    public Factura(Cliente cliente, List<Item> productos) {
+    public Factura(Cliente cliente) {
         this.cliente = cliente;
-        this.productos = productos;
-        productos.forEach(i -> this.costoTotal += i.getCostoUnitario() * i.getCantidadComprada());
+        this.productos = new ArrayList<>();
+        this.costoTotal = 0;
     }
 
     public Cliente getCliente() {
         return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
     }
 
     public List<Item> getProductos() {
@@ -31,19 +28,16 @@ public class Factura {
     }
 
     public double getCostoTotal() {
+        productos.forEach(i -> this.costoTotal += i.getCostoUnitario() * i.getCantidadComprada());
         return costoTotal;
-    }
-
-    public void setCostoTotal(double costoTotal) {
-        this.costoTotal = costoTotal;
     }
 
     @Override
     public String toString() {
         return "Factura{" +
-                "cliente=" + cliente +
-                ", productos=" + productos +
-                ", costoTotal=" + costoTotal +
+                "cliente=" + getCliente() +
+                ", productos=" + getProductos() +
+                ", costoTotal=" + getCostoTotal() +
                 '}';
     }
 }
