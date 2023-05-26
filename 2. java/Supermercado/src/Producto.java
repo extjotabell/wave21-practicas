@@ -1,21 +1,21 @@
-public class Producto {
-    private String codigo;
+public class Producto implements IObtenerId{
+    private Long codigo;
     private String nombre;
     private int cantidad;
     private double costo;
 
-    public Producto(String codigo, String nombre, int cantidad, double costo) {
+    public Producto(Long codigo, String nombre, int cantidad, double costo) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.cantidad = cantidad;
         this.costo = costo;
     }
 
-    public String getCodigo() {
+    public Long getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(String codigo) {
+    public void setCodigo(Long codigo) {
         this.codigo = codigo;
     }
 
@@ -51,5 +51,10 @@ public class Producto {
                 ", cantidad=" + cantidad +
                 ", costo=" + costo +
                 '}';
+    }
+
+    @Override
+    public Long obtenerId() {
+        return codigo;
     }
 }

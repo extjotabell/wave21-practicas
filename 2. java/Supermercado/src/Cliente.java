@@ -1,19 +1,19 @@
-public class Cliente {
-    private String dni;
+public class Cliente implements IObtenerId{
+    private Long dni;
     private String nombre;
     private String apellido;
 
-    public Cliente(String dni, String nombre, String apellido) {
+    public Cliente(Long dni, String nombre, String apellido) {
         this.dni = dni;
         this.nombre = nombre;
         this.apellido = apellido;
     }
 
-    public String getDni() {
+    public Long getDni() {
         return dni;
     }
 
-    public void setDni(String dni) {
+    public void setDni(Long dni) {
         this.dni = dni;
     }
 
@@ -40,5 +40,10 @@ public class Cliente {
                 ", nombre='" + nombre + '\'' +
                 ", apellido='" + apellido + '\'' +
                 '}';
+    }
+
+    @Override
+    public Long obtenerId() {
+        return this.dni;
     }
 }
