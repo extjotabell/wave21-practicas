@@ -41,5 +41,33 @@ public class Main {
 
         System.out.println(ordenadosPrecio);
         System.out.println(ordenadosPrecioInverso);
+
+        List<Vehiculo> ordenadoMarcaYPrecio = garaje.getVehiculoList().stream()
+                .sorted(Comparator.comparing(Vehiculo::getMarca))
+                .sorted(Comparator.comparing((Vehiculo::getCosto)))
+                .toList();
+
+        System.out.println(ordenadoMarcaYPrecio);
+
+        List<Vehiculo> noMayor1000 = garaje.getVehiculoList().stream()
+                .filter(vehiculo -> vehiculo.getCosto() <= 1000)
+                .sorted(Comparator.comparing(Vehiculo::getCosto).reversed())
+                .toList();
+
+        System.out.println(noMayor1000);
+
+        List<Vehiculo> mayor1000 = garaje.getVehiculoList().stream()
+                .filter(vehiculo -> vehiculo.getCosto() >= 1000 )
+                .sorted(Comparator.comparing(Vehiculo::getCosto).reversed())
+                .toList();
+
+        System.out.println(mayor1000);
+
+        double promedio = garaje.getVehiculoList().stream()
+                .mapToDouble(Vehiculo::getCosto)
+                .average()
+                .orElse(0);
+
+        System.out.println(promedio);
     }
 }
