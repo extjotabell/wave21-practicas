@@ -10,7 +10,7 @@ public class Main {
   static final LocalizadorRepositorio localizadores = new LocalizadorRepositorio();
 
   public static void main(String[] args) {
-    Clientes c = new Clientes("Nahuel", 11111111);
+    Cliente c = new Cliente("Nahuel", 11111111);
     ClienteRepositorio.add(c);
 
     Localizador lCompleto = Main.createLocalizador(
@@ -37,7 +37,7 @@ public class Main {
 
     ClienteRepositorio.add(c);
 
-    Clientes toSearch = c;
+    Cliente toSearch = c;
 
     try {
       List<Localizador> localizadores = LocalizadorRepositorio.searchByClient(toSearch);
@@ -49,7 +49,7 @@ public class Main {
     }
   }
 
-  static public Localizador createLocalizador(Clientes c, Reservas ...reservas) {
+  static public Localizador createLocalizador(Cliente c, Reservas ...reservas) {
 
     Localizador localizador = new Localizador(c);
 

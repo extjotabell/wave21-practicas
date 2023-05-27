@@ -1,9 +1,8 @@
 package org.example.repositorios;
 
-import org.example.Clientes;
+import org.example.Cliente;
 import org.example.Localizador;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -18,10 +17,10 @@ public class LocalizadorRepositorio implements Repositorio<Localizador> {
 
   @Override
   public Optional<Localizador> search(Localizador obj) {
-    return Optional.empty();
+    return LocalizadorRepositorio.localizadores.stream().filter(l -> l.equals(obj)).findFirst();
   }
 
-  static public List<Localizador> searchByClient(Clientes obj) {
+  static public List<Localizador> searchByClient(Cliente obj) {
     return LocalizadorRepositorio.localizadores.stream().filter(l -> l.getCliente().equals(obj)).toList();
   }
 }

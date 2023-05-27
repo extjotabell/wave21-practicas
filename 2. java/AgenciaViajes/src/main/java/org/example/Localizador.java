@@ -1,7 +1,5 @@
 package org.example;
 
-import org.example.repositorios.LocalizadorRepositorio;
-import org.example.repositorios.ReservasRepositorio;
 import org.example.reservas.BoletosReserva;
 import org.example.reservas.HotelReserva;
 import org.example.reservas.Reservas;
@@ -12,11 +10,11 @@ import java.util.List;
 
 public class Localizador {
   private List<Reservas> reservas = new ArrayList<>();
-  private Clientes cliente;
+  private Cliente cliente;
 
   private Double total;
 
-  public Localizador(Clientes cliente) {
+  public Localizador(Cliente cliente) {
     this.cliente = cliente;
   }
 
@@ -85,7 +83,7 @@ public class Localizador {
     return String.format("Total de la localizacion es: $%s. Con %s reservas. %s", this.total, this.reservas.size(), a);
   }
 
-  public Clientes getCliente() {
+  public Cliente getCliente() {
     return this.cliente;
   }
 }
