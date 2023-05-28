@@ -4,7 +4,6 @@ import Ejercicio_1.interfaces.Deposito;
 import Ejercicio_1.interfaces.Transferencia;
 
 public class Ejecutivo extends Cliente implements Transferencia, Deposito {
-
     public Ejecutivo(String nombre) {
         super(nombre);
     }
