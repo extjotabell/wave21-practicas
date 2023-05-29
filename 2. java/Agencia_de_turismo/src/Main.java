@@ -93,7 +93,7 @@ public class Main {
         System.out.println("\nPROMEDIO DE TODAS LAS VENTAS");
         repositorio.mostrarPromedioDeVentas();
 
-
+        
 
 
     }
