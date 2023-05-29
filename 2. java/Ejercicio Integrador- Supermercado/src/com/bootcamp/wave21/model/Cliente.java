@@ -1,4 +1,4 @@
-package com.bootcamp.wave21;
+package com.bootcamp.wave21.model;
 
 public class Cliente {
 

@@ -1,4 +1,4 @@
-package com.bootcamp.wave21;
+package com.bootcamp.wave21.model;
 
 public class ItemFactura {
     /*De cada item o producto se guarda el código, nombre, cantidad comprada y costo unitario. */
@@ -38,5 +38,14 @@ public class ItemFactura {
 
     public void setCostoUnitario(double costoUnitario) {
         this.costoUnitario = costoUnitario;
+    }
+
+    @Override
+    public String toString() {
+        return "Producto:" +
+                "codigo='" + codigo + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", cantComprada=" + cantComprada +
+                ", costoUnitario=" + costoUnitario ;
     }
 }
