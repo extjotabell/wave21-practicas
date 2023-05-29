@@ -1,6 +1,24 @@
-public class Informes extends Pdf implements Imprimible{
+public class Informes  implements Imprimible{
     private String texto;
     private String revisor;
+    private String titulo;
+    private String autor;
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public String getAutor() {
+        return autor;
+    }
+
+    public void setAutor(String autor) {
+        this.autor = autor;
+    }
 
     public String getTexto() {
         return texto;
@@ -18,11 +36,7 @@ public class Informes extends Pdf implements Imprimible{
         this.revisor = revisor;
     }
 
-    public Informes( int cantidadPaginas, String autor, String texto, String revisor) {
-        super(cantidadPaginas, autor);
-        this.texto = texto;
-        this.revisor = revisor;
-    }
+
 
     public void toOneString(){
         System.out.println("ACA IMPRIMO UN Informe");

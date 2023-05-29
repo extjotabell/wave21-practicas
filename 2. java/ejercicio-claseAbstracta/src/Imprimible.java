@@ -1,4 +1,7 @@
 public interface Imprimible {
 
-    public  void imprimir();
+    static void imprimirDocumento(Documento documento){
+        documento.imprimir();
+    }
+    void imprimirTipoDoc();
 }
