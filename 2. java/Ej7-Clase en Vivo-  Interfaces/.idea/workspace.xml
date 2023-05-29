@@ -2,15 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="40126cb2-2cab-4229-8989-ec4971d3536a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/com/bootcamp/wave21/Impresora.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/bootcamp/wave21/Curriculum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/bootcamp/wave21/Curriculum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/bootcamp/wave21/Imprimible.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/bootcamp/wave21/Imprimible.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/bootcamp/wave21/Informe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/bootcamp/wave21/Informe.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/bootcamp/wave21/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/bootcamp/wave21/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/bootcamp/wave21/PDF.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/bootcamp/wave21/PDF.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/bootcamp/wave21/Persona.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/bootcamp/wave21/Persona.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/bootcamp/wave21/TipoDocumento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/bootcamp/wave21/TipoDocumento.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Ejercicio Integrador- Dakar/src/com/bootcamp/wave21/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Ejercicio Integrador- Dakar/src/com/bootcamp/wave21/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Ejercicio Integrador- Dakar/src/com/bootcamp/wave21/Vehiculo.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Ejercicio Integrador- Dakar/src/com/bootcamp/wave21/Vehiculo.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,17 +115,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
@@ -153,6 +135,7 @@
       <workItem from="1684849370690" duration="917000" />
       <workItem from="1684850362792" duration="612000" />
       <workItem from="1684854247834" duration="1350000" />
+      <workItem from="1685380095372" duration="1000" />
     </task>
     <servers />
   </component>

@@ -1,5 +1,7 @@
 package com.bootcamp.wave21;
 
+import java.util.Optional;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -9,13 +11,14 @@ public class Main {
     dakar.darDeAltaMoto(22, 3, 5, "MMM123");
     dakar.darDeAltaAuto(32,3,4,"JJJ123");
     dakar.darDeAltaMoto(15,3,2,"HHH!23");
-    dakar.darDeAltaAuto(32,3,2,"III123");
-    dakar.darDeAltaMoto(113,3,14,"KKK123");
+    dakar.darDeAltaAuto(1,3,2,"III123");
+    dakar.darDeAltaMoto(1,3,14,"KKK123");
     dakar.socorrerMoto("PPP123");
     dakar.socorrerAuto("JJJ123");
     Vehiculo ganador  = dakar.definirGanador();
     System.out.println("El vehiculo ganador de la carrera es:  " + ganador.getPatente());
-
+        Optional<Vehiculo> lambdaGanador = dakar.definirGanadorPorLambda();
+        System.out.println("El ganador segun lamda es...." + lambdaGanador.toString());
 
 
     }

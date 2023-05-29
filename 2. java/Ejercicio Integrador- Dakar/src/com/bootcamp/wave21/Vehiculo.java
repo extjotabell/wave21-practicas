@@ -69,5 +69,10 @@ public abstract class Vehiculo {
         this.ruedas = ruedas;
     }
 
-
+    @Override
+    public String toString() {
+        return "Vehiculo{" +
+                "patente='" + patente + '\'' +
+                '}';
+    }
 }
