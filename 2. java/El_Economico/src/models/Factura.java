@@ -36,4 +36,13 @@ public class Factura {
     public void setListProductos(List<Producto> listProductos) {
         this.listProductos = listProductos;
     }
+
+    @Override
+    public String toString() {
+        return "Factura{" +
+                "datosCliente=" + datosCliente +
+                ", total=" + total +
+                ", listProductos=" + listProductos +
+                '}';
+    }
 }

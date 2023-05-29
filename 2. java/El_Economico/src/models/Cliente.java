@@ -1,9 +1,14 @@
 package models;
 
-public class Cliente {
+import repository.ClienteImp;
+
+public class Cliente{
     private String nombre;
     private String apellido;
     private Integer dni;
+
+    public Cliente() {
+    }
 
     public Cliente(String nombre, String apellido, Integer dni) {
         this.nombre = nombre;
