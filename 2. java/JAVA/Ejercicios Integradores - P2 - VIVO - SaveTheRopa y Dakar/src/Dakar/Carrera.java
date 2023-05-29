@@ -54,13 +54,17 @@ public class Carrera {
     }
 
     public void eliminarVehiculoConPatente(String patente){
+        boolean flag = false;
         for(Vehiculo v : listaDeVehiculos){
-            if(v.getPatente().toString().equals(patente)){
+            if(v.getPatente().toString().equals(patente)) {
                 listaDeVehiculos.remove(v);
                 System.out.println("El vehiculo fue eliminado exitosamente!");
+                flag = true;
                 break;
-            }else{
-                System.out.println("Ese vehiculo no esta en el sistema!");            }
+            }
+        }
+        if(!flag){
+            System.out.println("Ese vehiculo no esta en el sistema!");
         }
     }
 
@@ -81,13 +85,14 @@ public class Carrera {
     }
 
     public void socorrerAuto(String patente){
+        //Se busca al auto en la coleccion de vehiculos de la carrera
         Auto autoASocorrer = null;
         for(Vehiculo v : listaDeVehiculos){
             if(v.getPatente().toString().equals(patente) && v instanceof Auto){
                 autoASocorrer = (Auto) v;       //Al ser v del tipo Vehiculo, lo casteo a Auto
             }
         }
-
+        //Si existe, se socorre
         if(autoASocorrer != null){
             socorristaAuto.socorrer(autoASocorrer);
         }else {
@@ -96,13 +101,14 @@ public class Carrera {
     }
 
     public void socorrerMoto(String patente){
+        //Se busca la moto en la coleccion de vehiculos de la carrera
         Moto motoASocorrer = null;
         for(Vehiculo v : listaDeVehiculos){
             if(v.getPatente().toString().equals(patente) && v instanceof Moto){
                 motoASocorrer = (Moto) v;       //Al ser v del tipo Vehiculo, lo casteo a Auto
             }
         }
-
+        //Si existe, se socorre
         if(motoASocorrer != null){
             socorristaMoto.socorrer(motoASocorrer);
         }else {
