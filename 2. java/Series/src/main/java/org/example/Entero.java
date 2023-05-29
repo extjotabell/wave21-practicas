@@ -10,8 +10,7 @@ public class Entero extends Prototipo<Integer> {
   @Override
   public void set(Integer i) {
     this.incremento = i;
-    this.base = 0;
-    this.times = 0;
+    this.base = this.times = 0;
   }
 
   @Override

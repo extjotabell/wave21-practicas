@@ -12,5 +12,17 @@ public class Main {
     System.out.println(e.next());
     System.out.println(e.next());
     System.out.println(e.next());
+
+    Decimal d = new Decimal();
+    d.set(3.1d);
+    System.out.println(d.next());
+    System.out.println(d.next());
+    System.out.println(d.next());
+    System.out.println(d.next());
+    d.reset(1d);
+    System.out.println(d.next());
+    System.out.println(d.next());
+    System.out.println(d.next());
+    System.out.println(d.next());
   }
 }
