@@ -12,4 +12,8 @@ public class Item {
         this.costoUnitario = costoUnitario;
         this.nombre = nombre;
     }
+
+    public double obtenerPrecio(){
+        return cantidad * costoUnitario;
+    }
 }

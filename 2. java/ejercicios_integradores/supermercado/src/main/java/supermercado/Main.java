@@ -1,35 +1,32 @@
 package supermercado;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        HashMap<String,Cliente> clientes = new HashMap();
-
+        Supermercado supermercado = new Supermercado();
 
         Cliente juan = new Cliente("Juan", "Perez", "41818181");
         Cliente pedro = new Cliente("Pedro", "Perez", "41828181");
         Cliente gonzalo =new Cliente("Gonzalo", "Perez", "41518181");
 
-        clientes.put(juan.obtenerDni(), juan);
-        clientes.put(pedro.obtenerDni(), pedro);
-        clientes.put(gonzalo.obtenerDni(), gonzalo);
+        supermercado.agregar(juan);
+        supermercado.agregar(pedro);
+        supermercado.agregar(gonzalo);
+
 
         System.out.println("Clientes inciales");
-        clientes.values().forEach(Cliente::mostrar);
+        supermercado.imprimirClientes();
 
-        clientes.remove(pedro.obtenerDni());
+        //Eliminar
+        supermercado.eliminar(pedro.obtenerDni());
 
         System.out.println();
         System.out.println("Clientes sin Pedro");
+        supermercado.imprimirClientes();
 
-
-
-        clientes.values().forEach(Cliente::mostrar);
-
-
+        //Buscar
         System.out.println();
         System.out.println("-----------------------------------------------------------");
 
@@ -38,7 +35,7 @@ public class Main {
         Scanner teclado = new Scanner(System.in);
         String dni = teclado.next();
 
-        Cliente cliente = clientes.get(dni);
+        Cliente cliente = supermercado.buscar(dni);
 
         if(cliente != null){
             cliente.mostrar();
@@ -46,6 +43,22 @@ public class Main {
             System.out.println("No se encontro un usuario con dni " + dni);
         }
 
-        
+        //Parte II
+        Item papa = new Item(1,1,50, "papa");
+        Item zanahoria = new Item(1,2,50, "zanahoria");
+        ArrayList<Item> items = new ArrayList<>();
+        items.add(papa);
+        items.add(zanahoria);
+
+        Factura factura = new Factura(juan,items);
+
+        Cliente noCliente = new Cliente("Juan", "Perez", "54987987");
+        Factura facturaNoCliente = new Factura(noCliente,items);
+
+        supermercado.agregar(factura);
+
+        supermercado.agregar(facturaNoCliente);
+
+
     }
 }
