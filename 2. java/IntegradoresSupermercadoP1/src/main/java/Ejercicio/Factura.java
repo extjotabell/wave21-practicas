@@ -7,6 +7,8 @@ public class Factura {
     private List<Item> items;
     private int totalCompra;
 
+    private int id;
+
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
@@ -31,10 +33,19 @@ public class Factura {
         return totalCompra;
     }
 
-    public Factura(Cliente cliente, List<Item> items, int totalCompra) {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Factura(Cliente cliente, List<Item> items, int totalCompra, int id) {
         this.cliente = cliente;
         this.items = items;
         this.totalCompra = totalCompra;
+        this.id = id;
     }
 
 

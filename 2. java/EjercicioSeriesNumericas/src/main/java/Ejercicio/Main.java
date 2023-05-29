@@ -19,7 +19,7 @@ public class Main {
             //while (seguirCalculando){
             Prototipo prototipo = new SeriesDeDos<>();
             prototipo.valorInicial(nroInicial);
-            prototipo.valorSiguiente(nroInicial);
+            prototipo.valorSiguiente();
             System.out.println(nroInicial);
 
                 System.out.println("Volver a ejecutar? S/N");

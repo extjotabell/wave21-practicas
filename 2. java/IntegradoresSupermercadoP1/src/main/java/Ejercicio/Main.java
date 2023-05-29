@@ -96,13 +96,13 @@ public class Main {
         if(!validarCliente(dni, clientes))
         {
             Cliente c = crearCliente(dni);
-            Factura f = new Factura (c, items, calcularTotal(items));
+            Factura f = new Factura (c, items, calcularTotal(items),1);
             facturas.add(f);
         }
         else
         {
             Cliente c = buscarCliente(dni, clientes);
-            Factura f = new Factura (c, items, calcularTotal(items));
+            Factura f = new Factura (c, items, calcularTotal(items),1);
             facturas.add(f);
         }
 

@@ -3,7 +3,7 @@ package Ejercicio;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Crud_Cliente implements CRUD<Cliente>{
+public class Crud_Cliente implements CRUD<Cliente, String>{
     public List<Cliente> clientes = new ArrayList<>();
     @Override
     public boolean agregarElemento(Cliente elemento)

@@ -1,8 +1,8 @@
 package Ejercicio;
 
-public interface CRUD <T>{
+public interface CRUD <T, V>{
     boolean agregarElemento(T elemento);
-    boolean eliminarElemento (String elemento);
+    boolean eliminarElemento (V elemento);
     boolean actualizarElemento (T elemento);
-    T consultarElemento (String elemento);
+    T consultarElemento (V elemento);
 }

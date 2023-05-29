@@ -1,21 +1,22 @@
 package Ejercicio;
 
 public class SeriesDeDos<T extends Number> extends Prototipo<T> {
-    private T inicial;
+    private T valor;
     @Override
-    public T valorSiguiente(T numero) {
-        Number siguente = 2 + (int)(numero);
-        return (T)siguente;
+    public T valorSiguiente() {
+        Number siguente = 2 + (int)(valor);
+        valor = (T)siguente;
+        return valor;
     }
 
     @Override
     public void reiniciarSerie() {
-        System.out.flush();
+        valor = (T)0;
     }
 
     @Override
     public void valorInicial(T numero) {
-        this.inicial = numero;
+        this.valor = numero;
     }
 
 }
