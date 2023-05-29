@@ -37,5 +37,7 @@ public class Main {
         ServiceLocalizadores.cantidadDeLocalizadores(repoLocalizadores);
         ServiceLocalizadores.cantidadDeReservas(repoLocalizadores);
         ServiceLocalizadores.listarReservasPorTipo(repoLocalizadores);
+        ServiceLocalizadores.listarVentasTotales(repoLocalizadores);
+        ServiceLocalizadores.listarPromedioVentas(repoLocalizadores);
     }
 }
