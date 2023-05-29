@@ -18,7 +18,7 @@ public abstract class Vehiculo {
   }
 
   public void printStats() {
-    System.out.println("Auto "+this.patente+" indice: ~"+Math.round(this.calcularIndiceDeCarrera())+" "+this.velocidad+" "+this.aceleracion+" "+this.anguloGiro+" "+this.peso+" "+this.ruedas);
+    System.out.println("Vehiculo "+this.patente+" indice: ~"+Math.round(this.calcularIndiceDeCarrera())+" "+this.velocidad+" "+this.aceleracion+" "+this.anguloGiro+" "+this.peso+" "+this.ruedas);
   }
   public double calcularIndiceDeCarrera() {
     return this.velocidad * (this.aceleracion / 2) / (this.anguloGiro*(this.peso-this.ruedas*100));
