@@ -37,16 +37,27 @@ public class Main {
             }
         }
         */
-        //Creacion de Items
-        Item pan = new Item(1,"Pan",3.0);
-        Item arroz = new Item(2,"Arroz",4.5);
-        Item yerba = new Item(3,"Yerba",10.0);
 
-        Map<Item,Integer> productos = new HashMap<>();
-        productos.put(pan,5);
-        productos.put(arroz,10);
-        productos.put(yerba,15);
+        Item pan = new Item(1,"Pan",3.0,5);
+        Item arroz = new Item(2,"Arroz",4.5,10);
+        Item yerba = new Item(3,"Yerba",10.0,15);
 
+        List<Item>  productos = new ArrayList<>();
+        productos.add(pan);
+        productos.add(arroz);
+        productos.add(yerba);
+
+        Cliente pedro = new Cliente("Pedro","Perez","2222");
+
+        Factura factura = new Factura(pedro,productos);
+
+        List<Factura> facturas = new ArrayList<>();
+
+        if(!Cliente.existeCliente(clientes,factura.getCliente())){
+            clientes.add(factura.getCliente());
+        }
+
+        facturas.add(factura);
 
     }
 

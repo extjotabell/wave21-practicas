@@ -1,17 +1,24 @@
+import java.util.List;
 import java.util.Map;
 
 public class Factura {
 
     Cliente cliente;
-    Map<Item,Integer> productos;
+    List<Item> productos;
     Double total;
 
-    public Factura(Cliente cliente, Map<Item,Integer> productos, Double total) {
+    public Factura(Cliente cliente,List<Item> productos) {
         this.cliente = cliente;
         this.productos = productos;
-        this.total = total;
+        this.total = calcularTotal(productos);
     }
-
+    public Double calcularTotal(List<Item>  productos){
+        Double total = 0.0;
+        for(Item item : productos){
+            total+= item.getPrecioUnitario() * item.getCantidadComprada();
+        }
+        return total;
+    }
     public Cliente getCliente() {
         return cliente;
     }
@@ -20,11 +27,11 @@ public class Factura {
         this.cliente = cliente;
     }
 
-    public Map<Item,Integer> getProductos() {
+    public List<Item> getProductos() {
         return productos;
     }
 
-    public void setProductos(Map<Item,Integer> productos) {
+    public void setProductos(List<Item>  productos) {
         this.productos = productos;
     }
 

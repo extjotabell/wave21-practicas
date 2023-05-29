@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class Cliente {
     String nombre;
     String apellido;
@@ -40,6 +42,16 @@ public class Cliente {
                 ", apellido='" + apellido + '\'' +
                 ", dni='" + dni + '\'' +
                 '}';
+    }
+
+    public static boolean existeCliente(List<Cliente> clientes, Cliente clienteBuscado){
+        Boolean seEncontro = false;
+        for (Cliente client:clientes) {
+            if(client.equals(clienteBuscado)){
+                seEncontro = true;
+            }
+        }
+        return seEncontro;
     }
 
     public Cliente findBy(){
