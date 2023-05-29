@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Curriculum implements Imprimible {
@@ -9,6 +10,7 @@ public class Curriculum implements Imprimible {
     public Curriculum(Persona persona, List habilidadesPersona) {
         this.persona = persona;
         this.habilidadesPersona = habilidadesPersona;
+        List lista1 = new ArrayList();
     }
 
     @Override
