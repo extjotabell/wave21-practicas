@@ -1,13 +1,13 @@
 package Ejercicio_integrador_parte1;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 
 public class Factura {
     private Cliente cliente;
-    private double[] list;
+    private ArrayList<Item> list;
     private double total;
 
-    public Factura(Cliente cliente, double[] list, double total) {
+    public Factura(Cliente cliente, ArrayList<Item> list, double total) {
         this.cliente = cliente;
         this.list = list;
         this.total = total;
@@ -21,11 +21,11 @@ public class Factura {
         this.cliente = cliente;
     }
 
-    public double[] getList() {
+    public ArrayList<Item> getList() {
         return list;
     }
 
-    public void setList(double[] list) {
+    public void setList(ArrayList<Item> list) {
         this.list = list;
     }
 
@@ -34,6 +34,7 @@ public class Factura {
     }
 
     public void setTotal(double total) {
+
         this.total = total;
     }
 
@@ -41,7 +42,7 @@ public class Factura {
     public String toString() {
         return "Factura{" +
                 "cliente=" + cliente +
-                ", list=" + Arrays.toString(list) +
+                ", list=" + list +
                 ", total=" + total +
                 '}';
     }
