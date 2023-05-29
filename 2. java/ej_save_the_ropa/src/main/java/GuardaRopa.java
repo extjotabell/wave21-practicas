@@ -17,16 +17,21 @@ public class GuardaRopa {
     }
 
     public Integer guardarPrendas(List<Prenda> listaDePrendas){
-        this.guardaropas.put(contador++,listaDePrendas);
-        return this.contador;
+        this.guardaropas.put(contador,listaDePrendas);
+        return this.contador++;
     }
 
     public void mostrarPrendas(){
-        this.guardaropas.forEach((k,v) -> {
-            System.out.print("Con número " + k + " se tienen las prendas: [ ");
-            v.forEach(System.out::print);
-            System.out.println("]");
-        });
+        if (this.guardaropas.size() == 0){
+            System.out.println("No hay prendas guardadas");
+        }else{
+            System.out.println("Las prendas guardadas actualmente son:");
+            this.guardaropas.forEach((k,v) -> {
+                System.out.print("Con número " + k + " se tienen las prendas: [ ");
+                v.forEach(p -> System.out.print(p + " "));
+                System.out.println("]");
+            });
+        }
     }
 
     public List<Prenda> devolverPrendas(Integer numero){
