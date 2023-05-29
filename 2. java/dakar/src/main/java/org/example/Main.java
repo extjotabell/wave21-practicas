@@ -4,6 +4,10 @@ import java.util.Random;
 
 public class Main {
   static String patenteMoto;
+  static final int ASCII_INIT = 65;
+  static final int ASCII_END = 90;
+  static final int LIMITE_VELOCIDAD = 300;
+
   public static void main(String[] args) {
     Carrera c = new Carrera(100, 2000, "Gran Patagonia", 10);
     Carrera cMuerte = new Carrera(200, 2000, "Gran Patagonia", 10);
@@ -44,30 +48,35 @@ public class Main {
   public static Moto generadorMotos() {
     Random  r = new Random();
 
-    char a = (char) r.nextInt(65, 90);
-    char b = (char) r.nextInt(65, 90);
-    char c = (char) r.nextInt(65, 90);
+    char a = (char) r.nextInt(ASCII_INIT, ASCII_END);
+    char b = (char) r.nextInt(ASCII_INIT, ASCII_END);
+    char c = (char) r.nextInt(ASCII_INIT, ASCII_END);
     int number = r.nextInt(100, 999);
 
-    Main.patenteMoto = ""+a+b+c+" "+number;
+    String patente = Main.patenteMoto = ""+a+b+c+" "+number;
+
     return new Moto(
-      Math.floor(r.nextDouble(0, 300)),
-      Math.floor(r.nextDouble(0, 300)), Math.round(Math.random()*10),
-      Main.patenteMoto
+      Math.floor(r.nextDouble(0, LIMITE_VELOCIDAD)),
+      Math.floor(r.nextDouble(0, LIMITE_VELOCIDAD)),
+      Math.round(Math.random()*10),
+      patente
     );
   }
   public static Auto generadorAutos() {
     Random  r = new Random();
 
-    char a = (char) r.nextInt(65, 90);
-    char b = (char) r.nextInt(65, 90);
-    char c = (char) r.nextInt(65, 90);
+    char a = (char) r.nextInt(ASCII_INIT, ASCII_END);
+    char b = (char) r.nextInt(ASCII_INIT, ASCII_END);
+    char c = (char) r.nextInt(ASCII_INIT, ASCII_END);
     int number = r.nextInt(100, 999);
 
+    String patente = ""+a+b+c+" "+number;
+
     return new Auto(
-      Math.floor(r.nextDouble(0, 300)),
-      Math.floor(r.nextDouble(0, 300)), Math.round(Math.random()*10),
-     ""+a+b+c+" "+number
+      Math.floor(r.nextDouble(0, LIMITE_VELOCIDAD)),
+      Math.floor(r.nextDouble(0, LIMITE_VELOCIDAD)),
+      Math.round(Math.random()*10),
+      patente
     );
   }
 }
