@@ -3,6 +3,7 @@ package com.example.romanos.service;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.IntStream;
 
 @Service
 public class RomanoService {
@@ -34,16 +35,19 @@ public class RomanoService {
    * @param caracteres Lista de los caracteres del numero
    * @return
    */
-  public static List<String> decimalARomano(List<String> caracteres) {
+  public static List<String> decimalARomano(List<String> caracteres) throws OutOfNumberException {
 
     List<Integer> numeroEnDigitos = RomanoService.separarDigitos(caracteres);
 
     List<String> number = new ArrayList<>();
 
-    for(int i=0;i<numeroEnDigitos.size();++i) {
+    IntStream.range(0, numeroEnDigitos.size()).forEach(i -> {
       int numeroEnDigito = numeroEnDigitos.get(i);
       number.add(String.valueOf(RomanoService.parse(numeroEnDigito, i)));
-    }
+    });
+
+    if(number.stream().anyMatch(v -> v.contains("none")))
+      throw new OutOfNumberException("No se puede representar este numero");
 
     return number;
   }

@@ -1,5 +1,6 @@
 package com.example.romanos.controller;
 
+import com.example.romanos.service.OutOfNumberException;
 import com.example.romanos.service.RomanoService;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,9 +18,15 @@ public class Romanos {
     for(int i=0;i<number.length();++i)
       caracteres.add(String.valueOf(number.charAt(i))); // ["100", "20", "0"]
 
-    List<String> romano = RomanoService.decimalARomano(caracteres);
-    Collections.reverse(romano);
+    try {
+      List<String> romano = RomanoService.decimalARomano(caracteres);
 
-    return romano.stream().reduce("", (s, i) -> s + i);
+      Collections.reverse(romano);
+
+      return String.join("", romano);
+    } catch(OutOfNumberException e) {
+      e.printStackTrace();
+      return e.getMessage();
+    }
   }
 }
