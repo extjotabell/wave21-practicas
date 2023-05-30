@@ -9,7 +9,6 @@ public class Carrera {
     private String nombre;
     private Integer cantidadDeVehiculosPermitidos;
     private List<Vehiculo> listaDeVehiculos;
-
     private SocorristaAuto socorristaAuto;
     private SocorristaMoto socorristaMoto;
 
