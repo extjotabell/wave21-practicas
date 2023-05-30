@@ -14,7 +14,6 @@ public class Vehiculo {
         this.anguloDeGiro = anguloDeGiro;
         this.patente = patente;
     }
-
     public int getVelocidad() {
         return velocidad;
     }
