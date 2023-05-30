@@ -27,7 +27,7 @@ public class RomanoService {
   );
 
   /**
-   * Parseo de decimal a numeros romanos.
+   * Parseo de decimal a numeros romanos. Limite en 89999
    * @param caracteres Lista de los caracteres del numero
    * @return
    */
