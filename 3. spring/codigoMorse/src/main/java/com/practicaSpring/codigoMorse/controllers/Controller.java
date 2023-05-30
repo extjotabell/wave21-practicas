@@ -55,16 +55,17 @@ public class Controller {
         codigo.put("--..--",",");
         codigo.put("..--..","?");
         codigo.put("-.-.--","!");
-        codigo.put("   "," ");
 
         StringBuilder mensaje = new StringBuilder();
         String[] palabras = codigoMorse.split("\\s{3,}");
+
         for (String palabra:palabras
              ) {
             String[] letras = palabra.split("\\s");
             for (String letra:letras
                  ) {
                 if (codigo.get(letra)!=null) mensaje.append(codigo.get(letra));
+                else mensaje.append("$");
             }
             mensaje.append(" ");
         }
