@@ -12,11 +12,11 @@ public class ConversorController {
     @GetMapping("/{romano}")
     public String convertirARomano(@PathVariable String romano){
 
-       return "ROMANO: " + romano + "---->" + "DECIMAL: " + romanoADecimal(romano);
+       return "ROMANO: " + romano + "---->" + "DECIMAL: " + romanoADecimal(romano).toString();
     }
 
     //La logica es que que siempre que se tenga un numero mas chico por detras, entonces hay que restar
-    public int romanoADecimal(String numRomano) {
+    public Integer romanoADecimal(String numRomano) {
         int ret = 0;
         HashMap<Character, Integer> transformacion = new HashMap<>();
         transformacion.put('I', 1);
@@ -28,6 +28,7 @@ public class ConversorController {
         transformacion.put('M', 1000);
 
         for (int i = 0; i < numRomano.length(); i++) {
+
             if (i < numRomano.length() - 1 && transformacion.get(numRomano.charAt(i)) < transformacion.get(numRomano.charAt(i + 1))) {
                 //si el numero i es menor al numero i + 1 -> hay que restar
                 ret -= transformacion.get(numRomano.charAt(i));
