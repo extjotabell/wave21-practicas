@@ -6,6 +6,9 @@ import java.util.*;
 
 @Service
 public class RomanoService {
+  public static final String ZERO = "0";
+  public static final String ONE = "1";
+  public static final String FIVE = "5";
   private static final Map<String, String> DIC = Map.ofEntries(
     Map.entry("1", "I"),
     Map.entry("2", "II"),
@@ -38,8 +41,8 @@ public class RomanoService {
     List<String> number = new ArrayList<>();
 
     for(int i=0;i<numeroEnDigitos.size();++i) {
-      int v = numeroEnDigitos.get(i);
-      number.add(String.valueOf(RomanoService.parse(v, i)));
+      int numeroEnDigito = numeroEnDigitos.get(i);
+      number.add(String.valueOf(RomanoService.parse(numeroEnDigito, i)));
     }
 
     return number;
@@ -55,7 +58,7 @@ public class RomanoService {
     List<Integer> l = new ArrayList<>();
 
     for(int lvl=c.size()-1;lvl>=0;--lvl)
-      l.add(Integer.valueOf(c.get(lvl) + "0".repeat(c.size()-1-lvl)));
+      l.add(Integer.valueOf(c.get(lvl) + ZERO.repeat(c.size()-1-lvl)));
 
     return l;
   }
@@ -76,14 +79,14 @@ public class RomanoService {
   private static String parse(int number, int zeros) {
 
     String cantZeros = "0".repeat(zeros);
-    int raiz = (number/Integer.valueOf("1"+cantZeros));
+    int raiz = (number/Integer.valueOf(ONE+cantZeros));
 
-    if(raiz == 4) return RomanoService.DIC.getOrDefault("1" + cantZeros, "none") + RomanoService.DIC.getOrDefault("5" + cantZeros, "none");
-    else if(raiz == 9) return RomanoService.DIC.getOrDefault("1" + cantZeros, "none")+RomanoService.DIC.getOrDefault("1" + cantZeros+"0", "none");
-    else if(raiz == 5) return RomanoService.DIC.getOrDefault("5" + cantZeros, "none");
-    else if(raiz == 1) return RomanoService.DIC.getOrDefault("1" + cantZeros, "none");
-    else if(raiz > 5) return RomanoService.DIC.getOrDefault("5" + cantZeros, "none") + RomanoService.DIC.getOrDefault("1" + cantZeros, "none").repeat(raiz % 5);
+    if(raiz == 4) return RomanoService.DIC.getOrDefault(ONE+cantZeros, "none") + RomanoService.DIC.getOrDefault(FIVE+cantZeros, "none");
+    else if(raiz == 9) return RomanoService.DIC.getOrDefault(ONE+cantZeros, "none")+RomanoService.DIC.getOrDefault(FIVE+cantZeros+ZERO, "none");
+    else if(raiz == 5) return RomanoService.DIC.getOrDefault(FIVE+cantZeros, "none");
+    else if(raiz == 1) return RomanoService.DIC.getOrDefault(ONE+cantZeros, "none");
+    else if(raiz > 5) return RomanoService.DIC.getOrDefault(FIVE+cantZeros, "none") + RomanoService.DIC.getOrDefault(ONE+cantZeros, "none").repeat(raiz % 5);
 
-    return RomanoService.DIC.getOrDefault("1" + cantZeros, "none").repeat(raiz);
+    return RomanoService.DIC.getOrDefault(ONE+cantZeros, "none").repeat(raiz);
   }
 }
