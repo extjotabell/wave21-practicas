@@ -1,0 +1,64 @@
+{
+	"info": {
+		"_postman_id": "6cb63ef5-039f-4163-9744-4ac4b099a5e2",
+		"name": "PruebasDeportistas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost:8080/findSportsPersons",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/findSportsPersons",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"findSportsPersons"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/findAllSports",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/findAllSports",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"findAllSports"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/findSport/futbol",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/findSport/futbol",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"findSport",
+						"futbol"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

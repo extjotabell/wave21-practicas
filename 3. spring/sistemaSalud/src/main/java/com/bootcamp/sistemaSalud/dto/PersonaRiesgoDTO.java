@@ -1,17 +1,15 @@
-package com.bootcamp.deportista.dto;
+package com.bootcamp.sistemaSalud.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
 @Setter
-@AllArgsConstructor
+@Getter
 @NoArgsConstructor
-public class DeporteDTO {
-
+@AllArgsConstructor
+public class PersonaRiesgoDTO {
     private String nombre;
-    private String nivel;
-
+    private String apellido;
 }
