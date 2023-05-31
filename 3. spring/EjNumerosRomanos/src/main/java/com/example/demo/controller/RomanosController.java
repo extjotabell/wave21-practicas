@@ -29,7 +29,8 @@ public class RomanosController {
         valores.put("V", 5);
         valores.put("IV", 4);
         valores.put("I", 1);
-        // Imprimir el mapa
+
+        // recorro el map y voy dejando el resto
         for (Map.Entry<String, Integer> entry : valores.entrySet()) {
             auxCantidadLetras = numeroAux / entry.getValue();
             numeroAux = numeroAux % entry.getValue();
@@ -37,8 +38,6 @@ public class RomanosController {
             for (int i = 0; i < auxCantidadLetras; i++)
                 numeroRomano += (entry.getKey());
         }
-
-
 
         return numeroRomano;
     }
