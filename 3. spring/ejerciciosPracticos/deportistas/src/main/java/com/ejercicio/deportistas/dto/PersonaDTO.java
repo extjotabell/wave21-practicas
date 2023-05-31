@@ -1,7 +1,6 @@
 package com.ejercicio.deportistas.dto;
 
 
-import com.ejercicio.deportistas.classes.Deporte;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
