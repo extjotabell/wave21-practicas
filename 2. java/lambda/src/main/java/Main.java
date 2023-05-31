@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Stream;
@@ -45,7 +46,20 @@ public class Main {
 
 
         // Ejercicio 5
-        System.out.println(listaVehiculos.stream().filter(vehiculo -> vehiculo.getCosto() >= 1000).mapToInt(Vehiculo::getCosto).average().orElse(0));
+        //System.out.println(listaVehiculos.stream().filter(vehiculo -> vehiculo.getCosto() >= 1000).mapToInt(Vehiculo::getCosto).average().orElse(0));
 
+        int[] numeros = new int[7];
+        numeros[0] = 15;
+        numeros[1] = 20;
+        numeros[2] = 18;
+        numeros[3] = 21;
+        numeros[4] = 25;
+        numeros[5] = 24;
+        numeros[6] = 7;
+
+        System.out.println(Arrays.toString(burbuja(numeros)));
+    }
+    public static int[] burbuja(int[] array) {
+        return Arrays.stream(array).sorted().toArray();
     }
 }
