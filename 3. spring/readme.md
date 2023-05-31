@@ -5,4 +5,4 @@
 - Ejercicio Números Romanos 
 - Ejercicio Morse ✅
 - Ejercicio Edad persona ✅
-- Ejercicio Persona deportista 
+- Ejercicio Persona deportista ✅
