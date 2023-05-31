@@ -1,4 +1,6 @@
-package org.example.Supermercado;
+package org.example.Supermercado.model;
+
+import java.util.List;
 
 public class Cliente {
     private int dni;

@@ -1,44 +1,46 @@
 package org.example.Supermercado;
 
+import org.example.Supermercado.model.Cliente;
+import org.example.Supermercado.model.Item;
+import org.example.Supermercado.repository.RepoCliente;
+import org.example.Supermercado.repository.RepoFactura;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
+        RepoCliente clientes = new RepoCliente();
+        RepoFactura facturas = new RepoFactura();
         Cliente cliente1 = new Cliente(12345, "Juan", "Gomez");
         Cliente cliente2 = new Cliente(23456, "Pedro", "Perez");
         Cliente cliente3 = new Cliente(34567, "Carlos", "Fernandez");
 
-        List<Cliente> clientes = new ArrayList<>();
-        clientes.add(cliente1);
-        clientes.add(cliente2);
-        clientes.add(cliente3);
+        clientes.guardar(cliente1);
+        clientes.guardar(cliente2);
+        clientes.guardar(cliente3);
 
-        imprimir(clientes);
+
+        clientes.imprimir(); //muestro a todos los clientes
         System.out.println("borremos a Juan");
-        clientes.remove(0);
-        imprimir(clientes);
+        clientes.eliminar(12345); // borro a Juan
+
+        clientes.imprimir(); //muestro a todos los clientes sin Juan
         System.out.println("donde esta Juan?");
-        buscarPorDNI(12345,clientes);
-        buscarPorDNI(23456, clientes);
+        clientes.buscarPorID(12345); // busco a juan
+        clientes.buscarPorID(23456); // busco a un cliente
+        clientes.eliminar(22222); //se trata de eliminar a un cliente no registrado
 
+        Item item1 = new Item(123, "leche", 2, 150);
+        Item item2 = new Item(124, "harina", 1, 100);
+        List<Item> itemsComprados = new ArrayList<>();
+        itemsComprados.add(item1);
+        itemsComprados.add(item2);
+        System.out.println("Genero factura de un nuevo cliente");
+        facturas.generarFactura(clientes, cliente1, itemsComprados);
+        System.out.println("Genero factura de un cliente ya ingresado");
+        facturas.generarFactura(clientes, cliente2, itemsComprados);
 
-    }
-    public static void imprimir(List<Cliente> clientes){
-        for (Cliente cliente : clientes){
-            System.out.println(cliente);
-        }
-    }
-    public static void buscarPorDNI(int dni, List<Cliente> clientes){
-        boolean encontrado =false;
-            for ( int i=0; i<clientes.size(); i++) {
-                if (clientes.get(i).getDni() == dni) {
-                    encontrado =true;
-                    System.out.println(clientes.get(i));
-                }
-            }
-            if (!encontrado){
-            System.out.println("No se encuentra el DNI "+dni+" solicitado. Por favor, registre al nuevo cliente");
-            }
+        facturas.imprimir();
     }
 }
