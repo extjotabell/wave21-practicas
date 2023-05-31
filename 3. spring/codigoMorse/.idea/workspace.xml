@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0feec54f-2669-46c1-a9ae-408197b8215a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../2. java/EjIntegrador/src/main/java/org/example/Supermercado/Cliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../2. java/EjIntegrador/src/main/java/org/example/Supermercado/Cliente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../2. java/EjIntegrador/src/main/java/org/example/Supermercado/Factura.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../2. java/EjIntegrador/src/main/java/org/example/Supermercado/Factura.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../2. java/EjIntegrador/src/main/java/org/example/Supermercado/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../2. java/EjIntegrador/src/main/java/org/example/Supermercado/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../2. java/Java_Vivo_P2_EstructurasDinamicas/src/main/java/org/example/Inscripcion.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../2. java/Java_Vivo_P2_EstructurasDinamicas/src/main/java/org/example/Inscripcion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../2. java/Java_Vivo_P2_EstructurasDinamicas/src/main/java/org/example/Participante.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../2. java/Java_Vivo_P2_EstructurasDinamicas/src/main/java/org/example/Participante.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectId" id="2QWilZTBHx9xeSNjDBU5rjYTZ2l" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "last_opened_file_path": "/Users/oquarracino/Documents/BootcampJava/wave21-practicas/3. spring/codigoMorse/pom.xml",
+    "onboarding.tips.debug.path": "/Users/oquarracino/Documents/BootcampJava/wave21-practicas/3. spring/CodigoMorse/src/main/java/org/example/Main.java"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration default="true" type="GroovyScriptRunConfiguration" factoryName="Groovy">
+      <setting name="path" value="" />
+      <setting name="vmparams" value="" />
+      <setting name="params" value="" />
+      <setting name="workDir" value="file://$PROJECT_DIR$" />
+      <setting name="debug" value="false" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0feec54f-2669-46c1-a9ae-408197b8215a" name="Changes" comment="" />
+      <created>1685475892655</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1685475892655</updated>
+    </task>
+    <servers />
+  </component>
+</project>
