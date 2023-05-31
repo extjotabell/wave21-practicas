@@ -6,3 +6,4 @@
 - Ejercicio Morse ✅
 - Ejercicio Edad persona ✅
 - Ejercicio Persona deportista ✅
+- Ejercicio COVID
