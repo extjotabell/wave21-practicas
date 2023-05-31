@@ -15,8 +15,6 @@ public class DiaPersonaController {
         LocalDate hoy = LocalDate.now();
         int edad = 0;
 
-
-
         edad = (hoy.getYear() -anio);
         if(hoy.getMonthValue() < mes){
             edad --;
