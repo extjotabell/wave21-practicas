@@ -1,6 +1,7 @@
 package com.ejercicio.deportistas.dto;
 
 
+import com.ejercicio.deportistas.classes.Deporte;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,6 +14,5 @@ import lombok.Setter;
 public class PersonaDTO {
     private String nombre;
     private String apellido;
-    private int edad;
-    private DeporteDTO deporte;
+    private String deporte;
 }
