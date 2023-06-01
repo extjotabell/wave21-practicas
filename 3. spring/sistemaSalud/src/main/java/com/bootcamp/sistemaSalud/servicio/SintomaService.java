@@ -2,6 +2,8 @@ package com.bootcamp.sistemaSalud.servicio;
 
 import com.bootcamp.sistemaSalud.dto.SintomaDTO;
 import com.bootcamp.sistemaSalud.entidades.Sintoma;
+import com.bootcamp.sistemaSalud.repository.SymptomRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -9,30 +11,30 @@ import java.util.List;
 
 @Service
 public class SintomaService {
-    List<SintomaDTO> sintomas = new ArrayList<>();
+@Autowired
+SymptomRepo repo;
 
-    public SintomaService(){
-        cargarSintomas();
+    public SintomaService(SymptomRepo repo){
+        this.repo = repo;
     }
+
     public List<SintomaDTO> getAllSintoms(){
         //Busca en el repositorio toda la info y la guarda en una lista de dtos.
-        return sintomas;
+        List<SintomaDTO> sintomasConvert = new ArrayList<>();
+
+        for(Sintoma sin : repo.getSintomas()){
+
+            sintomasConvert.add(new SintomaDTO(sin.getNombre(),sin.getCodigo(),sin.getNivel_de_gravedad()));
+        }
+        return sintomasConvert  ;
     }
 
-
-    public void cargarSintomas(){
-        sintomas.add(new SintomaDTO("001122","Malestar",4));
-        sintomas.add(new SintomaDTO("001123","Dolor de Garganta",8));
-        sintomas.add(new SintomaDTO("001124","Diarrea",8));
-        sintomas.add(new SintomaDTO("001120","Tos",9));
-        sintomas.add(new SintomaDTO("001125","Dificultad Respiratoria",10));
-    }
 
     public String buscarNivelGravedadPorNombre(String nombre) {
         String nivel;
-        for(SintomaDTO sin : sintomas){
+        for(Sintoma sin : repo.getSintomas()){
             if(sin.getNombre().equals(nombre)){
-                return String.valueOf(sin.getNivel_gravedad());
+              return String.valueOf(sin.getNivel_de_gravedad());
             }
         }
         return " ";

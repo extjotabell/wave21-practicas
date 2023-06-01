@@ -12,7 +12,11 @@ import java.util.List;
 
 @RestController
 public class PersonaController {
-PersonaService servicio = new PersonaService();
+PersonaService servicio ;
+
+public PersonaController(PersonaService ser){
+    this.servicio = ser;
+}
     @GetMapping("/findRiskPerson")
     public ResponseEntity<List<PersonaRiesgoDTO>> obtenerPacienteRiesgo() {
 

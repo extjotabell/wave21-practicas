@@ -30,4 +30,12 @@ public class Persona {
     public void agregarSintoma(Sintoma sintoma){
         sintomas.add(sintoma);
     }
+
+    public boolean isOld(){
+        return this.edad > 60;
+    }
+
+    public boolean hasAnySymptom(){
+        return this.sintomas.size() > 0;
+    }
 }

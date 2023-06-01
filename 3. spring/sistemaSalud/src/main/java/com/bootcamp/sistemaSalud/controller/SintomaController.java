@@ -12,7 +12,11 @@ import java.util.List;
 
 @RestController
 public class SintomaController {
-    SintomaService servicio = new SintomaService();
+    SintomaService servicio ;
+
+    public SintomaController(SintomaService ser){
+        this.servicio = ser;
+    }
 
     @GetMapping("/findSymptom")
     public ResponseEntity<List<SintomaDTO>> obtenerSintomas(){
