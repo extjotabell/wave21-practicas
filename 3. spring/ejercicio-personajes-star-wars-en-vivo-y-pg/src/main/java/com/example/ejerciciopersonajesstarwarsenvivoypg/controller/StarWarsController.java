@@ -1,5 +1,6 @@
 package com.example.ejerciciopersonajesstarwarsenvivoypg.controller;
 
+import com.example.ejerciciopersonajesstarwarsenvivoypg.service.IStarWarsService;
 import com.example.ejerciciopersonajesstarwarsenvivoypg.service.StarWarsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class StarWarsController {
 
     @Autowired
-    StarWarsService starWarsService;
+    IStarWarsService starWarsService;
 
     @GetMapping("artists/{name}")
     public ResponseEntity<?> getArtistsByName(@PathVariable String name){

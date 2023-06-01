@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class StarWarsService {
+public class StarWarsService implements IStarWarsService{
 
     @Value("${not.found.artist}")
     private String NOT_FOUND_ARTIST;
@@ -20,6 +20,7 @@ public class StarWarsService {
     @Autowired
     StarWarsRepository starWarsRepository;
 
+    @Override
     public ResponseEntity<?> artistsByName(String name) {
         List<ArtistResponseDTO> result = StarWarsUtils.convertArtistsToDTO(starWarsRepository.getArtistsListByName(name));
         if(!result.isEmpty()){
