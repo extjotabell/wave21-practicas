@@ -1,17 +1,15 @@
-package com.example.ejercicioCovid19.Controller;
+package com.example.ejercicioCovid19.controller;
 
 
-import com.example.ejercicioCovid19.Clases.PersonaDTO;
-import com.example.ejercicioCovid19.Clases.ResponseDto;
-import com.example.ejercicioCovid19.Clases.Sintoma;
-import com.example.ejercicioCovid19.Services.PersonaService;
-import com.example.ejercicioCovid19.Services.SintomaService;
+import com.example.ejercicioCovid19.dto.ResponseDTO;
+import com.example.ejercicioCovid19.dto.SintomaDTO;
+import com.example.ejercicioCovid19.service.PersonaService;
+import com.example.ejercicioCovid19.service.SintomaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -26,7 +24,7 @@ public class Controller {
     PersonaService personaService;
 
     @GetMapping("/findSymptom")
-    public ResponseEntity<List<Sintoma>> findSymptom(){
+    public ResponseEntity<List<SintomaDTO>> findSymptom(){
         return new ResponseEntity<>(sintomaService.findSymptom(), HttpStatus.OK);
     }
     @GetMapping("/findSymptom/{name}")
@@ -39,7 +37,7 @@ public class Controller {
     }
 
     @GetMapping("/findRiskPerson")
-    public ResponseEntity<List<ResponseDto>> findRiskPerson(){
+    public ResponseEntity<List<ResponseDTO>> findRiskPerson(){
         return new ResponseEntity<>(personaService.findRiskPerson(), HttpStatus.OK);
     }
 }

@@ -1,6 +1,6 @@
-package com.example.ejercicioCovid19.Services;
+package com.example.ejercicioCovid19.service;
 
-import com.example.ejercicioCovid19.Clases.Sintoma;
+import com.example.ejercicioCovid19.dto.SintomaDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -9,28 +9,28 @@ import java.util.List;
 @Service
 public class SintomaService {
 
-    private static List<Sintoma> listaSintomas;
+    private static List<SintomaDTO> listaSintomas;
 
 
     public SintomaService() {
         this.listaSintomas = new ArrayList<>();
-        Sintoma s1 = new Sintoma(1, "tos","leve" );
-        Sintoma s2 = new Sintoma(2, "vomito", "alta");
-        Sintoma s3 = new Sintoma(3, "convulsiones", "alta");
+        SintomaDTO s1 = new SintomaDTO(1, "tos","leve" );
+        SintomaDTO s2 = new SintomaDTO(2, "vomito", "alta");
+        SintomaDTO s3 = new SintomaDTO(3, "convulsiones", "alta");
         listaSintomas.add(s1);
         listaSintomas.add(s2);
         listaSintomas.add(s3);
 
     }
 
-    public List<Sintoma> findSymptom(){
+    public List<SintomaDTO> findSymptom(){
         return listaSintomas;
     }
 
-    public Sintoma findSymptomByName(String name){
-        Sintoma sintomaEncontrado = null;
+    public SintomaDTO findSymptomByName(String name){
+        SintomaDTO sintomaEncontrado = null;
 
-        for (Sintoma s : listaSintomas){
+        for (SintomaDTO s : listaSintomas){
             if(s.getNombre().equals(name)){
                 sintomaEncontrado = s;
                 break;

@@ -1,4 +1,4 @@
-package com.example.ejercicioCovid19.Clases;
+package com.example.ejercicioCovid19.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Setter
 @Getter
-public class Sintoma {
+public class SintomaDTO {
     private int codigo;
     private String nombre;
     private String nivel_de_gravedad;
