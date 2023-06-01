@@ -18,6 +18,7 @@ import java.util.Optional;
 public class Controlador {
 
 
+
     List<Sintoma> sintomas = new ArrayList<>();
     List<Persona> personas = new ArrayList<>();
 
@@ -66,7 +67,7 @@ public class Controlador {
     @GetMapping("/sintomas/{nombre}")
     public ResponseEntity<String> encontrarNivelGravedad(@PathVariable String nombre) {
 
-        Optional<Sintoma> sintomaEncontrado = sintomas.stream().filter(s -> s.getNombre() == nombre).findAny();
+        Optional<Sintoma> sintomaEncontrado = sintomas.stream().filter(s -> s.getNombre().equals(nombre)).findAny();
 
         String nivelGravedad = "NO SE ENCONTRO EL SINTOMA";
 
