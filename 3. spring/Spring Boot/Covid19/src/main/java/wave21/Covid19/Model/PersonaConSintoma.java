@@ -1,4 +1,4 @@
-package wave21.Covid19.DTO;
+package wave21.Covid19.Model;
 
 import lombok.*;
 
@@ -9,7 +9,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class ResponseDTO {
+public class PersonaConSintoma {
     private String idPersona;
     private List<String> sintomas;
 }

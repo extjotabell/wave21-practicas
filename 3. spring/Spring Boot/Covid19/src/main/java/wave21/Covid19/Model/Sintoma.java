@@ -1,4 +1,4 @@
-package wave21.Covid19.DTO;
+package wave21.Covid19.Model;
 
 import lombok.*;
 
@@ -7,8 +7,8 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class SintomaDTO {
+public class Sintoma {
     private String codigo;
     private String nombre;
-    private int nivelDeGravedad;
+    private Integer nivelDeGravedad;
 }
