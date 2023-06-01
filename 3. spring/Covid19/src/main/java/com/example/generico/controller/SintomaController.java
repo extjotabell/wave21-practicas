@@ -1,6 +1,7 @@
 package com.example.generico.controller;
 
 import com.example.generico.DTO.SintomaDTO;
+import com.example.generico.DTO.SintomaIdDTO;
 import com.example.generico.DTO.response.SintomaResponseDTO;
 import com.example.generico.entity.Sintoma;
 import com.example.generico.services.SintomaService;
@@ -31,9 +32,9 @@ public class SintomaController {
   }
 
   @PostMapping("/sintoma")
-  public ResponseEntity<Integer> crearSintoma(@RequestBody SintomaDTO s) {
-    Sintoma sintoma = SintomaService.crearSintoma(s);
+  public ResponseEntity<SintomaIdDTO> crearSintoma(@RequestBody SintomaDTO s) {
+    SintomaIdDTO sintoma = SintomaService.crearSintoma(s);
 
-    return new ResponseEntity<>(sintoma.getId(), HttpStatus.OK);
+    return new ResponseEntity<>(sintoma, HttpStatus.OK);
   }
 }

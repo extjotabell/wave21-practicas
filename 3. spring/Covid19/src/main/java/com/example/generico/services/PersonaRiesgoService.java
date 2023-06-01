@@ -1,6 +1,7 @@
 package com.example.generico.services;
 
 import com.example.generico.DTO.PersonaRiesgoDTO;
+import com.example.generico.DTO.PersonaRiesgoIdDTO;
 import com.example.generico.DTO.SintomaDTO;
 import com.example.generico.Exceptions.InternalErrorException;
 import com.example.generico.Exceptions.NoPersonaException;
@@ -14,14 +15,14 @@ import com.example.generico.repository.SintomaRepository;
 import java.util.List;
 
 public class PersonaRiesgoService {
-  public static PersonaRiesgo crearPersonaRiesgo(PersonaRiesgoDTO pr) throws InternalErrorException {
+  public static PersonaRiesgoIdDTO crearPersonaRiesgo(PersonaRiesgoDTO pr) throws InternalErrorException {
     try {
       Persona p = PersonaRepository.getById(pr.personaId()).orElseThrow(NoPersonaException::new);
       List<Sintoma> sintomas = SintomaRepository.obtenerSintomas(pr.sintomasId());
 
       PersonaRiesgo personaRiesgo = new PersonaRiesgo(p, sintomas);
 
-      return PersonaRiesgoRepository.save(personaRiesgo);
+      return new PersonaRiesgoIdDTO(PersonaRiesgoRepository.save(personaRiesgo));
     } catch(NoPersonaException e) {
       throw new InternalErrorException("No se encontro la persona");
     } catch(IndexOutOfBoundsException e) {

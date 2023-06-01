@@ -2,7 +2,9 @@ package com.example.generico.controller;
 
 
 import com.example.generico.DTO.PersonaDTO;
+import com.example.generico.DTO.PersonaIdDTO;
 import com.example.generico.DTO.PersonaRiesgoDTO;
+import com.example.generico.DTO.PersonaRiesgoIdDTO;
 import com.example.generico.entity.Persona;
 import com.example.generico.entity.PersonaRiesgo;
 import com.example.generico.services.PersonaRiesgoService;
@@ -15,16 +17,16 @@ import org.springframework.web.bind.annotation.*;
 public class PersonaController {
 
   @PostMapping("/persona")
-  public ResponseEntity<Integer> persona(@RequestBody PersonaDTO p) {
-    Persona persona = PersonaService.crearPersona(p);
+  public ResponseEntity<PersonaIdDTO> persona(@RequestBody PersonaDTO p) {
+    PersonaIdDTO persona = PersonaService.crearPersona(p);
 
-    return new ResponseEntity<>(persona.getId(), HttpStatus.OK);
+    return new ResponseEntity<>(persona, HttpStatus.OK);
   }
 
   @PostMapping("/personaRiesgo")
-  public ResponseEntity<Integer> riesgo(@RequestBody PersonaRiesgoDTO pr) {
-    PersonaRiesgo personaRiesgo = PersonaRiesgoService.crearPersonaRiesgo(pr);
+  public ResponseEntity<PersonaRiesgoIdDTO> riesgo(@RequestBody PersonaRiesgoDTO pr) {
+    PersonaRiesgoIdDTO personaRiesgo = PersonaRiesgoService.crearPersonaRiesgo(pr);
 
-    return new ResponseEntity<>(personaRiesgo.getId(), HttpStatus.OK);
+    return new ResponseEntity<>(personaRiesgo, HttpStatus.OK);
   }
 }

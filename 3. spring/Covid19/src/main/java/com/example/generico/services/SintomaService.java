@@ -1,6 +1,7 @@
 package com.example.generico.services;
 
 import com.example.generico.DTO.SintomaDTO;
+import com.example.generico.DTO.SintomaIdDTO;
 import com.example.generico.DTO.response.SintomaResponseDTO;
 import com.example.generico.Exceptions.InternalErrorException;
 import com.example.generico.Exceptions.NoPersonaException;
@@ -9,13 +10,15 @@ import com.example.generico.entity.Sintoma;
 import com.example.generico.repository.SintomaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public class SintomaService {
   public static SintomaResponseDTO buscarSintoma(String nombre) {
     try {
 
-      return SintomaRepository.getByName(nombre)
-        .map(SintomaResponseDTO::new)
+      Optional<Sintoma> sintoma =  SintomaRepository.getByName(nombre);
+
+      return sintoma.map(SintomaResponseDTO::new)
         .orElseThrow(NoSintomaException::new);
     } catch(NoSintomaException e) {
       throw new InternalErrorException("No se pudo obtener el sintoma");
@@ -26,13 +29,13 @@ public class SintomaService {
     return SintomaRepository.getAll();
   }
 
-  public static Sintoma crearSintoma(SintomaDTO s) {
+  public static SintomaIdDTO crearSintoma(SintomaDTO s) {
     Sintoma sintoma = new Sintoma();
 
     sintoma.setNombre(s.nombre());
     sintoma.setGravedad(s.gravedad());
     sintoma.setCodigo(s.codigo());
 
-    return SintomaRepository.save(sintoma);
+    return new SintomaIdDTO(SintomaRepository.save(sintoma));
   }
 }

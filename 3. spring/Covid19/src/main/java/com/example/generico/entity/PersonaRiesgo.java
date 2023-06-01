@@ -12,7 +12,7 @@ import java.util.List;
 public class PersonaRiesgo {
   Integer id;
   Persona persona;
-  List<Sintoma> sintomas = new ArrayList<>();
+  List<Sintoma> sintomas;
 
   public PersonaRiesgo(Persona p, List<Sintoma> s) {
     this.persona = p;
