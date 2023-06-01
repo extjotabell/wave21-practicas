@@ -11,7 +11,7 @@ public class PersonaRepository {
   public static final List<Persona> personas = new ArrayList<>();
 
   public static Persona save(Persona p) {
-    p.setId(personas.size()-1);
+    p.setId(personas.size());
     personas.add(p);
     return p;
   }

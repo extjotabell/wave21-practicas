@@ -10,7 +10,7 @@ public class SintomaRepository {
   private static final List<Sintoma> sintomas = new ArrayList<>();
 
   public static Sintoma save(Sintoma s) {
-    s.setId(sintomas.size()-1);
+    s.setId(sintomas.size());
     sintomas.add(s);
 
     return s;

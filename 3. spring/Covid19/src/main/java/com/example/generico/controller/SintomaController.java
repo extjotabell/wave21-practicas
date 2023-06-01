@@ -21,8 +21,8 @@ public class SintomaController {
     return new ResponseEntity<>(sintoma, HttpStatus.OK);
   }
 
-  @GetMapping("/sintoma")
-  public ResponseEntity<List<SintomaResponseDTO>> sintomas(@RequestBody SintomaDTO s) {
+  @GetMapping("/sintomas")
+  public ResponseEntity<List<SintomaResponseDTO>> sintomas() {
     List<SintomaResponseDTO> sintomas = SintomaService.buscarSintomas()
       .stream()
       .map(SintomaResponseDTO::new)

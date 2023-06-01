@@ -1,4 +1,4 @@
-package com.example.generico.DTO;
+package com.example.generico.DTO.response;
 
 import com.example.generico.entity.Persona;
 
