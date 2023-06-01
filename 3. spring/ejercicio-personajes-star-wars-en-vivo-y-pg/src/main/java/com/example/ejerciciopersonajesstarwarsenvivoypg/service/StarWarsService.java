@@ -1,6 +1,7 @@
 package com.example.ejerciciopersonajesstarwarsenvivoypg.service;
 
 import com.example.ejerciciopersonajesstarwarsenvivoypg.dto.ArtistResponseDTO;
+import com.example.ejerciciopersonajesstarwarsenvivoypg.repository.IStarWarsRepository;
 import com.example.ejerciciopersonajesstarwarsenvivoypg.repository.StarWarsRepository;
 import com.example.ejerciciopersonajesstarwarsenvivoypg.utils.StarWarsUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class StarWarsService implements IStarWarsService{
     private String NOT_FOUND_ARTIST;
 
     @Autowired
-    StarWarsRepository starWarsRepository;
+    IStarWarsRepository starWarsRepository;
 
     @Override
     public ResponseEntity<?> artistsByName(String name) {

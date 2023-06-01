@@ -13,8 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class StarWarsRepository {
+public class StarWarsRepository implements IStarWarsRepository {
 
+    @Override
     public List<Artist> getArtistsListByName(String name){
         return getArtists().stream()
                 .filter(artist -> {
