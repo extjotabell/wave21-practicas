@@ -1,0 +1,27 @@
+[
+  {
+    "code": "S-01",
+    "name": "headache",
+    "severity_level": "Low"
+  },
+  {
+    "code": "S-02",
+    "name": "queasiness",
+    "severity_level": "Low"
+  },
+  {
+    "code": "S-03",
+    "name": "dizziness",
+    "severity_level": "Low"
+  },
+  {
+    "code": "S-04",
+    "name": "fatigue",
+    "severity_level": "Low"
+  },
+  {
+    "code": "S-05",
+    "name": "musclePain",
+    "severity_level": "Low"
+  }
+]

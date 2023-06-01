@@ -1,0 +1,54 @@
+[
+  {
+    "name": "Lenore",
+    "last_name": "Shilvock",
+    "age": 25,
+    "symptoms": [
+      {
+        "code": "S-01",
+        "name": "headache",
+        "severity_level": "Low"
+      }
+    ]
+  },
+  {
+    "name": "Wenona",
+    "last_name": "Paddefield",
+    "age": 65,
+    "symptoms": []
+  },
+  {
+    "name": "Ade",
+    "last_name": "Asple",
+    "age": 75,
+    "symptoms": [
+      {
+        "code": "S-03",
+        "name": "dizziness",
+        "severity_level": "Low"
+      },
+      {
+        "code": "S-05",
+        "name": "musclePain",
+        "severity_level": "Low"
+      }
+    ]
+  },
+  {
+    "name": "Nicholle",
+    "last_name": "Abrahamsen",
+    "age": 61,
+    "symptoms": [
+      {
+        "code": "S-04",
+        "name": "fatigue",
+        "severity_level": "Low"
+      },
+      {
+        "code": "S-02",
+        "name": "queasiness",
+        "severity_level": "Low"
+      }
+    ]
+  }
+]
