@@ -33,9 +33,10 @@ public class PersonaRiesgoService {
 
   public static PersonaRiesgoIdDTO crearPersonaRiesgo(PersonaRiesgoDTO pr) throws InternalErrorException {
     try {
-      Persona p = PersonaRepository.getById(pr.personaId()).orElseThrow(NoPersonaException::new);
-      List<Sintoma> sintomas = SintomaRepository.obtenerSintomas(pr.sintomasId());
 
+      Persona p = PersonaRepository.getByIdRiesgo(pr.personaId()).orElseThrow(NoPersonaException::new);
+
+      List<Sintoma> sintomas = SintomaRepository.obtenerSintomas(pr.sintomasId());
       PersonaRiesgo personaRiesgo = new PersonaRiesgo(p, sintomas);
 
       return new PersonaRiesgoIdDTO(PersonaRiesgoRepository.save(personaRiesgo));

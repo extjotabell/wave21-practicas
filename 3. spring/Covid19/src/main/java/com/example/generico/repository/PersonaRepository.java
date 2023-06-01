@@ -15,8 +15,9 @@ public class PersonaRepository {
     personas.add(p);
     return p;
   }
-  public static Optional<Persona> getById(Integer id) {
-    return Optional.ofNullable(personas.get(id));
+  public static Optional<Persona> getByIdRiesgo(Integer id) {
+    return Optional.ofNullable(personas.get(id))
+      .filter(e -> e.getEdad() > EDAD_RIESGO);
   }
 
   public static List<Persona> buscarPersonaRiesgo() {
