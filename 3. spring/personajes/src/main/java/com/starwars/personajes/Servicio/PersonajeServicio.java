@@ -16,7 +16,7 @@ public class PersonajeServicio {
     }
 
     public List<Personaje> buscar(String nombre){
-        return this._repositorio.personajes().stream().filter(personaje -> personaje.getName().contains(nombre))
+        return this._repositorio.personajes().stream().filter(personaje -> personaje.getName().toLowerCase().contains(nombre.toLowerCase()))
                 .collect(Collectors.toList());
     }
 
