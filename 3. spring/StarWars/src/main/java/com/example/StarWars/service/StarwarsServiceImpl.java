@@ -2,18 +2,36 @@ package com.example.StarWars.service;
 
 import com.example.StarWars.dto.PersonajeDto;
 import com.example.StarWars.dto.response.PersonajeResponseDto;
+import com.example.StarWars.entity.Personaje;
+import com.example.StarWars.repository.StarwarsRepositoryImpl;
 import org.springframework.stereotype.Service;
 
-import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 @Service
 public class StarwarsServiceImpl implements StarwarsService{
+    StarwarsRepositoryImpl repository;
+
+    public StarwarsServiceImpl(StarwarsRepositoryImpl repository) {
+        this.repository = repository;
+    }
+
     private static List<PersonajeDto> listPersonajes = new ArrayList<>();
     @Override
     public String saveAll(List<PersonajeDto> dto) {
-        if(dto.size() != 0){
-            listPersonajes = dto;
+        List<Personaje> model = dto.stream().map(p -> {
+            var personaje = new Personaje();
+            personaje.setBirthYear(p.getBirth_year());
+            personaje.setGender(p.getGender());
+            personaje.setHeight(p.getHeight());
+            personaje.setName(p.getName());
+            personaje.setSpecies(p.getSpecies());
+            personaje.setHomeworld(p.getHomeworld());
+            personaje.setSkinColor(p.getSkin_color());
+            personaje.setEyeColor(p.getEye_color());
+            return personaje;
+        }).toList();
+        if(repository.saveAll(model)){
             return "Lista cargada con exito";
         }
         return null;
@@ -21,8 +39,8 @@ public class StarwarsServiceImpl implements StarwarsService{
 
     @Override
     public List<PersonajeResponseDto> findByName(String name) {
-        List<PersonajeResponseDto> result = (List<PersonajeResponseDto>) listPersonajes.stream()
-                .filter(p -> p.getName().equals(name))
+        List<Personaje> result = repository.findByName(name);
+        return result.stream()
                 .map(p -> {
                     PersonajeResponseDto personaje = new PersonajeResponseDto(
                             p.getName(),
@@ -35,7 +53,5 @@ public class StarwarsServiceImpl implements StarwarsService{
                     return personaje;
                 })
                 .toList();
-
-        return result;
     }
 }
