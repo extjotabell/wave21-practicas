@@ -61,6 +61,7 @@ public class RomanoService {
   private static List<Integer> separarDigitos(List<String> c) {
     List<Integer> l = new ArrayList<>();
 
+    // #magiaseminegra le agrego tantos ceros como la posicion en la que este el numero
     for(int lvl=c.size()-1;lvl>=0;--lvl)
       l.add(Integer.valueOf(c.get(lvl) + ZERO.repeat(c.size()-1-lvl)));
 
