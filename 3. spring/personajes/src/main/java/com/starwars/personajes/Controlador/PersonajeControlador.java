@@ -1,5 +1,6 @@
 package com.starwars.personajes.Controlador;
 
+import com.starwars.personajes.Dto.PersonajeDTO;
 import com.starwars.personajes.Entidad.Personaje;
 import com.starwars.personajes.Servicio.PersonajeServicio;
 import org.springframework.web.bind.annotation.*;
@@ -16,12 +17,12 @@ public class PersonajeControlador {
     }
 
     @GetMapping("/todos")
-    public List<Personaje> todos(){
+    public List<PersonajeDTO> todos(){
         return this._servicio.todos();
     }
 
     @GetMapping("/buscar")
-    public List<Personaje> todos(@RequestParam String nombre){
+    public List<PersonajeDTO> todos(@RequestParam String nombre){
         return this._servicio.buscar(nombre);
     }
 }
