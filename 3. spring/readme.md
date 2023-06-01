@@ -7,3 +7,5 @@
 - Ejercicio Edad persona ✅
 - Ejercicio Persona deportista ✅
 - Ejercicio COVID
+- Ejercicio Star Wars ✅
+- Ejercicio calories
