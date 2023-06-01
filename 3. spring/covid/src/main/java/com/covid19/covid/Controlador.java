@@ -10,11 +10,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class Controlador {
-
 
 
     List<Sintoma> sintomas = new ArrayList<>();
@@ -23,17 +24,18 @@ public class Controlador {
     {
         System.out.println("---- CARGA DE DATOS ----- ");
 
-        Persona p1 = new Persona(1, "Mercedes", "Magnelli", 23, null);
-        Persona p2 = new Persona(2, "Pepito", "Suarez", 67, null);
-        Persona p3 = new Persona(3, "Lolo", "Perez", 45, null);
+        Persona p1 = new Persona(1, "Mercedes", "Magnelli", 23, new ArrayList<>());
+        Persona p2 = new Persona(2, "Pepito", "Suarez", 67, new ArrayList<>());
+        Persona p3 = new Persona(3, "Lolo", "Perez", 45, new ArrayList<>());
 
         Sintoma s1 = new Sintoma(1, "tos", 1);
         Sintoma s2 = new Sintoma(2, "mocos", 2);
         Sintoma s3 = new Sintoma(3, "fiebre", 4);
+        Sintoma s4 = new Sintoma(3, "picazon", 3);
 
-        personas.add(p1);
-        personas.add(p2);
-        personas.add(p3);
+
+        personas.addAll(Arrays.asList(p1,p2,p3));
+        sintomas.addAll(Arrays.asList(s1,s2,s3,s4));
 
         p1.getSintomas().add(s1);
         p1.getSintomas().add(s3);
@@ -41,11 +43,9 @@ public class Controlador {
         p2.getSintomas().add(s2);
 
         p3.getSintomas().add(s1);
+        p3.getSintomas().add(s4);
 
-        sintomas.add(s1);
-        sintomas.add(s2);
-        sintomas.add(s3);
-        
+
 
 
 
@@ -66,11 +66,11 @@ public class Controlador {
     @GetMapping("/sintomas/{nombre}")
     public ResponseEntity<String> encontrarNivelGravedad(@PathVariable String nombre) {
 
-        Sintoma sintomaEncontrado = sintomas.stream().filter(s -> s.getNombre() == nombre).findFirst().get();
+        Optional<Sintoma> sintomaEncontrado = sintomas.stream().filter(s -> s.getNombre() == nombre).findAny();
 
         String nivelGravedad = "NO SE ENCONTRO EL SINTOMA";
 
-        if(sintomaEncontrado!=null) nivelGravedad = String.valueOf(sintomaEncontrado.getNivel_de_gravedad());
+        if(sintomaEncontrado.isPresent()) nivelGravedad = String.valueOf(sintomaEncontrado.get().getNivel_de_gravedad());
 
 
         return ResponseEntity.ok(nivelGravedad);

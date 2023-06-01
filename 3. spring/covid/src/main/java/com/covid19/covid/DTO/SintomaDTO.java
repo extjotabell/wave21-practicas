@@ -1,5 +1,12 @@
 package com.covid19.covid.DTO;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+
+
 public class SintomaDTO {
 
     private int codigo;
