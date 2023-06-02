@@ -1,10 +1,10 @@
-package com.consigna.consigna;
+package com.example.blog;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ConsignaApplicationTests {
+class BlogApplicationTests {
 
 	@Test
 	void contextLoads() {
