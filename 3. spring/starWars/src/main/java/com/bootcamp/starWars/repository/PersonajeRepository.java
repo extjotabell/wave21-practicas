@@ -2,7 +2,13 @@ package com.bootcamp.starWars.repository;
 
 import com.bootcamp.starWars.dto.PersonajeDTO;
 import com.bootcamp.starWars.entity.Personaje;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.util.ResourceUtils;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +18,8 @@ public class PersonajeRepository implements Repository{
 
     public PersonajeRepository(){
         personajes = new ArrayList<>();
-        cargarPersonajes();
+        //cargarPersonajes();
+        personajes = loadDataBase();
     }
 
     public void cargarPersonajes(){
@@ -23,6 +30,24 @@ public class PersonajeRepository implements Repository{
         personajes.add(personaje);
         personajes.add(personaje1);
         personajes.add(personaje2);
+    }
+
+    private List<Personaje> loadDataBase() {
+        File file = null;
+        try {
+            file = ResourceUtils.getFile("classpath:starwars_characters.json");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        ObjectMapper objectMapper = new ObjectMapper();
+        TypeReference<List<Personaje>> typeRef = new TypeReference<>() {};
+        List<Personaje> characters = null;
+        try {
+            characters = objectMapper.readValue(file, typeRef);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return characters;
     }
 
     @Override

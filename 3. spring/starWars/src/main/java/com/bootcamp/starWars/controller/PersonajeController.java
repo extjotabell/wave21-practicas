@@ -1,6 +1,7 @@
 package com.bootcamp.starWars.controller;
 
 import com.bootcamp.starWars.dto.PersonajeDTO;
+import com.bootcamp.starWars.service.IPersonajeService;
 import com.bootcamp.starWars.service.PersonajeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,9 +15,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/find")
 public class PersonajeController {
-    PersonajeService service;
+    IPersonajeService service;
 
-    public PersonajeController(PersonajeService personajeservice){
+    public PersonajeController(IPersonajeService personajeservice){
         this.service = personajeservice;
     }
 
