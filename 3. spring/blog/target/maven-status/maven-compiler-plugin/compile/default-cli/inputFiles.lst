@@ -1,0 +1,14 @@
+/Users/marielebarri/Documents/Proyectos/Spring/blog/src/main/java/com/example/blog/dto/response/ErrorDto.java
+/Users/marielebarri/Documents/Proyectos/Spring/blog/src/main/java/com/example/blog/exception/IllegalDataException.java
+/Users/marielebarri/Documents/Proyectos/Spring/blog/src/main/java/com/example/blog/dto/response/BlogResponseDto.java
+/Users/marielebarri/Documents/Proyectos/Spring/blog/src/main/java/com/example/blog/dto/request/BlogRequestDto.java
+/Users/marielebarri/Documents/Proyectos/Spring/blog/src/main/java/com/example/blog/services/IBlogService.java
+/Users/marielebarri/Documents/Proyectos/Spring/blog/src/main/java/com/example/blog/entities/Blog.java
+/Users/marielebarri/Documents/Proyectos/Spring/blog/src/main/java/com/example/blog/exception/NotFoundException.java
+/Users/marielebarri/Documents/Proyectos/Spring/blog/src/main/java/com/example/blog/repositories/IBlogRepository.java
+/Users/marielebarri/Documents/Proyectos/Spring/blog/src/main/java/com/example/blog/repositories/BlogRepository.java
+/Users/marielebarri/Documents/Proyectos/Spring/blog/src/main/java/com/example/blog/controllers/BlogController.java
+/Users/marielebarri/Documents/Proyectos/Spring/blog/src/main/java/com/example/blog/exception/BlogExceptionConfig.java
+/Users/marielebarri/Documents/Proyectos/Spring/blog/src/main/java/com/example/blog/BlogApplication.java
+/Users/marielebarri/Documents/Proyectos/Spring/blog/src/main/java/com/example/blog/exception/DuplicateKeyException.java
+/Users/marielebarri/Documents/Proyectos/Spring/blog/src/main/java/com/example/blog/services/BlogService.java
