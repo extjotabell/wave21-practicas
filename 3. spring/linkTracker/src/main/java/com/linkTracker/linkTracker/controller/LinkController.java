@@ -1,5 +1,6 @@
 package com.linkTracker.linkTracker.controller;
 
+import com.linkTracker.linkTracker.dto.ContadorDTO;
 import com.linkTracker.linkTracker.dto.LinkDTO;
 import com.linkTracker.linkTracker.dto.ResponseDTO;
 import com.linkTracker.linkTracker.service.LinkService;
@@ -10,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
 @RestController
-@RequestMapping("/link")
 public class LinkController {
     //Crear un link: Endpoint POST para crear link a partir de una URL válida
     // y tiene que devolver un JSON con el linkId para utilizar en la redirección.
@@ -21,22 +21,27 @@ public class LinkController {
         this.linkService = linkService;
     }
 
-    @PostMapping("/crearLink")
-    public ResponseEntity<ResponseDTO> createLink(@RequestBody LinkDTO dto){
-        return new ResponseEntity<>(linkService.save(dto), HttpStatus.OK);
+    @PostMapping("/link")
+    public ResponseEntity<ResponseDTO> createLink(@RequestParam String contrasena, @RequestBody LinkDTO dto){
+        return new ResponseEntity<>(linkService.save(contrasena, dto), HttpStatus.OK);
     }
 
-    //Redirección:  Dado un link (ej: http://localhost:8080/link/{linkId} ) tiene que
-    // realizar un redirect a la URL enmascarada. Siempre y cuando el link sea válido. En
-    // el caso de que el link sea invalido devolver 404(INVESTIGAR REDIRECT)
-    @GetMapping("/{linkId}")
-    public RedirectView redirectToLink(@PathVariable int linkId){
-        RedirectView linkVerified =  linkService.redirectToLink(linkId);
+    @GetMapping("/link/{linkId}")
+    public RedirectView redirectToLink(@RequestParam String contrasena, @PathVariable int linkId){
+        RedirectView linkVerified =  linkService.redirectToLink(contrasena, linkId);
         //urlToRedirect.setUrl(linkService.redirectToLink(linkId));
 
         return linkVerified;
     }
 
+    @GetMapping("/metrics/{linkId}")
+    public ContadorDTO metricaPorLink(@PathVariable int linkId){
+        return linkService.contarRedirecciones(linkId);
+    }
 
+    @DeleteMapping("/invalidate/{linkID}")
+    public void invalidateLink(@PathVariable int linkID){
+        linkService.delete(linkID);
+    }
 
 }

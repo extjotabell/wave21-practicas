@@ -32,5 +32,12 @@ public class LinkRepository {
         else return null;
     }
 
+    public void delete(int linkId){
+       repoLink.remove(findById(linkId).getId());
+    }
+
+    public void sumarContador(int linkId){
+        findById(linkId).setContadorRedireccion(findById(linkId).getContadorRedireccion()+1);
+    }
 
 }
