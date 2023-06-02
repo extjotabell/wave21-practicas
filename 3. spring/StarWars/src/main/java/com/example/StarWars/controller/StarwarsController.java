@@ -2,6 +2,7 @@ package com.example.StarWars.controller;
 
 import com.example.StarWars.dto.PersonajeDto;
 import com.example.StarWars.dto.response.PersonajeResponseDto;
+import com.example.StarWars.service.StarwarsService;
 import com.example.StarWars.service.StarwarsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,7 +16,7 @@ import java.util.List;
 @RequestMapping("/starwars")
 public class StarwarsController {
     @Autowired(required = true)
-    StarwarsServiceImpl starwarsServiceImpl;
+    StarwarsService starwarsServiceImpl;
     @GetMapping("")
     public ResponseEntity<List<PersonajeDto>> findAll(){
         return null;
