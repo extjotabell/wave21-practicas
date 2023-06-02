@@ -3,8 +3,10 @@ package com.example.generico.repository;
 import com.example.generico.entity.Ingredient;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.IntStream;
 
 @Repository
 public class IngredientsRepository {

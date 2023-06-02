@@ -7,18 +7,19 @@ import com.example.generico.service.FoodService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class FoodController {
   @Autowired
   FoodService foodService;
 
-  @GetMapping("/food")
-  public ResponseEntity<FoodResponseDto>
+  @GetMapping("/food/{name}")
+  public ResponseEntity<FoodResponseDto> getFood(final @PathVariable String name) {
+    final FoodResponseDto f = foodService.findFoodByName(name);
+
+    return new ResponseEntity<>(f, HttpStatus.OK);
+  }
 
   @PostMapping("/food")
   public ResponseEntity<FoodIdDto> createFood(@RequestBody final FoodDto food) {
