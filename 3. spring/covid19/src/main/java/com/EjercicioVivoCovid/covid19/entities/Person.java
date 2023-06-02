@@ -1,4 +1,4 @@
-package entities;
+package com.EjercicioVivoCovid.covid19.entities;
 
 public class Person {
 

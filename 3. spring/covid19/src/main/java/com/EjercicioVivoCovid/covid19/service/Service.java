@@ -1,4 +1,4 @@
-package service;
+package com.EjercicioVivoCovid.covid19.service;
 
 import com.EjercicioVivoCovid.covid19.dto.PersonDTO;
 import com.EjercicioVivoCovid.covid19.dto.PersonSymptomDTO;

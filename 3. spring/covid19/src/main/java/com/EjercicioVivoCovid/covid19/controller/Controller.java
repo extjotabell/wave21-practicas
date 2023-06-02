@@ -1,4 +1,4 @@
-package controller;
+package com.EjercicioVivoCovid.covid19.controller;
 
 import com.EjercicioVivoCovid.covid19.dto.PersonSymptomDTO;
 import com.EjercicioVivoCovid.covid19.dto.SymptomDTO;
@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import service.Service;
+import com.EjercicioVivoCovid.covid19.service.Service;
 
 import java.util.ArrayList;
 
