@@ -13,6 +13,7 @@ public class Service {
     public ArrayList<Person> personsList = new ArrayList<>();
     public ArrayList<PersonSportDTO> personSportDTOArrayList = new ArrayList<>();
 
+
     public Sport findSport(String name) {
         for (Sport sport : sportsList) {
             if (sport.getName().equals(name)) {
