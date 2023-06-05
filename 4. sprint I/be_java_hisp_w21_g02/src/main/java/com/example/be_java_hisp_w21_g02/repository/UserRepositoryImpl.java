@@ -1,5 +1,6 @@
 package com.example.be_java_hisp_w21_g02.repository;
 
+import com.example.be_java_hisp_w21_g02.model.Post;
 import com.example.be_java_hisp_w21_g02.model.User;
 import org.springframework.stereotype.Repository;
 
@@ -25,7 +26,7 @@ public class UserRepositoryImpl implements IUserRepository{
         User user4 = new User(4, "AdrianRodriguez", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
         User user5 = new User(5, "JoseGonzaloez", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
         User user6 = new User(6, "FlagusRodriguez", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
-        User user7 = new User(7, "LeandroSupanta", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        User user7 = new User(7, "LeandroMarcelo", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
         User user8 = new User(8, "GonzaloMarquez", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
         User user9 = new User(9, "MartinMarquez", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
         User user10 = new User(10, "GabrielaMonzon", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
@@ -40,5 +41,15 @@ public class UserRepositoryImpl implements IUserRepository{
         dataUser.put(user8.getId(), user8);
         dataUser.put(user9.getId(), user9);
         dataUser.put(user10.getId(), user10);
+    }
+
+    @Override
+    public Post createPost(Post post) {
+        try{
+            dataUser.get(post.getUserId()).getPosts().add(post);
+        }catch (NullPointerException e) {
+            return null;
+        }
+        return post;
     }
 }
