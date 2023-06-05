@@ -1,16 +1,18 @@
-package com.example.Deportistas;
+package com.example.LinkTracker.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Setter
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class Deporte {
-    String nombre;
-    String nivel;
+public class LinkDTO {
+    int linkId;
+    String url;
+    int numberOfRedirects;
+    String password;
 }

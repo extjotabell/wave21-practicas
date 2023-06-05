@@ -10,6 +10,7 @@ public class MyRestController {
     public String getRomanNumeral(@PathVariable int decimalNumber) {
         int centena, decena, unidad,miles;
         String romanNumber = "";
+
         unidad=decimalNumber%10;
         decena=(decimalNumber%100-decimalNumber%10)/10;
         centena=(decimalNumber%1000-decimalNumber%100)/100;

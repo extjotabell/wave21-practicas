@@ -1,2 +1,10 @@
-package com.example.Deportistas.dto;public class deportistadto {
+package com.example.Deportistas.dto;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public class deportistadto {
+
 }

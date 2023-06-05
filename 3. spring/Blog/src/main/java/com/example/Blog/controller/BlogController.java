@@ -34,6 +34,4 @@ public class BlogController {
         BlogIDDTO blogId = blogService.createBlog(blog);
         return new ResponseEntity<>(blogId, HttpStatus.OK);
     }
-
-
 }

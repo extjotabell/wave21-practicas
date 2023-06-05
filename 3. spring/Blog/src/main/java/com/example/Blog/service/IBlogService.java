@@ -1,5 +1,6 @@
 package com.example.Blog.service;
 
+import com.example.Blog.dto.BlogDTO;
 import com.example.Blog.dto.BlogIDDTO;
 import com.example.Blog.dto.BlogResponseDTO;
 

@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class BlogService {
+public class BlogService implements IBlogService {
 
     @Autowired
     BlogRepository blogRepository;
@@ -43,9 +43,9 @@ public class BlogService {
         blog.setTitle(blogDTO.getTitle());
 
         //TODO falta definir el manejo de las excepciones todavia
-        try{
+        try {
             blogID.setId(blogRepository.createBlog(blog));
-        }catch(Exception e){
+        } catch(Exception e){
             throw e;
         }
 
