@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="f3af0748-90f4-4dc0-ab3b-bd3cd6141863" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/blog/bean/ModelMapperConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/blog/controller/BlogController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/blog/dto/BlogDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/blog/exception/BlogExceptionHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/blog/model/Blog.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/blog/repository/BlogRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/blog/repository/interfaces/IBlogRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/blog/service/BlogService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/blog/service/interfaces/IBlogService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Calorias/src/main/java/com/example/calorias/bean/ModelMapperConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Calorias/src/main/java/com/example/calorias/controller/MealController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Calorias/src/main/java/com/example/calorias/dto/IngredientDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Calorias/src/main/java/com/example/calorias/model/Ingredient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Calorias/src/main/java/com/example/calorias/model/Meal.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Calorias/src/main/java/com/example/calorias/repository/IngredientRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Calorias/src/main/java/com/example/calorias/repository/MealRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Calorias/src/main/java/com/example/calorias/repository/interfaces/IIngredientRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Calorias/src/main/java/com/example/calorias/repository/interfaces/IMealRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Calorias/src/main/java/com/example/calorias/service/MealService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Calorias/src/main/java/com/example/calorias/service/interfaces/IMealService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Calorias/src/main/resources/json/3. food.json" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2QeejF0YnQwVtClofFjfd0oXTpN" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="BlogApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="Blog" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.blog.BlogApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f3af0748-90f4-4dc0-ab3b-bd3cd6141863" name="Changes" comment="" />
+      <created>1685718613012</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1685718613012</updated>
+      <workItem from="1685718615624" duration="3404000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
