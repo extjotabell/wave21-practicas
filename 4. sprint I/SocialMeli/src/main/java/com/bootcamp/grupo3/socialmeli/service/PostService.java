@@ -21,4 +21,8 @@ public class PostService implements IPostService {
         this.postRepository = postRepository;
         this.modelMapper = modelMapper;
     }
+
+    public int createPost(PostDTO body){
+        return postRepository.createPost(modelMapper.map(body,Post.class));
+    }
 }
