@@ -87,13 +87,13 @@ public class  Controller {
     /*
     * /products/followed/{userId}/list?order=date_asc
     /products/followed/{userId}/list?order=date_desc
-    */
+
     @GetMapping("products/followed/{userId}/list")
     public ResponseEntity<?> orderProductsBy(@PathVariable int userId, @RequestParam(value = "order", required = true) String dateOrder){
         return null;
     }
 
-
+    */
     //US 0010: Llevar a cabo la publicación de un nuevo producto en promoción
     @PostMapping("/products/promo-post")
     public ResponseEntity<?> newProductInSale() {
