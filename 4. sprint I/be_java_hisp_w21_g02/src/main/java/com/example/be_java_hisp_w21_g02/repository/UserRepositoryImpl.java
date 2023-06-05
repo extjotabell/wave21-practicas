@@ -15,6 +15,9 @@ public class UserRepositoryImpl implements IUserRepository{
         loadInitialData();
     }
 
+    public User getUser(int userIdToFollow){
+        return  dataUser.get(userIdToFollow);
+    }
 
 
     private void loadInitialData() {
