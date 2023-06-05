@@ -20,14 +20,14 @@
     {
       "user_id": 4,
       "user_name": "EmilyDavis",
-      "followers": [3],
-      "followed": [5]
+      "followers": [5],
+      "followed": [5,3]
     },
     {
       "user_id": 5,
       "user_name": "DavidWilson",
       "followers": [4],
-      "followed": []
+      "followed": [4]
     },
     {
       "user_id": 6,
