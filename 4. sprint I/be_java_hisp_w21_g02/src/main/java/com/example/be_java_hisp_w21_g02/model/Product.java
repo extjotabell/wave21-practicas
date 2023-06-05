@@ -5,9 +5,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 public class Product {
+    private int id;
+    private LocalDate publishDate;
+    private String notes;
+    private String type;
+    private String brand;
 }
