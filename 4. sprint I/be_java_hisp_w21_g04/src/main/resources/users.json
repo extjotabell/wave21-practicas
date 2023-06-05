@@ -1,4 +1,5 @@
 [
+<<<<<<< HEAD
   {
     "user_id": 1,
     "user_name": "JohnDoe",
@@ -60,3 +61,66 @@
     "followed": []
   }
 ]
+=======
+    {
+      "user_id": 1,
+      "user_name": "JohnDoe",
+      "followers": [],
+      "followed": []
+    },
+    {
+      "user_id": 2,
+      "user_name": "JaneSmith",
+      "followers": [],
+      "followed": []
+    },
+    {
+      "user_id": 3,
+      "user_name": "MikeJohnson",
+      "followers": [4],
+      "followed": []
+    },
+    {
+      "user_id": 4,
+      "user_name": "EmilyDavis",
+      "followers": [5],
+      "followed": [5,3]
+    },
+    {
+      "user_id": 5,
+      "user_name": "DavidWilson",
+      "followers": [4],
+      "followed": [4]
+    },
+    {
+      "user_id": 6,
+      "user_name": "SophiaLee",
+      "followers": [],
+      "followed": [7]
+    },
+    {
+      "user_id": 7,
+      "user_name": "JacobBrown",
+      "followers": [6],
+      "followed": []
+    },
+    {
+      "user_id": 8,
+      "user_name": "OliviaTaylor",
+      "followers": [],
+      "followed": []
+    },
+    {
+      "user_id": 9,
+      "user_name": "EthanAnderson",
+      "followers": [],
+      "followed": []
+    },
+    {
+      "user_id": 10,
+      "user_name": "AvaThomas",
+      "followers": [],
+      "followed": []
+    }
+  ]
+>>>>>>> be_java_hisp_w21_g4_2
