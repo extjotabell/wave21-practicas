@@ -1,5 +1,6 @@
 package com.example.be_java_hisp_w21_g02.service;
 
+import com.example.be_java_hisp_w21_g02.dto.response.FollowersCountDTO;
 import com.example.be_java_hisp_w21_g02.exceptions.UserNotFoundException;
 import com.example.be_java_hisp_w21_g02.exceptions.UserNotSellerException;
 import com.example.be_java_hisp_w21_g02.exceptions.UserFollowingException;
@@ -55,6 +56,26 @@ public class UsersServiceImpl implements IUsersService{
 
 
 
+    }
+
+    public FollowersCountDTO getFollowersCount(int userId){
+
+        User persistedUser = _usersRepository.getUser(userId);
+
+        if(persistedUser == null){
+            throw new UserNotFoundException("No se pudo encontrar un usuario con el ID mencionado");
+        }
+        if (!persistedUser.isSeller()) {
+            throw new UserNotSellerException("El usuario a seguir no es un vendedor");
+        }
+
+        FollowersCountDTO response = new FollowersCountDTO(
+                persistedUser.getId(),
+                persistedUser.getUsername(),
+                persistedUser.getFollowers().size()
+        );
+
+        return response;
     }
 
 }

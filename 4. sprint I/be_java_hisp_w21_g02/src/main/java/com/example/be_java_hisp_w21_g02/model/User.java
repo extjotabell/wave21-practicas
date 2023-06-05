@@ -43,4 +43,5 @@ public class User {
     public boolean verifyFollower(int userIdToUnFollow) {
         return following.contains(userIdToUnFollow);
     }
+
 }
