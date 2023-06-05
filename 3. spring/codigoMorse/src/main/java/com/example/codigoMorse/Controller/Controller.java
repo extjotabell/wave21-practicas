@@ -71,7 +71,7 @@ public class Controller {
                 fraseFinal.append(foundCode);
                 break;
             }
-            
+
             if(Character.isWhitespace(character) && !Character.isWhitespace(code.charAt(i+1))){
                 Character foundCode = morseCodeMap.get(unCodigo.toString());
                 fraseFinal.append(foundCode);
