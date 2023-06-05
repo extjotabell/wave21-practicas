@@ -1,2 +1,4 @@
-package com.example.calculadoraCalorias.dtos;public class ResponseDTO {
+package com.example.calculadoraCalorias.dtos;
+
+public class ResponseDTO {
 }

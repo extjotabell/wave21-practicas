@@ -1,11 +1,9 @@
 package com.example.calculadoraCalorias.exceptions;
 
-import org.springframework.web.bind.annotation.ExceptionHandler;
 
+public class PlatoNotFoundException extends RuntimeException{
 
-public class NotFoundException extends RuntimeException{
-
-    NotFoundException(String mensaje){
+    public PlatoNotFoundException(String mensaje){
         super(mensaje);
     }
 }
