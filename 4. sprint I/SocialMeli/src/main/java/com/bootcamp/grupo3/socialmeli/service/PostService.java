@@ -21,11 +21,4 @@ public class PostService implements IPostService {
         this.postRepository = postRepository;
         this.modelMapper = modelMapper;
     }
-
-    public void pepito(PostDTO dto){
-        List<Post> posts = new ArrayList<>();
-        User user = null;
-        UserPostListDTO result = modelMapper.map(posts, UserPostListDTO.class);
-        modelMapper.map(user, result);
-    }
 }
