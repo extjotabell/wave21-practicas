@@ -30,6 +30,6 @@ public class RepositoryBlogImp implements RepositoryBlog{
 
     @Override
     public List<Blog> buscarTodos() {
-        return null;
+        return this.blogs;
     }
 }

@@ -11,6 +11,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @org.springframework.stereotype.Repository
 public class PersonajeRepository implements Repository{
@@ -57,7 +58,7 @@ public class PersonajeRepository implements Repository{
 
     @Override
     public List<Personaje> findbyName(String name) {
-        return this.personajes.stream().filter(n->n.getName().equals(name)).toList();
+        return this.personajes.stream().filter(n->n.getName().contains(name)).collect(Collectors.toList());
     }
 
     @Override

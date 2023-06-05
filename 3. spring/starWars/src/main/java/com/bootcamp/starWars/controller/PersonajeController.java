@@ -29,14 +29,12 @@ public class PersonajeController {
         }*/
         return new ResponseEntity<List<PersonajeDTO>>(service.findAll(), HttpStatus.OK);
     }
-    @GetMapping("/byName/{name}")
-    public ResponseEntity<List<PersonajeDTO>> findByName(@PathVariable String name){
-        List<PersonajeDTO> resultado= service.findByName(name);
-        if (resultado.size() == 0){
-            return new ResponseEntity<List<PersonajeDTO>>(resultado, HttpStatus.BAD_REQUEST);
-        }
+    @GetMapping("/{name}")
+    public ResponseEntity<?> findByName(@PathVariable String name){
 
-        return new ResponseEntity<List<PersonajeDTO>>(service.findByName(name),HttpStatus.OK);
+        return  ResponseEntity.status(HttpStatus.OK).body(this.service.findByName(name));
+
+
     }
 
 }

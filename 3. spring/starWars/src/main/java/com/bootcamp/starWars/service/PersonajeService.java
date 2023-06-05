@@ -2,7 +2,11 @@ package com.bootcamp.starWars.service;
 
 import com.bootcamp.starWars.dto.PersonajeDTO;
 import com.bootcamp.starWars.entity.Personaje;
+import com.bootcamp.starWars.exception.NoCharacterFoundException;
 import com.bootcamp.starWars.repository.PersonajeRepository;
+import com.bootcamp.starWars.util.Mapper;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -21,7 +25,7 @@ public class PersonajeService implements IPersonajeService{
     public List<PersonajeDTO> findAll() {
         List<PersonajeDTO> resultado = new ArrayList<>();
         for(Personaje per : repo.findAll()){
-            resultado.add(new PersonajeDTO(per.getName(),per.getHeight(),per.getMass(),per.getGender(),per.getHomeWord(),per.getSpecies()));
+            resultado.add(new PersonajeDTO(per.getName(),per.getHeight(),per.getMass(),per.getGender(),per.getHomeworld(),per.getSpecies()));
         }
         return resultado ;
     }
@@ -29,14 +33,17 @@ public class PersonajeService implements IPersonajeService{
     @Override
     public List<PersonajeDTO> findByName(String name) {
 
-    List<PersonajeDTO> personajes = new ArrayList<>();
-    if(repo.findbyName(name) == null){
-        return null;
+    List<Personaje> personajes = repo.findbyName(name);
+    List<PersonajeDTO> personajeDTO = new ArrayList<>();
+
+    if(personajes == null || personajes.size() == 0 ){
+        throw new NoCharacterFoundException("El Nombre no se encuentra en la BBDD");
     }
-    for(Personaje per : repo.findbyName(name)){
-        personajes.add(new PersonajeDTO(per.getName(),per.getHeight(),per.getMass(),per.getGender(),per.getHomeWord(),per.getSpecies()));
+
+    for(Personaje per : personajes){
+        personajeDTO.add(Mapper.personajeADTO(per));
     }
-    return personajes;
+    return personajeDTO;
     }
 
     @Override
