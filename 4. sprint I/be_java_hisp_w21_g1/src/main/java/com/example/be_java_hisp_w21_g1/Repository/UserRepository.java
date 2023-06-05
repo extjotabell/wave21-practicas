@@ -40,7 +40,7 @@ public class UserRepository implements IUserRepository{
 
     @Override
     public User findUserById(int id){
-        return null;
+        return users.stream().filter(u -> u.getUser_id() == id).findAny().orElse(null);
     }
 
 }

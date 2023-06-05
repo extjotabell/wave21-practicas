@@ -2,16 +2,19 @@ package com.example.be_java_hisp_w21_g1.Controller;
 
 import com.example.be_java_hisp_w21_g1.DTO.Request.PostProductDTO;
 import com.example.be_java_hisp_w21_g1.DTO.Response.FollowedListDTO;
+import com.example.be_java_hisp_w21_g1.DTO.Response.FollowersCountDTO;
 import com.example.be_java_hisp_w21_g1.DTO.Response.PostDTO;
+import com.example.be_java_hisp_w21_g1.Service.IUserService;
 import com.example.be_java_hisp_w21_g1.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class  Controller {
     @Autowired
-    UserService userService;
+    IUserService userService;
 
     //US 0001: Poder realizar la acción de “Follow” (seguir) a un determinado vendedor
     //Recibe FollowPostDTO
@@ -25,8 +28,8 @@ public class  Controller {
     //Recibe UserIdDTO
     //Retorna FollowersCountDTO
     @GetMapping("/users/{userId}/followers/count")
-    public ResponseEntity<?> countFollowers(@PathVariable int userId){
-        return null;
+    public ResponseEntity<FollowersCountDTO> countFollowers(@PathVariable int userId){
+        return new ResponseEntity<>(userService.getFollowersCount(userId), HttpStatus.OK);
     }
 
     //US 0003: Obtener un listado de todos los usuarios que siguen a un determinado vendedor (¿Quién me sigue?)
