@@ -17,7 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/findSymptom")
+
+
 public class Controller {
 
     @Autowired
@@ -26,11 +27,11 @@ public class Controller {
     @Autowired
     PersonaService personaService;
 
-    @GetMapping
+    @GetMapping("/findSymptom")
     public ResponseEntity<List<Sintoma>> findSymptom(){
         return new ResponseEntity<>(sintomaService.findSymptom(), HttpStatus.OK);
     }
-    @GetMapping("/{name}")
+    @GetMapping("/findSymptom/{name}")
     public ResponseEntity<String> findSymptomByName(@PathVariable String name) {
         if (sintomaService.findSymptomByName(name) == null) {
             return new ResponseEntity<>("No se encuentra registrado el sintoma", HttpStatus.NOT_FOUND);
