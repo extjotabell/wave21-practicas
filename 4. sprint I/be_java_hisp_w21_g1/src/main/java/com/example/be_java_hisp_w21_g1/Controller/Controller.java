@@ -1,15 +1,14 @@
 package com.example.be_java_hisp_w21_g1.Controller;
 
 import com.example.be_java_hisp_w21_g1.DTO.Request.PostProductDTO;
-import com.example.be_java_hisp_w21_g1.DTO.Response.FollowedListDTO;
-import com.example.be_java_hisp_w21_g1.DTO.Response.PostDTO;
 import com.example.be_java_hisp_w21_g1.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-public class  Controller {
+public class Controller {
     @Autowired
     UserService userService;
 
@@ -49,8 +48,9 @@ public class  Controller {
     //Recibe PostProductDTO
     //Retorna status code
     @PostMapping("/products/post")
-    public ResponseEntity<?> postProduct(@RequestBody PostProductDTO body){
-        return null;
+    public ResponseEntity<?> createPost(@RequestBody PostProductDTO postProductDTO){
+        userService.createPost(postProductDTO);
+        return new ResponseEntity<>("Se ha ", HttpStatus.OK);
     }
 
     //US 0006: Obtener un listado de las publicaciones realizadas por los vendedores que un usuario
@@ -87,12 +87,12 @@ public class  Controller {
     /*
     * /products/followed/{userId}/list?order=date_asc
     /products/followed/{userId}/list?order=date_desc
-    */
-    @GetMapping("products/followed/{userId}/list")
+
+    @GetMapping("products/followed/{userId}/list//")
     public ResponseEntity<?> orderProductsBy(@PathVariable int userId, @RequestParam(value = "order", required = true) String dateOrder){
         return null;
     }
-
+   */
 
     //US 0010: Llevar a cabo la publicación de un nuevo producto en promoción
     @PostMapping("/products/promo-post")

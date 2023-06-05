@@ -16,9 +16,9 @@ public class User {
     String user_name;
     ArrayList<User> followers;
     ArrayList<User> followed;
-    ArrayList<Post> publication;
+    ArrayList<Post> posts;
 
     boolean isSeller(){
-        return publication.size()>0;
+        return posts.size()>0;
     }
 }

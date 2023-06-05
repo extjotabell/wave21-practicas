@@ -29,7 +29,7 @@ public class UserRepository implements IUserRepository{
         Post post1 = new Post(1, LocalDate.of(2023, 04, 15), product1, 25.50, 1);
         Post post2 = new Post(2, LocalDate.of(2022, 12, 27), product2, 15.90, 2);
         Post post3 = new Post(3, LocalDate.of(2023, 06, 04), product3, 190.00, 1);
-        
+
         List<Product> products = Arrays.asList(product1, product2, product3);
         List<Post> posts = Arrays.asList(post1, post2, post3);
 
@@ -40,7 +40,13 @@ public class UserRepository implements IUserRepository{
 
     @Override
     public User findUserById(int id){
-        return null;
+        return users.stream().filter(
+                n-> n.getUser_id() == id
+        ).findFirst().orElse(null);
+    }
+
+    public void addPostToUser(Post post, int userId){
+        findUserById(userId).getPosts().add(post);
     }
 
 }
