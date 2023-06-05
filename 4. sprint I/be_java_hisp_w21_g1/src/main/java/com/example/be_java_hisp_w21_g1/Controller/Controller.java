@@ -1,6 +1,7 @@
 package com.example.be_java_hisp_w21_g1.Controller;
 
 import com.example.be_java_hisp_w21_g1.DTO.Request.PostProductDTO;
+import com.example.be_java_hisp_w21_g1.DTO.Response.FollowedListDTO;
 import com.example.be_java_hisp_w21_g1.DTO.Response.PostDTO;
 import com.example.be_java_hisp_w21_g1.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,30 +14,40 @@ public class  Controller {
     UserService userService;
 
     //US 0001: Poder realizar la acción de “Follow” (seguir) a un determinado vendedor
+    //Recibe FollowPostDTO
+    //Retorna status code
     @PostMapping("/users/{userId}/follow/{userIdToFollow}")
     public ResponseEntity<?> follow(@PathVariable int userId, @PathVariable int userIdToFollow){
         return null;
     }
 
     //US 0002: Obtener el resultado de la cantidad de usuarios que siguen a un determinado vendedor
+    //Recibe UserIdDTO
+    //Retorna FollowersCountDTO
     @GetMapping("/users/{userId}/followers/count")
     public ResponseEntity<?> countFollowers(@PathVariable int userId){
         return null;
     }
 
     //US 0003: Obtener un listado de todos los usuarios que siguen a un determinado vendedor (¿Quién me sigue?)
+    //Recibe UserIdDTO
+    //Retorna FollowerListDTO
     @GetMapping("/users/{userId}/followers/list")
     public ResponseEntity<?> listFollowers(@PathVariable int userId){
         return null;
     }
 
     //US 0004: Obtener un listado de todos los vendedores a los cuales sigue un determinado usuario (¿A quién sigo?)
+    //Recibe UserIdDTO
+    //Retorna FollowedListDTO
     @GetMapping("/users/{userId}/followed/list")
     public ResponseEntity<?> listFollowed(@PathVariable int userId){
         return null;
     }
 
     //US 0005: Dar de alta una nueva publicación
+    //Recibe PostProductDTO
+    //Retorna status code
     @PostMapping("/products/post")
     public ResponseEntity<?> postProduct(@RequestBody PostProductDTO body){
         return null;
@@ -45,7 +56,8 @@ public class  Controller {
     //US 0006: Obtener un listado de las publicaciones realizadas por los vendedores que un usuario
     // sigue en las últimas dos semanas (para esto tener en cuenta ordenamiento por fecha,
     // publicaciones más recientes primero).
-
+    //Recibe UserIdDTO
+    //Retorna PostBySeller
     @GetMapping("/products/followed/{userId}/list")
     public ResponseEntity<?> latestsPosts(@PathVariable int userId){
         return null;
@@ -53,7 +65,8 @@ public class  Controller {
 
 
     //US 0007: Poder realizar la acción de “Unfollow” (dejar de seguir) a un determinado vendedor.
-
+    //Recibe FollowPostDTO
+    //Retorna status code
     @PostMapping("/users/{userId}/unfollow/{userIdToUnfollow}")
     public ResponseEntity<?> unfollowUser(@PathVariable int userId, PathVariable userIdToUnfollow) {
         return null;
