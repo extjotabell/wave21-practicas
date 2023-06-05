@@ -1,0 +1,107 @@
+[
+  {
+    "user_id": 1,
+    "date": "05-06-2023",
+    "product": {
+      "product_id": 1,
+      "product_name": "Camiseta",
+      "type": "Ropa",
+      "brand": "Adidas",
+      "code": "AD-001",
+      "notes": "Camiseta de algodón con estampado"
+    },
+    "category": 1,
+    "price": 10.0,
+    "has_promo": false,
+    "discount": 0.0
+  },
+  {
+    "user_id": 1,
+    "date": "05-06-2023",
+    "product": {
+      "product_id": 2,
+      "product_name": "Pantalón vaquero",
+      "type": "Ropa",
+      "brand": "Levi's",
+      "code": "LV-002",
+      "notes": "Pantalón vaquero ajustado para hombre"
+    },
+    "category": 2,
+    "price": 20.0,
+    "has_promo": false,
+    "discount": 0.0
+  },
+  {
+    "user_id": 1,
+    "date": "05-06-2023",
+    "product": {
+      "product_id": 3,
+      "product_name": "Vestido",
+      "type": "Ropa",
+      "brand": "Zara",
+      "code": "ZR-003",
+      "notes": "Vestido de verano con estampado floral"
+    },
+    "category": 3,
+    "price": 30.0,
+    "has_promo": false,
+    "discount": 0.0
+  },
+  {
+    "user_id": 1,
+    "date": "05-06-2023",
+    "product": {
+      "product_id": 4,
+      "product_name": "Zapatos de deporte",
+      "type": "Calzado",
+      "brand": "Nike",
+      "code": "NK-004",
+      "notes": "Zapatos deportivos para correr"
+    },
+    "category": 4,
+    "price": 40.0,
+    "has_promo": false,
+    "discount": 0.0
+  },
+  {
+    "user_id": 2,
+    "date": "05-06-2023",
+    "product": {
+      "product_id": 5,
+      "product_name": "Abrigo",
+      "type": "Ropa",
+      "brand": "H&M",
+      "code": "HM-005",
+      "notes": "Abrigo largo para mujer"
+    },
+    "category": 5,
+    "price": 50.0,
+    "has_promo": false,
+    "discount": 0.0
+  },
+  {
+    "user_id": 2,
+    "date": "05-06-2023",
+    "product": {
+      "product_id": 6,
+      "product_name": "Sombrero",
+      "type": "Accesorio",
+      "brand": "Gucci",
+      "code": "GC-006",
+      "notes": "Sombrero de paja con lazo"
+    },
+    "category": 6,
+    "price": 60.0,
+    "has_promo": false,
+    "discount": 0.0
+  }
+]
+
+
+
+
+
+
+
+
+

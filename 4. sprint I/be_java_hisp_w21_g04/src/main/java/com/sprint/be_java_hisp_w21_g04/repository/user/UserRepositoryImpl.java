@@ -31,7 +31,7 @@ public class UserRepositoryImpl {
             return objectMapper.readValue(jsonFile, new TypeReference<>() {});
 
         }catch ( FileNotFoundException e ){
-            System.out.println("Archivo JSON no encontrado");
+            System.out.println("Archivo users.json no encontrado");
             System.out.println(e.getMessage());
         }catch( JsonProcessingException err ){
             System.out.println("Error de procesamiento de JSON");
