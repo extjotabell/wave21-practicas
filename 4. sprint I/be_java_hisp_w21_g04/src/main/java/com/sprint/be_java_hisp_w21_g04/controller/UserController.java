@@ -21,9 +21,8 @@ public class UserController {
     }
 
     @GetMapping("/users/{userId}/followers/list")
-    public ResponseEntity<?> getFollowersById(@PathVariable int userId){
-        FollowersResponseDto followers = _userService.getFollowersById(userId);
-        return new ResponseEntity<>(followers, HttpStatus.OK);
+    public ResponseEntity<FollowersResponseDto> getFollowersById(@PathVariable int userId){
+        return new ResponseEntity<>(_userService.getFollowersById(userId), HttpStatus.OK);
     }
 
 }
