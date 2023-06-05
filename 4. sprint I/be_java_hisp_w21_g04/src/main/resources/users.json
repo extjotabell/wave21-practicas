@@ -14,31 +14,31 @@
     {
       "user_id": 3,
       "user_name": "MikeJohnson",
-      "followers": [],
+      "followers": [4],
       "followed": []
     },
     {
       "user_id": 4,
       "user_name": "EmilyDavis",
-      "followers": [],
-      "followed": []
+      "followers": [3],
+      "followed": [5]
     },
     {
       "user_id": 5,
       "user_name": "DavidWilson",
-      "followers": [],
+      "followers": [4],
       "followed": []
     },
     {
       "user_id": 6,
       "user_name": "SophiaLee",
       "followers": [],
-      "followed": []
+      "followed": [7]
     },
     {
       "user_id": 7,
       "user_name": "JacobBrown",
-      "followers": [],
+      "followers": [6],
       "followed": []
     },
     {
