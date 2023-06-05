@@ -9,7 +9,7 @@ import java.util.HashMap;
 @Repository
 public class EntradaBlogRepositoryImp implements EntradaBlogRepository {
 
-    private final HashMap<String, EntradaBlog> blogs;
+    private HashMap<String, EntradaBlog> blogs;
 
     public EntradaBlogRepositoryImp(){
         this.blogs = new HashMap<>();
