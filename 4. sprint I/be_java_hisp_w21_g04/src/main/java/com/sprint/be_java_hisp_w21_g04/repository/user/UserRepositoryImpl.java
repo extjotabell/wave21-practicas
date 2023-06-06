@@ -58,5 +58,8 @@ public class UserRepositoryImpl implements IUserRepository{
         return this.users.stream().filter(user -> user.getUser_id()==user_id).findFirst().orElse(null);
     }
 
-
+    @Override
+    public List<User> getAll() {
+        return this.users;
+    }
 }

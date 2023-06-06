@@ -4,8 +4,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.sprint.be_java_hisp_w21_g04.entity.Post;
 import com.sprint.be_java_hisp_w21_g04.entity.User;
+import com.sprint.be_java_hisp_w21_g04.repository.user.IUserRepository;
+import org.springframework.stereotype.Repository;
 import org.springframework.util.ResourceUtils;
 
 import java.io.File;
@@ -13,12 +16,17 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
-public class PostRepositoryImpl {
+@Repository
+public class PostRepositoryImpl implements IPostRepository {
 
+    private IUserRepository _userRepository;
     private List<Post> posts = new ArrayList<>();
 
-    public PostRepositoryImpl() {
+    public PostRepositoryImpl(IUserRepository userRepository) {
+        this._userRepository = userRepository;
         this.posts = this.getPostsJSON();
     }
 
@@ -26,6 +34,7 @@ public class PostRepositoryImpl {
 
         ObjectMapper objectMapper = new ObjectMapper();
 
+        objectMapper.registerModule(new JavaTimeModule());
         objectMapper.setPropertyNamingStrategy( PropertyNamingStrategy.SNAKE_CASE );
         try{
             File jsonFile = ResourceUtils.getFile("classpath:posts.json");
@@ -43,4 +52,21 @@ public class PostRepositoryImpl {
         return new ArrayList<>();
     }
 
+    @Override
+    public void post(Post post) {
+        this.posts.add(post);
+    }
+
+    @Override
+    public List<Post> getAll() {
+        return this.posts;
+    }
+
+    @Override
+    public List<Post> getSellerFollowed(int user_id){
+        List<Integer> ids = this._userRepository.getAll().stream()
+                .filter(user -> user.getUser_id() == user_id)
+                .flatMap(user -> user.getFollowed().stream()).toList();
+        return this.posts.stream().filter(post -> ids.contains(post.getUser_id())).toList();
+    }
 }
