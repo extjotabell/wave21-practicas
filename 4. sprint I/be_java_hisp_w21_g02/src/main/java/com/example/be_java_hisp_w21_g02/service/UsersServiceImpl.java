@@ -67,9 +67,6 @@ public class UsersServiceImpl implements IUsersService{
         );
     }
 
-
-
-    
     public FollowersListDTO getFollowersList(int userId){
         User persistedUser = _usersRepository.getUser(userId);
         validateUserExistenceAndIsSeller(persistedUser);
@@ -79,8 +76,6 @@ public class UsersServiceImpl implements IUsersService{
                 persistedUser.getUsername(),
                 getFollowDTO(persistedUser, persistedUser.getFollowers())
         );
-
-
     }
 
     public FollowersListDTO getFollowersList(int userId, String order){
@@ -110,7 +105,6 @@ public class UsersServiceImpl implements IUsersService{
                 persistedUser.getUsername(),
                 getFollowDTO(persistedUser, persistedUser.getFollowing())
         );
-
     }
 
     public FollowedListDTO getFollowedList(int userId, String order){
@@ -130,7 +124,6 @@ public class UsersServiceImpl implements IUsersService{
                 followedDTO
         );
     }
-
 
     //region Extra Methods
     private static void validatePersistedFollowingsAndSeller(User persistedUser, User persistedOtherUser) {
@@ -153,7 +146,6 @@ public class UsersServiceImpl implements IUsersService{
     }
 
     private List<FollowerDTO> getFollowDTO(User  persistedUser, Set<Integer> usersIds){
-
         List<User> followers = _usersRepository.getUsers(usersIds);
         List<FollowerDTO> followersDTO = new ArrayList<>();
         followers.forEach(follower -> followersDTO.add(new FollowerDTO(follower.getId(),follower.getUsername())));
@@ -169,7 +161,4 @@ public class UsersServiceImpl implements IUsersService{
         }
     }
     //endregion
-
-
-
 }
