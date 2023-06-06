@@ -17,4 +17,9 @@ public class ExceptionConfig {
     public ResponseEntity<?> userAlreadyFollowedException(Exception e){
         return ResponseEntity.badRequest().body(new MessageDTO(e.getMessage()));
     }
+
+    @ExceptionHandler(UserEqualsException.class)
+    public ResponseEntity<?> userEqualsException(Exception e){
+        return ResponseEntity.badRequest().body(new MessageDTO(e.getMessage()));
+    }
 }

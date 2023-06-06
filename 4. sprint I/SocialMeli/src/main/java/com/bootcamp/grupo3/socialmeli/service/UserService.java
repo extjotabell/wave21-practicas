@@ -5,6 +5,7 @@ import com.bootcamp.grupo3.socialmeli.dto.response.UserFollowedListDTO;
 import com.bootcamp.grupo3.socialmeli.dto.response.UserFollowerCountDTO;
 import com.bootcamp.grupo3.socialmeli.dto.response.UserFollowersListDTO;
 import com.bootcamp.grupo3.socialmeli.exception.UserAlreadyFollowedException;
+import com.bootcamp.grupo3.socialmeli.exception.UserEqualsException;
 import com.bootcamp.grupo3.socialmeli.exception.UserNotFoundException;
 import com.bootcamp.grupo3.socialmeli.model.User;
 import com.bootcamp.grupo3.socialmeli.repository.interfaces.IUserRepository;
@@ -48,6 +49,9 @@ public class UserService implements IUserService {
     public MessageDTO unfollow(int userId, int userIdToUnfollow) {
         User user = this.getUserByID(userId);
         User userToUnfollow = this.getUserByID(userIdToUnfollow);
+
+        if(user.equals(userToUnfollow))
+            throw new UserEqualsException("No te puedes seguir a tí mismo!");
 
         if(!user.getFollowed().contains(userToUnfollow))
             throw new UserNotFoundException("El usuario " + userToUnfollow.getName() + " no se encuentra en tu lista de seguidos.");
