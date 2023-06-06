@@ -3,6 +3,7 @@ package com.bootcamp.grupo3.socialmeli.model;
 import lombok.*;
 
 import javax.annotation.processing.Generated;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter @Setter
@@ -12,6 +13,6 @@ import java.util.List;
 public class User {
     private int id;
     private String name;
-    private List<User> followers;
-    private List<User> followed;
+    private List<User> followers = new ArrayList<>();
+    private List<User> followed = new ArrayList<>();
 }

@@ -28,4 +28,12 @@ public class UserRepository implements IUserRepository {
                 .filter(user -> user.getId() == id)
                 .findFirst();
     }
+
+    @Override
+    public Optional<User> getUserByID(int userID) {
+        return this.users
+                .stream()
+                .filter(user -> user.getId() == userID)
+                .findFirst();
+    }
 }
