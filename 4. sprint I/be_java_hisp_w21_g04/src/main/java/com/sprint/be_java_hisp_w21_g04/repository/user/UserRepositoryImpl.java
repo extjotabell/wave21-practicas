@@ -14,6 +14,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class UserRepositoryImpl implements IUserRepository{
@@ -23,8 +24,6 @@ public class UserRepositoryImpl implements IUserRepository{
     public UserRepositoryImpl() {
         this.users = getUsersJSON();
     }
-
-
 
     private List<User> getUsersJSON() {
 
@@ -59,12 +58,27 @@ public class UserRepositoryImpl implements IUserRepository{
 
     @Override
     public List<Integer> getFollowersById(int user_id) {
-        return this.users.stream().filter(user -> user.getUserId()==user_id).findFirst().orElseThrow(()-> new IllegalDataException("Usuario no registrado")).getFollowers();
+        return this.users.stream()
+                         .filter(user -> user.getUserId()==user_id)
+                         .findFirst().orElseThrow(()-> new IllegalDataException("Vendedor no registrado"))
+                         .getFollowers();
+    }
+
+    @Override
+    public List<Integer> getFollowedById(int user_id) {
+        return this.users.stream()
+                         .filter(user -> user.getUserId()==user_id)
+                         .findFirst()
+                         .orElseThrow(()-> new IllegalDataException("Usuario no registrado"))
+                         .getFollowed();
     }
 
     @Override
     public User getById(int user_id) {
-        return this.users.stream().filter(user -> user.getUserId()==user_id).findFirst().orElseThrow(()-> new IllegalDataException("Usuario no registrado"));
+        return this.users.stream()
+                         .filter(user -> user.getUserId()==user_id)
+                         .findFirst()
+                         .orElseThrow(()-> new IllegalDataException("Usuario no registrado"));
     }
 
     @Override
