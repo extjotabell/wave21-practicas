@@ -44,12 +44,7 @@ public class UserRepositoryImpl implements IUserRepository{
     }
 
     @Override
-    public Post createPost(Post post) {
-        try{
-            dataUser.get(post.getUserId()).getPosts().add(post);
-        }catch (NullPointerException e) {
-            return null;
-        }
-        return post;
+    public void createPost(Post post) {
+       dataUser.get(post.getUserId()).getPosts().add(post);
     }
 }

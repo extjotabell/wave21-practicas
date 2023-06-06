@@ -9,6 +9,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class ExceptionConfig {
     @ExceptionHandler(PostBadRequestException.class)
     public ResponseEntity<?> PostBadRequestException(Exception e) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("");
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
     }
 }

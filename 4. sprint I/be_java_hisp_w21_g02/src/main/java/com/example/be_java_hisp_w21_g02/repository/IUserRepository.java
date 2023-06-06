@@ -4,6 +4,6 @@ import com.example.be_java_hisp_w21_g02.model.Post;
 
 public interface IUserRepository {
 
-    Post createPost(Post post);
+    void createPost(Post post);
 
 }

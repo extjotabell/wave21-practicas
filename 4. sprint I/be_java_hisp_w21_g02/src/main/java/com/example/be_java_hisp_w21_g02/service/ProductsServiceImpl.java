@@ -23,9 +23,15 @@ public class ProductsServiceImpl implements IProductsService{
     @Override
     public ResponseEntity<?> createPost(PostRequestDTO postRequestDTO) {
         Post post = convertPostRequestDTOtoPost(postRequestDTO);
-        Post response = userRepository.createPost(post);
-        if(!isValidRequest(postRequestDTO) || response == null){
-            throw new PostBadRequestException(String.format("Invalid post request"));
+        try{
+            userRepository.createPost(post);
+        }catch (NullPointerException e) {
+            //Use User not found (Missing another pr)
+            throw new PostBadRequestException("Invalid post request");
+        }
+
+        if(!isValidRequest(postRequestDTO)){
+            throw new PostBadRequestException("Invalid post request");
         }
         return new ResponseEntity<>(HttpStatus.OK);
     }
