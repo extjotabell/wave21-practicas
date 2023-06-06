@@ -31,6 +31,28 @@ public class UserRepositoryImpl implements IUserRepository{
        dataUser.get(post.getUserId()).getPosts().add(post);
     }
 
+    /*
+    * Se declara una lista de usuarios a retornar.
+    * Se busca la lista de usuarios seguidos por userId.
+    * Por cada uno de esos usuarios, se busca la lista de posts.
+    * Se agregan los posts a un usuario temp, y se agrega el temp a la lista de usuarios a retornar.
+     */
+    @Override
+    public List<User> listFollowingPosts2Weeks(int userId) {
+        List<User> result = new ArrayList<>();
+        dataUser.get(userId).getFollowing().forEach(followingId -> {
+            User tempUser = dataUser.get(followingId);
+            List<Post> filteredList = tempUser.getPosts()
+                    .stream()
+                    .filter(post -> post.getDate().isAfter(LocalDate.now().minusWeeks(2)))
+                    .sorted(Comparator.comparing(Post::getDate).reversed()).toList();
+            tempUser.setPosts(filteredList);
+            result.add(tempUser);
+        });
+
+        return result;
+    }
+
     private void loadInitialData() {
 
         Post post = new Post();
