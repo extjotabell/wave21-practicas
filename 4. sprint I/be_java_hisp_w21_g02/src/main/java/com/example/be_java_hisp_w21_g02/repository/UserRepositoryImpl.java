@@ -26,6 +26,15 @@ public class UserRepositoryImpl implements IUserRepository{
         dataUser.put(persistedFollowUser.getId(), persistedFollowUser);
     }
 
+    public List<User> getUsers(Set<Integer> users){
+        List<User> result = new ArrayList<>();
+        users.forEach( x->{
+                    result.add(this.getUser(x));
+                });
+        return result;
+    }
+
+
     @Override
     public void createPost(Post post) {
        dataUser.get(post.getUserId()).getPosts().add(post);

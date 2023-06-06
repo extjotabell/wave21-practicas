@@ -1,6 +1,9 @@
 package com.example.be_java_hisp_w21_g02.service;
 
+import com.example.be_java_hisp_w21_g02.dto.response.FollowedListDTO;
+import com.example.be_java_hisp_w21_g02.dto.response.FollowerDTO;
 import com.example.be_java_hisp_w21_g02.dto.response.FollowersCountDTO;
+import com.example.be_java_hisp_w21_g02.dto.response.FollowersListDTO;
 import com.example.be_java_hisp_w21_g02.exceptions.UserNotFoundException;
 import com.example.be_java_hisp_w21_g02.exceptions.UserNotSellerException;
 import com.example.be_java_hisp_w21_g02.exceptions.UserFollowingException;
@@ -8,6 +11,9 @@ import com.example.be_java_hisp_w21_g02.model.User;
 import com.example.be_java_hisp_w21_g02.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class UsersServiceImpl implements IUsersService{
@@ -76,6 +82,46 @@ public class UsersServiceImpl implements IUsersService{
         );
 
         return response;
+    }
+
+    public FollowersListDTO getFollowersList(int userId){
+        User persistedUser = _usersRepository.getUser(userId);
+
+        if(persistedUser == null){
+            throw new UserNotFoundException("No se pudo encontrar un usuario con el ID mencionado");
+        }
+
+        if (!persistedUser.isSeller()) {
+            throw new UserNotSellerException("El usuario no es un vendedor");
+        }
+
+        List<User> followers = _usersRepository.getUsers(persistedUser.getFollowers());
+        List<FollowerDTO> followersDTO = new ArrayList<>();
+        followers.forEach(follower -> followersDTO.add(new FollowerDTO(follower.getId(),follower.getUsername())));
+
+        return new FollowersListDTO(
+                persistedUser.getId(),
+                persistedUser.getUsername(),
+                followersDTO
+        );
+    }
+
+    public FollowedListDTO getFollowedList(int userId){
+        User persistedUser = _usersRepository.getUser(userId);
+
+        if(persistedUser == null){
+            throw new UserNotFoundException("No se pudo encontrar un usuario con el ID mencionado");
+        }
+        List<User> followed =  _usersRepository.getUsers(persistedUser.getFollowing());
+        List<FollowerDTO> followedDTO = new ArrayList<>();
+        followed.forEach(following -> followedDTO.add(new FollowerDTO(following.getId(),following.getUsername())));
+
+        return new FollowedListDTO(
+                persistedUser.getId(),
+                persistedUser.getUsername(),
+                followedDTO
+        );
+
     }
 
 }
