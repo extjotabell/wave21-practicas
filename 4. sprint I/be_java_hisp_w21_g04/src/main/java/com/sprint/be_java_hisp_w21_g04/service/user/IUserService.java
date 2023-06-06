@@ -12,6 +12,7 @@ public interface IUserService {
     ResponseDto unfollowUser(int userId, int userIdToFollow);
 
     FollowersResponseDto getFollowersById(int user_id);
+    FollowersResponseDto getFollowersByIdSorted(int user_id, String order);
     FollowedResponseDto getFollowedById(int user_id);
 
 }
