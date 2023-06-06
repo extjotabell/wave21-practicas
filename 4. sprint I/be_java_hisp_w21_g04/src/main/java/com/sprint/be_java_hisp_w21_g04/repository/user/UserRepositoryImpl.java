@@ -17,10 +17,10 @@ import java.util.List;
 @Repository
 public class UserRepositoryImpl implements IUserRepository{
 
-    private List<User> users = new ArrayList<>();
+    private List<User> users;
 
     public UserRepositoryImpl() {
-        this.users = this.getUsersJSON();
+        this.users = getUsersJSON();
     }
 
 
@@ -44,6 +44,16 @@ public class UserRepositoryImpl implements IUserRepository{
             throw new RuntimeException(e);
         }
         return new ArrayList<>();
+    }
+
+    @Override
+    public User findUserById(int userId) {
+        User user = users
+                .stream()
+                .filter(user1 -> user1.getUserId() == userId)
+                .findFirst()
+                .orElse(null);
+        return user;
     }
 
     @Override
