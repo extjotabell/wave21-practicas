@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.sprint.be_java_hisp_w21_g04.entity.User;
+import com.sprint.be_java_hisp_w21_g04.exception.IllegalDataException;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.ResourceUtils;
 
@@ -13,6 +14,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class UserRepositoryImpl implements IUserRepository{
@@ -22,8 +24,6 @@ public class UserRepositoryImpl implements IUserRepository{
     public UserRepositoryImpl() {
         this.users = getUsersJSON();
     }
-
-
 
     private List<User> getUsersJSON() {
 
@@ -58,12 +58,27 @@ public class UserRepositoryImpl implements IUserRepository{
 
     @Override
     public List<Integer> getFollowersById(int user_id) {
-        return this.users.stream().filter(user -> user.getUserId()==user_id).findFirst().orElse(null).getFollowers();
+        return this.users.stream()
+                         .filter(user -> user.getUserId()==user_id)
+                         .findFirst().orElseThrow(()-> new IllegalDataException("Vendedor no registrado"))
+                         .getFollowers();
+    }
+
+    @Override
+    public List<Integer> getFollowedById(int user_id) {
+        return this.users.stream()
+                         .filter(user -> user.getUserId()==user_id)
+                         .findFirst()
+                         .orElseThrow(()-> new IllegalDataException("Usuario no registrado"))
+                         .getFollowed();
     }
 
     @Override
     public User getById(int user_id) {
-        return this.users.stream().filter(user -> user.getUserId()==user_id).findFirst().orElse(null);
+        return this.users.stream()
+                         .filter(user -> user.getUserId()==user_id)
+                         .findFirst()
+                         .orElseThrow(()-> new IllegalDataException("Usuario no registrado"));
     }
 
     @Override
