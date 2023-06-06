@@ -5,6 +5,7 @@ import com.bootcamp.grupo3.socialmeli.dto.response.UserFollowedListDTO;
 import com.bootcamp.grupo3.socialmeli.dto.response.UserFollowerCountDTO;
 import com.bootcamp.grupo3.socialmeli.dto.response.UserFollowersListDTO;
 import com.bootcamp.grupo3.socialmeli.exception.UserAlreadyFollowedException;
+import com.bootcamp.grupo3.socialmeli.exception.UserEqualsException;
 import com.bootcamp.grupo3.socialmeli.exception.UserNotFoundException;
 import com.bootcamp.grupo3.socialmeli.model.User;
 import com.bootcamp.grupo3.socialmeli.repository.interfaces.IUserRepository;
@@ -32,6 +33,9 @@ public class UserService implements IUserService {
 
     @Override
     public MessageDTO follow(int userId, int userIdToFollow) {
+        if(userId==userIdToFollow)
+            throw new UserEqualsException("No te puedes seguir a tí mismo!");
+
         User user = this.getUserByID(userId);
         User userToFollow = this.getUserByID(userIdToFollow);
 
@@ -46,6 +50,9 @@ public class UserService implements IUserService {
 
     @Override
     public MessageDTO unfollow(int userId, int userIdToUnfollow) {
+        if(userId==userIdToUnfollow)
+            throw new UserEqualsException("No te puedes dejar de seguir a tí mismo!");
+
         User user = this.getUserByID(userId);
         User userToUnfollow = this.getUserByID(userIdToUnfollow);
 
