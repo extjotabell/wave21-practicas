@@ -2,6 +2,7 @@ package com.example.be_java_hisp_w21_g1.Controller;
 
 import com.example.be_java_hisp_w21_g1.DTO.Request.PostProductDTO;
 import com.example.be_java_hisp_w21_g1.DTO.Response.FollowedListDTO;
+import com.example.be_java_hisp_w21_g1.DTO.Response.FollowerListDTO;
 import com.example.be_java_hisp_w21_g1.DTO.Response.FollowersCountDTO;
 import com.example.be_java_hisp_w21_g1.DTO.Response.PostDTO;
 import com.example.be_java_hisp_w21_g1.Service.IUserService;
@@ -36,16 +37,16 @@ public class  Controller {
     //Recibe UserIdDTO
     //Retorna FollowerListDTO
     @GetMapping("/users/{userId}/followers/list")
-    public ResponseEntity<?> listFollowers(@PathVariable int userId){
-        return null;
+    public ResponseEntity<FollowerListDTO> listFollowers(@PathVariable int userId){
+        return new ResponseEntity<>(userService.getFollowersList(userId), HttpStatus.OK);
     }
 
     //US 0004: Obtener un listado de todos los vendedores a los cuales sigue un determinado usuario (¿A quién sigo?)
     //Recibe UserIdDTO
     //Retorna FollowedListDTO
     @GetMapping("/users/{userId}/followed/list")
-    public ResponseEntity<?> listFollowed(@PathVariable int userId){
-        return null;
+    public ResponseEntity<FollowedListDTO> listFollowed(@PathVariable int userId){
+        return new ResponseEntity<>(userService.getFollowedList(userId), HttpStatus.OK);
     }
 
     //US 0005: Dar de alta una nueva publicación
