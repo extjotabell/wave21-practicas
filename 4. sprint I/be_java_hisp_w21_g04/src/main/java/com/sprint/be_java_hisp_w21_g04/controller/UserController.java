@@ -15,8 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 public class UserController {
-
-    private IUserService _userService;
+    private UserServiceImpl _userService;
 
     public UserController(UserServiceImpl userService) {
         this._userService = userService;
