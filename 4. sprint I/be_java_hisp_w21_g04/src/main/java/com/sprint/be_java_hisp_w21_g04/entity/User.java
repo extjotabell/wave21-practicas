@@ -17,5 +17,4 @@ public class User {
     private List<Integer> followers;
     //¿A quién sigo?
     private List<Integer> followed;
-
 }
