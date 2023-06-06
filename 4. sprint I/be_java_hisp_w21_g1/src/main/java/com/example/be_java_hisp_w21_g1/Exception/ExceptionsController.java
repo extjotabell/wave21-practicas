@@ -17,7 +17,7 @@ public class ExceptionsController extends ResponseEntityExceptionHandler {
         return handleExceptionInternal(e, response, new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }
 
-    @ExceptionHandler(NotFoundException.class)
+    @ExceptionHandler(BadRequestException.class)
     protected ResponseEntity<Object> badRequestException(Exception e, WebRequest request){
         String response = "Bad Request";
         return handleExceptionInternal(e, response, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
