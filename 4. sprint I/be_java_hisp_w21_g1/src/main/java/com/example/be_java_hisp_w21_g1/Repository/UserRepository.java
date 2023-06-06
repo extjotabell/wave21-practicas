@@ -38,7 +38,11 @@ try {
     Post post3 = new Post(1,3, LocalDate.of(2022,04,04), product3, 1, 190.00);
     Post post4 = new Post(1,4, LocalDate.of(2023,05,29), product2, 1, 90.90);
 
-    List<Post> posts = Arrays.asList(post1, post2, post3,post4);
+    List<Post> posts = new ArrayList<>();
+    posts.add(post1);
+    posts.add(post2);
+    posts.add(post3);
+    posts.add(post4);
 
     User user1 = new User(1, "Pepe", new ArrayList<>(), new ArrayList<>(), posts);
     User user2 = new User(2, "Pablo", new ArrayList<>(), Arrays.asList(user1), new ArrayList<>());
