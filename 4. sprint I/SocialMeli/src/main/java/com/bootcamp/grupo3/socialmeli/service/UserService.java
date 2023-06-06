@@ -1,5 +1,6 @@
 package com.bootcamp.grupo3.socialmeli.service;
 
+import com.bootcamp.grupo3.socialmeli.dto.response.MessageDTO;
 import com.bootcamp.grupo3.socialmeli.exception.UserNotFoundException;
 import com.bootcamp.grupo3.socialmeli.model.User;
 import com.bootcamp.grupo3.socialmeli.repository.interfaces.IUserRepository;
@@ -18,7 +19,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public String follow(int userId, int userIdToFollow) {
+    public MessageDTO follow(int userId, int userIdToFollow) {
         User user = userRepository.findByID(userId)
                 .orElseThrow(() -> new UserNotFoundException("No se ha encontrado el usuario"));
         User userToFollow= userRepository.findByID(userIdToFollow)
@@ -26,11 +27,11 @@ public class UserService implements IUserService {
 
         user.getFollowed().add(userToFollow);
 
-        return user.getName()+ " followed "+userToFollow.getName()+ " successfully!";
+        return new MessageDTO(user.getName()+ " followed "+userToFollow.getName()+ " successfully!");
     }
 
     @Override
-    public String unfollow(int userId, int userIdToUnfollow) {
+    public MessageDTO unfollow(int userId, int userIdToUnfollow) {
         User user = userRepository.findByID(userId)
                 .orElseThrow(() -> new UserNotFoundException("No se ha encontrado el usuario"));
         User userToUnfollow= userRepository.findByID(userIdToUnfollow)
@@ -38,6 +39,6 @@ public class UserService implements IUserService {
 
         user.getFollowed().remove(userToUnfollow);
 
-        return user.getName()+ " unfollowed "+userToUnfollow.getName()+ " successfully!";
+        return new MessageDTO(user.getName()+ " unfollowed "+userToUnfollow.getName()+ " successfully!");
     }
 }
