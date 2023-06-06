@@ -12,7 +12,7 @@ Java Spring Boot para la creaciòn de la API.
 
 Postman para testear las diferentes firmas utilizadas.
 
-##Configuracion
+## Configuracion
 
 ```bash
 git clone git@github.com:extjotabell/wave21-practicas.git
@@ -45,9 +45,9 @@ Ornella Quarracino
 
 El diagrama de clases y el armado inicial del proyecto lo hacemos entre todos. 
 
-Las US se trabajan de equipos de a pares, quedando de la siguiente manera:
+En el Sprint 1 consideramos que vendedores y compradores son usuarios que comparten las mismas características, con lo cual hicimos una sola clase llamada User.
 
-Endpoints  y responsables del desarrollo. 
+## Endpoints  y responsables del desarrollo. 
 
 POST /users/{userId}/follow/{userIdToFollow} 
 Responsables: Luciano Lattante y Ornella Quarracino
@@ -83,4 +83,4 @@ GET /products/promo-post/count?user_id={userId}
 Responsable: Individual
 
   
-En el Sprint 1 consideramos que vendedores y compradores son usuarios que comparten las mismas características, con lo cual hicimos una sola clase llamada User
+
