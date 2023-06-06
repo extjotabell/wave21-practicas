@@ -1,0 +1,452 @@
+{
+	"info": {
+		"_postman_id": "6732b474-97fb-42a2-8428-b73fd61f0d9b",
+		"name": "Sprint 1 - g03",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27456240"
+	},
+	"item": [
+		{
+			"name": "US1 - Follow",
+			"item": [
+				{
+					"name": "Usuario de id  2 sigue a usuario de id 3",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{{{baseUrl}}}}/users/2/follow/30",
+							"host": [
+								"{{{{baseUrl}}}}"
+							],
+							"path": [
+								"users",
+								"2",
+								"follow",
+								"30"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Error - Intentar seguir a un usuario ya seguido",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{{{baseUrl}}}}/users/2/follow/3",
+							"host": [
+								"{{{{baseUrl}}}}"
+							],
+							"path": [
+								"users",
+								"2",
+								"follow",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "US2 - cantidad de usuarios que siguen a un determinado usuario",
+			"item": [
+				{
+					"name": "Cantidad de usuarios que siguen al usuario de id 3",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{{{baseUrl}}}}/users/3/followers/count",
+							"host": [
+								"{{{{baseUrl}}}}"
+							],
+							"path": [
+								"users",
+								"3",
+								"followers",
+								"count"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "US3 - Quien me sigue",
+			"item": [
+				{
+					"name": "Quien sigue al usuario de id 2",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{{{baseUrl}}}}/users/2/followers/list",
+							"host": [
+								"{{{{baseUrl}}}}"
+							],
+							"path": [
+								"users",
+								"2",
+								"followers",
+								"list"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "US4 - A quien sigo",
+			"item": [
+				{
+					"name": "Que usuarios sigue el usuario de id 2",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{{{baseUrl}}}}/users/2/followed/list",
+							"host": [
+								"{{{{baseUrl}}}}"
+							],
+							"path": [
+								"users",
+								"2",
+								"followed",
+								"list"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "US5 - Dar de alta una nueva publicación",
+			"item": [
+				{
+					"name": "Agregar un POST",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": 3,\n    \"date\": \"22-05-2023\",\n    \"product\":{\n        \"product_id\": 123,\n        \"product_name\": \"Silla Gamer\",\n        \"type\": \"Silla\",\n        \"brand\": \"Asus\",\n        \"color\": \"Negro y Verde\",\n        \"notes\": \"Silla en impecables condiciones, poco uso\"\n    },\n    \"category\": 100,\n    \"price\": 200.50\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{{{baseUrl}}}}/products/post",
+							"host": [
+								"{{{{baseUrl}}}}"
+							],
+							"path": [
+								"products",
+								"post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Error - No existe usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": 20,\n    \"date\": \"22-05-2023\",\n    \"product\":{\n        \"product_id\": 123,\n        \"product_name\": \"Silla Gamer\",\n        \"type\": \"Silla\",\n        \"brand\": \"Asus\",\n        \"color\": \"Negro y Verde\",\n        \"notes\": \"Silla en impecables condiciones, poco uso\"\n    },\n    \"category\": 100,\n    \"price\": 200.50\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{{{baseUrl}}}}/products/post",
+							"host": [
+								"{{{{baseUrl}}}}"
+							],
+							"path": [
+								"products",
+								"post"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "US6 - Obtener un listado de las publicaciones realizadas por los vendedores que un usuario sigue en las últimas dos semanas",
+			"item": [
+				{
+					"name": "Publicaciones realizadas por los usuarios seguidos por el usuario de id 3",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{{{baseUrl}}}}/products/followed/3/list",
+							"host": [
+								"{{{{baseUrl}}}}"
+							],
+							"path": [
+								"products",
+								"followed",
+								"3",
+								"list"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "US7 - Unfollow",
+			"item": [
+				{
+					"name": "Usuario de id 1 deja de seguir a usuario de id 3",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{{{baseUrl}}}}/users/1/unfollow/3",
+							"host": [
+								"{{{{baseUrl}}}}"
+							],
+							"path": [
+								"users",
+								"1",
+								"unfollow",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Error - Usuario de id 1 no seguia a usuario de id 3",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{{{baseUrl}}}}/users/1/unfollow/3",
+							"host": [
+								"{{{{baseUrl}}}}"
+							],
+							"path": [
+								"users",
+								"1",
+								"unfollow",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "US8 - Ordenamiento alfabético ascendente y descendente",
+			"item": [
+				{
+					"name": "Seguidores del usuario de id 1 por nombre ascendente",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{{{baseUrl}}}}/users/1/followers/list?order=name_asc",
+							"host": [
+								"{{{{baseUrl}}}}"
+							],
+							"path": [
+								"users",
+								"1",
+								"followers",
+								"list"
+							],
+							"query": [
+								{
+									"key": "order",
+									"value": "name_asc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Seguidores del usuario de id 1 por nombre ascendente Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{{{baseUrl}}}}/users/1/followers/list?order=name_asc",
+							"host": [
+								"{{{{baseUrl}}}}"
+							],
+							"path": [
+								"users",
+								"1",
+								"followers",
+								"list"
+							],
+							"query": [
+								{
+									"key": "order",
+									"value": "name_asc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Usuarios seguidos por el usuario de id 1 por nombre ascendente",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{{{baseUrl}}}}/users/1/followed/list?order=name_asc",
+							"host": [
+								"{{{{baseUrl}}}}"
+							],
+							"path": [
+								"users",
+								"1",
+								"followed",
+								"list"
+							],
+							"query": [
+								{
+									"key": "order",
+									"value": "name_asc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Usuarios seguidos por el usuario de id 1 por nombre descendente",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{{{baseUrl}}}}/users/1/followed/list?order=name_desc",
+							"host": [
+								"{{{{baseUrl}}}}"
+							],
+							"path": [
+								"users",
+								"1",
+								"followed",
+								"list"
+							],
+							"query": [
+								{
+									"key": "order",
+									"value": "name_desc"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "US9 - Ordenamiento por fecha ascendente y descendente",
+			"item": [
+				{
+					"name": "Productos publicados por los usuarios seguidos por el usuario de id 1 con las fechas en orden ascendente",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{{{baseUrl}}}}/products/followed/1/list?order=date_asc",
+							"host": [
+								"{{{{baseUrl}}}}"
+							],
+							"path": [
+								"products",
+								"followed",
+								"1",
+								"list"
+							],
+							"query": [
+								{
+									"key": "order",
+									"value": "date_asc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Productos publicados por los usuarios seguidos por el usuario de id 1 con las fechas en orden descendente",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{{{baseUrl}}}}/products/followed/1/list?order=date_desc",
+							"host": [
+								"{{{{baseUrl}}}}"
+							],
+							"path": [
+								"products",
+								"followed",
+								"1",
+								"list"
+							],
+							"query": [
+								{
+									"key": "order",
+									"value": "date_desc"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "{{baseUrl}}",
+			"value": "localhost:8080",
+			"type": "string"
+		}
+	]
+}
