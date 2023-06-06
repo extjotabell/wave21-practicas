@@ -1,7 +1,10 @@
 package com.example.be_java_hisp_w21_g1.Controller;
 
 import com.example.be_java_hisp_w21_g1.DTO.Request.PostProductDTO;
+import com.example.be_java_hisp_w21_g1.DTO.Request.UserIdDTO;
+import com.example.be_java_hisp_w21_g1.DTO.Response.PostBySellerDTO;
 import com.example.be_java_hisp_w21_g1.Service.UserService;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -50,7 +53,7 @@ public class Controller {
     @PostMapping("/products/post")
     public ResponseEntity<?> createPost(@RequestBody PostProductDTO postProductDTO){
         userService.createPost(postProductDTO);
-        return new ResponseEntity<>("Se ha ", HttpStatus.OK);
+        return new ResponseEntity<>("Se ha creado el post!", HttpStatus.OK);
     }
 
     //US 0006: Obtener un listado de las publicaciones realizadas por los vendedores que un usuario
@@ -58,9 +61,10 @@ public class Controller {
     // publicaciones más recientes primero).
     //Recibe UserIdDTO
     //Retorna PostBySeller
-    @GetMapping("/products/followed/{userId}/list")
-    public ResponseEntity<?> latestsPosts(@PathVariable int userId){
-        return null;
+    @GetMapping("/products/followed/{user_id}/list")
+    public ResponseEntity<PostBySellerDTO> latestsPosts(@PathVariable("user_id") int userId){
+        PostBySellerDTO latestPosts = userService.listPostsBySeller(userId);
+        return new ResponseEntity<>(latestPosts, HttpStatus.OK);
     }
 
 
