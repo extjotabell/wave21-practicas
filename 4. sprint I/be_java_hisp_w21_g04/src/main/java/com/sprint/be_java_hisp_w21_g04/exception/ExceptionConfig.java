@@ -9,7 +9,8 @@ import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import java.time.format.DateTimeParseException;
+
+import com.sprint.be_java_hisp_w21_g04.dto.response.UserNotFoundDto;
 
 @ControllerAdvice
 public class ExceptionConfig {
@@ -25,4 +26,9 @@ public class ExceptionConfig {
 //        ErrorDto error = new ErrorDto(e.getMessage(), 500);
 //        return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
 //    }
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<?> userNotFoundException(Exception e){
+        UserNotFoundDto userNotFoundDto = new UserNotFoundDto(e.getMessage(), 404);
+        return new ResponseEntity<>(userNotFoundDto, HttpStatus.NOT_FOUND);
+    }
 }
