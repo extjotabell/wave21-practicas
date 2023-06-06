@@ -12,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 public class  Controller {
     @Autowired
@@ -37,16 +39,16 @@ public class  Controller {
     //Recibe UserIdDTO
     //Retorna FollowerListDTO
     @GetMapping("/users/{userId}/followers/list")
-    public ResponseEntity<FollowerListDTO> listFollowers(@PathVariable int userId){
-        return new ResponseEntity<>(userService.getFollowersList(userId), HttpStatus.OK);
+    public ResponseEntity<FollowerListDTO> listFollowers(@PathVariable int userId, @RequestParam(value = "order", required = false) String alf_order){
+        return new ResponseEntity<>(userService.getFollowersList(userId, alf_order), HttpStatus.OK);
     }
 
     //US 0004: Obtener un listado de todos los vendedores a los cuales sigue un determinado usuario (¿A quién sigo?)
     //Recibe UserIdDTO
     //Retorna FollowedListDTO
     @GetMapping("/users/{userId}/followed/list")
-    public ResponseEntity<FollowedListDTO> listFollowed(@PathVariable int userId){
-        return new ResponseEntity<>(userService.getFollowedList(userId), HttpStatus.OK);
+    public ResponseEntity<FollowedListDTO> listFollowed(@PathVariable int userId, @RequestParam(value = "order", required = false) String alf_order){
+        return new ResponseEntity<>(userService.getFollowedList(userId, alf_order), HttpStatus.OK);
     }
 
     //US 0005: Dar de alta una nueva publicación
@@ -77,15 +79,15 @@ public class  Controller {
     }
 
     //US 0008: Ordenamiento alfabético ascendente y descendente
-    @GetMapping("/users/{UserId}/followers/list?order=name_asc")
-    public ResponseEntity<?> orderFollowersBy(@PathVariable int userId, @RequestParam(value = "order", required = true) String alf_order){
-        return null;
-    }
+//    @GetMapping("/users/{UserId}/followers/list")
+//    public ResponseEntity<?> orderFollowersBy(@PathVariable int userId, @RequestParam(value = "order", required = false) String alf_order){
+//        return null;
+//    }
 
-    @GetMapping("/users/{UserID}/followed/list?order=name_asc")
-    public ResponseEntity<?> orderFollowedBy(@PathVariable int userId, @RequestParam(value = "order", required = true) String alf_order){
-        return null;
-    }
+//    @GetMapping("/users/{UserID}/followed/list?order=name_asc")
+//    public ResponseEntity<?> orderFollowedBy(@PathVariable int userId, @RequestParam(value = "order", required = true) String alf_order){
+//        return null;
+//    }
 
     //US 0009: Ordenamiento por fecha ascendente y descendente
     /*
