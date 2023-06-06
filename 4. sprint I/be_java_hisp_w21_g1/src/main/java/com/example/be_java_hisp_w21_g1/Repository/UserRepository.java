@@ -56,9 +56,17 @@ try {
     public Optional<User> findUserById(int id){
         return users.stream().filter(u -> u.getUser_id() == id).findFirst();
     }
-
-    public void addPostToUser(Post post, int userId){
-        findUserById(userId).orElseThrow().getPosts().add(post);
+    public User findUser(int id){
+        return users.stream().filter(u -> u.getUser_id() == id).findFirst().orElse(null);
+    }
+    public void addPostToUser(Post post, User user){
+        for (User usuario: users) {
+            if(usuario.getUser_id()==user.getUser_id()){
+               List<Post> posteos = usuario.getPosts();
+               posteos.add(post);
+               usuario.setPosts(posteos);
+            }
+        }
     }
 
 }

@@ -17,7 +17,7 @@ public class Mapper {
         return new PostDTO(
                 post.getUserId(),
                 post.getPostId(),
-                DateFormatter.revertLocalDate(post.getLocalDate().toString()),
+                post.getLocalDate(),
                 post.getProduct(),
                 post.getCategory(),
                 post.getPrice()

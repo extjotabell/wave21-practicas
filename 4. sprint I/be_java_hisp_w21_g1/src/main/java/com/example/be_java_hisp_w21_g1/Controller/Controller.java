@@ -61,7 +61,7 @@ public class Controller {
     // publicaciones más recientes primero).
     //Recibe UserIdDTO
     //Retorna PostBySeller
-    @GetMapping("/products/followed/{user_id}/list?order=date_asc")
+    @GetMapping("/products/followed/{user_id}/list")
     public ResponseEntity<PostBySellerDTO> latestsPosts(@PathVariable("user_id") int userId, @RequestParam(value = "order", required = false) String alf_order){
         PostBySellerDTO latestPosts = userService.listPostsBySeller(userId, alf_order);
         return new ResponseEntity<>(latestPosts, HttpStatus.OK);
@@ -76,6 +76,7 @@ public class Controller {
         return null;
     }
 
+    /*
     //US 0008: Ordenamiento alfabético ascendente y descendente
     @GetMapping("/users/{UserId}/followers/list?order=name_asc")
     public ResponseEntity<?> orderFollowersBy(@PathVariable int userId, @RequestParam(value = "order", required = true) String alf_order){
@@ -86,7 +87,6 @@ public class Controller {
     public ResponseEntity<?> orderFollowedBy(@PathVariable int userId, @RequestParam(value = "order", required = true) String alf_order){
         return null;
     }
-
     //US 0009: Ordenamiento por fecha ascendente y descendente
     /*
     * /products/followed/{userId}/list?order=date_asc

@@ -13,7 +13,7 @@ import java.time.LocalDate;
 public class PostDTO {
     private int user_id;
     private int post_id;
-    private String date;
+    private LocalDate date;
     private Product product;
     private int category;
     private double price;

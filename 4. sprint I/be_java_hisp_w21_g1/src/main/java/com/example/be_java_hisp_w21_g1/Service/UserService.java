@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -25,12 +26,15 @@ public class UserService implements IUserService {
     UserRepository userRepository;
 
     public void createPost(PostProductDTO postProductDTO) {
-        int postId = userRepository.findUserById(postProductDTO.getUser_id()).orElseThrow(()-> new BadRequestException("No se encontro el usuario con el ID" + postProductDTO.getUser_id()))
-                .getPosts().size();
+        Optional<User> user =userRepository.findUserById(postProductDTO.getUser_id());
+        if(user.isEmpty()){
+            throw new BadRequestException("No se encontro el usuario con el ID" + postProductDTO.getUser_id());
+        }
+        int postId = user.get().getPosts().size();
         Post post = Mapper.DTOtoPost(postProductDTO, postId);
-        userRepository.addPostToUser(post, postProductDTO.getUser_id());
-    }
 
+        userRepository.addPostToUser(post, user.get());
+    }
 
     public PostBySellerDTO listPostsBySeller(int userId, String alf_order) {
         LocalDate currentDate = LocalDate.now();
@@ -48,25 +52,28 @@ public class UserService implements IUserService {
                 ).map(Mapper::PostToPostDTO)
                 .collect(Collectors.toList());
 
-        PostBySellerDTO postBySellerDTO = Mapper.SellerPostToDTO(sellersPost, userId);
-        if(alf_order!=null){
-           // return orderList(postBySellerDTO, alf_order);
+        if(alf_order != null){
+            return orderList(Mapper.SellerPostToDTO(sellersPost, userId),alf_order);
         }
-        return postBySellerDTO;
+
+        return Mapper.SellerPostToDTO(sellersPost, userId);
     }
-/*
+
     private PostBySellerDTO orderList(PostBySellerDTO postBySellerDTO, String order) {
         if (order.equals("date_asc")) {
-            return 
-            postBySellerDTO.getPosts().stream()
-                    .sorted(Comparator.comparing(PostDTO::getDate));
+            return new PostBySellerDTO(
+                        postBySellerDTO.getUser_id(),
+                        postBySellerDTO.getPosts().stream()
+                        .sorted(Comparator.comparing(PostDTO::getDate)).collect(Collectors.toList()));
         } else if(order.equals("date_desc")){
-            return postBySellerDTO.getPosts().stream()
-                    .sorted((o1, o2) -> o2.getDate().compareTo(o1.getDate()));
+            return new PostBySellerDTO(postBySellerDTO.getUser_id(),
+                    postBySellerDTO.getPosts().stream()
+                            .sorted((o1, o2) -> o2.getDate().compareTo(o1.getDate()))
+                            .collect(Collectors.toList()));
         } else {
             throw new BadRequestException("El parametro order debe ser name_asc o name_desc");
         }
     }
 
-*/
+
 }
