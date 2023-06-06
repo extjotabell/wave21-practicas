@@ -36,12 +36,12 @@ public class UserService implements IUserService {
         User userToFollow = this.getUserByID(userIdToFollow);
 
         if(user.getFollowed().contains(userToFollow))
-            throw new UserAlreadyFollowedException("The user "+userToFollow.getName()+ " is already in you followed list!");
+            throw new UserAlreadyFollowedException("El usuario " + userToFollow.getName() + " ya es encuentra en tu lista de seguidos!");
 
         user.getFollowed().add(userToFollow);
         userToFollow.getFollowers().add(user);
 
-        return new MessageDTO(user.getName()+ " followed "+userToFollow.getName()+ " successfully!");
+        return new MessageDTO(user.getName() + " siguio a " + userToFollow.getName() + " correctamente!");
     }
 
     @Override
@@ -50,12 +50,12 @@ public class UserService implements IUserService {
         User userToUnfollow = this.getUserByID(userIdToUnfollow);
 
         if(!user.getFollowed().contains(userToUnfollow))
-            throw new UserNotFoundException("The user "+userToUnfollow.getName() +" has not been found in your followed list.");
+            throw new UserNotFoundException("El usuario " + userToUnfollow.getName() + " no se encuentra en tu lista de seguidos.");
 
         user.getFollowed().remove(userToUnfollow);
         userToUnfollow.getFollowers().remove(user);
 
-        return new MessageDTO(user.getName() + " unfollowed " + userToUnfollow.getName() + " successfully!");
+        return new MessageDTO(user.getName() + " dejo de seguir a " + userToUnfollow.getName() + " correctamente!");
     }
 
     public UserFollowedListDTO getFollowed(int userId, String order){
