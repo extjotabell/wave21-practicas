@@ -32,13 +32,7 @@ public class PostServiceImpl implements IPostService{
     public List<PostResponseDto> getAll() {
         return this._repository.getAll().stream().map(post -> modelMapper.map(post, PostResponseDto.class)).toList();
     }
-
-//    @Override
-//    public SellerFollowedListPostResponseDto sellerFollowedListPosts(int user_id) {
-//        List<PostResponseDto> posts = this._repository.getSellerFollowed(user_id).stream()
-//                .map(post -> modelMapper.map(post, PostResponseDto.class)).toList();
-//        return new SellerFollowedListPostResponseDto(user_id, posts);
-//    }
+    
 
 //    metodo sobrecargado para prueba
     @Override
