@@ -61,9 +61,9 @@ public class Controller {
     // publicaciones más recientes primero).
     //Recibe UserIdDTO
     //Retorna PostBySeller
-    @GetMapping("/products/followed/{user_id}/list")
-    public ResponseEntity<PostBySellerDTO> latestsPosts(@PathVariable("user_id") int userId){
-        PostBySellerDTO latestPosts = userService.listPostsBySeller(userId);
+    @GetMapping("/products/followed/{user_id}/list?order=date_asc")
+    public ResponseEntity<PostBySellerDTO> latestsPosts(@PathVariable("user_id") int userId, @RequestParam(value = "order", required = false) String alf_order){
+        PostBySellerDTO latestPosts = userService.listPostsBySeller(userId, alf_order);
         return new ResponseEntity<>(latestPosts, HttpStatus.OK);
     }
 
