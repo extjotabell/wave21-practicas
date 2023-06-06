@@ -1,11 +1,12 @@
 package com.example.be_java_hisp_w21_g02.repository;
 
+import com.example.be_java_hisp_w21_g02.model.Post;
+import com.example.be_java_hisp_w21_g02.model.Product;
 import com.example.be_java_hisp_w21_g02.model.User;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.time.LocalDate;
+import java.util.*;
 
 @Repository
 public class UserRepositoryImpl implements IUserRepository{
@@ -16,19 +17,38 @@ public class UserRepositoryImpl implements IUserRepository{
         // comentario para probar PRS
     }
 
+    public User getUser(int userIdToFollow){
+        return  dataUser.get(userIdToFollow);
+    }
 
+    public void persistFollows(User persistedUser, User persistedFollowUser){
+        dataUser.put(persistedUser.getId(), persistedUser);
+        dataUser.put(persistedFollowUser.getId(), persistedFollowUser);
+    }
 
     private void loadInitialData() {
-        User user1 = new User(1, "JavierRydel", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
-        User user2 = new User(2, "GastonBarro", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
-        User user3 = new User(3, "YaninaFaretta", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
-        User user4 = new User(4, "AdrianRodriguez", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
-        User user5 = new User(5, "JoseGonzaloez", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
-        User user6 = new User(6, "FlagusRodriguez", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
-        User user7 = new User(7, "LeandroSupanta", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
-        User user8 = new User(8, "GonzaloMarquez", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
-        User user9 = new User(9, "MartinMarquez", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
-        User user10 = new User(10, "GabrielaMonzon", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+
+        Post post = new Post();
+        post.setId(1);
+        post.setDate(LocalDate.now());
+        post.setCategory(1);
+        post.setPrice(100.0);
+        post.setProducts(new ArrayList<>());
+        post.setHasPromo(true);
+        post.setDiscount(10.0);
+
+
+        User user1 = new User(1, "JavierRydel", new HashSet<>(), new HashSet<>(), new ArrayList<>());
+        User user2 = new User(2, "GastonBarro", new HashSet<>(), new HashSet<>(), new ArrayList<>());
+        user2.getPosts().add(post);
+        User user3 = new User(3, "YaninaFaretta", new HashSet<>(), new HashSet<>(), new ArrayList<>());
+        User user4 = new User(4, "AdrianRodriguez", new HashSet<>(), new HashSet<>(), new ArrayList<>());
+        User user5 = new User(5, "JoseGonzaloez", new HashSet<>(), new HashSet<>(), new ArrayList<>());
+        User user6 = new User(6, "FlagusRodriguez", new HashSet<>(), new HashSet<>(), new ArrayList<>());
+        User user7 = new User(7, "LeandroSupanta", new HashSet<>(), new HashSet<>(), new ArrayList<>());
+        User user8 = new User(8, "GonzaloMarquez", new HashSet<>(), new HashSet<>(), new ArrayList<>());
+        User user9 = new User(9, "MartinMarquez", new HashSet<>(), new HashSet<>(), new ArrayList<>());
+        User user10 = new User(10, "GabrielaMonzon", new HashSet<>(), new HashSet<>(), new ArrayList<>());
 
         dataUser.put(user1.getId(), user1);
         dataUser.put(user2.getId(), user2);
