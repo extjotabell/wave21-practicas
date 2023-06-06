@@ -14,7 +14,6 @@ public interface IUserService {
     UserFollowersCountDto getFollowersCount(int userId);
     UserUnfollowResponseDto unfollowUser(int userId, int userIdToFollow);
 
-
     public FollowersResponseDto getFollowersById(int user_id);
 
 }

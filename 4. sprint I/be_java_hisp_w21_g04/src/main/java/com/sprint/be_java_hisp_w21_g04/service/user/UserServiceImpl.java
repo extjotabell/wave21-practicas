@@ -1,8 +1,6 @@
 package com.sprint.be_java_hisp_w21_g04.service.user;
 
-import com.sprint.be_java_hisp_w21_g04.dto.response.UserFollowResponseDto;
-import com.sprint.be_java_hisp_w21_g04.dto.response.UserFollowersCountDto;
-import com.sprint.be_java_hisp_w21_g04.dto.response.UserUnfollowResponseDto;
+import com.sprint.be_java_hisp_w21_g04.dto.response.*;
 import com.sprint.be_java_hisp_w21_g04.entity.User;
 import com.sprint.be_java_hisp_w21_g04.exception.UserNotFoundException;
 import com.sprint.be_java_hisp_w21_g04.repository.user.UserRepositoryImpl;
