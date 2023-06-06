@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserUnfollowResponseDto {
+public class ResponseDto {
     private String message;
-    private int statusCode;
 }
