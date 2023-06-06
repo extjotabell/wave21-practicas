@@ -4,6 +4,8 @@ import com.bootcamp.grupo3.socialmeli.dto.response.MessageDTO;
 import com.bootcamp.grupo3.socialmeli.dto.response.UserFollowedListDTO;
 import com.bootcamp.grupo3.socialmeli.dto.response.UserFollowerCountDTO;
 import com.bootcamp.grupo3.socialmeli.dto.response.UserFollowersListDTO;
+import com.bootcamp.grupo3.socialmeli.exception.UserAlreadyFollowedException;
+import com.bootcamp.grupo3.socialmeli.exception.UserEqualsException;
 import com.bootcamp.grupo3.socialmeli.exception.UserNotFoundException;
 import com.bootcamp.grupo3.socialmeli.model.User;
 import com.bootcamp.grupo3.socialmeli.repository.interfaces.IUserRepository;
@@ -31,24 +33,36 @@ public class UserService implements IUserService {
 
     @Override
     public MessageDTO follow(int userId, int userIdToFollow) {
+        if(userId==userIdToFollow)
+            throw new UserEqualsException("No te puedes seguir a tí mismo!");
+
         User user = this.getUserByID(userId);
         User userToFollow = this.getUserByID(userIdToFollow);
+
+        if(user.getFollowed().contains(userToFollow))
+            throw new UserAlreadyFollowedException("El usuario " + userToFollow.getName() + " ya es encuentra en tu lista de seguidos!");
 
         user.getFollowed().add(userToFollow);
         userToFollow.getFollowers().add(user);
 
-        return new MessageDTO(user.getName()+ " followed "+userToFollow.getName()+ " successfully!");
+        return new MessageDTO(user.getName() + " siguio a " + userToFollow.getName() + " correctamente!");
     }
 
     @Override
     public MessageDTO unfollow(int userId, int userIdToUnfollow) {
+        if(userId==userIdToUnfollow)
+            throw new UserEqualsException("No te puedes dejar de seguir a tí mismo!");
+
         User user = this.getUserByID(userId);
         User userToUnfollow = this.getUserByID(userIdToUnfollow);
+
+        if(!user.getFollowed().contains(userToUnfollow))
+            throw new UserNotFoundException("El usuario " + userToUnfollow.getName() + " no se encuentra en tu lista de seguidos.");
 
         user.getFollowed().remove(userToUnfollow);
         userToUnfollow.getFollowers().remove(user);
 
-        return new MessageDTO(user.getName() + " unfollowed " + userToUnfollow.getName() + " successfully!");
+        return new MessageDTO(user.getName() + " dejo de seguir a " + userToUnfollow.getName() + " correctamente!");
     }
 
     public UserFollowedListDTO getFollowed(int userId, String order){
@@ -82,7 +96,7 @@ public class UserService implements IUserService {
 
     @Override
     public List<Integer> getFollowedByUser(int id) {
-        return this.getUserByID(id).getFollowers()
+        return this.getUserByID(id).getFollowed()
                 .stream()
                 .map(User::getId)
                 .collect(Collectors.toList());
