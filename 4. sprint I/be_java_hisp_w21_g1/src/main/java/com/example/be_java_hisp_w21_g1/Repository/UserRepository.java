@@ -5,6 +5,7 @@ import com.example.be_java_hisp_w21_g1.Model.User;
 import com.example.be_java_hisp_w21_g1.Model.Post;
 import org.springframework.stereotype.Repository;
 
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -37,17 +38,30 @@ public class UserRepository implements IUserRepository{
         User user1 = new User(1, "Pepe", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
         User user2 = new User(2, "Pablo", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
         User user3 = new User(3, "Pedro", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        User user4 = new User(4, "USUARIO NUEVO", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+
 
         this.users.add(user1);
         this.users.add(user2);
         this.users.add(user3);
-    }
 
+        ArrayList<User> followers1 = new ArrayList<>();
+        followers1.add(user2);
+        followers1.add(user3);
+        user1.setFollowers(followers1);
+
+        ArrayList<User> followed1 = new ArrayList<>();
+        followed1.add(user2);
+        followed1.add(user4);
+        user1.setFollowed(followed1);
+
+    }
 
     @Override
     public Optional<User> findUserById(int id){
         return users.stream().filter(p-> p.getUser_id() == id).findFirst();
     }
+
     public void relateUserAndSeller(User user, User seller){
         user.getFollowed().add(seller);
         seller.getFollowers().add(user);

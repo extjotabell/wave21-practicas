@@ -21,4 +21,11 @@ public class User {
     public boolean isSeller(){
         return publication.size()>0;
     }
+
+    public int followersCount() {
+        return followers.size();
+    }
+
+
+
 }

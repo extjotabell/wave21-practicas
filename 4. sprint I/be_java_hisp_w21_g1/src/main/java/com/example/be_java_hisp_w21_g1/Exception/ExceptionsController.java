@@ -13,13 +13,13 @@ public class ExceptionsController extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(NotFoundException.class)
     protected ResponseEntity<Object> notFoundException(Exception e, WebRequest request){
-        String response = "Not found";
+        String response = e.getMessage();
         return handleExceptionInternal(e, response, new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }
 
     @ExceptionHandler(BadRequestException.class)
     protected ResponseEntity<Object> badRequestException(Exception e, WebRequest request){
-        String response = "Bad Request";
+        String response = e.getMessage();
         return handleExceptionInternal(e, response, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
 }
