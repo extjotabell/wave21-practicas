@@ -1,32 +1,16 @@
 package com.example.be_java_hisp_w21_g1.Service;
 
 import com.example.be_java_hisp_w21_g1.DTO.Request.FollowPostDTO;
-import com.example.be_java_hisp_w21_g1.Exception.BadRequestException;
-import com.example.be_java_hisp_w21_g1.Exception.NotFoundException;
-import com.example.be_java_hisp_w21_g1.Model.User;
-import com.example.be_java_hisp_w21_g1.DTO.Response.FollowUserDTO;
-import com.example.be_java_hisp_w21_g1.DTO.Response.FollowedListDTO;
-import com.example.be_java_hisp_w21_g1.DTO.Response.FollowerListDTO;
-import com.example.be_java_hisp_w21_g1.DTO.Response.FollowersCountDTO;
-import com.example.be_java_hisp_w21_g1.Exception.BadRequestException;
-import com.example.be_java_hisp_w21_g1.Exception.NotFoundException;
-import com.example.be_java_hisp_w21_g1.Model.User;
 import com.example.be_java_hisp_w21_g1.DTO.Request.PostProductDTO;
-import com.example.be_java_hisp_w21_g1.DTO.Request.UserIdDTO;
-import com.example.be_java_hisp_w21_g1.DTO.Response.FollowUserDTO;
-import com.example.be_java_hisp_w21_g1.DTO.Response.PostBySellerDTO;
-import com.example.be_java_hisp_w21_g1.DTO.Response.PostDTO;
+import com.example.be_java_hisp_w21_g1.DTO.Response.*;
 import com.example.be_java_hisp_w21_g1.Exception.BadRequestException;
+import com.example.be_java_hisp_w21_g1.Exception.NotFoundException;
 import com.example.be_java_hisp_w21_g1.Model.Post;
 import com.example.be_java_hisp_w21_g1.Model.User;
 import com.example.be_java_hisp_w21_g1.Repository.UserRepository;
 import com.example.be_java_hisp_w21_g1.Utils.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
 
 import java.time.LocalDate;
 import java.util.Comparator;

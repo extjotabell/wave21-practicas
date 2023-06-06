@@ -1,18 +1,11 @@
 package com.example.be_java_hisp_w21_g1.Repository;
 
-import com.example.be_java_hisp_w21_g1.Exception.BadRequestException;
-import com.example.be_java_hisp_w21_g1.Exception.NotFoundException;
+import com.example.be_java_hisp_w21_g1.Model.Post;
 import com.example.be_java_hisp_w21_g1.Model.Product;
 import com.example.be_java_hisp_w21_g1.Model.User;
-import com.example.be_java_hisp_w21_g1.Model.Post;
-import com.example.be_java_hisp_w21_g1.Utils.DateFormatter;
-import com.example.be_java_hisp_w21_g1.Utils.Mapper;
 import org.springframework.stereotype.Repository;
 
-import java.lang.reflect.Array;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -39,7 +32,10 @@ public class UserRepository implements IUserRepository {
         Post post3 = new Post(1, 3, LocalDate.of(2022, 04, 04), product3, 1, 190.00);
         Post post4 = new Post(1, 4, LocalDate.of(2023, 05, 29), product2, 1, 90.90);
 
-        List<Post> posts = Arrays.asList(post1, post2, post3, post4);
+        // asList crea un array de tamaño fijo y tratamos de agregar mas cosas
+        // List<Post> posts = Arrays.asList(post1, post2, post3, post4);
+        // Revisar excepciones
+        List<Post> posts = new ArrayList<>();
         posts.add(post1);
         posts.add(post2);
         posts.add(post3);
@@ -72,9 +68,10 @@ public class UserRepository implements IUserRepository {
         return users.stream().filter(p-> p.getUser_id() == id).findFirst();
     }
 
-    public void relateUserAndSeller(User user, User seller){
+    public void relateUserAndSeller(User user, User seller) {
         user.getFollowed().add(seller);
         seller.getFollowers().add(user);
+    }
 
     public void addPostToUser(Post post, User user) {
         for (User usuario : users) {

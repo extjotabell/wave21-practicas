@@ -2,26 +2,20 @@ package com.example.be_java_hisp_w21_g1.Controller;
 
 import com.example.be_java_hisp_w21_g1.DTO.Request.FollowPostDTO;
 import com.example.be_java_hisp_w21_g1.DTO.Request.PostProductDTO;
-import com.example.be_java_hisp_w21_g1.DTO.Request.UserIdDTO;
-import com.example.be_java_hisp_w21_g1.DTO.Response.PostBySellerDTO;
 import com.example.be_java_hisp_w21_g1.DTO.Response.FollowedListDTO;
 import com.example.be_java_hisp_w21_g1.DTO.Response.FollowerListDTO;
 import com.example.be_java_hisp_w21_g1.DTO.Response.FollowersCountDTO;
-import com.example.be_java_hisp_w21_g1.DTO.Response.PostDTO;
-import com.example.be_java_hisp_w21_g1.Service.IUserService;
+import com.example.be_java_hisp_w21_g1.DTO.Response.PostBySellerDTO;
 import com.example.be_java_hisp_w21_g1.Service.UserService;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
-
 @RestController
 public class Controller {
     @Autowired
-    IUserService userService;
+    UserService userService;
 
     //US 0001: Poder realizar la acción de “Follow” (seguir) a un determinado vendedor
     //Recibe FollowPostDTO
