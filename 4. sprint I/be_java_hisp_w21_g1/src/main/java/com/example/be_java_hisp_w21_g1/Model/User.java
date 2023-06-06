@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,18 +15,15 @@ import java.util.ArrayList;
 public class User {
     int user_id;
     String user_name;
-    ArrayList<User> followers;
-    ArrayList<User> followed;
-    ArrayList<Post> publication;
+    List<User> followers;
+    List<User> followed;
+    List<Post> posts;
 
     public boolean isSeller(){
-        return publication.size()>0;
+        return posts.size()>0;
     }
 
     public int followersCount() {
         return followers.size();
     }
-
-
-
 }

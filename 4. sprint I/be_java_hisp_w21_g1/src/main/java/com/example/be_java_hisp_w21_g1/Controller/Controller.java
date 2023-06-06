@@ -2,12 +2,15 @@ package com.example.be_java_hisp_w21_g1.Controller;
 
 import com.example.be_java_hisp_w21_g1.DTO.Request.FollowPostDTO;
 import com.example.be_java_hisp_w21_g1.DTO.Request.PostProductDTO;
+import com.example.be_java_hisp_w21_g1.DTO.Request.UserIdDTO;
+import com.example.be_java_hisp_w21_g1.DTO.Response.PostBySellerDTO;
 import com.example.be_java_hisp_w21_g1.DTO.Response.FollowedListDTO;
 import com.example.be_java_hisp_w21_g1.DTO.Response.FollowerListDTO;
 import com.example.be_java_hisp_w21_g1.DTO.Response.FollowersCountDTO;
 import com.example.be_java_hisp_w21_g1.DTO.Response.PostDTO;
 import com.example.be_java_hisp_w21_g1.Service.IUserService;
 import com.example.be_java_hisp_w21_g1.Service.UserService;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -62,8 +65,9 @@ public class Controller {
     //Recibe PostProductDTO
     //Retorna status code
     @PostMapping("/products/post")
-    public ResponseEntity<?> postProduct(@RequestBody PostProductDTO body) {
-        return null;
+    public ResponseEntity<?> createPost(@RequestBody PostProductDTO postProductDTO){
+        userService.createPost(postProductDTO);
+        return new ResponseEntity<>("Se ha creado el post!", HttpStatus.OK);
     }
 
     //US 0006: Obtener un listado de las publicaciones realizadas por los vendedores que un usuario
@@ -71,9 +75,10 @@ public class Controller {
     // publicaciones más recientes primero).
     //Recibe UserIdDTO
     //Retorna PostBySeller
-    @GetMapping("/products/followed/{userId}/list")
-    public ResponseEntity<?> latestsPosts(@PathVariable int userId) {
-        return null;
+    @GetMapping("/products/followed/{user_id}/list")
+    public ResponseEntity<PostBySellerDTO> latestsPosts(@PathVariable("user_id") int userId, @RequestParam(value = "order", required = false) String alf_order){
+        PostBySellerDTO latestPosts = userService.listPostsBySeller(userId, alf_order);
+        return new ResponseEntity<>(latestPosts, HttpStatus.OK);
     }
 
 
@@ -90,6 +95,21 @@ public class Controller {
             response = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         return response;
     }
+    /*
+    @GetMapping("/users/{UserID}/followed/list?order=name_asc")
+    public ResponseEntity<?> orderFollowedBy(@PathVariable int userId, @RequestParam(value = "order", required = true) String alf_order){
+        return null;
+    }
+    //US 0009: Ordenamiento por fecha ascendente y descendente
+    /*
+    * /products/followed/{userId}/list?order=date_asc
+    /products/followed/{userId}/list?order=date_desc
+
+    @GetMapping("products/followed/{userId}/list//")
+    public ResponseEntity<?> orderProductsBy(@PathVariable int userId, @RequestParam(value = "order", required = true) String dateOrder){
+        return null;
+    }
+   */
 
     //US 0010: Llevar a cabo la publicación de un nuevo producto en promoción
     @PostMapping("/products/promo-post")

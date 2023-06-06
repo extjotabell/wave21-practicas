@@ -15,7 +15,7 @@ public class PostDTO {
     private int post_id;
     private LocalDate date;
     private Product product;
-    private String category;
+    private int category;
     private double price;
 
 }

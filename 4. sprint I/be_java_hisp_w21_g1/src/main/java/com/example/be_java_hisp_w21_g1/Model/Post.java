@@ -5,7 +5,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Getter
 @Setter
@@ -13,9 +12,16 @@ import java.util.Date;
 @NoArgsConstructor
 
 public class Post {
+    private int userId;
     private int postId;
     private LocalDate localDate;
     private Product product;
-    private Double price;
     private int category;
+    private Double price;
+
+    public boolean isLatestPost(LocalDate currentDate){
+        return (getLocalDate().isAfter(currentDate.minusWeeks(2))
+                && getLocalDate().isBefore(currentDate.plusDays(1))
+        );
+    }
 }
