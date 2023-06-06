@@ -1,18 +1,18 @@
 # SocialMeli - Grupo 3
 
-Aplicaciòn tipo ecommerce que permite a los usuarios seguir a los vendedores.
+Aplicación tipo ecommerce que permite a los usuarios seguir a los vendedores.
 
-## Tecnologìas
+## Tecnologías
 
-Trello para la distribuciòn de tareas
+Trello para la distribución de tareas
 
 Git y github para hostear el proyecto. 
 
-Java Spring Boot para la creaciòn de la API.
+Java Spring Boot para la creación de la API.
 
 Postman para testear las diferentes firmas utilizadas.
 
-## Configuracion
+## Configuración
 
 ```bash
 git clone git@github.com:extjotabell/wave21-practicas.git
@@ -20,6 +20,12 @@ git clone git@github.com:extjotabell/wave21-practicas.git
 Rama be_java_hisp_w21_g03
 
 Se debe abrir el proyecto desde la carpeta 4.Sprint 1
+
+Si no compila correctamente, realizar los siguientes pasos:
+    Seleccionar Edit Configurations en el panel de Run/Debug Configurations
+    Seleccionar New configuration
+    En el text area de Run completar con "spring-boot:run"
+    Seleccionar Apply - OK.
 
 Se deja la coleccion de Postman en la carpeta resources del proyecto
 
