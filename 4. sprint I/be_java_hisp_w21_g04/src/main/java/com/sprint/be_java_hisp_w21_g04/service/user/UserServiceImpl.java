@@ -3,6 +3,7 @@ package com.sprint.be_java_hisp_w21_g04.service.user;
 import com.sprint.be_java_hisp_w21_g04.dto.response.*;
 import com.sprint.be_java_hisp_w21_g04.entity.User;
 import com.sprint.be_java_hisp_w21_g04.exception.UserAlreadyFollowedException;
+import com.sprint.be_java_hisp_w21_g04.exception.UserFollowNotAllowedException;
 import com.sprint.be_java_hisp_w21_g04.exception.UserNotFollowedException;
 import com.sprint.be_java_hisp_w21_g04.exception.UserNotFoundException;
 import com.sprint.be_java_hisp_w21_g04.repository.user.UserRepositoryImpl;
@@ -44,6 +45,11 @@ public class UserServiceImpl implements IUserService {
         // Validar que el usuario no exista en la lista
         if (user.getFollowed().contains(userToFollow.getUserId()) || userToFollow.getFollowers().contains(user.getUserId())){
             throw new UserAlreadyFollowedException("Ya se están siguiendo.");
+        }
+
+        // Validar que el usuario a seguir sea distinto al usuario actual
+        if (user.getUserId() == userToFollow.getUserId()){
+            throw new UserFollowNotAllowedException("No puedes seguirte a ti mismo.");
         }
 
         // Agregar a la lista de seguidos

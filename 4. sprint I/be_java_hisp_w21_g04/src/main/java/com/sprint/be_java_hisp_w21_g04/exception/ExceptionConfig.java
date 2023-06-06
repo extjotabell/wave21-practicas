@@ -41,4 +41,10 @@ public class ExceptionConfig {
         ErrorDto error = new ErrorDto(e.getMessage(), 400);
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(UserFollowNotAllowedException.class)
+    public ResponseEntity<?> userFollowNotAllowedException(Exception e){
+        ErrorDto error = new ErrorDto(e.getMessage(), 400);
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
 }
