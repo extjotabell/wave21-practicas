@@ -15,15 +15,16 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "{{{{baseUrl}}}}/users/2/follow/30",
+							"raw": "localhost:8080/users/2/follow/3",
 							"host": [
-								"{{{{baseUrl}}}}"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
 								"users",
 								"2",
 								"follow",
-								"30"
+								"3"
 							]
 						}
 					},
@@ -35,10 +36,11 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "{{{{baseUrl}}}}/users/2/follow/3",
+							"raw": "localhost:8080/users/2/follow/3",
 							"host": [
-								"{{{{baseUrl}}}}"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
 								"users",
 								"2",
@@ -60,10 +62,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{{{baseUrl}}}}/users/3/followers/count",
+							"raw": "localhost:8080/users/3/followers/count",
 							"host": [
-								"{{{{baseUrl}}}}"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
 								"users",
 								"3",
@@ -85,10 +88,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{{{baseUrl}}}}/users/2/followers/list",
+							"raw": "localhost:8080/users/2/followers/list",
 							"host": [
-								"{{{{baseUrl}}}}"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
 								"users",
 								"2",
@@ -110,10 +114,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{{{baseUrl}}}}/users/2/followed/list",
+							"raw": "localhost:8080/users/2/followed/list",
 							"host": [
-								"{{{{baseUrl}}}}"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
 								"users",
 								"2",
@@ -144,10 +149,11 @@
 							}
 						},
 						"url": {
-							"raw": "{{{{baseUrl}}}}/products/post",
+							"raw": "localhost:8080/products/post",
 							"host": [
-								"{{{{baseUrl}}}}"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
 								"products",
 								"post"
@@ -171,10 +177,11 @@
 							}
 						},
 						"url": {
-							"raw": "{{{{baseUrl}}}}/products/post",
+							"raw": "localhost:8080/products/post",
 							"host": [
-								"{{{{baseUrl}}}}"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
 								"products",
 								"post"
@@ -194,10 +201,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{{{baseUrl}}}}/products/followed/3/list",
+							"raw": "localhost:8080/products/followed/3/list",
 							"host": [
-								"{{{{baseUrl}}}}"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
 								"products",
 								"followed",
@@ -219,10 +227,11 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "{{{{baseUrl}}}}/users/1/unfollow/3",
+							"raw": "localhost:8080/users/1/unfollow/3",
 							"host": [
-								"{{{{baseUrl}}}}"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
 								"users",
 								"1",
@@ -239,10 +248,11 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "{{{{baseUrl}}}}/users/1/unfollow/3",
+							"raw": "localhost:8080/users/1/unfollow/3",
 							"host": [
-								"{{{{baseUrl}}}}"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
 								"users",
 								"1",
@@ -264,10 +274,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{{{baseUrl}}}}/users/1/followers/list?order=name_asc",
+							"raw": "localhost:8080/users/1/followers/list?order=name_asc",
 							"host": [
-								"{{{{baseUrl}}}}"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
 								"users",
 								"1",
@@ -290,10 +301,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{{{baseUrl}}}}/users/1/followers/list?order=name_asc",
+							"raw": "localhost:8080/users/1/followers/list?order=name_asc",
 							"host": [
-								"{{{{baseUrl}}}}"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
 								"users",
 								"1",
@@ -316,10 +328,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{{{baseUrl}}}}/users/1/followed/list?order=name_asc",
+							"raw": "localhost:8080/users/1/followed/list?order=name_asc",
 							"host": [
-								"{{{{baseUrl}}}}"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
 								"users",
 								"1",
@@ -342,10 +355,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{{{baseUrl}}}}/users/1/followed/list?order=name_desc",
+							"raw": "localhost:8080/users/1/followed/list?order=name_desc",
 							"host": [
-								"{{{{baseUrl}}}}"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
 								"users",
 								"1",
@@ -373,10 +387,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{{{baseUrl}}}}/products/followed/1/list?order=date_asc",
+							"raw": "localhost:8080/products/followed/1/list?order=date_asc",
 							"host": [
-								"{{{{baseUrl}}}}"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
 								"products",
 								"followed",
@@ -399,10 +414,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{{{baseUrl}}}}/products/followed/1/list?order=date_desc",
+							"raw": "localhost:8080/products/followed/1/list?order=date_desc",
 							"host": [
-								"{{{{baseUrl}}}}"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
 								"products",
 								"followed",
@@ -444,9 +460,10 @@
 	],
 	"variable": [
 		{
-			"key": "{{baseUrl}}",
+			"key": "baseUrl",
 			"value": "localhost:8080",
-			"type": "string"
+			"type": "string",
+			"disabled": true
 		}
 	]
 }
