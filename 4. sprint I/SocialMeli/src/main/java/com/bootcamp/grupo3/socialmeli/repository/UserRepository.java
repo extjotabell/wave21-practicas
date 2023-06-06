@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class UserRepository implements IUserRepository {
@@ -20,5 +21,10 @@ public class UserRepository implements IUserRepository {
         users.add(User.builder().id(6).name("nauhel").build());
         users.add(User.builder().id(7).name("Favrisio").build());
         users.add(User.builder().id(8).name("Mersh").build());
+    }
+
+    @Override
+    public boolean userExists(int id) {
+        return users.stream().anyMatch(u -> u.getId() == id);
     }
 }

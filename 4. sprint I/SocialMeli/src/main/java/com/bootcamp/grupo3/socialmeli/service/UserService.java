@@ -14,4 +14,9 @@ public class UserService implements IUserService {
         this.userRepository = userRepository;
         this.modelMapper = modelMapper;
     }
+
+    @Override
+    public boolean userExists(int id) {
+        return userRepository.userExists(id);
+    }
 }
