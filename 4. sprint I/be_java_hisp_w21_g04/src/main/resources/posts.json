@@ -7,7 +7,7 @@
       "product_name": "Camiseta",
       "type": "Ropa",
       "brand": "Adidas",
-      "code": "AD-001",
+      "color": "Rojo con blanco",
       "notes": "Camiseta de algodón con estampado"
     },
     "category": 1,
@@ -23,7 +23,7 @@
       "product_name": "Pantalón vaquero",
       "type": "Ropa",
       "brand": "Levi's",
-      "code": "LV-002",
+      "color": "Azul",
       "notes": "Pantalón vaquero ajustado para hombre"
     },
     "category": 2,
@@ -39,7 +39,7 @@
       "product_name": "Vestido",
       "type": "Ropa",
       "brand": "Zara",
-      "code": "ZR-003",
+      "color": "Rosa",
       "notes": "Vestido de verano con estampado floral"
     },
     "category": 3,
@@ -55,7 +55,7 @@
       "product_name": "Zapatos de deporte",
       "type": "Calzado",
       "brand": "Nike",
-      "code": "NK-004",
+      "color": "Negro",
       "notes": "Zapatos deportivos para correr"
     },
     "category": 4,
@@ -71,7 +71,7 @@
       "product_name": "Abrigo",
       "type": "Ropa",
       "brand": "H&M",
-      "code": "HM-005",
+      "color": "Beige",
       "notes": "Abrigo largo para mujer"
     },
     "category": 5,
@@ -87,7 +87,7 @@
       "product_name": "Sombrero",
       "type": "Accesorio",
       "brand": "Gucci",
-      "code": "GC-006",
+      "color": "Negro",
       "notes": "Sombrero de paja con lazo"
     },
     "category": 6,
