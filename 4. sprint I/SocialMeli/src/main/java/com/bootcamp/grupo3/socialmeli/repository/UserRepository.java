@@ -5,7 +5,9 @@ import com.bootcamp.grupo3.socialmeli.repository.interfaces.IUserRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class UserRepository implements IUserRepository {
@@ -21,4 +23,13 @@ public class UserRepository implements IUserRepository {
         users.add(User.builder().id(7).name("Favrisio").build());
         users.add(User.builder().id(8).name("Mersh").build());
     }
+
+  public List<User> getFollowedByUser(final int userId) {
+    return users
+      .stream()
+      .filter(p -> p.getId() == userId)
+      .map(User::getFollowed)
+      .findFirst()
+      .orElseThrow(() -> new RuntimeException("No se encontro el usuario"));
+  }
 }
