@@ -4,14 +4,13 @@ import com.bootcamp.grupo3.socialmeli.model.Post;
 import com.bootcamp.grupo3.socialmeli.repository.interfaces.IPostRepository;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public class PostRepository implements IPostRepository {
     private final List<Post> posts = new ArrayList<>();
-
     private int nextId;
 
     public PostRepository() {
@@ -25,7 +24,16 @@ public class PostRepository implements IPostRepository {
         return body.getId();
     }
 
-    private int getNextId(){
+    private int getNextId() {
         return ++nextId;
+    }
+
+    public List<Post> getPostsByUserInTwoWeeks(int userId) {
+        LocalDate pastTwoWeek = LocalDate.now().minusWeeks(2);
+
+        return posts.stream()
+          .filter(p -> p.getUserId() == userId)
+          .filter(post -> post.getDate().isAfter(pastTwoWeek))
+          .toList();
     }
 }

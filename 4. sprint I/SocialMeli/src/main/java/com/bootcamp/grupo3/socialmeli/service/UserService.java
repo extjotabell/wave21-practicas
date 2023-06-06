@@ -1,10 +1,10 @@
 package com.bootcamp.grupo3.socialmeli.service;
 
 import com.bootcamp.grupo3.socialmeli.dto.response.MessageDTO;
-import com.bootcamp.grupo3.socialmeli.exception.UserNotFoundException;
 import com.bootcamp.grupo3.socialmeli.dto.response.UserFollowedListDTO;
-import com.bootcamp.grupo3.socialmeli.dto.response.UserFollowersListDTO;
 import com.bootcamp.grupo3.socialmeli.dto.response.UserFollowerCountDTO;
+import com.bootcamp.grupo3.socialmeli.dto.response.UserFollowersListDTO;
+import com.bootcamp.grupo3.socialmeli.exception.UserNotFoundException;
 import com.bootcamp.grupo3.socialmeli.model.User;
 import com.bootcamp.grupo3.socialmeli.repository.interfaces.IUserRepository;
 import com.bootcamp.grupo3.socialmeli.service.interfaces.IUserService;
@@ -12,7 +12,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService implements IUserService {
@@ -74,6 +76,14 @@ public class UserService implements IUserService {
     @Override
     public boolean userExists(int id) {
         return userRepository.userExists(id);
+    }
+
+    @Override
+    public List<Integer> getFollowedByUser(int id) {
+        return this.getUserByID(id).getFollowers()
+                .stream()
+                .map(User::getId)
+                .collect(Collectors.toList());
     }
 
     @Override

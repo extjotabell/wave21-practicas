@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter @Setter
@@ -16,5 +17,5 @@ import java.util.List;
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class UserPostListDTO {
     private int userId;
-    private List<PostDTO> posts;
+    private List<PostDTO> posts = new ArrayList<>();
 }

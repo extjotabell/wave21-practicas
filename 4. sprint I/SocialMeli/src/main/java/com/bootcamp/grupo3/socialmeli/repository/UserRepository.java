@@ -5,6 +5,7 @@ import com.bootcamp.grupo3.socialmeli.repository.interfaces.IUserRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,7 +16,7 @@ public class UserRepository implements IUserRepository {
     public UserRepository() {
         User mtato = new User(1, "mtato", new ArrayList<>(), new ArrayList<>());
         User nauhel = new User(2, "nauhel", new ArrayList<>(), new ArrayList<>());
-        User juansito = new User(3, "juancito", List.of(mtato, nauhel), new ArrayList<>());
+        User juansito = new User(3, "juancito", List.of(mtato, nauhel), List.of(mtato, nauhel));
         users.add(mtato);
         users.add(nauhel);
         users.add(juansito);
