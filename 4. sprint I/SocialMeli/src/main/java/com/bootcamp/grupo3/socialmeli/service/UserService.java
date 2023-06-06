@@ -33,6 +33,9 @@ public class UserService implements IUserService {
 
     @Override
     public MessageDTO follow(int userId, int userIdToFollow) {
+        if(userId==userIdToFollow)
+            throw new UserEqualsException("No te puedes seguir a tí mismo!");
+
         User user = this.getUserByID(userId);
         User userToFollow = this.getUserByID(userIdToFollow);
 
@@ -47,11 +50,11 @@ public class UserService implements IUserService {
 
     @Override
     public MessageDTO unfollow(int userId, int userIdToUnfollow) {
+        if(userId==userIdToUnfollow)
+            throw new UserEqualsException("No te puedes dejar de seguir a tí mismo!");
+
         User user = this.getUserByID(userId);
         User userToUnfollow = this.getUserByID(userIdToUnfollow);
-
-        if(user.equals(userToUnfollow))
-            throw new UserEqualsException("No te puedes seguir a tí mismo!");
 
         if(!user.getFollowed().contains(userToUnfollow))
             throw new UserNotFoundException("El usuario " + userToUnfollow.getName() + " no se encuentra en tu lista de seguidos.");
