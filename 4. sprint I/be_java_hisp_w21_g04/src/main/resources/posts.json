@@ -161,6 +161,22 @@
     "price": 150.0,
     "has_promo": false,
     "discount": 0.0
+  },
+  {
+    "user_id": 1,
+    "date": "10-05-2023",
+    "product": {
+      "product_id": 10,
+      "product_name": "gafas de sol",
+      "type": "Accesorio",
+      "brand": "Ray-Ban",
+      "color": "Dorado",
+      "notes": "Gafas de sol estilo aviador con lentes polarizadas"
+    },
+    "category": 6,
+    "price": 150.0,
+    "has_promo": false,
+    "discount": 0.0
   }
 ]
 
