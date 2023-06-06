@@ -89,7 +89,7 @@ public class UserService implements IUserService {
 
     @Override
     public List<Integer> getFollowedByUser(int id) {
-        return this.getUserByID(id).getFollowers()
+        return this.getUserByID(id).getFollowed()
                 .stream()
                 .map(User::getId)
                 .collect(Collectors.toList());
