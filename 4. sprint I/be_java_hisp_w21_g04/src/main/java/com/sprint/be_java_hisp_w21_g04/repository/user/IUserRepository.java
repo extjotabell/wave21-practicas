@@ -7,6 +7,7 @@ import java.util.List;
 public interface IUserRepository {
 
     List<Integer> getFollowersById(int user_id);
+    List<Integer> getFollowedById(int user_id);
     User getById(int user_id);
 
     List<User> getAll();
