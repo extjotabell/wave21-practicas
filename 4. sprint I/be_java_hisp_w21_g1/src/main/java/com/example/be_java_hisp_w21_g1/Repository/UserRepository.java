@@ -32,9 +32,9 @@ try {
     Product product2 = new Product(2, "Producto2", "Type2", "Brand2", "Color2", "Notes2");
     Product product3 = new Product(3, "Producto3", "Type3", "Brand3", "Color3", "Notes3");
 
-    Post post1 = new Post(1, DateFormatter.stringToLocalDate("04-06-2023"), product1, 1, 25.50);
-    Post post2 = new Post(2, DateFormatter.stringToLocalDate("28-05-2023"), product2, 1, 15.90);
-    Post post3 = new Post(3, DateFormatter.stringToLocalDate("10-06-2022"), product3, 1, 190.00);
+    Post post1 = new Post(1,1, DateFormatter.stringToLocalDate("04-06-2023"), product1, 1, 25.50);
+    Post post2 = new Post(1,2, DateFormatter.stringToLocalDate("28-05-2023"), product2, 1, 15.90);
+    Post post3 = new Post(1,3, DateFormatter.stringToLocalDate("10-06-2022"), product3, 1, 190.00);
 
     List<Post> posts = Arrays.asList(post1, post2, post3);
 

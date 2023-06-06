@@ -14,6 +14,7 @@ import java.util.Date;
 @NoArgsConstructor
 
 public class Post {
+    private int userId;
     private int postId;
     private LocalDate localDate;
     private Product product;
