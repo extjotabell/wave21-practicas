@@ -7,6 +7,8 @@ import com.example.be_java_hisp_w21_g1.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UserService implements IUserService{
 
@@ -16,17 +18,15 @@ public class UserService implements IUserService{
     @Override
     public FollowersCountDTO getFollowersCount(int idUser) {
 
-        User foundUser = userRepository.findUserById(idUser);
-        //inicializado en -1 para marcar un numero cuando no existe el usuario
-        int followersCount = -1;
-        if(foundUser != null){
-            followersCount = foundUser.followersCount();
-            return new FollowersCountDTO(idUser, foundUser.getUser_name(),followersCount);
-        }
-        else {
+        Optional<User> foundUser = userRepository.findUserById(idUser);
+
+        if(foundUser.isEmpty()){
             throw new NotFoundException("No se encontro el usuario con el ID" + idUser);
         }
 
+        User user = foundUser.get();
+        int followersCount = user.followersCount();
+        return new FollowersCountDTO(idUser, user.getUser_name(),followersCount);
       
     }
 
