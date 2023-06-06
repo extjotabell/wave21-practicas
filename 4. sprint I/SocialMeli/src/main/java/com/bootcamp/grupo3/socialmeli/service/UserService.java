@@ -32,9 +32,10 @@ public class UserService implements IUserService {
     @Override
     public MessageDTO follow(int userId, int userIdToFollow) {
         User user = this.getUserByID(userId);
-        User userToFollow= this.getUserByID(userIdToFollow);
+        User userToFollow = this.getUserByID(userIdToFollow);
 
         user.getFollowed().add(userToFollow);
+        userToFollow.getFollowers().add(user);
 
         return new MessageDTO(user.getName()+ " followed "+userToFollow.getName()+ " successfully!");
     }
@@ -45,6 +46,7 @@ public class UserService implements IUserService {
         User userToUnfollow = this.getUserByID(userIdToUnfollow);
 
         user.getFollowed().remove(userToUnfollow);
+        userToUnfollow.getFollowers().remove(user);
 
         return new MessageDTO(user.getName() + " unfollowed " + userToUnfollow.getName() + " successfully!");
     }
