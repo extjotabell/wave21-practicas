@@ -7,6 +7,7 @@ public interface IUserService {
 
 
     FollowersResponseDto getFollowersById(int user_id);
+    FollowersResponseDto getFollowersByIdSorted(int user_id, String order);
     FollowedResponseDto getFollowedById(int user_id);
 
 }
