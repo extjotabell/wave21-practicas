@@ -26,10 +26,16 @@ public class PostController {
         this._service.post(post);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+//
+//    @GetMapping("/followed/{userId}/list")
+//    public ResponseEntity<SellerFollowedListPostResponseDto> sellerFollowedListPosts(@PathVariable int userId){
+//        return new ResponseEntity<>(this._service.sellerFollowedListPosts(userId), HttpStatus.OK);
+//    }
 
+//    Se sobrecarga el metodo con los query params con (@RequestParam String order)
     @GetMapping("/followed/{userId}/list")
-    public ResponseEntity<SellerFollowedListPostResponseDto> sellerFollowedListPosts(@PathVariable int userId){
-        return new ResponseEntity<>(this._service.sellerFollowedListPosts(userId), HttpStatus.OK);
+    public ResponseEntity<SellerFollowedListPostResponseDto> sellerFollowedListPosts(@PathVariable int userId, @RequestParam(required = false, value = "order", defaultValue = "date_asc") String order){
+        return new ResponseEntity<>(this._service.sellerFollowedListPosts(userId, order), HttpStatus.OK);
     }
 
     @GetMapping("/getAll")
