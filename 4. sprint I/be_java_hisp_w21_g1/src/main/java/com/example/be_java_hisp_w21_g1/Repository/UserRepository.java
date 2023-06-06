@@ -16,7 +16,7 @@ public class UserRepository implements IUserRepository{
 
     private List<User> users = new ArrayList<>();
 
-    public void IUserRepository(){
+    public UserRepository() {
         init();
     }
 
@@ -36,6 +36,12 @@ public class UserRepository implements IUserRepository{
         User user1 = new User(1, "Pepe", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
         User user2 = new User(2, "Pablo", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
         User user3 = new User(3, "Pedro", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+
+        this.users.add(user1);
+        this.users.add(user2);
+        this.users.add(user3);
+
+
     }
 
     @Override
