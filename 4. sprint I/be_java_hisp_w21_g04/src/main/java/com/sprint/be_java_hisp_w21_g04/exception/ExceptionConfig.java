@@ -1,6 +1,7 @@
 package com.sprint.be_java_hisp_w21_g04.exception;
 
 import com.sprint.be_java_hisp_w21_g04.dto.response.ErrorDto;
+import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -44,6 +45,12 @@ public class ExceptionConfig {
 
     @ExceptionHandler(UserFollowNotAllowedException.class)
     public ResponseEntity<?> userFollowNotAllowedException(Exception e){
+        ErrorDto error = new ErrorDto(e.getMessage(), 400);
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(UserUnfollowNotAllowedException.class)
+    public ResponseEntity<?> userUnfollowNotAllowedException(Exception e){
         ErrorDto error = new ErrorDto(e.getMessage(), 400);
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }

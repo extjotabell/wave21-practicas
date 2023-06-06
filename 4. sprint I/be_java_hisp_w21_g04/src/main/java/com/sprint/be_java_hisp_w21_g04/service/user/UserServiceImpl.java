@@ -2,10 +2,7 @@ package com.sprint.be_java_hisp_w21_g04.service.user;
 
 import com.sprint.be_java_hisp_w21_g04.dto.response.*;
 import com.sprint.be_java_hisp_w21_g04.entity.User;
-import com.sprint.be_java_hisp_w21_g04.exception.UserAlreadyFollowedException;
-import com.sprint.be_java_hisp_w21_g04.exception.UserFollowNotAllowedException;
-import com.sprint.be_java_hisp_w21_g04.exception.UserNotFollowedException;
-import com.sprint.be_java_hisp_w21_g04.exception.UserNotFoundException;
+import com.sprint.be_java_hisp_w21_g04.exception.*;
 import com.sprint.be_java_hisp_w21_g04.repository.user.UserRepositoryImpl;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -91,6 +88,11 @@ public class UserServiceImpl implements IUserService {
         User userToUnfollow = userRepository.findUserById(userIdToUnfollow);
         if (user == null || userToUnfollow == null){
             throw new UserNotFoundException("Usuario no encontrado");
+        }
+
+        // Validar que el usuario no se este intentado de unfollow a si mismo
+        if (user.getUserId() == userToUnfollow.getUserId()){
+            throw new UserUnfollowNotAllowedException("No puedes dejar de seguirte a ti mismo.");
         }
 
         // Validar que el usuario exista en la lista
