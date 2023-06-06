@@ -38,6 +38,7 @@ public class UserRepository implements IUserRepository{
         User user1 = new User(1, "Pepe", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
         User user2 = new User(2, "Pablo", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
         User user3 = new User(3, "Pedro", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        User user4 = new User(4, "USUARIO NUEVO", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
 
 
         this.users.add(user1);
@@ -49,8 +50,12 @@ public class UserRepository implements IUserRepository{
         followers1.add(user3);
         user1.setFollowers(followers1);
 
+        ArrayList<User> followed1 = new ArrayList<>();
+        followed1.add(user2);
+        followed1.add(user4);
+        user1.setFollowed(followed1);
+        
     }
-
     @Override
     public Optional<User> findUserById(int id){
         return users.stream().filter(u -> u.getUser_id() == id).findFirst();
