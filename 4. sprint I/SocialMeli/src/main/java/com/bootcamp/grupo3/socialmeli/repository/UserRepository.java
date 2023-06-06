@@ -27,4 +27,9 @@ public class UserRepository implements IUserRepository {
     public boolean userExists(int id) {
         return users.stream().anyMatch(u -> u.getId() == id);
     }
+
+    @Override
+    public Optional<User> getUser(int id) {
+        return users.stream().filter(u -> u.getId() == id).findFirst();
+    }
 }
