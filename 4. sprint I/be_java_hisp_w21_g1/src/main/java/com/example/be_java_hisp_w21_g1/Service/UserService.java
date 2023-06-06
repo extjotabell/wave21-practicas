@@ -36,9 +36,11 @@ public class UserService implements IUserService{
     @Override
     public FollowerListDTO getFollowersList(int idUser) {
         Optional<User> foundUser = userRepository.findUserById(idUser);
+
         if (foundUser.isEmpty()) {
             throw new NotFoundException("No se encontro el usuario con el ID" + idUser);
         }
+
         User user = foundUser.get();
         List<FollowUserDTO> followedList = user.getFollowers().stream()
                 .map(u -> new FollowUserDTO(u.getUser_id(), u.getUser_name()))
@@ -49,9 +51,11 @@ public class UserService implements IUserService{
     @Override
     public FollowedListDTO getFollowedList(int idUser) {
         Optional<User> foundUser = userRepository.findUserById(idUser);
+
         if (foundUser.isEmpty()) {
             throw new NotFoundException("No se encontro el usuario con el ID" + idUser);
         }
+
         User user = foundUser.get();
         List<FollowUserDTO> followedList = user.getFollowed().stream()
                 .map(u -> new FollowUserDTO(u.getUser_id(), u.getUser_name()))
