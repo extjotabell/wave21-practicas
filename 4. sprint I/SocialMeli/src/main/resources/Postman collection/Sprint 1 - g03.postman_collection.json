@@ -1,9 +1,8 @@
 {
 	"info": {
-		"_postman_id": "6732b474-97fb-42a2-8428-b73fd61f0d9b",
+		"_postman_id": "932b4dde-9b61-4f5c-ba33-bbaa0592b76b",
 		"name": "Sprint 1 - g03",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "27456240"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
@@ -50,6 +49,48 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Error - Seguir a un usuario que no existe",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/users/2/follow/30",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"2",
+								"follow",
+								"30"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Error - Seguirte a ti mismo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/users/2/follow/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"2",
+								"follow",
+								"2"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -76,6 +117,27 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Error - Cantidad de seguidores de un usuario que no existe",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/users/30/followers/count",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"30",
+								"followers",
+								"count"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -83,19 +145,40 @@
 			"name": "US3 - Quien me sigue",
 			"item": [
 				{
-					"name": "Quien sigue al usuario de id 2",
+					"name": "Quien sigue al usuario de id 3",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/users/2/followers/list",
+							"raw": "localhost:8080/users/3/followers/list",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"users",
-								"2",
+								"3",
+								"followers",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Error - Seguidores de un usuario que no existe",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/users/30/followers/list",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"30",
 								"followers",
 								"list"
 							]
@@ -128,6 +211,27 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Error - Seguidos de un usuario que no existe",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/users/30/followed/list",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"30",
+								"followed",
+								"list"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -135,13 +239,13 @@
 			"name": "US5 - Dar de alta una nueva publicación",
 			"item": [
 				{
-					"name": "Agregar un POST",
+					"name": "Agregar un Post",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"user_id\": 3,\n    \"date\": \"22-05-2023\",\n    \"product\":{\n        \"product_id\": 123,\n        \"product_name\": \"Silla Gamer\",\n        \"type\": \"Silla\",\n        \"brand\": \"Asus\",\n        \"color\": \"Negro y Verde\",\n        \"notes\": \"Silla en impecables condiciones, poco uso\"\n    },\n    \"category\": 100,\n    \"price\": 200.50\n}",
+							"raw": "{\n    \"user_id\": 3,\n    \"date\": \"05-06-2023\",\n    \"product\":{\n        \"product_id\": 123,\n        \"product_name\": \"Silla Gamer\",\n        \"type\": \"Silla\",\n        \"brand\": \"Asus\",\n        \"color\": \"Negro y Verde\",\n        \"notes\": \"Silla en impecables condiciones, poco uso\"\n    },\n    \"category\": 100,\n    \"price\": 250.50\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -215,6 +319,27 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Error - Usuario no existe",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/products/followed/30/list",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"followed",
+								"30",
+								"list"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -222,19 +347,19 @@
 			"name": "US7 - Unfollow",
 			"item": [
 				{
-					"name": "Usuario de id 1 deja de seguir a usuario de id 3",
+					"name": "Usuario de id 2 deja de seguir a usuario de id 3",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/users/1/unfollow/3",
+							"raw": "localhost:8080/users/2/unfollow/3",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"users",
-								"1",
+								"2",
 								"unfollow",
 								"3"
 							]
@@ -262,6 +387,27 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Error - Dejar de seguirte",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/users/1/unfollow/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"1",
+								"unfollow",
+								"1"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -274,14 +420,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/users/1/followers/list?order=name_asc",
+							"raw": "localhost:8080/users/3/followers/list?order=name_asc",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"users",
-								"1",
+								"3",
 								"followers",
 								"list"
 							],
@@ -296,26 +442,26 @@
 					"response": []
 				},
 				{
-					"name": "Seguidores del usuario de id 1 por nombre ascendente Copy",
+					"name": "Seguidores del usuario de id 1 por nombre descendente",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/users/1/followers/list?order=name_asc",
+							"raw": "localhost:8080/users/3/followers/list?order=name_desc",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"users",
-								"1",
+								"3",
 								"followers",
 								"list"
 							],
 							"query": [
 								{
 									"key": "order",
-									"value": "name_asc"
+									"value": "name_desc"
 								}
 							]
 						}
@@ -429,6 +575,60 @@
 								{
 									"key": "order",
 									"value": "date_desc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Productos publicados por los usuarios seguidos por el usuario de id 1 con los precios en orden ascendente",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/products/followed/1/list?order=price_asc",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"followed",
+								"1",
+								"list"
+							],
+							"query": [
+								{
+									"key": "order",
+									"value": "price_asc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Productos publicados por los usuarios seguidos por el usuario de id 1 con los precios en orden descendente",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/products/followed/1/list?order=price_desc",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"followed",
+								"1",
+								"list"
+							],
+							"query": [
+								{
+									"key": "order",
+									"value": "price_desc"
 								}
 							]
 						}
