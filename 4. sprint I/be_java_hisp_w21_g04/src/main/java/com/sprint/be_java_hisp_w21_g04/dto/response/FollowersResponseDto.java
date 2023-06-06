@@ -11,8 +11,8 @@ import java.util.List;
 @ToString
 public class FollowersResponseDto {
 
-    private int user_id;
-    private String user_name;
+    private int userId;
+    private String userName;
     private List<UserResponseDto> followers;
 
 }

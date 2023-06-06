@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.sprint.be_java_hisp_w21_g04.entity.Post;
-import com.sprint.be_java_hisp_w21_g04.entity.User;
 import com.sprint.be_java_hisp_w21_g04.repository.user.IUserRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.ResourceUtils;
@@ -16,8 +15,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Repository
 public class PostRepositoryImpl implements IPostRepository {
@@ -65,8 +62,8 @@ public class PostRepositoryImpl implements IPostRepository {
     @Override
     public List<Post> getSellerFollowed(int user_id){
         List<Integer> ids = this._userRepository.getAll().stream()
-                .filter(user -> user.getUser_id() == user_id)
+                .filter(user -> user.getUserId() == user_id)
                 .flatMap(user -> user.getFollowed().stream()).toList();
-        return this.posts.stream().filter(post -> ids.contains(post.getUser_id())).toList();
+        return this.posts.stream().filter(post -> ids.contains(post.getUserId())).toList();
     }
 }

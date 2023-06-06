@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
-import com.sprint.be_java_hisp_w21_g04.dto.response.UserResponseDto;
 import com.sprint.be_java_hisp_w21_g04.entity.User;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.ResourceUtils;
@@ -14,7 +13,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Repository
 public class UserRepositoryImpl implements IUserRepository{
@@ -50,12 +48,12 @@ public class UserRepositoryImpl implements IUserRepository{
 
     @Override
     public List<Integer> getFollowersById(int user_id) {
-        return this.users.stream().filter(user -> user.getUser_id()==user_id).findFirst().orElse(null).getFollowers();
+        return this.users.stream().filter(user -> user.getUserId()==user_id).findFirst().orElse(null).getFollowers();
     }
 
     @Override
     public User getById(int user_id) {
-        return this.users.stream().filter(user -> user.getUser_id()==user_id).findFirst().orElse(null);
+        return this.users.stream().filter(user -> user.getUserId()==user_id).findFirst().orElse(null);
     }
 
     @Override

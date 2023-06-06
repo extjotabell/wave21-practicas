@@ -2,7 +2,6 @@ package com.sprint.be_java_hisp_w21_g04.service.user;
 
 import com.sprint.be_java_hisp_w21_g04.dto.response.FollowersResponseDto;
 import com.sprint.be_java_hisp_w21_g04.dto.response.UserResponseDto;
-import com.sprint.be_java_hisp_w21_g04.entity.User;
 import com.sprint.be_java_hisp_w21_g04.repository.user.IUserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -23,11 +22,11 @@ public class UserServiceImpl implements IUserService{
     }
 
     @Override
-    public FollowersResponseDto getFollowersById(int user_id) {
+    public FollowersResponseDto getFollowersById(int userId) {
 
-        List<UserResponseDto> followers = _userRepository.getFollowersById(user_id).stream().map(follower -> _mapper.map(_userRepository.getById(follower), UserResponseDto.class)).collect(Collectors.toList());
+        List<UserResponseDto> followers = _userRepository.getFollowersById(userId).stream().map(follower -> _mapper.map(_userRepository.getById(follower), UserResponseDto.class)).collect(Collectors.toList());
 
-        return new FollowersResponseDto(user_id, _userRepository.getById(user_id).getUser_name(), followers);
+        return new FollowersResponseDto(userId, _userRepository.getById(userId).getUserName(), followers);
     }
 
 }

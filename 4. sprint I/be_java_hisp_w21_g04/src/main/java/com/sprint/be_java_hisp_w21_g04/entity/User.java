@@ -11,8 +11,8 @@ import java.util.List;
 @ToString
 public class User {
 
-    private int user_id;
-    private String user_name;
+    private int userId;
+    private String userName;
     //¿Quiénes me siguen?
     private List<Integer> followers;
     //¿A quién sigo?
