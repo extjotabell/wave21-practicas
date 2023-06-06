@@ -23,12 +23,6 @@ public class UserRepository implements IUserRepository {
         users.add(User.builder().id(8).name("Mersh").followed(new ArrayList<>()).followers(new ArrayList<>()).build());
     }
 
-    public Optional<User> findByID(int id){
-        return users.stream()
-                .filter(user -> user.getId() == id)
-                .findFirst();
-    }
-
     @Override
     public Optional<User> getUserByID(int userID) {
         return this.users
