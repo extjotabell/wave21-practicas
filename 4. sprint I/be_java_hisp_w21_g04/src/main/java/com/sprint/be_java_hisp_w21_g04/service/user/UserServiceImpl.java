@@ -8,9 +8,11 @@ import com.sprint.be_java_hisp_w21_g04.dto.response.FollowedResponseDto;
 import com.sprint.be_java_hisp_w21_g04.dto.response.FollowersResponseDto;
 import com.sprint.be_java_hisp_w21_g04.dto.response.UserResponseDto;
 import com.sprint.be_java_hisp_w21_g04.entity.User;
+import com.sprint.be_java_hisp_w21_g04.exception.IllegalDataException;
 import com.sprint.be_java_hisp_w21_g04.exception.NotFoundException;
 import com.sprint.be_java_hisp_w21_g04.repository.user.IUserRepository;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.internal.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -91,13 +93,15 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public FollowersResponseDto getFollowersByIdSorted(int userId, String order) {
-
+        if(!(order.equals("name_asc") || order.equals("name_desc"))){
+            throw new IllegalDataException("Ordenamiento invalido");
+        }
         List<UserResponseDto> followers = _userRepository.getFollowersById(userId)
                                                          .stream()
                                                          .map(follower -> _mapper.map(_userRepository.getById(follower), UserResponseDto.class))
                                                          .sorted((u1, u2) -> order.equals("name_asc") ? u1.getUserName().compareTo(u2.getUserName())
                                                                            : order.equals("name_desc")? u2.getUserName().compareTo(u1.getUserName())
-                                                                           :0)
+                                                                           : 0)
                                                          .collect(Collectors.toList());
 
         if (followers.isEmpty()) throw new NotFoundException("No se encontraron seguidores para el vendedor");
