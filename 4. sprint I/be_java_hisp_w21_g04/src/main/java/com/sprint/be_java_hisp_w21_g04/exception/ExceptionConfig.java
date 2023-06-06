@@ -1,7 +1,5 @@
 package com.sprint.be_java_hisp_w21_g04.exception;
 
-import com.fasterxml.jackson.databind.exc.InvalidFormatException;
-import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 import com.sprint.be_java_hisp_w21_g04.dto.response.ErrorDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,5 +28,17 @@ public class ExceptionConfig {
     public ResponseEntity<?> userNotFoundException(Exception e){
         UserNotFoundDto userNotFoundDto = new UserNotFoundDto(e.getMessage(), 404);
         return new ResponseEntity<>(userNotFoundDto, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(UserAlreadyFollowedException.class)
+    public ResponseEntity<?> userAlreadyFollowedException(Exception e){
+        ErrorDto error = new ErrorDto(e.getMessage(), 400);
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(UserNotFollowedException.class)
+    public ResponseEntity<?> userNotFollowedException(Exception e){
+        ErrorDto error = new ErrorDto(e.getMessage(), 400);
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 }
