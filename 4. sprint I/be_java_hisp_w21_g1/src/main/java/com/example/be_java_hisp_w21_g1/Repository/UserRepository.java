@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 
 @Repository
@@ -56,8 +57,8 @@ public class UserRepository implements IUserRepository{
         
     }
     @Override
-    public User findUserById(int id){
-        return users.stream().filter(u -> u.getUser_id() == id).findAny().orElse(null);
+    public Optional<User> findUserById(int id){
+        return users.stream().filter(u -> u.getUser_id() == id).findFirst();
     }
 
 }

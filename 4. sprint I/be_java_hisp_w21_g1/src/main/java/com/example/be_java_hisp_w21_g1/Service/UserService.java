@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService implements IUserService{
@@ -21,50 +22,45 @@ public class UserService implements IUserService{
     @Override
     public FollowersCountDTO getFollowersCount(int idUser) {
 
-        User foundUser = userRepository.findUserById(idUser);
-        //inicializado en -1 para marcar un numero cuando no existe el usuario
-        int followersCount = -1;
-        if(foundUser != null){
-            followersCount = foundUser.followersCount();
-            return new FollowersCountDTO(idUser, foundUser.getUser_name(),followersCount);
-        }
-        else {
+        Optional<User> foundUser = userRepository.findUserById(idUser);
+        if (foundUser.isEmpty()) {
             throw new NotFoundException("No se encontro el usuario con el ID" + idUser);
         }
 
+        User user = foundUser.get();
+        int followersCount = user.followersCount();
+        return new FollowersCountDTO(idUser, user.getUser_name(),followersCount);
       
     }
-    @Override
-    public FollowerListDTO getFollowersList(int idUser){
-        User foundUser = userRepository.findUserById(idUser);
 
-        if(foundUser != null){
-            List<FollowUserDTO> followedList = foundUser.getFollowers().stream()
-                    .map(u -> new FollowUserDTO(u.getUser_id(), u.getUser_name()))
-                    .toList();
-            return new FollowerListDTO(idUser, foundUser.getUser_name(),followedList);
-        }
-        else {
+    @Override
+    public FollowerListDTO getFollowersList(int idUser) {
+        Optional<User> foundUser = userRepository.findUserById(idUser);
+
+        if (foundUser.isEmpty()) {
             throw new NotFoundException("No se encontro el usuario con el ID" + idUser);
         }
 
+        User user = foundUser.get();
+        List<FollowUserDTO> followedList = user.getFollowers().stream()
+                .map(u -> new FollowUserDTO(u.getUser_id(), u.getUser_name()))
+                .toList();
+        return new FollowerListDTO(idUser, user.getUser_name(),followedList);
     }
 
     @Override
-    public FollowedListDTO getFollowedList(int idUser){
-        User foundUser = userRepository.findUserById(idUser);
+    public FollowedListDTO getFollowedList(int idUser) {
+        Optional<User> foundUser = userRepository.findUserById(idUser);
 
-        if(foundUser != null){
-            List<FollowUserDTO> followedList = foundUser.getFollowed().stream()
-                    .map(u -> new FollowUserDTO(u.getUser_id(), u.getUser_name()))
-                    .toList();
-            return new FollowedListDTO(idUser, foundUser.getUser_name(),followedList);
-        }
-        else {
+        if (foundUser.isEmpty()) {
             throw new NotFoundException("No se encontro el usuario con el ID" + idUser);
         }
 
+        User user = foundUser.get();
+        List<FollowUserDTO> followedList = user.getFollowed().stream()
+                .map(u -> new FollowUserDTO(u.getUser_id(), u.getUser_name()))
+                .toList();
+        return new FollowedListDTO(idUser, user.getUser_name(),followedList);
     }
-
 
 }
