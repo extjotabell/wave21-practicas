@@ -4,6 +4,7 @@ import com.bootcamp.grupo3.socialmeli.dto.response.MessageDTO;
 import com.bootcamp.grupo3.socialmeli.dto.response.UserFollowedListDTO;
 import com.bootcamp.grupo3.socialmeli.dto.response.UserFollowerCountDTO;
 import com.bootcamp.grupo3.socialmeli.dto.response.UserFollowersListDTO;
+import com.bootcamp.grupo3.socialmeli.exception.UserAlreadyFollowedException;
 import com.bootcamp.grupo3.socialmeli.exception.UserNotFoundException;
 import com.bootcamp.grupo3.socialmeli.model.User;
 import com.bootcamp.grupo3.socialmeli.repository.interfaces.IUserRepository;
@@ -34,6 +35,9 @@ public class UserService implements IUserService {
         User user = this.getUserByID(userId);
         User userToFollow = this.getUserByID(userIdToFollow);
 
+        if(user.getFollowed().contains(userToFollow))
+            throw new UserAlreadyFollowedException("The user "+userToFollow.getName()+ " is already in you followed list!");
+
         user.getFollowed().add(userToFollow);
         userToFollow.getFollowers().add(user);
 
@@ -44,6 +48,9 @@ public class UserService implements IUserService {
     public MessageDTO unfollow(int userId, int userIdToUnfollow) {
         User user = this.getUserByID(userId);
         User userToUnfollow = this.getUserByID(userIdToUnfollow);
+
+        if(!user.getFollowed().contains(userToUnfollow))
+            throw new UserNotFoundException("The user "+userToUnfollow.getName() +" has not been found in your followed list.");
 
         user.getFollowed().remove(userToUnfollow);
         userToUnfollow.getFollowers().remove(user);
