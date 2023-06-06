@@ -18,23 +18,23 @@ import org.springframework.http.HttpStatus;
 
 @RestController
 public class UserController {
-    private UserServiceImpl userService;
+    private UserServiceImpl _userService;
 
     public UserController(UserServiceImpl userService) {
-        this.userService = userService;
+        this._userService = userService;
     }
     @PostMapping("/users/{userId}/follow/{userIdToFollow}")
     public ResponseEntity<ResponseDto> userFollow(@PathVariable int userId, @PathVariable int userIdToFollow){
-        return ResponseEntity.ok(userService.followUser(userId, userIdToFollow));
+        return ResponseEntity.ok(_userService.followUser(userId, userIdToFollow));
     }
     @GetMapping("/users/{userId}/followers/count")
     public ResponseEntity<UserFollowersCountDto> userFollowersCountDto(@PathVariable int userId){
-        return ResponseEntity.status(200).body(userService.getFollowersCount(userId));
+        return ResponseEntity.status(200).body(_userService.getFollowersCount(userId));
     }
 
     @PostMapping("/users/{userId}/unfollow/{userIdToUnfollow}")
     public ResponseEntity<ResponseDto> userUnfollow(@PathVariable int userId, @PathVariable int userIdToUnfollow){
-        return ResponseEntity.ok(userService.unfollowUser(userId, userIdToUnfollow));
+        return ResponseEntity.ok(_userService.unfollowUser(userId, userIdToUnfollow));
     }
 
     @GetMapping("/users/{userId}/followers/list")
