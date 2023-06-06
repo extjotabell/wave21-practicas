@@ -31,20 +31,38 @@ public class UserRepositoryImpl implements IUserRepository{
        dataUser.get(post.getUserId()).getPosts().add(post);
     }
 
+    /*
+    * Se declara una lista de usuarios a retornar.
+    * Se busca la lista de usuarios seguidos por userId.
+    * Por cada uno de esos usuarios, se busca la lista de posts.
+    * Se agregan los posts a un usuario temp, y se agrega el temp a la lista de usuarios a retornar.
+     */
+    @Override
+    public List<User> listFollowingPosts2Weeks(int userId) {
+        List<User> result = new ArrayList<>();
+        dataUser.get(userId).getFollowing().forEach(followingId -> {
+            User tempUser = new User();
+            User tempFollowingUser = dataUser.get(followingId);
+            tempUser.setId(tempFollowingUser.getId());
+            tempUser.setUsername(tempFollowingUser.getUsername());
+            tempUser.setFollowers(tempFollowingUser.getFollowers());
+            tempUser.setFollowing(tempFollowingUser.getFollowing());
+
+            List<Post> filteredList = tempFollowingUser.getPosts()
+                    .stream()
+                    .filter(post -> post.getDate().isAfter(LocalDate.now().minusWeeks(2)))
+                    .sorted(Comparator.comparing(Post::getDate).reversed()).toList();
+            tempUser.setPosts(filteredList);
+            result.add(tempUser);
+        });
+
+        return result;
+    }
+
     private void loadInitialData() {
-
-        Post post = new Post();
-        post.setDate(LocalDate.now());
-        post.setCategory(1);
-        post.setPrice(100.0);
-        post.setProduct(new Product());
-        post.setHasPromo(true);
-        post.setDiscount(10.0);
-
 
         User user1 = new User(1, "JavierRydel", new HashSet<>(), new HashSet<>(), new ArrayList<>());
         User user2 = new User(2, "GastonBarro", new HashSet<>(), new HashSet<>(), new ArrayList<>());
-        user2.getPosts().add(post);
         User user3 = new User(3, "YaninaFaretta", new HashSet<>(), new HashSet<>(), new ArrayList<>());
         User user4 = new User(4, "AdrianRodriguez", new HashSet<>(), new HashSet<>(), new ArrayList<>());
         User user5 = new User(5, "JoseGonzaloez", new HashSet<>(), new HashSet<>(), new ArrayList<>());

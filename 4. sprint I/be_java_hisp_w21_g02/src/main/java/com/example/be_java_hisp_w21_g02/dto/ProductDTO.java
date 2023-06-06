@@ -1,4 +1,4 @@
-package com.example.be_java_hisp_w21_g02.dto.request;
+package com.example.be_java_hisp_w21_g02.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,7 +8,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@Setter
 public class ProductDTO {
     private int productId;
     private String productName;

@@ -12,9 +12,10 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class Product {
-    private int id;
-    private LocalDate publishDate;
-    private String notes;
+    private int productId;
+    private String productName;
     private String type;
     private String brand;
+    private String color;
+    private String notes;
 }

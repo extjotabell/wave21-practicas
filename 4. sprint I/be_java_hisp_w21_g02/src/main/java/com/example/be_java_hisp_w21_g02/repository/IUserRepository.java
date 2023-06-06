@@ -4,6 +4,8 @@ import com.example.be_java_hisp_w21_g02.model.User;
 
 import com.example.be_java_hisp_w21_g02.model.Post;
 
+import java.util.List;
+
 public interface IUserRepository {
     User getUser(int userIdToFollow);
 
@@ -11,4 +13,5 @@ public interface IUserRepository {
 
     void createPost(Post post);
 
+    List<User> listFollowingPosts2Weeks(int userId);
 }

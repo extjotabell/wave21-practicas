@@ -5,4 +5,6 @@ import org.springframework.http.ResponseEntity;
 
 public interface IProductsService {
     ResponseEntity<?> createPost(PostRequestDTO postRequestDTO);
+
+    ResponseEntity<?> listFollowingPosts2Weeks(int userId);
 }
