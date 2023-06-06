@@ -20,4 +20,8 @@ public class ExceptionConfig {
     public ResponseEntity<?> UserFollowingException(Exception e){
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
     }
+    @ExceptionHandler(PostBadRequestException.class)
+    public ResponseEntity<?> PostBadRequestException(Exception e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    }
 }

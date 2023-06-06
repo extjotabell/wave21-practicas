@@ -26,14 +26,18 @@ public class UserRepositoryImpl implements IUserRepository{
         dataUser.put(persistedFollowUser.getId(), persistedFollowUser);
     }
 
+    @Override
+    public void createPost(Post post) {
+       dataUser.get(post.getUserId()).getPosts().add(post);
+    }
+
     private void loadInitialData() {
 
         Post post = new Post();
-        post.setId(1);
         post.setDate(LocalDate.now());
         post.setCategory(1);
         post.setPrice(100.0);
-        post.setProducts(new ArrayList<>());
+        post.setProduct(new Product());
         post.setHasPromo(true);
         post.setDiscount(10.0);
 
@@ -45,7 +49,7 @@ public class UserRepositoryImpl implements IUserRepository{
         User user4 = new User(4, "AdrianRodriguez", new HashSet<>(), new HashSet<>(), new ArrayList<>());
         User user5 = new User(5, "JoseGonzaloez", new HashSet<>(), new HashSet<>(), new ArrayList<>());
         User user6 = new User(6, "FlagusRodriguez", new HashSet<>(), new HashSet<>(), new ArrayList<>());
-        User user7 = new User(7, "LeandroSupanta", new HashSet<>(), new HashSet<>(), new ArrayList<>());
+        User user7 = new User(7, "LeandroMarcelo", new HashSet<>(), new HashSet<>(), new ArrayList<>());
         User user8 = new User(8, "GonzaloMarquez", new HashSet<>(), new HashSet<>(), new ArrayList<>());
         User user9 = new User(9, "MartinMarquez", new HashSet<>(), new HashSet<>(), new ArrayList<>());
         User user10 = new User(10, "GabrielaMonzon", new HashSet<>(), new HashSet<>(), new ArrayList<>());
@@ -61,4 +65,6 @@ public class UserRepositoryImpl implements IUserRepository{
         dataUser.put(user9.getId(), user9);
         dataUser.put(user10.getId(), user10);
     }
+
+    
 }
