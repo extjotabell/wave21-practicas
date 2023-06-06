@@ -98,6 +98,7 @@ public class UserServiceImpl implements IUserService {
                 .stream()
                 .map(follower -> _mapper.map(_userRepository.getById(follower), UserResponseDto.class))
                 .collect(Collectors.toList());
+        if (followers.isEmpty()) throw new NotFoundException("No se encontraron seguidores para el vendedor");
         return new FollowersResponseDto(userId, _userRepository.getById(userId).getUserName(), followers);
     }
 
