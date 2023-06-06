@@ -43,19 +43,20 @@ public class ProductsServiceImpl implements IProductsService{
 
     @Override
     public ResponseEntity<?> listFollowingPosts2Weeks(int userId) {
-        List<UserPostResponseDTO> result = new ArrayList<>();
         List<User> responseList;
         try{
             responseList = userRepository.listFollowingPosts2Weeks(userId);
         }catch (NullPointerException e) {
             throw new UserNotFoundException("No se pudo encontrar un usuario con el ID mencionado.");
         }
-
+        List<PostDTO> postsDTO = new ArrayList<>();
         responseList.forEach(user -> {
-            result.add(new UserPostResponseDTO(user.getId(), convertUserToUserPostResponseDTO(user).getPosts()));
+            user.getPosts().forEach(post -> {
+                postsDTO.add(convertPostToPostDTO(post));
+            });
         });
 
-        return ResponseEntity.ok(result);
+        return ResponseEntity.ok(new UserPostResponseDTO(userId, postsDTO));
     }
     
 
@@ -68,7 +69,7 @@ public class ProductsServiceImpl implements IProductsService{
     }
 
     private PostDTO convertPostToPostDTO(Post post){
-        return new PostDTO(post.getUserId(),post.getPostId(),post.getDate(),
+        return new PostDTO(post.getUserId(),post.getPostId(),convertLocalDateToString(post.getDate()),
                 convertProductToProductDTO(post.getProduct()),post.getCategory(),post.getPrice());
     }
 
@@ -78,14 +79,15 @@ public class ProductsServiceImpl implements IProductsService{
     }
 
     private boolean isValidRequest(PostRequestDTO postRequestDTO){
-        return postRequestDTO.getDate() != null && convertStringToLocalDate(postRequestDTO.getDate())
-                .isBefore(LocalDate.now()) && postRequestDTO.getPrice() >= 0;
+        LocalDate date = convertStringToLocalDate(postRequestDTO.getDate());
+        return postRequestDTO.getDate() != null && (date.isBefore(LocalDate.now()) || date.isEqual(LocalDate.now()))
+                && postRequestDTO.getPrice() >= 0;
     }
 
     private Post convertPostRequestDTOtoPost(PostRequestDTO postRequestDTO){
         Post post = new Post();
         post.setUserId(postRequestDTO.getUserId());
-   
+
         post.setDate(convertStringToLocalDate(postRequestDTO.getDate()));
         post.setCategory(postRequestDTO.getCategory());
         post.setPrice(postRequestDTO.getPrice());
@@ -98,7 +100,10 @@ public class ProductsServiceImpl implements IProductsService{
         return LocalDate.parse(date, dateFormatter);
     }
 
-
+    private String convertLocalDateToString(LocalDate date){
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        return date.format(dateFormatter);
+    }
 
     private Product convertProductDTOtoProduct(ProductDTO productDTO){
         Product product = new Product();
