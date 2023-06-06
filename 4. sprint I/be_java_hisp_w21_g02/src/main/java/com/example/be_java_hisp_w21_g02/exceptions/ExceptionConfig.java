@@ -24,4 +24,9 @@ public class ExceptionConfig {
     public ResponseEntity<?> PostBadRequestException(Exception e) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
     }
+    @ExceptionHandler(OrderNotFoundException.class)
+    public ResponseEntity<?> OrderNotFoundException(Exception e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    }
+
 }
