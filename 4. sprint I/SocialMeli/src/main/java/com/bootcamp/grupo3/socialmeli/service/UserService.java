@@ -29,8 +29,7 @@ public class UserService implements IUserService {
         Optional<User> user = userRepository.getUser(id);
         if (user.isPresent()){
             UserFollowerCountDTO userFollowerCountDTO = modelMapper.map(user.get(),UserFollowerCountDTO.class);
-            System.out.println("Followers: " + user.get());
-            userFollowerCountDTO.setFollowersCount(user.get().getFollowers().size());
+             userFollowerCountDTO.setFollowersCount(user.get().getFollowers().size());
             return userFollowerCountDTO;
         }else {
             throw new RuntimeException("User no se encontro");
