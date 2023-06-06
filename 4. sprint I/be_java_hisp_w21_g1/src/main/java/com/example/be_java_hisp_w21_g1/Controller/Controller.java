@@ -36,8 +36,8 @@ public class  Controller {
     //Recibe UserIdDTO
     //Retorna FollowerListDTO
     @GetMapping("/users/{userId}/followers/list")
-    public ResponseEntity<?> listFollowers(@PathVariable int userId){
-        return null;
+    public ResponseEntity<FollowedListDTO> listFollowers(@PathVariable int userId){
+        return new ResponseEntity<>(userService.getFollowersList(userId), HttpStatus.OK);
     }
 
     //US 0004: Obtener un listado de todos los vendedores a los cuales sigue un determinado usuario (¿A quién sigo?)
