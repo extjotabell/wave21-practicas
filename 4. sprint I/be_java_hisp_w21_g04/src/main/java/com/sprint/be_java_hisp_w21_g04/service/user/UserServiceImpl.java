@@ -49,8 +49,7 @@ public class UserServiceImpl implements IUserService{
                                                          .stream()
                                                          .map(follower -> _mapper.map(_userRepository.getById(follower), UserResponseDto.class))
                                                          .sorted((u1, u2) -> order.equals("name_asc") ? u1.getUserName().compareTo(u2.getUserName())
-                                                                           : order.equals("name_desc")? u2.getUserName().compareTo(u1.getUserName())
-                                                                           : 0)
+                                                                           : u2.getUserName().compareTo(u1.getUserName()))
                                                          .collect(Collectors.toList());
 
         if (followers.isEmpty()) throw new NotFoundException("No se encontraron seguidores para el vendedor");
@@ -58,14 +57,29 @@ public class UserServiceImpl implements IUserService{
     }
 
     @Override
-    public FollowedResponseDto getFollowedById(int user_id) {
+    public FollowedResponseDto getFollowedById(int userId) {
 
-        List<UserResponseDto> followedList = _userRepository.getFollowedById(user_id)
+        List<UserResponseDto> followedList = _userRepository.getFollowedById(userId)
                                                             .stream()
                                                             .map(followed -> _mapper.map(_userRepository.getById(followed), UserResponseDto.class))
                                                             .collect(Collectors.toList());
         if (followedList.isEmpty()) throw new NotFoundException("El usuario no sigue a ningún vendedor");
-        return new FollowedResponseDto(user_id, _userRepository.getById(user_id).getUserName(), followedList);
+        return new FollowedResponseDto(userId, _userRepository.getById(userId).getUserName(), followedList);
+    }
+
+    @Override
+    public FollowedResponseDto getFollowedByIdSorted(int userId, String order) {
+        if(!(order.equals("name_asc") || order.equals("name_desc"))){
+            throw new IllegalDataException("Ordenamiento invalido");
+        }
+        List<UserResponseDto> followedList = _userRepository.getFollowedById(userId)
+                                                            .stream()
+                                                            .map(followed -> _mapper.map(_userRepository.getById(followed), UserResponseDto.class))
+                                                            .sorted((u1, u2) -> order.equals("name_asc") ? u1.getUserName().compareTo(u2.getUserName())
+                                                                              : u2.getUserName().compareTo(u1.getUserName()))
+                                                            .collect(Collectors.toList());
+        if (followedList.isEmpty()) throw new NotFoundException("El usuario no sigue a ningún vendedor");
+        return new FollowedResponseDto(userId, _userRepository.getById(userId).getUserName(), followedList);
     }
 
 }
