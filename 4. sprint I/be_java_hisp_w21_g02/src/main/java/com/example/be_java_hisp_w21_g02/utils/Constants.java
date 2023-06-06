@@ -8,9 +8,16 @@ import java.util.Objects;
 public  class Constants {
     public static final String ORDER_NAME_ASC = "name_asc";
     public static final String ORDER_NAME_DESC = "name_desc";
+    public static final String ORDER_DATE_ASC = "date_asc";
+    public static final String ORDER_DATE_DESC = "date_desc";
 
     public static boolean isOrderConstant(String order){
-        return (Objects.equals(order, ORDER_NAME_ASC) || Objects.equals(order, ORDER_NAME_DESC));
+        return (
+                Objects.equals(order, ORDER_NAME_ASC) ||
+                Objects.equals(order, ORDER_NAME_DESC) ||
+                Objects.equals(order, ORDER_DATE_ASC) ||
+                Objects.equals(order, ORDER_DATE_DESC)
+        );
     }
 
 }

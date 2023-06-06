@@ -7,4 +7,6 @@ public interface IProductsService {
     ResponseEntity<?> createPost(PostRequestDTO postRequestDTO);
 
     ResponseEntity<?> listFollowingPosts2Weeks(int userId);
+
+    ResponseEntity<?> listFollowingPosts2Weeks(int userId, String order);
 }

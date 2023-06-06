@@ -139,7 +139,7 @@ public class UsersServiceImpl implements IUsersService{
         }
 
         if (!persistedOtherUser.isSeller()){
-            throw new UserNotSellerException("El usuario que quiere dejar de seguir no es un vendedor");
+            throw new UserNotSellerException("El usuario no es un vendedor");
         }
     }
 

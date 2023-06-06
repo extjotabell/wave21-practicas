@@ -11,6 +11,7 @@ import java.util.*;
 @Repository
 public class UserRepositoryImpl implements IUserRepository{
     private HashMap<Integer, User> dataUser = new HashMap<>();
+    private int POST_ID_COUNT = 1;
 
     public UserRepositoryImpl(List<User> dataUser) {
         loadInitialData();
@@ -37,6 +38,8 @@ public class UserRepositoryImpl implements IUserRepository{
 
     @Override
     public void createPost(Post post) {
+        post.setPostId(POST_ID_COUNT);
+        POST_ID_COUNT++;
        dataUser.get(post.getUserId()).getPosts().add(post);
     }
 
@@ -59,7 +62,7 @@ public class UserRepositoryImpl implements IUserRepository{
 
             List<Post> filteredList = tempFollowingUser.getPosts()
                     .stream()
-                    .filter(post -> post.getDate().isAfter(LocalDate.now().minusWeeks(2)))
+                    .filter(post -> post.getDate().isAfter(LocalDate.now().minusWeeks(2).minusDays(1)))
                     .sorted(Comparator.comparing(Post::getDate).reversed()).toList();
             tempUser.setPosts(filteredList);
             result.add(tempUser);
