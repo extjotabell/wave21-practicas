@@ -6,4 +6,5 @@ import java.util.Optional;
 
 public interface IUserRepository {
     Optional<User> getUserByID(int userID);
+    boolean userExists(int id);
 }

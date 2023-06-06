@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import com.bootcamp.grupo3.socialmeli.dto.response.UserFollowerCountDTO;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -33,15 +34,20 @@ public class UserController {
         return ResponseEntity.ok(userService.unfollow(userId, userIdToUnfollow));
     }
 
-    @GetMapping("/users/{userId}/followed/list")
+    @GetMapping("/{userId}/followed/list")
     public ResponseEntity<UserFollowedListDTO> getFollowed(@PathVariable int userId,
                                                            @RequestParam(value = "order", required = false) String order){
         return ResponseEntity.ok().body(this.userService.getFollowed(userId, order));
     }
 
-    @GetMapping("/users/{userId}/followers/list")
+    @GetMapping("/{userId}/followers/list")
     public ResponseEntity<UserFollowersListDTO> getFollowers(@PathVariable int userId,
-                                                             @RequestParam(value = "order", required = false) String order){
+                                                             @RequestParam(value = "order", required = false) String order) {
         return ResponseEntity.ok().body(this.userService.getFollowers(userId, order));
+    }
+
+    @GetMapping("/{userId}/followers/count")
+    public ResponseEntity<UserFollowerCountDTO> getUserFollowers(@PathVariable int userId){
+        return ResponseEntity.ok(userService.getUserFollowersCount(userId));
     }
 }

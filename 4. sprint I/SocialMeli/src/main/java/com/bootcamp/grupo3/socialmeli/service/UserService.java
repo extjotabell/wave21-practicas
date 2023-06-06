@@ -4,6 +4,7 @@ import com.bootcamp.grupo3.socialmeli.dto.response.MessageDTO;
 import com.bootcamp.grupo3.socialmeli.exception.UserNotFoundException;
 import com.bootcamp.grupo3.socialmeli.dto.response.UserFollowedListDTO;
 import com.bootcamp.grupo3.socialmeli.dto.response.UserFollowersListDTO;
+import com.bootcamp.grupo3.socialmeli.dto.response.UserFollowerCountDTO;
 import com.bootcamp.grupo3.socialmeli.model.User;
 import com.bootcamp.grupo3.socialmeli.repository.interfaces.IUserRepository;
 import com.bootcamp.grupo3.socialmeli.service.interfaces.IUserService;
@@ -65,8 +66,21 @@ public class UserService implements IUserService {
         return user;
     }
 
-    private User getUserByID(int userId){
+    private User getUserByID(int userId) {
         Optional<User> user = userRepository.getUserByID(userId);
         return user.orElseThrow(() -> new UserNotFoundException("No se ha encontrado el usuario"));
+    }
+
+    @Override
+    public boolean userExists(int id) {
+        return userRepository.userExists(id);
+    }
+
+    @Override
+    public UserFollowerCountDTO getUserFollowersCount(int id) {
+        User user = this.getUserByID(id);
+        UserFollowerCountDTO userFollowerCountDTO = modelMapper.map(user,UserFollowerCountDTO.class);
+        userFollowerCountDTO.setFollowersCount(user.getFollowers().size());
+        return userFollowerCountDTO;
     }
 }
