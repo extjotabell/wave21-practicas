@@ -20,11 +20,7 @@ public class UserServiceImpl implements IUserService {
         this._userRepository = userRepository;
         this._mapper = new ModelMapper();
     }
-    @Override
-    public FollowersResponseDto getFollowersById(int userId) {
-        List<UserResponseDto> followers = _userRepository.getFollowersById(userId).stream().map(follower -> _mapper.map(_userRepository.getById(follower), UserResponseDto.class)).collect(Collectors.toList());
-        return new FollowersResponseDto(userId, _userRepository.getById(userId).getUserName(), followers);
-    }
+
     @Override
     public ResponseDto followUser(int userId, int userIdToFollow) {
         User user = _userRepository.findUserById(userId);
@@ -78,8 +74,18 @@ public class UserServiceImpl implements IUserService {
         return userUnfollowResponseDto;
     }
     @Override
+    public FollowersResponseDto getFollowersById(int userId) {
+        List<UserResponseDto> followers = _userRepository
+                .getFollowersById(userId)
+                .stream()
+                .map(follower -> _mapper.map(_userRepository.getById(follower), UserResponseDto.class))
+                .collect(Collectors.toList());
+        if (followers.isEmpty()) throw new NotFoundException("No se encontraron seguidores para el vendedor");
+        return new FollowersResponseDto(userId, _userRepository.getById(userId).getUserName(), followers);
+    }
+    @Override
     public FollowersResponseDto getFollowersByIdSorted(int userId, String order) {
-        if(!(order.equals("name_asc") || order.equals("name_desc"))){
+        if (!(order.equals("name_asc") || order.equals("name_desc"))) {
             throw new IllegalDataException("Ordenamiento invalido");
         }
         List<UserResponseDto> followers = _userRepository.getFollowersById(userId)
@@ -102,7 +108,7 @@ public class UserServiceImpl implements IUserService {
     }
     @Override
     public FollowedResponseDto getFollowedByIdSorted(int userId, String order) {
-        if(!(order.equals("name_asc") || order.equals("name_desc"))){
+        if (!(order.equals("name_asc") || order.equals("name_desc"))) {
             throw new IllegalDataException("Ordenamiento invalido");
         }
         List<UserResponseDto> followedList = _userRepository.getFollowedById(userId)

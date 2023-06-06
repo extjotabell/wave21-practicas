@@ -1,13 +1,11 @@
 package com.sprint.be_java_hisp_w21_g04.exception;
 
 import com.sprint.be_java_hisp_w21_g04.dto.response.ErrorDto;
-import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.client.HttpClientErrorException;
 
 
 import com.sprint.be_java_hisp_w21_g04.dto.response.UserNotFoundDto;
@@ -50,6 +48,7 @@ public class ExceptionConfig {
         ErrorDto error = new ErrorDto(e.getMessage(), 400);
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
+
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<?> notFound(NotFoundException e){
         ErrorDto error = new ErrorDto(e.getMessage(), 404);
