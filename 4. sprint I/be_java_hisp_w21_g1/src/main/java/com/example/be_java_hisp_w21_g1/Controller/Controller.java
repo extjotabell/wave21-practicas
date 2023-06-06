@@ -1,10 +1,12 @@
 package com.example.be_java_hisp_w21_g1.Controller;
 
+import com.example.be_java_hisp_w21_g1.DTO.Request.FollowPostDTO;
 import com.example.be_java_hisp_w21_g1.DTO.Request.PostProductDTO;
 import com.example.be_java_hisp_w21_g1.DTO.Response.FollowedListDTO;
 import com.example.be_java_hisp_w21_g1.DTO.Response.PostDTO;
 import com.example.be_java_hisp_w21_g1.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +20,13 @@ public class  Controller {
     //Retorna status code
     @PostMapping("/users/{userId}/follow/{userIdToFollow}")
     public ResponseEntity<?> follow(@PathVariable int userId, @PathVariable int userIdToFollow){
-        return null;
+        FollowPostDTO followPostDTO = new FollowPostDTO(userId, userIdToFollow);
+        ResponseEntity<?> response;
+        if(userService.follow(followPostDTO))
+            response = new ResponseEntity<>("Todo joya",HttpStatus.OK);
+        else
+            response = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        return response;
     }
 
     //US 0002: Obtener el resultado de la cantidad de usuarios que siguen a un determinado vendedor
@@ -68,8 +76,14 @@ public class  Controller {
     //Recibe FollowPostDTO
     //Retorna status code
     @PostMapping("/users/{userId}/unfollow/{userIdToUnfollow}")
-    public ResponseEntity<?> unfollowUser(@PathVariable int userId, PathVariable userIdToUnfollow) {
-        return null;
+    public ResponseEntity<?> unfollowUser(@PathVariable int userId, @PathVariable int userIdToUnfollow) {
+        FollowPostDTO followPostDTO = new FollowPostDTO(userId, userIdToUnfollow);
+        ResponseEntity<?> response;
+        if(userService.unFollow(followPostDTO))
+            response = new ResponseEntity<>(HttpStatus.OK);
+        else
+            response = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        return response;
     }
 
     //US 0008: Ordenamiento alfabético ascendente y descendente

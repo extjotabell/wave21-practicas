@@ -18,7 +18,7 @@ public class User {
     ArrayList<User> followed;
     ArrayList<Post> publication;
 
-    boolean isSeller(){
+    public boolean isSeller(){
         return publication.size()>0;
     }
 }

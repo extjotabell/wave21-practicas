@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 
 @Repository
@@ -16,7 +17,7 @@ public class UserRepository implements IUserRepository{
 
     private List<User> users = new ArrayList<>();
 
-    public void IUserRepository(){
+    public UserRepository(){
         init();
     }
 
@@ -36,11 +37,26 @@ public class UserRepository implements IUserRepository{
         User user1 = new User(1, "Pepe", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
         User user2 = new User(2, "Pablo", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
         User user3 = new User(3, "Pedro", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+
+        this.users.add(user1);
+        this.users.add(user2);
+        this.users.add(user3);
     }
 
+
     @Override
-    public User findUserById(int id){
-        return null;
+    public Optional<User> findUserById(int id){
+        return users.stream().filter(p-> p.getUser_id() == id).findFirst();
     }
+    public void relateUserAndSeller(User user, User seller){
+        user.getFollowed().add(seller);
+        seller.getFollowers().add(user);
+    }
+
+    public void unRelateUserAndSeller(User user, User seller){
+        user.getFollowed().remove(seller);
+        seller.getFollowers().remove(user);
+    }
+
 
 }
