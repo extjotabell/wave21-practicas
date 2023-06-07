@@ -6,6 +6,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.sprint.be_java_hisp_w21_g04.entity.Post;
+import com.sprint.be_java_hisp_w21_g04.entity.User;
+import com.sprint.be_java_hisp_w21_g04.exception.NotFoundException;
 import com.sprint.be_java_hisp_w21_g04.repository.user.IUserRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.ResourceUtils;
@@ -56,6 +58,11 @@ public class PostRepositoryImpl implements IPostRepository {
     }
 
     @Override
+    public void promoPost(Post promoPost) {
+        this.posts.add(promoPost);
+    }
+
+    @Override
     public List<Post> getAll() {
         return this.posts;
     }
@@ -69,4 +76,6 @@ public class PostRepositoryImpl implements IPostRepository {
                                                 .toList();
         return this.posts.stream().filter(post -> ids.contains(post.getUserId())).toList();
     }
+
+
 }

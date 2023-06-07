@@ -10,10 +10,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class UserFollowersCountDto {
+public class PromoPostCountProductsDto {
 
     private int userId;
     private String userName;
-    private int followersCount;
+    private int promoProductsCount;
 
 }

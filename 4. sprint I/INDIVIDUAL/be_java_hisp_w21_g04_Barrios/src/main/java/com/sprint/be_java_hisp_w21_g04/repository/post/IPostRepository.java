@@ -7,7 +7,11 @@ import java.util.List;
 public interface IPostRepository {
     void post(Post post);
 
+    void promoPost(Post promoPost);
+
     List<Post> getAll();
 
     public List<Post> getSellerFollowed(int user_id);
+
+
 }

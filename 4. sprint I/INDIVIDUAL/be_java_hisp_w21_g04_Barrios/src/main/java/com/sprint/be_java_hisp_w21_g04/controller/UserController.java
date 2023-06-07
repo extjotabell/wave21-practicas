@@ -1,6 +1,7 @@
 package com.sprint.be_java_hisp_w21_g04.controller;
 
 import com.sprint.be_java_hisp_w21_g04.dto.response.*;
+import com.sprint.be_java_hisp_w21_g04.service.user.IUserService;
 import com.sprint.be_java_hisp_w21_g04.service.user.UserServiceImpl;
 import com.sprint.be_java_hisp_w21_g04.dto.response.FollowedResponseDto;
 import com.sprint.be_java_hisp_w21_g04.dto.response.FollowersResponseDto;
@@ -14,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 public class UserController {
-    private UserServiceImpl _userService;
+    private IUserService _userService;
 
-    public UserController(UserServiceImpl userService) {
+    public UserController(IUserService userService) {
         this._userService = userService;
     }
 

@@ -1,7 +1,10 @@
 package com.sprint.be_java_hisp_w21_g04.controller;
 
+import com.sprint.be_java_hisp_w21_g04.dto.request.PromoPostRequestDto;
 import com.sprint.be_java_hisp_w21_g04.dto.request.PostRequestDto;
 import com.sprint.be_java_hisp_w21_g04.dto.response.PostResponseDto;
+import com.sprint.be_java_hisp_w21_g04.dto.response.PromoPostCountProductsDto;
+import com.sprint.be_java_hisp_w21_g04.dto.response.ResponseDto;
 import com.sprint.be_java_hisp_w21_g04.dto.response.SellerFollowedListPostResponseDto;
 import com.sprint.be_java_hisp_w21_g04.service.post.IPostService;
 import org.springframework.http.HttpStatus;
@@ -13,6 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/products")
 public class PostController {
+
     private IPostService _service;
 
     public PostController(IPostService service) {
@@ -20,9 +24,14 @@ public class PostController {
     }
 
     @PostMapping("/post")
-    public ResponseEntity<String> post(@RequestBody(required = true) PostRequestDto post) {
-        this._service.post(post);
-        return new ResponseEntity<>("Post agregado exitosamente", HttpStatus.OK);
+    public ResponseEntity<ResponseDto> post(@RequestBody(required = true) PostRequestDto post) {
+        return ResponseEntity.ok(_service.post(post));
+
+    }
+
+    @PostMapping("/promo-post")
+    public ResponseEntity<ResponseDto> post(@RequestBody(required = true) PromoPostRequestDto promoPost) {
+        return ResponseEntity.ok(_service.post(promoPost));
     }
 
     @GetMapping("/followed/{userId}/list")
@@ -35,5 +44,10 @@ public class PostController {
     @GetMapping("/getAll")
     public ResponseEntity<List<PostResponseDto>> getAll() {
         return new ResponseEntity<>(this._service.getAll(), HttpStatus.OK);
+    }
+
+    @GetMapping("/promo-post/count")
+    public ResponseEntity<PromoPostCountProductsDto> getPromoPostCountProducts(@RequestParam(value = "user_id") int userId) {
+        return new ResponseEntity<>(this._service.getPromoPostCountProducts(userId), HttpStatus.OK);
     }
 }
