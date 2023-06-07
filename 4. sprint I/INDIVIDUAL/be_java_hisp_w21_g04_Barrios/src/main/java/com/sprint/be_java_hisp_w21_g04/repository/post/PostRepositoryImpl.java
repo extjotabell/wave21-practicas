@@ -32,15 +32,16 @@ public class PostRepositoryImpl implements IPostRepository {
         ObjectMapper objectMapper = new ObjectMapper();
 
         objectMapper.registerModule(new JavaTimeModule());
-        objectMapper.setPropertyNamingStrategy( PropertyNamingStrategy.SNAKE_CASE );
-        try{
+        objectMapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
+        try {
             File jsonFile = ResourceUtils.getFile("classpath:posts.json");
-            return objectMapper.readValue(jsonFile, new TypeReference<>() {});
+            return objectMapper.readValue(jsonFile, new TypeReference<>() {
+            });
 
-        }catch ( FileNotFoundException e ){
+        } catch (FileNotFoundException e) {
             System.out.println("Archivo posts.json no encontrado");
             System.out.println(e.getMessage());
-        }catch( JsonProcessingException err ){
+        } catch (JsonProcessingException err) {
             System.out.println("Error de procesamiento de JSON");
             System.out.println(err.getMessage());
         } catch (IOException e) {
@@ -60,10 +61,12 @@ public class PostRepositoryImpl implements IPostRepository {
     }
 
     @Override
-    public List<Post> getSellerFollowed(int userId){
-        List<Integer> ids = this._userRepository.getAll().stream()
-                .filter(user -> user.getUserId() == userId)
-                .flatMap(user -> user.getFollowed().stream()).toList();
+    public List<Post> getSellerFollowed(int userId) {
+        List<Integer> ids = this._userRepository.getAll()
+                                                .stream()
+                                                .filter(user -> user.getUserId() == userId)
+                                                .flatMap(user -> user.getFollowed().stream())
+                                                .toList();
         return this.posts.stream().filter(post -> ids.contains(post.getUserId())).toList();
     }
 }

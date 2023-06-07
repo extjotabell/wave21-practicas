@@ -46,11 +46,10 @@ public class UserRepositoryImpl implements IUserRepository{
 
     @Override
     public User findUserById(int userId) {
-        User user = users
-                .stream()
-                .filter(user1 -> user1.getUserId() == userId)
-                .findFirst()
-                .orElse(null);
+        User user = users.stream()
+                         .filter(user1 -> user1.getUserId() == userId)
+                         .findFirst()
+                         .orElse(null);
         return user;
     }
 
