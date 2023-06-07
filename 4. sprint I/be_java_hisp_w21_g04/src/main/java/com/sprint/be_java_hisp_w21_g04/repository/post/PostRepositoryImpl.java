@@ -60,9 +60,9 @@ public class PostRepositoryImpl implements IPostRepository {
     }
 
     @Override
-    public List<Post> getSellerFollowed(int user_id){
+    public List<Post> getSellerFollowed(int userId){
         List<Integer> ids = this._userRepository.getAll().stream()
-                .filter(user -> user.getUserId() == user_id)
+                .filter(user -> user.getUserId() == userId)
                 .flatMap(user -> user.getFollowed().stream()).toList();
         return this.posts.stream().filter(post -> ids.contains(post.getUserId())).toList();
     }
