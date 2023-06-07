@@ -35,6 +35,7 @@ La aplicación "SocialMeli" es una plataforma innovadora que te permite seguir y
 - US 0009: Ordena por fecha ascendente y descendente la US 0006
 - US 0010: Llevar a cabo la publicación de un nuevo producto en promoción
 - US 0011: Obtener la cantidad de productos en promoción de un determinado vendedor
+- US 0012: Obtener un listado de todos los productos en promoción de un determinado vendedor
 
 ### Endpoints y responsables del desarrollo por grupo:
 - US 0001 (Grupo 1): POST /users/{userId}/follow/{userIdToFollow}
@@ -54,6 +55,7 @@ La aplicación "SocialMeli" es una plataforma innovadora que te permite seguir y
 
 - US 0010 (Individual): POST /products/promo-post
 - US 0011 (Individual): GET /products/promo-post/count?user_id={userId}
+- US 0012 (Individual - Bonus): GET /products/promo-post/list?user_id={userId}
                
 ### Mejoras futuras:
 - Validar cuando un usuario no existe en la historia US 0006.
