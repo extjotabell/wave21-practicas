@@ -4,20 +4,20 @@
 - tec 1
 - tec 2
 - etc
-### Decisiones de Equipo
+### Decisiones de Equipo:
 - decision 1
 - decision 2
 - etc
 ### Miembros del Equipo:
-- 1
-- 2
-- 3
-- 4
-- 5
-- 6
-- 7
-- 8
-### Endpoints  y responsables del desarrollo
+- Carlos Alberto Oyaneder Schiaffino
+- Cristobal Alonso Bustamante Quito
+- Camila Andrea Molina Neculñir
+- José Juan Durón
+- Laura Nataly Sanabria Cepeda
+- Marielena Barrios Reinoso
+- Juan Manuel Arango
+- Helmer David Hernandez Ramirez
+### Endpoints  y responsables del desarrollo:
 - llenar
 - llenar
 - llenar
