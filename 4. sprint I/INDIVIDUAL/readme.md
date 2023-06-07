@@ -7,7 +7,7 @@ La aplicación "SocialMeli" es una plataforma innovadora que te permite seguir y
 <p align="left"> <a href="https://git-scm.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" alt="git" width="40" height="40"/> </a> <a href="https://www.java.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg" alt="java" width="40" height="40"/> </a> <a href="https://postman.com" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/getpostman/getpostman-icon.svg" alt="postman" width="40" height="40"/> </a> <a href="https://spring.io/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/springio/springio-icon.svg" alt="spring" width="40" height="40"/> </a> </p>
 
 ### Diagrama del proyecto:
-![](https://raw.githubusercontent.com/extjotabell/wave21-practicas/be_java_hisp_w21_g4/4.%20sprint%20I/Diagrama%20Sprint.png)
+![](https://raw.githubusercontent.com/extjotabell/wave21-practicas/marielebarri/4.%20sprint%20I/INDIVIDUAL/Diagrama%20Sprint.png)
 
 ### Decisiones de Equipo:
 - Decisión 1: Un usuario puede seguir a otro usuario, sin importar si tiene post (Usuario)
@@ -20,7 +20,7 @@ La aplicación "SocialMeli" es una plataforma innovadora que te permite seguir y
 - José Juan Durón (Grupo 2) 🇲🇽
 - Laura Nataly Sanabria Cepeda (Grupo 2) 🇨🇴
 - Marielena Barrios Reinoso (Grupo 2) 🇨🇴
-- Juan Manuel Arango (Grupo 2) 🇨🇴
+- Juan Manuel Arango (Grupo 3) 🇨🇴
 - Helmer David Hernandez Ramirez (Grupo 3) 🇨🇴
 
 ### Descripción de los Endpoint:
@@ -33,6 +33,8 @@ La aplicación "SocialMeli" es una plataforma innovadora que te permite seguir y
 - US 0007: Permite a un usuario dejar de seguir a un vendedor.
 - US 0008: Ordena alfabéticamente en orden ascendente y descendente las US 0003 y 0004
 - US 0009: Ordena por fecha ascendente y descendente la US 0006
+- US 0010: Llevar a cabo la publicación de un nuevo producto en promoción
+- US 0011: Obtener la cantidad de productos en promoción de un determinado vendedor
 
 ### Endpoints y responsables del desarrollo por grupo:
 - US 0001 (Grupo 1): POST /users/{userId}/follow/{userIdToFollow}
@@ -42,18 +44,19 @@ La aplicación "SocialMeli" es una plataforma innovadora que te permite seguir y
 - US 0005 (Grupo 3): POST /products/post
 - US 0006 (Grupo 3): GET /products/followed/{userId}/list
 - US 0007 (Grupo 1): POST /users/{userId}/unfollow/{userIdToUnfollow}
-- US 0008 (Grupo 2): GET /users/{UserID}/followers/list?order=name_asc
-               /users/{UserID}/followers/list?order=name_desc
-              /users/{UserID}/followed/list?order=name_asc
-               /users/{UserID}/followed/list?order=name_desc
+- US 0008 (Grupo 2): GET /users/{UserID}/followers/list?order=name_asc <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/users/{UserID}/followers/list?order=name_desc <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/users/{UserID}/followed/list?order=name_asc <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/users/{UserID}/followed/list?order=name_desc <br>
 
-- US 0009 (Grupo 3): GET /products/followed/{userId}/list?order=date_asc
-               /products/followed/{userId}/list?order=date_desc
+- US 0009 (Grupo 3): GET /products/followed/{userId}/list?order=date_asc <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/products/followed/{userId}/list?order=date_desc
+
+- US 0010 (Individual): POST /products/promo-post
+- US 0011 (Individual): GET /products/promo-post/count?user_id={userId}
                
 ### Mejoras futuras:
-- Validar cuando un usuario no existe en las historias US 0005 y US 0006.
-- Implementar DTO para el mensaje de respuesta de la historia US 0005
-- Mejora de restricciones en los posts (en especial US 0005)
+- Validar cuando un usuario no existe en la historia US 0006.
 
 ### Agradecimientos:
 - Gracias a nuestra Scrum Master, JOY por toda la paciencia. A Carlos (Charlie) por su enseñanza en git y a todos por su trabajo!! Grande equipo! 
