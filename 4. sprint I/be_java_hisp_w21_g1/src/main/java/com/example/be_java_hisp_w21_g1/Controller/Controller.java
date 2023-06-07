@@ -2,10 +2,7 @@ package com.example.be_java_hisp_w21_g1.Controller;
 
 import com.example.be_java_hisp_w21_g1.DTO.Request.FollowPostDTO;
 import com.example.be_java_hisp_w21_g1.DTO.Request.PostProductDTO;
-import com.example.be_java_hisp_w21_g1.DTO.Response.FollowedListDTO;
-import com.example.be_java_hisp_w21_g1.DTO.Response.FollowerListDTO;
-import com.example.be_java_hisp_w21_g1.DTO.Response.FollowersCountDTO;
-import com.example.be_java_hisp_w21_g1.DTO.Response.PostBySellerDTO;
+import com.example.be_java_hisp_w21_g1.DTO.Response.*;
 import com.example.be_java_hisp_w21_g1.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,14 +18,11 @@ public class Controller {
     //Recibe FollowPostDTO
     //Retorna status code
     @PostMapping("/users/{userId}/follow/{userIdToFollow}")
-    public ResponseEntity<?> follow(@PathVariable int userId, @PathVariable int userIdToFollow){
+    public ResponseEntity<ResponseDTO> follow(@PathVariable int userId, @PathVariable int userIdToFollow){
         FollowPostDTO followPostDTO = new FollowPostDTO(userId, userIdToFollow);
-        ResponseEntity<?> response;
-        if(userService.follow(followPostDTO))
-            response = new ResponseEntity<>("Todo joya",HttpStatus.OK);
-        else
-            response = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        return response;
+        ResponseEntity<ResponseDTO> response;
+        userService.follow(followPostDTO);
+        return new ResponseEntity<>(new ResponseDTO("Accion realizada con exito.", 200),HttpStatus.OK);
     }
 
     //US 0002: Obtener el resultado de la cantidad de usuarios que siguen a un determinado vendedor

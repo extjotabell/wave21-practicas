@@ -20,4 +20,9 @@ public class ExceptionsController extends ResponseEntityExceptionHandler {
     protected ResponseEntity<Object> badRequestException(Exception e, WebRequest request){
         return handleExceptionInternal(e, e.getMessage(), new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
+
+    @ExceptionHandler(UserNotSellerException.class)
+    protected ResponseEntity<Object> userNotSellerException(Exception e, WebRequest request){
+        return handleExceptionInternal(e, e.getMessage(), new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+    }
 }
