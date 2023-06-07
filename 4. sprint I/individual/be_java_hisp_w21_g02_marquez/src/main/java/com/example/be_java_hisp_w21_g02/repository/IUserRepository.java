@@ -12,4 +12,5 @@ public interface IUserRepository {
     List<User> getUsers(Set<Integer> users);
     List<User> listFollowingPosts2Weeks(int userId);
 
+    List<Post> getPostsByRange(double minimumPrice, double maximumPrice);
 }

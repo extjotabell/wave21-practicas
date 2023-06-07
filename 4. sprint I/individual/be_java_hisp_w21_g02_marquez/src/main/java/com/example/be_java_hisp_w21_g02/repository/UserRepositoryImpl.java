@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Repository
 public class UserRepositoryImpl implements IUserRepository{
@@ -69,6 +70,20 @@ public class UserRepositoryImpl implements IUserRepository{
             tempUser.setPosts(filteredList);
             result.add(tempUser);
         });
+
+        return result;
+    }
+
+    @Override
+    public List<Post> getPostsByRange(double minimumPrice, double maximumPrice) {
+        List<Post> result = new ArrayList<>();
+
+
+        dataUser.values().forEach(
+                user -> result.addAll(
+                        user.getPosts().stream()
+                        .filter(post -> post.getPrice() >= minimumPrice && post.getPrice() <= maximumPrice)
+                .toList()));
 
         return result;
     }

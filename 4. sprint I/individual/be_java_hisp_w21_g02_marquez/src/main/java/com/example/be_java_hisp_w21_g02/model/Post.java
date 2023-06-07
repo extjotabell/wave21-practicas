@@ -18,7 +18,7 @@ public class Post {
     private double price;
     private Product product;
     // Parte Individual
-    private boolean hasPromo;
-    private double discount;
+    private boolean hasPromo = false;
+    private double discount = 0;
     // Parte Individual
 }

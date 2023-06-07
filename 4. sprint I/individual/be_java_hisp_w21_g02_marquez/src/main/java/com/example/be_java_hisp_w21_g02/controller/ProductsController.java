@@ -1,5 +1,6 @@
 package com.example.be_java_hisp_w21_g02.controller;
 
+import com.example.be_java_hisp_w21_g02.dto.request.PostPromoDTO;
 import com.example.be_java_hisp_w21_g02.dto.request.PostRequestDTO;
 import com.example.be_java_hisp_w21_g02.exceptions.OrderNotFoundException;
 import com.example.be_java_hisp_w21_g02.service.IProductsService;
@@ -14,11 +15,11 @@ import org.springframework.web.bind.annotation.*;
 public class ProductsController {
 
     @Autowired
-    IProductsService productsService;
+    IProductsService _productsService;
 
     @PostMapping("/post")
     public ResponseEntity<?> createPost(@RequestBody PostRequestDTO postRequestDTO){
-        return productsService.createPost(postRequestDTO);
+        return _productsService.createPost(postRequestDTO);
     }
 
     @GetMapping("/followed/{userId}/list")
@@ -29,11 +30,33 @@ public class ProductsController {
         ResponseEntity<?> result = new ResponseEntity<>(HttpStatus.OK);
 
         if (order != null)
-            result =  productsService.listFollowingPosts2Weeks(userId, order);
+            result =  _productsService.listFollowingPosts2Weeks(userId, order);
         else
-            result =  productsService.listFollowingPosts2Weeks(userId);
-
+            result =  _productsService.listFollowingPosts2Weeks(userId);
 
         return result;
+    }
+
+    @GetMapping("/list")
+    public ResponseEntity<?> getListProductsFilterByPrice(@RequestParam String filter,
+                                                          @RequestParam("minimum_price") double minimumPrice,
+                                                       @RequestParam("maximum_price") double maximumPrice) {
+        if (!Constants.isOrderConstant(filter))
+            throw new OrderNotFoundException("El tipo de filtrado no existe");
+
+        return _productsService.getListProductsFilterByPrice(minimumPrice, maximumPrice);
+    }
+
+    @PostMapping("/promo-post")
+    public ResponseEntity<?> createPromoPost(@RequestBody PostPromoDTO postPromoDTO){
+        _productsService.createPromoPost(postPromoDTO);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/promo-post/count")
+    public ResponseEntity<?> getPromoPostCount(@RequestParam("user_id") int userId){
+        return new ResponseEntity<>(
+                _productsService.getPromoPostCount(userId), HttpStatus.OK
+        );
     }
 }

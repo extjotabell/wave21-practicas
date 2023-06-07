@@ -10,6 +10,7 @@ import com.example.be_java_hisp_w21_g02.exceptions.UserFollowingException;
 import com.example.be_java_hisp_w21_g02.model.User;
 import com.example.be_java_hisp_w21_g02.repository.IUserRepository;
 import com.example.be_java_hisp_w21_g02.utils.Constants;
+import com.example.be_java_hisp_w21_g02.utils.Validations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -58,7 +59,7 @@ public class UsersServiceImpl implements IUsersService{
 
         User persistedUser = _usersRepository.getUser(userId);
 
-        checkUserAndSellerException(persistedUser);
+        Validations.checkUserAndSellerException(persistedUser);
         
         return new FollowersCountDTO(
                 persistedUser.getId(),
@@ -69,7 +70,7 @@ public class UsersServiceImpl implements IUsersService{
 
     public FollowersListDTO getFollowersList(int userId){
         User persistedUser = _usersRepository.getUser(userId);
-        checkUserAndSellerException(persistedUser);
+        Validations.checkUserAndSellerException(persistedUser);
 
         return new FollowersListDTO(
                 persistedUser.getId(),
@@ -80,7 +81,7 @@ public class UsersServiceImpl implements IUsersService{
 
     public FollowersListDTO getFollowersList(int userId, String order){
         User persistedUser = _usersRepository.getUser(userId);
-        checkUserAndSellerException(persistedUser);
+        Validations.checkUserAndSellerException(persistedUser);
 
         List<FollowerDTO> followersDTO = getFollowDTO(persistedUser.getFollowers());
 
@@ -133,15 +134,6 @@ public class UsersServiceImpl implements IUsersService{
         }
 
         if (!persistedOtherUser.isSeller()){
-            throw new UserNotSellerException("El usuario no es un vendedor");
-        }
-    }
-
-    private static void checkUserAndSellerException(User persistedUser) {
-        if(persistedUser == null){
-            throw new UserNotFoundException("No se pudo encontrar un usuario con el ID mencionado");
-        }
-        if (!persistedUser.isSeller()) {
             throw new UserNotSellerException("El usuario no es un vendedor");
         }
     }

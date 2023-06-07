@@ -1,22 +1,27 @@
 package com.example.be_java_hisp_w21_g02.service;
 
 import com.example.be_java_hisp_w21_g02.dto.PostDTO;
+import com.example.be_java_hisp_w21_g02.dto.request.PostPromoDTO;
 import com.example.be_java_hisp_w21_g02.dto.request.PostRequestDTO;
 import com.example.be_java_hisp_w21_g02.dto.ProductDTO;
-import com.example.be_java_hisp_w21_g02.dto.response.FollowerDTO;
+import com.example.be_java_hisp_w21_g02.dto.response.PromoProductListDTO;
 import com.example.be_java_hisp_w21_g02.dto.response.UserPostResponseDTO;
+import com.example.be_java_hisp_w21_g02.exceptions.InvalidFilterParameterException;
 import com.example.be_java_hisp_w21_g02.exceptions.PostBadRequestException;
+import com.example.be_java_hisp_w21_g02.exceptions.PromoPostBadRequestException;
 import com.example.be_java_hisp_w21_g02.exceptions.UserNotFoundException;
 import com.example.be_java_hisp_w21_g02.model.Post;
 import com.example.be_java_hisp_w21_g02.model.Product;
 import com.example.be_java_hisp_w21_g02.model.User;
 import com.example.be_java_hisp_w21_g02.repository.IUserRepository;
 import com.example.be_java_hisp_w21_g02.utils.Constants;
+import com.example.be_java_hisp_w21_g02.utils.Validations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.security.InvalidParameterException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -27,28 +32,80 @@ import java.util.List;
 public class ProductsServiceImpl implements IProductsService{
 
     @Autowired
-    IUserRepository userRepository;
+    IUserRepository _usersRepository;
 
     @Override
     public ResponseEntity<?> createPost(PostRequestDTO postRequestDTO) {
         Post post = convertPostRequestDTOtoPost(postRequestDTO);
         try{
             if(!isValidRequest(postRequestDTO))
-                throw new PostBadRequestException("Peticion de publicacion invalida.");
+                throw new PostBadRequestException(Constants.POST_REQUEST_NOT_VALID_MESSAGE);
 
-            userRepository.createPost(post);
+            _usersRepository.createPost(post);
         }catch (NullPointerException e) {
-            throw new UserNotFoundException("No se pudo encontrar un usuario con el ID mencionado.");
+            throw new UserNotFoundException(Constants.USER_NOT_FOUND_BY_ID_MESSAGE);
         }
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @Override
+    public void createPromoPost(PostPromoDTO postPromoDTO) {
+        try {
+            if(!isValidRequest(postPromoDTO))
+                throw new PostBadRequestException(Constants.POST_REQUEST_NOT_VALID_MESSAGE);
+
+            if (!isValidPromoRequest(postPromoDTO))
+                throw new PromoPostBadRequestException(Constants.PROMO_POST_REQUEST_NOT_VALID_MESSAGE);
+
+            Post promoPost = convertPromoPostDTOToPost(postPromoDTO);
+            _usersRepository.createPost(promoPost);
+        }
+        catch (NullPointerException e){
+            throw new UserNotFoundException(Constants.USER_NOT_FOUND_BY_ID_MESSAGE);
+        }
+    }
+
+    private boolean isValidPromoRequest(PostPromoDTO postPromoDTO) {
+        return (postPromoDTO.isHasPromo() && (postPromoDTO.getDiscount() >= 0));
+    }
+
+    @Override
+    public PromoProductListDTO getPromoPostCount(int userId) {
+        User persistedUser = _usersRepository.getUser(userId);
+        Validations.checkUserAndSellerException(persistedUser);
+
+        return new PromoProductListDTO(
+                persistedUser.getId(),
+                persistedUser.getUsername(),
+                (int) persistedUser.getPosts().stream()
+                        .filter(Post::isHasPromo)
+                        .count()
+        );
+    }
+
+    @Override
+    public ResponseEntity<?> getListProductsFilterByPrice(double minimumPrice, double maximumPrice) {
+        if (minimumPrice < 0 && maximumPrice < 0)
+            throw new InvalidFilterParameterException("Los rangos deben ser mayores a 0");
+
+        List<Post> res = _usersRepository.getPostsByRange(minimumPrice, maximumPrice);
+
+        List<PostDTO> result = new ArrayList<>();
+
+        res.forEach(
+                post -> result.add(convertPostToPostDTO(post))
+        );
+
+        return ResponseEntity.ok(result);
+    }
+
+
+    @Override
     public ResponseEntity<?> listFollowingPosts2Weeks(int userId) {
         List<User> responseList;
         try{
-            responseList = userRepository.listFollowingPosts2Weeks(userId);
+            responseList = _usersRepository.listFollowingPosts2Weeks(userId);
         }catch (NullPointerException e) {
             throw new UserNotFoundException("No se pudo encontrar un usuario con el ID mencionado.");
         }
@@ -66,7 +123,7 @@ public class ProductsServiceImpl implements IProductsService{
     public ResponseEntity<?> listFollowingPosts2Weeks(int userId, String order) {
         List<User> responseList;
         try {
-            responseList = userRepository.listFollowingPosts2Weeks(userId);
+            responseList = _usersRepository.listFollowingPosts2Weeks(userId);
         } catch (NullPointerException e) {
             throw new UserNotFoundException("No se pudo encontrar un usuario con el ID mencionado.");
         }
@@ -83,6 +140,8 @@ public class ProductsServiceImpl implements IProductsService{
 
         return ResponseEntity.ok(postsDTO);
     }
+
+
 
     private void orderCollectionByOrderParam(List<Post> collection, String order) {
         if (order.equalsIgnoreCase(Constants.ORDER_DATE_ASC)) {
@@ -126,6 +185,19 @@ public class ProductsServiceImpl implements IProductsService{
         post.setPrice(postRequestDTO.getPrice());
         post.setProduct(convertProductDTOtoProduct(postRequestDTO.getProduct()));
         return post;
+    }
+
+    private Post convertPromoPostDTOToPost(PostPromoDTO postPromoDTO) {
+        Post promoPost = new Post();
+        promoPost.setUserId(postPromoDTO.getUserId());
+        promoPost.setDate(convertStringToLocalDate(postPromoDTO.getDate()));
+        promoPost.setCategory(postPromoDTO.getCategory());
+        promoPost.setPrice(postPromoDTO.getPrice());
+        promoPost.setProduct(convertProductDTOtoProduct(postPromoDTO.getProduct()));
+        promoPost.setHasPromo(postPromoDTO.isHasPromo());
+        promoPost.setDiscount(postPromoDTO.getDiscount());
+
+        return promoPost;
     }
 
     private LocalDate convertStringToLocalDate(String date){
