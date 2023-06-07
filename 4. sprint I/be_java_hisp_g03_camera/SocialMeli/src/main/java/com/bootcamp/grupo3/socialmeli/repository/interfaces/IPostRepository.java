@@ -9,4 +9,5 @@ public interface IPostRepository {
 
     int createPost(Post body);
     List<Post> getPostsByUserInTwoWeeks(int userId);
+    void addPromotion(int postId, double discount);
 }

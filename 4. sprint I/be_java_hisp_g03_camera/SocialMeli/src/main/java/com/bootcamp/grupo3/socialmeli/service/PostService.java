@@ -1,6 +1,7 @@
 package com.bootcamp.grupo3.socialmeli.service;
 
 import com.bootcamp.grupo3.socialmeli.dto.request.PostDTO;
+import com.bootcamp.grupo3.socialmeli.dto.request.PromoPostDTO;
 import com.bootcamp.grupo3.socialmeli.dto.response.UserPostListDTO;
 import com.bootcamp.grupo3.socialmeli.exception.UserNotFoundException;
 import com.bootcamp.grupo3.socialmeli.model.Post;
@@ -80,5 +81,14 @@ public class PostService implements IPostService {
             .sorted(c)
             .toList()
         );
+    }
+
+    @Override
+    public int createPromoPost(PromoPostDTO promoPostDTO) {
+        int postId = this.createPost(promoPostDTO.getPost());
+        if (promoPostDTO.isHasPromo()){
+            postRepository.addPromotion(postId, promoPostDTO.getDiscount());
+        }
+        return postId;
     }
 }

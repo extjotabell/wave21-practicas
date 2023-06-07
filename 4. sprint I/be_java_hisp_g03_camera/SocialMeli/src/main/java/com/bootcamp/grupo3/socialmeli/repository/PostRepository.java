@@ -1,16 +1,20 @@
 package com.bootcamp.grupo3.socialmeli.repository;
 
 import com.bootcamp.grupo3.socialmeli.model.Post;
+import com.bootcamp.grupo3.socialmeli.model.PromoPost;
 import com.bootcamp.grupo3.socialmeli.repository.interfaces.IPostRepository;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class PostRepository implements IPostRepository {
     private final List<Post> posts = new ArrayList<>();
+    private final Map<Integer,Double> discounts = new HashMap<>();
     private int nextId;
 
     public PostRepository() {
@@ -35,5 +39,10 @@ public class PostRepository implements IPostRepository {
           .filter(p -> p.getUserId() == userId)
           .filter(post -> post.getDate().isAfter(pastTwoWeek))
           .toList();
+    }
+
+    @Override
+    public void addPromotion(int postId, double discount) {
+        discounts.put(postId, discount);
     }
 }
