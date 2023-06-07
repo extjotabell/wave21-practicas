@@ -25,4 +25,8 @@ public class User {
     public int followersCount() {
         return followers.size();
     }
+
+    public int productDiscountCount() {
+        return posts.stream().filter(x->x.isHas_promo()).toList().size();
+    }
 }

@@ -2,6 +2,7 @@ package com.example.be_java_hisp_w21_g1.Controller;
 
 import com.example.be_java_hisp_w21_g1.DTO.Request.FollowPostDTO;
 import com.example.be_java_hisp_w21_g1.DTO.Request.PostProductDTO;
+import com.example.be_java_hisp_w21_g1.DTO.Request.PostProductDiscountDTO;
 import com.example.be_java_hisp_w21_g1.DTO.Response.*;
 import com.example.be_java_hisp_w21_g1.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -101,15 +102,16 @@ public class Controller {
 
     //US 0010: Llevar a cabo la publicación de un nuevo producto en promoción
     @PostMapping("/products/promo-post")
-    public ResponseEntity<?> newProductInSale() {
-        return null;
+    public ResponseEntity<?> newProductInDiscount(@RequestBody PostProductDiscountDTO postProductDiscountDTO) {
+        userService.createPostProductWithDiscount(postProductDiscountDTO);
+        return new ResponseEntity<>("Se creó el producto con descuento!", HttpStatus.OK);
     }
 
     //US 0011: Obtener la cantidad de productos en promoción de un determinado vendedor
 
     @GetMapping("/products/promo-post/count")
-    public ResponseEntity<?> promoProductsCount(@RequestParam(value = "user_id", required = true) int userId) {
-        return null;
+    public ResponseEntity<ProductCountDTO> promoProductsCount(@RequestParam(value = "user_id", required = true) int userId) {
+        return new ResponseEntity<>(userService.getDiscountProductCount(userId), HttpStatus.OK);
     }
 
     //US 0012: OPCIONAL

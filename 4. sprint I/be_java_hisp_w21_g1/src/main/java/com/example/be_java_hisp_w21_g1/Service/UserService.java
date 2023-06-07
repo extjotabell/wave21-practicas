@@ -2,6 +2,7 @@ package com.example.be_java_hisp_w21_g1.Service;
 
 import com.example.be_java_hisp_w21_g1.DTO.Request.FollowPostDTO;
 import com.example.be_java_hisp_w21_g1.DTO.Request.PostProductDTO;
+import com.example.be_java_hisp_w21_g1.DTO.Request.PostProductDiscountDTO;
 import com.example.be_java_hisp_w21_g1.DTO.Response.*;
 import com.example.be_java_hisp_w21_g1.Exception.BadRequestException;
 import com.example.be_java_hisp_w21_g1.Exception.NotFoundException;
@@ -176,5 +177,28 @@ public class UserService implements IUserService {
         }
     }
 
+    public void createPostProductWithDiscount (PostProductDiscountDTO productDiscountDTO)
+    {
+        Optional<User> user =userRepository.findUserById(productDiscountDTO.getUser_id());
+        if(user.isEmpty()){
+            throw new BadRequestException("No se encontro el usuario con el ID" + productDiscountDTO.getUser_id());
+        }
+        int postId = user.get().getPosts().size();
+        Post post = Mapper.DTODiscountToPost(productDiscountDTO, postId);
 
+        userRepository.addPostToUser(post, user.get());
+    }
+
+    public ProductCountDTO getDiscountProductCount(int idUser) {
+
+        Optional<User> foundUser = userRepository.findUserById(idUser);
+        if (foundUser.isEmpty()) {
+            throw new NotFoundException("No se encontro el usuario con el ID" + idUser);
+        }
+
+        User user = foundUser.get();
+        int followersCount = user.productDiscountCount();
+        return new ProductCountDTO(idUser, user.getUser_name(),followersCount);
+
+    }
 }

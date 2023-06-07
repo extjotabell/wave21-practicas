@@ -27,10 +27,10 @@ public class UserRepository implements IUserRepository {
         Product product2 = new Product(2, "Producto2", "Type2", "Brand2", "Color2", "Notes2");
         Product product3 = new Product(3, "Producto3", "Type3", "Brand3", "Color3", "Notes3");
 
-        Post post1 = new Post(1, 1, LocalDate.of(2023, 06, 04), product1, 1, 25.50);
-        Post post2 = new Post(1, 2, LocalDate.of(2023, 05, 28), product2, 1, 15.90);
-        Post post3 = new Post(1, 3, LocalDate.of(2022, 04, 04), product3, 1, 190.00);
-        Post post4 = new Post(1, 4, LocalDate.of(2023, 05, 29), product2, 1, 90.90);
+        Post post1 = new Post(1, 1, LocalDate.of(2023, 06, 04), product1, 1, 25.50, false, 0.00);
+        Post post2 = new Post(1, 2, LocalDate.of(2023, 05, 28), product2, 1, 15.90, true, 5.00);
+        Post post3 = new Post(1, 3, LocalDate.of(2022, 04, 04), product3, 1, 190.00, false, 0.00);
+        Post post4 = new Post(1, 4, LocalDate.of(2023, 05, 29), product2, 1, 90.90, true, 30.50);
 
         // asList crea un array de tamaño fijo y tratamos de agregar mas cosas
         // List<Post> posts = Arrays.asList(post1, post2, post3, post4);
@@ -87,6 +87,5 @@ public class UserRepository implements IUserRepository {
         user.getFollowed().remove(seller);
         seller.getFollowers().remove(user);
     }
-
 
 }

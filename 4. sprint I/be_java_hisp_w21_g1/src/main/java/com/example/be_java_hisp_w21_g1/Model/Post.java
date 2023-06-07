@@ -18,6 +18,11 @@ public class Post {
     private Product product;
     private int category;
     private Double price;
+    private boolean has_promo;
+    private double discount;
+
+    public Post(int userId, int postId, LocalDate date, Product product, int category, Double price) {
+    }
 
 
     public boolean isLatestPost(LocalDate currentDate){
