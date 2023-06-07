@@ -11,7 +11,7 @@ import lombok.Setter;
 @Getter
 public class PostRequestDTO {
     private int userId;
-    private String date;        //Originalmente LocalDate
+    private String date;
     private ProductDTO product;
     private int category;
     private double price;

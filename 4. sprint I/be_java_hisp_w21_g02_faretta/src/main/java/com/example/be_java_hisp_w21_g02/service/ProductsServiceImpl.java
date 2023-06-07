@@ -3,7 +3,7 @@ package com.example.be_java_hisp_w21_g02.service;
 import com.example.be_java_hisp_w21_g02.dto.PostDTO;
 import com.example.be_java_hisp_w21_g02.dto.request.PostRequestDTO;
 import com.example.be_java_hisp_w21_g02.dto.ProductDTO;
-import com.example.be_java_hisp_w21_g02.dto.response.FollowerDTO;
+import com.example.be_java_hisp_w21_g02.dto.request.PromoPostRequestDTO;
 import com.example.be_java_hisp_w21_g02.dto.response.UserPostResponseDTO;
 import com.example.be_java_hisp_w21_g02.exceptions.PostBadRequestException;
 import com.example.be_java_hisp_w21_g02.exceptions.UserNotFoundException;
@@ -31,18 +31,33 @@ public class ProductsServiceImpl implements IProductsService{
 
     @Override
     public ResponseEntity<?> createPost(PostRequestDTO postRequestDTO) {
-        Post post = convertPostRequestDTOtoPost(postRequestDTO);
-        try{
-            if(!isValidRequest(postRequestDTO))
-                throw new PostBadRequestException("Peticion de publicacion invalida.");
+        if(!isValidRequest(postRequestDTO))
+            throw new PostBadRequestException("Peticion de publicacion invalida.");
 
-            userRepository.createPost(post);
-        }catch (NullPointerException e) {
-            throw new UserNotFoundException("No se pudo encontrar un usuario con el ID mencionado.");
-        }
+        Post post = convertPostRequestDTOtoPost(postRequestDTO);
+
+        addPost(post);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
+    @Override
+    public ResponseEntity<?> createPost(PromoPostRequestDTO postRequestDTO) {
+        if(!isPromo(postRequestDTO) || !isValidRequest(postRequestDTO)){
+            throw new PostBadRequestException("Peticion de publicacion invalida.");
+        }
+
+        Post post = convertPostRequestDTOtoPost(postRequestDTO);
+
+        addPost(post);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    private boolean isPromo(PromoPostRequestDTO postRequestDTO) {
+
+        return (postRequestDTO.isHasPromo() && postRequestDTO.getDiscount() > 0D);
+    }
+
 
     @Override
     public ResponseEntity<?> listFollowingPosts2Weeks(int userId) {
@@ -83,6 +98,8 @@ public class ProductsServiceImpl implements IProductsService{
 
         return ResponseEntity.ok(postsDTO);
     }
+
+
 
     private void orderCollectionByOrderParam(List<Post> collection, String order) {
         if (order.equalsIgnoreCase(Constants.ORDER_DATE_ASC)) {
@@ -125,8 +142,16 @@ public class ProductsServiceImpl implements IProductsService{
         post.setCategory(postRequestDTO.getCategory());
         post.setPrice(postRequestDTO.getPrice());
         post.setProduct(convertProductDTOtoProduct(postRequestDTO.getProduct()));
+
         return post;
     }
+    private Post convertPostRequestDTOtoPost(PromoPostRequestDTO postRequestDTO){
+        Post post = convertPostRequestDTOtoPost((PostRequestDTO) postRequestDTO);
+        post.setHasPromo(postRequestDTO.isHasPromo());
+        post.setDiscount(postRequestDTO.getDiscount());
+        return post;
+    }
+
 
     private LocalDate convertStringToLocalDate(String date){
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -147,5 +172,13 @@ public class ProductsServiceImpl implements IProductsService{
         product.setNotes(productDTO.getNotes());
         product.setColor(productDTO.getColor());
         return product;
+    }
+
+    private void addPost(Post post){
+        try{
+            userRepository.createPost(post);
+        }catch (NullPointerException e) {
+            throw new UserNotFoundException("No se pudo encontrar un usuario con el ID mencionado.");
+        }
     }
 }
