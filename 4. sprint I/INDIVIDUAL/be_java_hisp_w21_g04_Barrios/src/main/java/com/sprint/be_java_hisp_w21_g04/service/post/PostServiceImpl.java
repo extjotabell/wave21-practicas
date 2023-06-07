@@ -100,7 +100,7 @@ public class PostServiceImpl implements IPostService {
 //      Se define el tiempo de publicacion de posts de las ultimas dos semanas
 //      Se define una fecha limite/base de dos semanas hacia atras desde la fecha actual
         LocalDate twoWeeksAgo = LocalDate.now().minusWeeks(2);
-        System.out.println("HOLA" + twoWeeksAgo);
+
         if (this._postRepository.getSellerFollowed(userId).isEmpty())
             throw new EmptySellerFollowedList("Los vendedores que sigues no tienen publicaciones");
         List<PostResponseDto> posts = this._postRepository.getSellerFollowed(userId).stream()
@@ -127,7 +127,7 @@ public class PostServiceImpl implements IPostService {
                 })
 //               Se convierte la lista a un ArrayList
                 .collect(Collectors.toList());
-//        System.out.println("HOLA" + posts.size());
+
         if (posts.isEmpty())
             throw new EmptySellerFollowedList("Los vendedores que sigues no han hecho publiciones en las últimas dos semanas");
         return new SellerFollowedListPostResponseDto(userId, posts);
