@@ -1,9 +1,13 @@
 package com.example.be_java_hisp_w21_g02.service;
 
 import com.example.be_java_hisp_w21_g02.dto.PostDTO;
+import com.example.be_java_hisp_w21_g02.dto.PostPromoDTO;
 import com.example.be_java_hisp_w21_g02.dto.request.PostRequestDTO;
 import com.example.be_java_hisp_w21_g02.dto.ProductDTO;
+import com.example.be_java_hisp_w21_g02.dto.request.PromoRequestDTO;
 import com.example.be_java_hisp_w21_g02.dto.response.FollowerDTO;
+import com.example.be_java_hisp_w21_g02.dto.response.FollowersCountDTO;
+import com.example.be_java_hisp_w21_g02.dto.response.PromoCountDTO;
 import com.example.be_java_hisp_w21_g02.dto.response.UserPostResponseDTO;
 import com.example.be_java_hisp_w21_g02.exceptions.PostBadRequestException;
 import com.example.be_java_hisp_w21_g02.exceptions.UserNotFoundException;
@@ -117,6 +121,12 @@ public class ProductsServiceImpl implements IProductsService{
                 && postRequestDTO.getPrice() >= 0;
     }
 
+    private boolean isValidRequestPromo(PromoRequestDTO promoRequestDTO){
+        LocalDate date = convertStringToLocalDate(promoRequestDTO.getDate());
+        return promoRequestDTO.getDate() != null && (date.isBefore(LocalDate.now()) || date.isEqual(LocalDate.now()))
+                && promoRequestDTO.getPrice() >= 0 && promoRequestDTO.isHasPromo() == true && promoRequestDTO.getDiscount() > 0;
+    }
+
     private Post convertPostRequestDTOtoPost(PostRequestDTO postRequestDTO){
         Post post = new Post();
         post.setUserId(postRequestDTO.getUserId());
@@ -148,4 +158,56 @@ public class ProductsServiceImpl implements IProductsService{
         product.setColor(productDTO.getColor());
         return product;
     }
+
+
+    private Post convertPostRequestPromoDTOtoPost(PromoRequestDTO promoRequestDTO){
+        Post post = new Post();
+        post.setUserId(promoRequestDTO.getUserId());
+
+        post.setDate(convertStringToLocalDate(promoRequestDTO.getDate()));
+        post.setCategory(promoRequestDTO.getCategory());
+        post.setPrice(promoRequestDTO.getPrice());
+        post.setProduct(convertProductDTOtoProduct(promoRequestDTO.getProduct()));
+        post.setHasPromo(promoRequestDTO.isHasPromo());
+        post.setDiscount(promoRequestDTO.getDiscount());
+        return post;
+    }
+
+    private PostPromoDTO convertPostToPromoDTO(Post post){
+        return new PostPromoDTO(post.getUserId(),post.getPostId(),convertLocalDateToString(post.getDate()),
+                convertProductToProductDTO(post.getProduct()),post.getCategory(),post.getPrice(),post.isHasPromo(),post.getDiscount());
+    }
+
+
+    public ResponseEntity<?> createPostHasPromo(PromoRequestDTO promoRequestDTO) {
+        Post post = convertPostRequestPromoDTOtoPost(promoRequestDTO);
+        try{
+            if(!isValidRequestPromo(promoRequestDTO))
+                throw new PostBadRequestException("Peticion de publicacion invalida.");
+
+            userRepository.createPost(post);
+        }catch (NullPointerException e) {
+            throw new UserNotFoundException("No se pudo encontrar un usuario con el ID mencionado.");
+        }
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    public PromoCountDTO getPostCount(int userId){
+        try {
+            User persistedUser = userRepository.getUser(userId);
+
+            int count = (int) persistedUser.getPosts().stream()
+                    .filter(post -> post.isHasPromo())
+                    .count();
+
+            return new PromoCountDTO(
+                    persistedUser.getId(),
+                    persistedUser.getUsername(),
+                    count);
+        } catch (NullPointerException e) {
+            throw new UserNotFoundException("El userId no existe en el repositorio");
+        }
+    }
+
 }

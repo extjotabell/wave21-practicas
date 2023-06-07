@@ -1,6 +1,7 @@
 package com.example.be_java_hisp_w21_g02.controller;
 
 import com.example.be_java_hisp_w21_g02.dto.request.PostRequestDTO;
+import com.example.be_java_hisp_w21_g02.dto.request.PromoRequestDTO;
 import com.example.be_java_hisp_w21_g02.exceptions.OrderNotFoundException;
 import com.example.be_java_hisp_w21_g02.service.IProductsService;
 import com.example.be_java_hisp_w21_g02.utils.Constants;
@@ -36,4 +37,19 @@ public class ProductsController {
 
         return result;
     }
+
+    @PostMapping("/promo-post")
+    public ResponseEntity<?> createPromoPost(@RequestBody PromoRequestDTO promoRequestDTO){
+        return productsService.createPostHasPromo(promoRequestDTO);
+    }
+
+    @GetMapping("/promo-post/count")
+    public ResponseEntity<?> listPromo(@RequestParam int userId){
+        return new ResponseEntity<>(
+                productsService.getPostCount(userId), HttpStatus.OK
+        );
+    }
+
+
+
 }
