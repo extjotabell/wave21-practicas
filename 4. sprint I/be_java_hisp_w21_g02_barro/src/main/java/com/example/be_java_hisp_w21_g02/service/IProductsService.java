@@ -12,4 +12,6 @@ public interface IProductsService {
     ResponseEntity<?> listFollowingPosts2Weeks(int userId);
 
     ResponseEntity<?> listFollowingPosts2Weeks(int userId, String order);
+
+    ResponseEntity<?> countPromoPostByUserId(int userId);
 }

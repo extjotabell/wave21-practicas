@@ -1,7 +1,6 @@
 package com.example.be_java_hisp_w21_g02.repository;
 
 import com.example.be_java_hisp_w21_g02.model.Post;
-import com.example.be_java_hisp_w21_g02.model.Product;
 import com.example.be_java_hisp_w21_g02.model.User;
 import org.springframework.stereotype.Repository;
 
@@ -71,6 +70,14 @@ public class UserRepositoryImpl implements IUserRepository{
         });
 
         return result;
+    }
+
+    @Override
+    public long countPromoPost(int userId){
+        List<Post> filteredPromoList = dataUser.get(userId).getPosts();
+        return filteredPromoList.stream()
+                .filter(Post::isHasPromo)
+                .count();
     }
 
     private void loadInitialData() {

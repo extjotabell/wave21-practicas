@@ -4,7 +4,7 @@ import com.example.be_java_hisp_w21_g02.dto.PostDTO;
 import com.example.be_java_hisp_w21_g02.dto.request.PostRequestDTO;
 import com.example.be_java_hisp_w21_g02.dto.ProductDTO;
 import com.example.be_java_hisp_w21_g02.dto.request.PromoPostRequestDTO;
-import com.example.be_java_hisp_w21_g02.dto.response.FollowerDTO;
+import com.example.be_java_hisp_w21_g02.dto.response.PromoPostCountDTO;
 import com.example.be_java_hisp_w21_g02.dto.response.UserPostResponseDTO;
 import com.example.be_java_hisp_w21_g02.exceptions.PostBadRequestException;
 import com.example.be_java_hisp_w21_g02.exceptions.UserNotFoundException;
@@ -100,6 +100,18 @@ public class ProductsServiceImpl implements IProductsService{
         return ResponseEntity.ok(postsDTO);
     }
 
+    @Override
+    public ResponseEntity<?> countPromoPostByUserId(int userId){
+        if (userId == 0) {
+            throw new UserNotFoundException("El parámetro user_id es obligatorio");
+        } else
+        return ResponseEntity.ok(
+                new PromoPostCountDTO(
+                userRepository.getUser(userId).getId()
+                ,userRepository.getUser(userId).getUsername()
+                ,userRepository.countPromoPost(userId)));
+    }
+
     private void orderCollectionByOrderParam(List<Post> collection, String order) {
         if (order.equalsIgnoreCase(Constants.ORDER_DATE_ASC)) {
             collection.sort(Comparator.comparing(Post::getDate));
@@ -121,6 +133,7 @@ public class ProductsServiceImpl implements IProductsService{
         return new PostDTO(post.getUserId(),post.getPostId(),convertLocalDateToString(post.getDate()),
                 convertProductToProductDTO(post.getProduct()),post.getCategory(),post.getPrice());
     }
+
 
     private ProductDTO convertProductToProductDTO(Product product){
         return new ProductDTO(product.getProductId(),product.getProductName(),product.getBrand(), product.getType(),
@@ -150,7 +163,7 @@ public class ProductsServiceImpl implements IProductsService{
         return post;
     }
 
-    //Nuevo converDTO para el promoPost
+    //Nuevo convertDTO para el promoPost
     private Post convertPromoPostRequestDTOtoPost(PromoPostRequestDTO promoPostRequestDTO){
         Post promoPost = new Post();
         promoPost.setUserId(promoPostRequestDTO.getUserId());

@@ -11,5 +11,5 @@ public interface IUserRepository {
     void createPost(Post post);
     List<User> getUsers(Set<Integer> users);
     List<User> listFollowingPosts2Weeks(int userId);
-
+    long countPromoPost(int userId);
 }
