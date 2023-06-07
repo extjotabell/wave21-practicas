@@ -18,8 +18,13 @@ public class Post {
     private Product product;
     private int category;
     private Double price;
+<<<<<<< HEAD:4. sprint I/be_java_hisp_w21_g1_deniz/src/main/java/com/example/be_java_hisp_w21_g1/Model/Post.java
     private Boolean hasPromo;
     private Double discount;
+=======
+
+
+>>>>>>> be_java_hisp_w21_g01:4. sprint I/be_java_hisp_w21_g1/src/main/java/com/example/be_java_hisp_w21_g1/Model/Post.java
     public boolean isLatestPost(LocalDate currentDate){
         return (getLocalDate().isAfter(currentDate.minusWeeks(2))
                 && getLocalDate().isBefore(currentDate.plusDays(1))
