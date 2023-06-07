@@ -31,7 +31,7 @@ public class UserServiceImpl implements IUserService {
             throw new UserNotFoundException("Usuario no encontrado.");
         }
         if (user.getFollowed().contains(userToFollow.getUserId()) || userToFollow.getFollowers().contains(user.getUserId())){
-            throw new UserAlreadyFollowedException("Ya se están siguiendo.");
+            throw new UserAlreadyFollowedException(String.format("Ya sigues a %s.", userToFollow.getUserName()));
         }
         if (user.getUserId() == userToFollow.getUserId()){
             throw new UserFollowNotAllowedException("No puedes seguirte a ti mismo.");
@@ -39,7 +39,7 @@ public class UserServiceImpl implements IUserService {
         user.getFollowed().add(userToFollow.getUserId());
         userToFollow.getFollowers().add(user.getUserId());
         ResponseDto userFollowResponseDto = new ResponseDto();
-        userFollowResponseDto.setMessage("Has seguido a " + userToFollow.getUserName());
+        userFollowResponseDto.setMessage(String.format("Ahora sigues a %s.", userToFollow.getUserName()));
         return userFollowResponseDto;
     }
     @Override
@@ -72,7 +72,7 @@ public class UserServiceImpl implements IUserService {
         int userToUnfollowIndex = userToUnfollow.getFollowers().indexOf(user.getUserId());
         userToUnfollow.getFollowers().remove(userToUnfollowIndex);
         ResponseDto userUnfollowResponseDto = new ResponseDto();
-        userUnfollowResponseDto.setMessage("Has dejado de seguir a " + userToUnfollow.getUserName());
+        userUnfollowResponseDto.setMessage(String.format("Dejaste de seguir a %s.", userToUnfollow.getUserName()));
         return userUnfollowResponseDto;
     }
     @Override
