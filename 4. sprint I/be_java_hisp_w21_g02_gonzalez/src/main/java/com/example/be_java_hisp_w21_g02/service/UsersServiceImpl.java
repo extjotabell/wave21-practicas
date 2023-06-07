@@ -164,6 +164,12 @@ public class UsersServiceImpl implements IUsersService{
     //endregion
 
     //INDIVIDUAL BONUS
+    /**
+     * Returns a ResponseEntity with any result usually it'll be GenericResponseDTO
+     *
+     * @param  body  a body (DTO) type UserRequestDTO
+     * @return       GenericResponseDTO with a message to inform if user was created and the userId like body
+     */
     @Override
     public ResponseEntity<?> createUser(UserRequestDTO userRequestDTO) {
         if(!isValidRequest(userRequestDTO)){
@@ -176,10 +182,19 @@ public class UsersServiceImpl implements IUsersService{
                 responseRepository.getId())), HttpStatus.CREATED);
     }
 
+    /**
+     * @param userDTO
+     * @return boolean
+     */
     private boolean isValidRequest(UserRequestDTO userDTO){
         return userDTO.getUserName() != null;
     }
 
+    /**
+     * @param code
+     * @param message
+     * @return GenericResponseDTO
+     */
     private GenericResponseDTO getGenericResponseDTO(int code, String message){
         return new GenericResponseDTO(code, message);
     }

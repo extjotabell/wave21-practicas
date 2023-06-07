@@ -159,6 +159,12 @@ public class ProductsServiceImpl implements IProductsService{
     }
 
     //INDIVIDUAL US0010
+    /**
+     * Returns a ResponseEntity with any result usually it'll be GenericResponseDTO
+     *
+     * @param productRequestDTO productRequestDTO
+     * @return ResponseEntity with an object type GenericResponseDTO like body
+     */
     @Override
     public ResponseEntity<?> createProductWithPromo(ProductWithPromoRequestDTO productRequestDTO) {
         if(isInvalidRequest(productRequestDTO)){
@@ -173,6 +179,12 @@ public class ProductsServiceImpl implements IProductsService{
     }
 
     //INDIVIDUAL US0011
+    /**
+     * Returns a ResponseEntity with any result usually it'll be CountPromoResponseDTO
+     *
+     * @param  int  userId
+     * @return      ResponseEntity with an object type CountPromoResponseDTO like body
+     */
     @Override
     public ResponseEntity<?> getProductsWithPromoByUserId(int userId) {
         User responseRepository = _userRepository.getProductsWithPromoByUserId(userId);
@@ -184,15 +196,28 @@ public class ProductsServiceImpl implements IProductsService{
         return new ResponseEntity<>(getCountPromoResponseDTO(responseRepository), HttpStatus.OK);
     }
 
+    /**
+     * @param code
+     * @param message
+     * @return GenericResponseDTO
+     */
     private GenericResponseDTO getGenericResponseDTO(int code, String message){
         return new GenericResponseDTO(code, message);
     }
 
+    /**
+     * @param productDTO
+     * @return boolean
+     */
     private boolean isInvalidRequest(ProductWithPromoRequestDTO productDTO){
         return !productDTO.isHasPromo() || productDTO.getProduct() == null || productDTO.getProduct().getProductName()
                 == null || productDTO.getDiscount() <= 0;
     }
 
+    /**
+     * @param postDTO
+     * @return Post entity
+     */
     private Post convertProductWithPromoRequestDTOtoPost(ProductWithPromoRequestDTO postDTO){
         Post post = new Post();
         post.setUserId(postDTO.getUserId());
@@ -206,6 +231,10 @@ public class ProductsServiceImpl implements IProductsService{
         return post;
     }
 
+    /**
+     * @param user
+     * @return CountPromoResponseDTO
+     */
     private CountPromoResponseDTO getCountPromoResponseDTO(User user){
         return new CountPromoResponseDTO(user.getId(), user.getUsername(), user.getPosts().size());
     }
