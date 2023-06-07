@@ -27,10 +27,10 @@ public class UserRepository implements IUserRepository {
         Product product2 = new Product(2, "Producto2", "Type2", "Brand2", "Color2", "Notes2");
         Product product3 = new Product(3, "Producto3", "Type3", "Brand3", "Color3", "Notes3");
 
-        Post post1 = new Post(1, 1, LocalDate.of(2023, 06, 04), product1, 1, 25.50);
-        Post post2 = new Post(1, 2, LocalDate.of(2023, 05, 28), product2, 1, 15.90);
-        Post post3 = new Post(1, 3, LocalDate.of(2022, 04, 04), product3, 1, 190.00);
-        Post post4 = new Post(1, 4, LocalDate.of(2023, 05, 29), product2, 1, 90.90);
+        Post post1 = new Post(2, 1, LocalDate.of(2023, 06, 04), product1, 1, 25.50);
+        Post post2 = new Post(2, 2, LocalDate.of(2023, 05, 28), product2, 1, 15.90);
+        Post post3 = new Post(2, 3, LocalDate.of(2022, 04, 04), product3, 1, 190.00);
+        Post post4 = new Post(2, 4, LocalDate.of(2023, 05, 29), product2, 1, 90.90);
 
         // asList crea un array de tamaño fijo y tratamos de agregar mas cosas
         // List<Post> posts = Arrays.asList(post1, post2, post3, post4);
@@ -42,7 +42,7 @@ public class UserRepository implements IUserRepository {
         posts.add(post4);
 
         User user1 = new User(1, "Pepe", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
-        User user2 = new User(2, "Pablo", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        User user2 = new User(2, "Pablo", new ArrayList<>(), new ArrayList<>(), posts);
         User user3 = new User(3, "Pedro", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
         User user4 = new User(4, "USUARIO NUEVO", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
 
@@ -89,4 +89,7 @@ public class UserRepository implements IUserRepository {
     }
 
 
+    public void addPromoPostToUser(Post post, User user) {
+        user.getPosts().add(post);
+    }
 }
