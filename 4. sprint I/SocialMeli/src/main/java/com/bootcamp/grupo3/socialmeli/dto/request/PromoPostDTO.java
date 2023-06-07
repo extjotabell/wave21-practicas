@@ -21,6 +21,6 @@ public class PromoPostDTO {
     private ProductDTO product;
     private int category;
     private double price;
-    private boolean hasPromo;
+    private boolean has_Promo;
     private double discount;
 }

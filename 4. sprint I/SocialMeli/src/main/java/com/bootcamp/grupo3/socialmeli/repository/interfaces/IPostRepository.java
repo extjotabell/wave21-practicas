@@ -12,4 +12,6 @@ public interface IPostRepository {
     List<Post> getPostsByUserInTwoWeeks(int userId);
 
     int createPromoPost(Post body);
+
+    long getCountPromoPostByUser(int userId);
 }

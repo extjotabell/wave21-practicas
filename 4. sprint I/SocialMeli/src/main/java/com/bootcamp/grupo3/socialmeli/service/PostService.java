@@ -2,9 +2,12 @@ package com.bootcamp.grupo3.socialmeli.service;
 
 import com.bootcamp.grupo3.socialmeli.dto.request.PostDTO;
 import com.bootcamp.grupo3.socialmeli.dto.request.PromoPostDTO;
+import com.bootcamp.grupo3.socialmeli.dto.response.UserFollowerCountDTO;
 import com.bootcamp.grupo3.socialmeli.dto.response.UserPostListDTO;
+import com.bootcamp.grupo3.socialmeli.dto.response.UserPromoPostCountDTO;
 import com.bootcamp.grupo3.socialmeli.exception.UserNotFoundException;
 import com.bootcamp.grupo3.socialmeli.model.Post;
+import com.bootcamp.grupo3.socialmeli.model.User;
 import com.bootcamp.grupo3.socialmeli.repository.interfaces.IPostRepository;
 import com.bootcamp.grupo3.socialmeli.service.interfaces.IPostService;
 import com.bootcamp.grupo3.socialmeli.service.interfaces.IUserService;
@@ -91,4 +94,17 @@ public class PostService implements IPostService {
             .toList()
         );
     }
+
+    @Override
+    public UserPromoPostCountDTO getUserPromoPostCount(final int userId) {
+        if (userService.userExists(userId)) {
+            String userName = userService.getUserByID(userId).getName();
+            long promoProductsCount = postRepository.getCountPromoPostByUser(userId);
+            return new UserPromoPostCountDTO(userId, userName, promoProductsCount);
+        } else {
+            throw new UserNotFoundException("No se ha encontrado el usuario");
+        }
+
+    }
+
 }

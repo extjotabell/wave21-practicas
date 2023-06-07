@@ -3,6 +3,8 @@ package com.bootcamp.grupo3.socialmeli.controller;
 import com.bootcamp.grupo3.socialmeli.dto.request.PostDTO;
 import com.bootcamp.grupo3.socialmeli.dto.request.PromoPostDTO;
 import com.bootcamp.grupo3.socialmeli.dto.response.MessageDTO;
+import com.bootcamp.grupo3.socialmeli.dto.response.UserFollowerCountDTO;
+import com.bootcamp.grupo3.socialmeli.dto.response.UserPromoPostCountDTO;
 import com.bootcamp.grupo3.socialmeli.service.interfaces.IPostService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,5 +37,10 @@ public class PostController {
     public ResponseEntity<MessageDTO> createPromoPost(@RequestBody PromoPostDTO body) {
         int promoPostId = postService.createPromoPost(body);
         return ResponseEntity.ok(new MessageDTO("Post con promo agregado exitosamente con id: " + promoPostId));
+    }
+
+    @GetMapping("promo-post/count")
+    public ResponseEntity<UserPromoPostCountDTO> getPromoPostCount(@RequestParam(value = "user_id") int userId){
+        return ResponseEntity.ok(postService.getUserPromoPostCount(userId));
     }
 }

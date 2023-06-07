@@ -84,7 +84,8 @@ public class UserService implements IUserService {
         return user;
     }
 
-    private User getUserByID(int userId) {
+    @Override
+    public User getUserByID(int userId) {
         Optional<User> user = userRepository.getUserByID(userId);
         return user.orElseThrow(() -> new UserNotFoundException("No se ha encontrado el usuario"));
     }

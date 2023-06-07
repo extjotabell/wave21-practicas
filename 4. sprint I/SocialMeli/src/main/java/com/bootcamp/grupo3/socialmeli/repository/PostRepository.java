@@ -43,4 +43,12 @@ public class PostRepository implements IPostRepository {
         posts.add(body);
         return body.getId();
     }
+
+    @Override
+    public long getCountPromoPostByUser(int userId) {
+        return posts.stream()
+                .filter(p -> p.getUserId() == userId)
+                .filter(p -> p.isHas_promo())
+                .count();
+    }
 }
