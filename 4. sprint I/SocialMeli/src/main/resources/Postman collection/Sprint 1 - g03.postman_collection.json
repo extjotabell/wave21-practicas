@@ -1,8 +1,10 @@
 {
 	"info": {
-		"_postman_id": "932b4dde-9b61-4f5c-ba33-bbaa0592b76b",
+		"_postman_id": "4daa8002-02b9-496c-8e5e-3f2089c836bf",
 		"name": "Sprint 1 - g03",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27734337",
+		"_collection_link": "https://web.postman.co/workspace/Bootcamp~4e93e04c-e44a-4210-a0d4-efbbc1167ac0/collection/27734337-4daa8002-02b9-496c-8e5e-3f2089c836bf?source=collection_link"
 	},
 	"item": [
 		{
@@ -245,7 +247,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"user_id\": 3,\n    \"date\": \"05-06-2023\",\n    \"product\":{\n        \"product_id\": 123,\n        \"product_name\": \"Silla Gamer\",\n        \"type\": \"Silla\",\n        \"brand\": \"Asus\",\n        \"color\": \"Negro y Verde\",\n        \"notes\": \"Silla en impecables condiciones, poco uso\"\n    },\n    \"category\": 100,\n    \"price\": 250.50\n}",
+							"raw": "{\n    \"user_id\": 3,\n    \"date\": \"05-06-2023\",\n    \"product\":{\n        \"product_id\": 200,\n        \"product_name\": \"auricular Gamer\",\n        \"type\": \"auricular\",\n        \"brand\": \"Asus\",\n        \"color\": \"Negro y Verde\",\n        \"notes\": \"auricular en impecables condiciones, poco uso\"\n    },\n    \"category\": 200,\n    \"price\": 679.50\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -305,7 +307,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/products/followed/3/list",
+							"raw": "localhost:8080/products/followed/2/list",
 							"host": [
 								"localhost"
 							],
@@ -313,7 +315,7 @@
 							"path": [
 								"products",
 								"followed",
-								"3",
+								"2",
 								"list"
 							]
 						}
@@ -629,6 +631,157 @@
 								{
 									"key": "order",
 									"value": "price_desc"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "US10 - Nuevo Promo-Post",
+			"item": [
+				{
+					"name": "Agregar promo-post 1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": 3,\n    \"date\": \"07-06-2023\",\n    \"product\":{\n        \"product_id\": 400,\n        \"product_name\": \"Monitor Gamer\",\n        \"type\": \"Monitor\",\n        \"brand\": \"Samsung\",\n        \"color\": \"Negro y Verde\",\n        \"notes\": \"Monitor en impecables condiciones, poco uso\",\n        \"has_promo\": true,\n        \"discount\": 5\n    },\n    \"category\": 6010,\n    \"price\": 200000\n    \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/products/promo-post",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"promo-post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Agregar promo-post 2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": 3,\n    \"date\": \"05-06-2023\",\n    \"product\":{\n        \"product_id\": 300,\n        \"product_name\": \"Silla Gamer\",\n        \"type\": \"Silla\",\n        \"brand\": \"Pegasus\",\n        \"color\": \"Rojo\",\n        \"notes\": \"Silla en impecables condiciones, poco uso\",\n        \"has_promo\": true,\n        \"discount\": 12\n    },\n    \"category\": 220,\n    \"price\": 48500\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/products/post",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Agregar promo-post 3",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": 3,\n    \"date\": \"05-06-2023\",\n    \"product\":{\n        \"product_id\": 411,\n        \"product_name\": \"Ventilador Gamer\",\n        \"type\": \"Ventilador\",\n        \"brand\": \"Asus\",\n        \"color\": \"Negro y Verde\",\n        \"notes\": \"Ventilador en impecables condiciones, poco uso\",\n        \"has_promo\": true,\n        \"discount\": 8\n    },\n    \"category\": 97,\n    \"price\": 21700\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/products/post",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"post"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "US11 - Cantidad de post con promo por ID",
+			"item": [
+				{
+					"name": "Cantidad de Post con Descuento por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/products/promo-post/count?user_id=3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"promo-post",
+								"count"
+							],
+							"query": [
+								{
+									"key": "user_id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "US12 -Listado de promos por ID",
+			"item": [
+				{
+					"name": "Listado de promos por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/products/promo-post/list?userId=3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"promo-post",
+								"list"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "3"
 								}
 							]
 						}
