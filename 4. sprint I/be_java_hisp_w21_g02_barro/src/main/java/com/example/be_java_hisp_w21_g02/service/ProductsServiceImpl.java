@@ -3,6 +3,7 @@ package com.example.be_java_hisp_w21_g02.service;
 import com.example.be_java_hisp_w21_g02.dto.PostDTO;
 import com.example.be_java_hisp_w21_g02.dto.request.PostRequestDTO;
 import com.example.be_java_hisp_w21_g02.dto.ProductDTO;
+import com.example.be_java_hisp_w21_g02.dto.request.PromoPostRequestDTO;
 import com.example.be_java_hisp_w21_g02.dto.response.FollowerDTO;
 import com.example.be_java_hisp_w21_g02.dto.response.UserPostResponseDTO;
 import com.example.be_java_hisp_w21_g02.exceptions.PostBadRequestException;
@@ -34,6 +35,21 @@ public class ProductsServiceImpl implements IProductsService{
         Post post = convertPostRequestDTOtoPost(postRequestDTO);
         try{
             if(!isValidRequest(postRequestDTO))
+                throw new PostBadRequestException("Peticion de publicacion invalida.");
+
+            userRepository.createPost(post);
+        }catch (NullPointerException e) {
+            throw new UserNotFoundException("No se pudo encontrar un usuario con el ID mencionado.");
+        }
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<?> createPromoPost(PromoPostRequestDTO promoPostRequestDTO) {
+        Post post = convertPromoPostRequestDTOtoPost(promoPostRequestDTO);
+        try{
+            if(!isValidPromoRequest(promoPostRequestDTO))
                 throw new PostBadRequestException("Peticion de publicacion invalida.");
 
             userRepository.createPost(post);
@@ -117,15 +133,34 @@ public class ProductsServiceImpl implements IProductsService{
                 && postRequestDTO.getPrice() >= 0;
     }
 
+    //Agrego validación de isValidRequest también para la promo
+    private boolean isValidPromoRequest(PromoPostRequestDTO promoPostRequestDTO){
+        LocalDate date = convertStringToLocalDate(promoPostRequestDTO.getDate());
+        return promoPostRequestDTO.getDate() != null && (date.isBefore(LocalDate.now()) || date.isEqual(LocalDate.now()))
+                && promoPostRequestDTO.getPrice() >= 0;
+    }
+
     private Post convertPostRequestDTOtoPost(PostRequestDTO postRequestDTO){
         Post post = new Post();
         post.setUserId(postRequestDTO.getUserId());
-
         post.setDate(convertStringToLocalDate(postRequestDTO.getDate()));
         post.setCategory(postRequestDTO.getCategory());
         post.setPrice(postRequestDTO.getPrice());
         post.setProduct(convertProductDTOtoProduct(postRequestDTO.getProduct()));
         return post;
+    }
+
+    //Nuevo converDTO para el promoPost
+    private Post convertPromoPostRequestDTOtoPost(PromoPostRequestDTO promoPostRequestDTO){
+        Post promoPost = new Post();
+        promoPost.setUserId(promoPostRequestDTO.getUserId());
+        promoPost.setDate(convertStringToLocalDate(promoPostRequestDTO.getDate()));
+        promoPost.setCategory(promoPostRequestDTO.getCategory());
+        promoPost.setPrice(promoPostRequestDTO.getPrice());
+        promoPost.setHasPromo(promoPostRequestDTO.isHasPromo());
+        promoPost.setDiscount(promoPostRequestDTO.getDiscount());
+        promoPost.setProduct(convertProductDTOtoProduct(promoPostRequestDTO.getProduct()));
+        return promoPost;
     }
 
     private LocalDate convertStringToLocalDate(String date){
