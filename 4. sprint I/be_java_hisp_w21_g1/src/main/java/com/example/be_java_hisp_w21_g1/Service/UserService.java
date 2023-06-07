@@ -139,6 +139,11 @@ public class UserService implements IUserService {
     }
 
 
+    public ProductsOnSaleDTO getProductsOnSale(int userId) {
+        return null;
+    }
+
+
     public void createPostOnSale(PostProductSaleDTO postProductDTO) {
         Optional<User> user = userRepository.findUserById(postProductDTO.getUser_id());
         if(user.isEmpty()){
@@ -173,6 +178,24 @@ public class UserService implements IUserService {
 
         return Mapper.SellerPostToDTO(sellersPost, userId);
     }
+
+    public PostBySellerDTO listPostsOnSaleBySeller(int userId) {
+
+        Optional<User> userFound = userRepository.findUserById(userId);
+
+        List<PostDTO> sellersPost = userFound
+                .orElseThrow(
+                        ()->new BadRequestException("No se encontro el usuario con el ID" + userId)
+                )
+                .getPosts().stream().filter(p->p.inOnSale())
+                .map(Mapper::PostToPostDTO)
+                .collect(Collectors.toList());
+
+
+        return Mapper.SellerPostToDTO(sellersPost, userId);
+    }
+
+
 
     private PostBySellerDTO orderList(PostBySellerDTO postBySellerDTO, String order) {
         if (order.equals("date_asc")) {

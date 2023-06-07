@@ -19,4 +19,6 @@ public interface IUserService {
     PostBySellerDTO listPostsBySeller(int userId, String alfOrder);
 
     void createPost(PostProductDTO postProductDTO);
+
+
 }

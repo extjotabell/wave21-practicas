@@ -101,9 +101,11 @@ public class Controller {
     }
 
     //US 0012: OPCIONAL
-    @GetMapping("/products/promo-post/list?user_id={userId}")
-    public ResponseEntity<?> productsInSaleBySeller(@PathVariable int userId) {
-        return null;
+    @GetMapping("/products/promo-post/list")
+    public ResponseEntity<?> productsInSaleBySeller(@RequestParam(value = "user_id", required = true) int user_id) {
+        //return new ResponseEntity<>("hola", HttpStatus.OK);
+        return new ResponseEntity<>(userService.listPostsOnSaleBySeller(user_id), HttpStatus.OK);
     }
+
 
 }
