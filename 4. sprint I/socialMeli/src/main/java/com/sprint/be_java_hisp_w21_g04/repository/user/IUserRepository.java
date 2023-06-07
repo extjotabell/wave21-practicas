@@ -9,11 +9,11 @@ import com.sprint.be_java_hisp_w21_g04.entity.User;
 public interface IUserRepository {
     User findUserById(int userId);
 
-    List<Integer> getFollowersById(int user_id);
-    List<Integer> getFollowedById(int user_id);
-    User getById(int user_id);
+    List<Integer> getFollowersById(int userId);
+    List<Integer> getFollowedById(int userId);
+    User getById(int userId);
     List<User> getAll();
 
-    String getUsernameById(int user_id);
+    String getUsernameById(int userId);
 
 }

@@ -85,9 +85,9 @@ public class UserRepositoryImpl implements IUserRepository{
     }
 
     @Override
-    public String getUsernameById(int user_id) {
+    public String getUsernameById(int userId) {
         return this.users.stream()
-                         .filter(user -> user.getUserId()==user_id)
+                         .filter(user -> user.getUserId()== userId)
                          .findFirst()
                          .orElseThrow(()-> new IllegalDataException("Usuario no registrado"))
                          .getUserName();
