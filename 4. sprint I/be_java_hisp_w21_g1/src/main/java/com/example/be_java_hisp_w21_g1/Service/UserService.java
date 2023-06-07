@@ -2,6 +2,7 @@ package com.example.be_java_hisp_w21_g1.Service;
 
 import com.example.be_java_hisp_w21_g1.DTO.Request.FollowPostDTO;
 import com.example.be_java_hisp_w21_g1.DTO.Request.PostProductDTO;
+import com.example.be_java_hisp_w21_g1.DTO.Request.PostProductPromoDTO;
 import com.example.be_java_hisp_w21_g1.DTO.Response.*;
 import com.example.be_java_hisp_w21_g1.Exception.BadRequestException;
 import com.example.be_java_hisp_w21_g1.Exception.NotFoundException;
@@ -10,6 +11,7 @@ import com.example.be_java_hisp_w21_g1.Model.Post;
 import com.example.be_java_hisp_w21_g1.Model.User;
 import com.example.be_java_hisp_w21_g1.Repository.UserRepository;
 import com.example.be_java_hisp_w21_g1.Utils.Mapper;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -137,6 +139,17 @@ public class UserService implements IUserService {
         userRepository.addPostToUser(post, user.get());
     }
 
+    public void createPostWithPromo(PostProductPromoDTO postProductDTO) {
+        Optional<User> user =userRepository.findUserById(postProductDTO.getUser_id());
+        if(user.isEmpty()){
+            throw new BadRequestException("No se encontro el usuario con el ID" + postProductDTO.getUser_id());
+        }
+        int postId = user.get().getPosts().size();
+        Post post = Mapper.DTOPromoToPost(postProductDTO, postId);
+
+        userRepository.addPostToUser(post, user.get());
+    }
+
     public PostBySellerDTO listPostsBySeller(int userId, String alf_order) {
         LocalDate currentDate = LocalDate.now();
 
@@ -158,6 +171,22 @@ public class UserService implements IUserService {
         }
 
         return Mapper.SellerPostToDTO(sellersPost, userId);
+    }
+
+    public PromoPostCountDTO listPostsWithPromoBySeller(int userId) {
+        Optional<User> userFound = userRepository.findUserById(userId);
+
+        if (userFound.isEmpty()) {
+            throw new BadRequestException("No se encontro el usuario con el ID" + userId);
+        }
+
+        int products =  userFound
+                .get()
+                .getPosts().stream()
+                .filter(Post::isHasPromo)
+                .toList().size();
+
+        return new PromoPostCountDTO(userId, userFound.get().getUser_name(), products);
     }
 
     private PostBySellerDTO orderList(PostBySellerDTO postBySellerDTO, String order) {
