@@ -5,6 +5,7 @@ import com.example.be_java_hisp_w21_g1.DTO.Request.PostProductDTO;
 import com.example.be_java_hisp_w21_g1.DTO.Response.*;
 import com.example.be_java_hisp_w21_g1.Exception.BadRequestException;
 import com.example.be_java_hisp_w21_g1.Exception.NotFoundException;
+import com.example.be_java_hisp_w21_g1.Exception.UserNotSellerException;
 import com.example.be_java_hisp_w21_g1.Model.Post;
 import com.example.be_java_hisp_w21_g1.Model.User;
 import com.example.be_java_hisp_w21_g1.Repository.UserRepository;
@@ -29,10 +30,10 @@ public class UserService implements IUserService {
         Optional<User> seller = userRepository.findUserById(followPostDTO.getUserIdToFollow());
 
         //validar que no esten null
-        if(user.isEmpty() || seller.isEmpty()) return false;
+        if(user.isEmpty() || seller.isEmpty()) throw new NotFoundException("Usuarios no encontrados...");
 
         //validar que sea vendedor el seller
-        if(!seller.get().isSeller()) return false;
+        if(!seller.get().isSeller()) throw new UserNotSellerException("El usuario no es un vendedor...");
 
         //validar que no exista la relacion
         if (user.get().getFollowed().stream().anyMatch(followed -> followed.getUser_id() == seller.get().getUser_id())) return false;
