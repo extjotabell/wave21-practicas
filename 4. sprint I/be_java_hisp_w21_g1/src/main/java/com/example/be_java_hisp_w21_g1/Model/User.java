@@ -25,4 +25,10 @@ public class User {
     public int followersCount() {
         return followers.size();
     }
+
+    //este método me suena más que tiene que ir en el repositorio, pero por ahora lo dejo aca
+    // para ser consistente con el followersCount
+    public int getPostOnSaleCount() {
+        return posts.stream().filter(p -> p.inOnSale()).toList().size();
+    }
 }

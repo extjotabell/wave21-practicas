@@ -46,7 +46,7 @@ public class Mapper {
                 postProductSaleDTO.getProduct(),
                 postProductSaleDTO.getCategory(),
                 postProductSaleDTO.getPrice(),
-                true,
+                postProductSaleDTO.getHas_promo(),
                 postProductSaleDTO.getDiscount()
 
         );

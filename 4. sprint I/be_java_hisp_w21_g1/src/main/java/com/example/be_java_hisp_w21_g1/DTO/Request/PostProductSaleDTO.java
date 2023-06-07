@@ -20,6 +20,7 @@ public class PostProductSaleDTO {
     Product product;
     int category;
     Double price;
+    Boolean has_promo;
     Double discount;
 
 

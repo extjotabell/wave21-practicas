@@ -97,7 +97,7 @@ public class Controller {
 
     @GetMapping("/products/promo-post/count")
     public ResponseEntity<?> promoProductsCount(@RequestParam(value = "user_id", required = true) int userId) {
-        return null;
+        return new ResponseEntity<>(userService.getPostsOnSaleCount(userId), HttpStatus.OK);
     }
 
     //US 0012: OPCIONAL

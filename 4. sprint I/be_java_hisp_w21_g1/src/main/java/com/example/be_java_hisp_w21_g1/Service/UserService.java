@@ -190,5 +190,17 @@ public class UserService implements IUserService {
         }
     }
 
+    public SaleCountDTO getPostsOnSaleCount(int idUser) {
+
+        Optional<User> foundUser = userRepository.findUserById(idUser);
+        if (foundUser.isEmpty()) {
+            throw new NotFoundException("No se encontro el usuario con el ID" + idUser);
+        }
+
+        User user = foundUser.get();
+        int postsOnSaleCount = user.getPostOnSaleCount();
+        return new SaleCountDTO(idUser, user.getUser_name(), postsOnSaleCount);
+    }
+
 
 }
