@@ -35,25 +35,53 @@ La aplicación "SocialMeli" es una plataforma innovadora que te permite seguir y
 - US 0009: Ordena por fecha ascendente y descendente la US 0006
 
 ### Endpoints y responsables del desarrollo por grupo:
-- US 0001 (Grupo 1): POST /users/{userId}/follow/{userIdToFollow}
-- US 0002 (Grupo 1): GET /users/{userId}/followers/count 
-- US 0003 (Grupo 2): GET /users/{userId}/followers/list
-- US 0004 (Grupo 2): GET /users/{userId}/followed/list
-- US 0005 (Grupo 3): POST /products/post
-- US 0006 (Grupo 3): GET /products/followed/{userId}/list
-- US 0007 (Grupo 1): POST /users/{userId}/unfollow/{userIdToUnfollow}
-- US 0008 (Grupo 2): GET /users/{UserID}/followers/list?order=name_asc
-               /users/{UserID}/followers/list?order=name_desc
-              /users/{UserID}/followed/list?order=name_asc
-               /users/{UserID}/followed/list?order=name_desc
+- ``US 0001`` (Grupo 1): ``POST``
+  - /users/{userId}/follow/{userIdToFollow}
 
-- US 0009 (Grupo 3): GET /products/followed/{userId}/list?order=date_asc
-               /products/followed/{userId}/list?order=date_desc
-               
+- ``US 0002`` (Grupo 1): ``GET``
+  - /users/{userId}/followers/count 
+
+- ``US 0003`` (Grupo 2): ``GET``
+
+  - /users/{userId}/followers/list
+
+- ``US 0004`` (Grupo 2): ``GET``
+
+  - /users/{userId}/followed/list
+
+- ``US 0005`` (Grupo 3): ``POST``
+
+  - /products/post
+
+- ``US 0006`` (Grupo 3): ``GET`` 
+
+  - /products/followed/{userId}/list
+
+- ``US 0007`` (Grupo 1): ``POST`` 
+
+  - /users/{userId}/unfollow/{userIdToUnfollow}
+
+
+- ``US 0008`` (Grupo 2): ``GET``
+  ```
+  - /users/{UserID}/followers/list?order=name_asc 
+  - /users/{UserID}/followers/list?order=name_desc 
+  - /users/{UserID}/followed/list?order=name_asc 
+  - /users/{UserID}/followed/list?order=name_desc
+    ```
+
+- ``US 0009`` (Grupo 3): ``GET`` 
+  ```
+  - /products/followed/{userId}/list?order=date_asc 
+  - /products/followed/{userId}/list?order=date_desc
+  ```     
+       
 ### Mejoras futuras:
-- Validar cuando un usuario no existe en las historias US 0005 y US 0006.
-- Implementar DTO para el mensaje de respuesta de la historia US 0005
-- Mejora de restricciones en los posts (en especial US 0005)
+- [ ] Validar cuando un usuario no existe en las historias US 0005 y US 0006.
+- [ ] Implementar DTO para el mensaje de respuesta de la historia US 0005
+- [ ] Mejora de restricciones en los posts (en especial US 0005)
 
 ### Agradecimientos:
-- Gracias a nuestra Scrum Master, JOY por toda la paciencia. A Carlos (Charlie) por su enseñanza en git y a todos por su trabajo!! Grande equipo! 
+- Gracias a nuestra Scrum Master, JOY por toda la paciencia. 
+- A Carlos (Charlie) por su enseñanza en git y a todos por su trabajo!! 
+- ❤️ Grande equipo! 
