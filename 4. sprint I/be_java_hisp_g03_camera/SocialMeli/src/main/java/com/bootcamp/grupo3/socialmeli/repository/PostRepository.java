@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.IntStream;
 
 @Repository
 public class PostRepository implements IPostRepository {
@@ -39,6 +40,18 @@ public class PostRepository implements IPostRepository {
           .filter(p -> p.getUserId() == userId)
           .filter(post -> post.getDate().isAfter(pastTwoWeek))
           .toList();
+    }
+
+    @Override
+    public int getPromotionsFromUser(int userId) {
+        return (int)getAllPostIdsFromUser(userId)
+                .filter(discounts::containsKey)
+                .count();
+    }
+    private IntStream getAllPostIdsFromUser(int userId){
+        return posts.stream()
+                .filter(p -> p.getUserId() == userId)
+                .mapToInt(Post::getId);
     }
 
     @Override

@@ -1,9 +1,6 @@
 package com.bootcamp.grupo3.socialmeli.service;
 
-import com.bootcamp.grupo3.socialmeli.dto.response.MessageDTO;
-import com.bootcamp.grupo3.socialmeli.dto.response.UserFollowedListDTO;
-import com.bootcamp.grupo3.socialmeli.dto.response.UserFollowerCountDTO;
-import com.bootcamp.grupo3.socialmeli.dto.response.UserFollowersListDTO;
+import com.bootcamp.grupo3.socialmeli.dto.response.*;
 import com.bootcamp.grupo3.socialmeli.exception.UserAlreadyFollowedException;
 import com.bootcamp.grupo3.socialmeli.exception.UserEqualsException;
 import com.bootcamp.grupo3.socialmeli.exception.UserNotFoundException;
@@ -82,6 +79,11 @@ public class UserService implements IUserService {
         else if(DESCEND_ORDER.equals(order)) user.getFollowers().sort(Comparator.reverseOrder());
 
         return user;
+    }
+
+    @Override
+    public UserDTO getUser(int id) {
+        return modelMapper.map(this.getUserByID(id), UserDTO.class);
     }
 
     private User getUserByID(int userId) {

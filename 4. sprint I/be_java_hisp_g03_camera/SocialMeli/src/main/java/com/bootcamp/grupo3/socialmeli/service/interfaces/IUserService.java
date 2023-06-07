@@ -1,9 +1,6 @@
 package com.bootcamp.grupo3.socialmeli.service.interfaces;
 
-import com.bootcamp.grupo3.socialmeli.dto.response.MessageDTO;
-import com.bootcamp.grupo3.socialmeli.dto.response.UserFollowedListDTO;
-import com.bootcamp.grupo3.socialmeli.dto.response.UserFollowersListDTO;
-import com.bootcamp.grupo3.socialmeli.dto.response.UserFollowerCountDTO;
+import com.bootcamp.grupo3.socialmeli.dto.response.*;
 
 import java.util.List;
 
@@ -14,5 +11,6 @@ public interface IUserService {
     UserFollowersListDTO getFollowers(int userId, String order);
     UserFollowerCountDTO getUserFollowersCount(int id);
     boolean userExists(int id);
+    UserDTO getUser(int id);
     List<Integer> getFollowedByUser(int id);
 }
