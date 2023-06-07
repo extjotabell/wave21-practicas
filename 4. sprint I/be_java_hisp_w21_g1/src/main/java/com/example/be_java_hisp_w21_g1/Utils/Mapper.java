@@ -20,7 +20,9 @@ public class Mapper {
                 post.getLocalDate(),
                 post.getProduct(),
                 post.getCategory(),
-                post.getPrice()
+                post.getPrice(),
+                post.isHasPromo(),
+                post.getDiscount()
         );
     }
 
@@ -31,7 +33,9 @@ public class Mapper {
                 postProductDTO.getDate(),
                 postProductDTO.getProduct(),
                 postProductDTO.getCategory(),
-                postProductDTO.getPrice()
+                postProductDTO.getPrice(),
+                postProductDTO.isHasPromo(),
+                postProductDTO.getDiscount()
         );
     }
 }

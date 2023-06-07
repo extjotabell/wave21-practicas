@@ -20,4 +20,15 @@ public class PostProductDTO {
   Product product;
   int category;
   Double price;
+  boolean hasPromo;
+  double discount;
+  public PostProductDTO(int user_id, LocalDate date, Product product, int category, Double price) {
+    this.user_id = user_id;
+    this.date = date;
+    this.product = product;
+    this.category = category;
+    this.price = price;
+    this.hasPromo = false;
+    this.discount = 0.0;
+  }
 }
