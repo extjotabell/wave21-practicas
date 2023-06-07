@@ -139,11 +139,6 @@ public class UserService implements IUserService {
     }
 
 
-    public ProductsOnSaleDTO getProductsOnSale(int userId) {
-        return null;
-    }
-
-
     public void createPostOnSale(PostProductSaleDTO postProductDTO) {
         Optional<User> user = userRepository.findUserById(postProductDTO.getUser_id());
         if(user.isEmpty()){

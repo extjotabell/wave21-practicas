@@ -13,11 +13,6 @@ public class Mapper {
         return new PostBySellerDTO(user_id,sellerPost);
     }
 
-    public static PostProductSaleDTO PostProductSaleToDTO(List<PostDTO> sellersPost, int userId) {
-        return new PostProductSaleDTO();
-    }
-
-
     public static PostDTO PostToPostDTO(Post post) {
         return new PostDTO(
                 post.getUserId(),
@@ -26,20 +21,8 @@ public class Mapper {
                 post.getProduct(),
                 post.getCategory(),
                 post.getPrice(),
-                false,
-                0
-        );
-    }
-    public static PostDTO PostToPostOnSaleDTO(Post post) {
-        return new PostDTO(
-                post.getUserId(),
-                post.getPostId(),
-                post.getLocalDate(),
-                post.getProduct(),
-                post.getCategory(),
-                post.getPrice(),
-                false,
-                0
+                post.getHas_promo(),
+                post.getDiscount()
         );
     }
 
