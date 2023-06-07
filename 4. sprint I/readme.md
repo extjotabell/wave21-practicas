@@ -20,7 +20,18 @@ La aplicación "SocialMeli" es una plataforma innovadora que te permite seguir y
 - Juan Manuel Arango (Grupo 2) 🇨🇴
 - Helmer David Hernandez Ramirez (Grupo 3) 🇨🇴
 
-### Endpoints  y responsables del desarrollo:
+### Descripción de los Endpoint:
+- US 0001: Permite a un usuario seguir a un vendedor, solo si el usuario y el vendedor existen
+- US 0002: Muestra el resultado de la cantidad de usuarios que siguen a un vendedor
+- US 0003: Entrega el listado de todos los usuarios que siguen a un determinado vendedor
+- US 0004: Entrega el listado de todos los vendedores a los cuales sigue un determinado usuario
+- US 0005: Da de alta una nueva publicación recibida en el cuerpo del endpoint
+- US 0006: Entrega un listado de las publicaciones realizadas por los vendedores que un usuario sigue en las últimas dos semanas teniendo en cuenta ordenamiento por fecha (publicaciones más recientes primero)
+- US 0007: Permite a un usuario dejar de seguir a un vendedor.
+- US 0008: Ordena alfabéticamente en orden ascendente y descendente las US 0003 y 0004
+- US 0009: Ordena por fecha ascendente y descendente la US 0006
+
+### Endpoints y responsables del desarrollo por grupo:
 - US 0001 (Grupo 1): POST /users/{userId}/follow/{userIdToFollow}
 - US 0002 (Grupo 1): GET /users/{userId}/followers/count 
 - US 0003 (Grupo 2): GET /users/{userId}/followers/list
