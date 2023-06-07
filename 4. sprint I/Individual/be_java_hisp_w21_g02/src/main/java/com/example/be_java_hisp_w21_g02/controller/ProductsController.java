@@ -22,11 +22,6 @@ public class ProductsController {
         return productsService.createPost(postRequestDTO);
     }
 
-    @PostMapping("/promo-post")
-    public ResponseEntity<?> createPostWithPromo(@RequestBody PostRequestPromoDTO postRequestDTO){
-        return productsService.createPostPromo(postRequestDTO);
-    }
-
 
     @GetMapping("/followed/{userId}/list")
     public ResponseEntity<?> listFollowingPosts2Weeks(@PathVariable int userId, @RequestParam(required = false) String order){
@@ -43,4 +38,16 @@ public class ProductsController {
 
         return result;
     }
+
+    //region individual
+    @PostMapping("/promo-post")
+    public ResponseEntity<?> createPostWithPromo(@RequestBody PostRequestPromoDTO postRequestPromoDTO){
+        return productsService.createPostPromo(postRequestPromoDTO);
+    }
+    //region individual
+    @GetMapping("/count")
+    public ResponseEntity<?> getProductPromoList(@RequestParam(required = false) int user_id){
+        return new ResponseEntity<>(productsService.getPromoList(user_id), HttpStatus.OK);
+    }
+
 }

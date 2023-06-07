@@ -62,4 +62,6 @@ public class UsersController {
             followedListDTO = _userService.getFollowedList(userId);
         return new ResponseEntity<> (followedListDTO, HttpStatus.OK);
     }
+
+
 }

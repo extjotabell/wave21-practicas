@@ -1,12 +1,10 @@
 package com.example.be_java_hisp_w21_g02.service;
 
-import com.example.be_java_hisp_w21_g02.dto.response.FollowedListDTO;
-import com.example.be_java_hisp_w21_g02.dto.response.FollowerDTO;
-import com.example.be_java_hisp_w21_g02.dto.response.FollowersCountDTO;
-import com.example.be_java_hisp_w21_g02.dto.response.FollowersListDTO;
+import com.example.be_java_hisp_w21_g02.dto.response.*;
 import com.example.be_java_hisp_w21_g02.exceptions.UserNotFoundException;
 import com.example.be_java_hisp_w21_g02.exceptions.UserNotSellerException;
 import com.example.be_java_hisp_w21_g02.exceptions.UserFollowingException;
+import com.example.be_java_hisp_w21_g02.model.Post;
 import com.example.be_java_hisp_w21_g02.model.User;
 import com.example.be_java_hisp_w21_g02.repository.IUserRepository;
 import com.example.be_java_hisp_w21_g02.utils.Constants;
@@ -40,7 +38,7 @@ public class UsersServiceImpl implements IUsersService{
 
     public void unFollowUser(int userId, int userIdToUnFollow){
         User persistedUnUser = _usersRepository.getUser(userId);
-        User persistedUnFollowUser = _usersRepository.getUser(userIdToUnFollow); //flav
+        User persistedUnFollowUser = _usersRepository.getUser(userIdToUnFollow);
 
         checkFollowAndSellerException(persistedUnUser, persistedUnFollowUser);
 
@@ -161,5 +159,9 @@ public class UsersServiceImpl implements IUsersService{
             collection.sort(Comparator.comparing(FollowerDTO::getUserName).reversed());
         }
     }
+    //endregion
+
+    //region individual
+
     //endregion
 }

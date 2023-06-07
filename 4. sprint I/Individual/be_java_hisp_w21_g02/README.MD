@@ -68,7 +68,8 @@ http://localhost:8080/users/{userId}/followers/count
 Products
 
 http://localhost:8080/products/followed/{userId}/list?order=date_asc
-
+http://localhost:8080/products/followed/{userId}/list?order=date_asc
+http://localhost:8080/products/followed/{userId}/list?order=date_asc
 ## Distribución de tareas del equipo
 Para visualizar los responsables de cada tarea, adjuntamos la plataforma utilizada para tener un seguimiento de las tareas y responsables de las mismas.
 

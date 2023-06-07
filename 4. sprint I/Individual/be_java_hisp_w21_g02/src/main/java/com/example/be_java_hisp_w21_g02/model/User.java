@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -44,4 +45,13 @@ public class User {
         return following.contains(userIdToUnFollow);
     }
 
+    public List<Post> getPromoPost() {
+        List<Post> promoList = new ArrayList<>();
+        for (Post post: posts) {
+            if(post.isHasPromo()){
+                promoList.add(post);
+            }
+        }
+        return promoList;
+    }
 }

@@ -20,4 +20,5 @@ public interface IUsersService {
 
     FollowedListDTO getFollowedList(int userId, String order);
 
+
 }
