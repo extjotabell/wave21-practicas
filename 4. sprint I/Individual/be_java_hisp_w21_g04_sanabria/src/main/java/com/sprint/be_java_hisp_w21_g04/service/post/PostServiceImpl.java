@@ -1,30 +1,35 @@
 package com.sprint.be_java_hisp_w21_g04.service.post;
 
+import com.sprint.be_java_hisp_w21_g04.dto.request.PostProductOnSaleRequestDto;
 import com.sprint.be_java_hisp_w21_g04.dto.request.PostRequestDto;
+import com.sprint.be_java_hisp_w21_g04.dto.response.PostProductOnSaleCountDto;
 import com.sprint.be_java_hisp_w21_g04.dto.response.PostResponseDto;
+import com.sprint.be_java_hisp_w21_g04.dto.response.ResponseDto;
 import com.sprint.be_java_hisp_w21_g04.dto.response.SellerFollowedListPostResponseDto;
 import com.sprint.be_java_hisp_w21_g04.entity.Post;
+import com.sprint.be_java_hisp_w21_g04.entity.User;
 import com.sprint.be_java_hisp_w21_g04.exception.EmptySellerFollowedList;
+import com.sprint.be_java_hisp_w21_g04.exception.NotFoundException;
 import com.sprint.be_java_hisp_w21_g04.exception.PostAlreadyExist;
 import com.sprint.be_java_hisp_w21_g04.repository.post.IPostRepository;
-import com.sprint.be_java_hisp_w21_g04.repository.post.PostRepositoryImpl;
+import com.sprint.be_java_hisp_w21_g04.repository.user.IUserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLOutput;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class PostServiceImpl implements IPostService{
     private IPostRepository _repository;
+
+    private IUserRepository _userRepository;
     private ModelMapper modelMapper;
 
-    public PostServiceImpl(IPostRepository repository){
+    public PostServiceImpl(IPostRepository repository, IUserRepository userRepository){
         this._repository = repository;
+        this._userRepository = userRepository;
         this.modelMapper = new ModelMapper();
     }
     @Override
@@ -78,5 +83,28 @@ public class PostServiceImpl implements IPostService{
         if(posts.isEmpty()) throw new EmptySellerFollowedList("Los vendedores que sigues no han hecho publiciones en las últimas dos semanas");
         return new SellerFollowedListPostResponseDto(userId, posts);
 
+    }
+
+    @Override
+    public ResponseDto postProductOnSale(PostProductOnSaleRequestDto post) {
+        if(!post.isHasPromo() || post.getDiscount()<=0d) throw new IllegalArgumentException("El post debe tener descuento");
+        if(this._userRepository.getById(post.getUserId())!=null){
+            List<PostProductOnSaleRequestDto> posts = this._repository.getAll().stream().
+                    filter(post1 -> post1.getUserId() == post.getUserId() && post1.getDate().equals(post.getDate()) && post1.getProduct().getProductId() == post.getProduct().getProductId())
+                    .map(post1 -> modelMapper.map(post, PostProductOnSaleRequestDto.class))
+                    .toList();
+            if (!posts.isEmpty()) throw new PostAlreadyExist("Ya existe un post para este producto");
+            this._repository.post(modelMapper.map(post, Post.class));
+            return new ResponseDto("Post con descuento creado con exito");
+        }
+        throw new NotFoundException("El usuario no existe");
+    }
+
+    @Override
+    public PostProductOnSaleCountDto countPromoPost(int userId) {
+        User user = this._userRepository.getById(userId);
+        int count = this._repository.getAll().stream().filter(post -> post.getUserId() == userId && post.isHasPromo()).toList().size();
+        PostProductOnSaleCountDto postProductOnSaleCountDto = new PostProductOnSaleCountDto(userId,user.getUserName(), count);
+        return modelMapper.map(postProductOnSaleCountDto, PostProductOnSaleCountDto.class);
     }
 }

@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.sprint</groupId>
-	<artifactId>be_java_hisp_w21_g04</artifactId>
+	<artifactId>be_java_hisp_w21_g04_sanabria</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>be_java_hisp_w21_g04</name>
 	<description>Demo project for Spring Boot</description>

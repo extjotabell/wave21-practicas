@@ -1,15 +1,16 @@
 package com.sprint.be_java_hisp_w21_g04.controller;
 
+import com.sprint.be_java_hisp_w21_g04.dto.request.PostProductOnSaleRequestDto;
 import com.sprint.be_java_hisp_w21_g04.dto.request.PostRequestDto;
+import com.sprint.be_java_hisp_w21_g04.dto.response.PostProductOnSaleCountDto;
 import com.sprint.be_java_hisp_w21_g04.dto.response.PostResponseDto;
+import com.sprint.be_java_hisp_w21_g04.dto.response.ResponseDto;
 import com.sprint.be_java_hisp_w21_g04.dto.response.SellerFollowedListPostResponseDto;
-import com.sprint.be_java_hisp_w21_g04.entity.Post;
 import com.sprint.be_java_hisp_w21_g04.service.post.IPostService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -36,4 +37,15 @@ public class PostController {
     public ResponseEntity<List<PostResponseDto>> getAll(){
         return new ResponseEntity<>(this._service.getAll(), HttpStatus.OK);
     }
+
+    @PostMapping("/promo-post")
+    public ResponseEntity<ResponseDto> postProductDiscount(@RequestBody(required = true) PostProductOnSaleRequestDto post) {
+        return new ResponseEntity<>(this._service.postProductOnSale(post),HttpStatus.OK);
+    }
+
+    @GetMapping("/promo-post/count")
+    public ResponseEntity<PostProductOnSaleCountDto> countPromoPost(@RequestParam("user_id") int userId){
+        return new ResponseEntity<>(this._service.countPromoPost(userId), HttpStatus.OK);
+    }
+
 }

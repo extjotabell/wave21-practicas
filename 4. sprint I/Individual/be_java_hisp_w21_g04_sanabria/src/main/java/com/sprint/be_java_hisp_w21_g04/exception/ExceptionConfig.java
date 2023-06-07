@@ -72,6 +72,11 @@ public class ExceptionConfig {
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<?> ilegalArgument(Exception e){
+        return ResponseEntity.badRequest().body(new ErrorDto(e.getMessage(), 400));
+    }
+
 //    @ExceptionHandler(Exception.class)
 //    public ResponseEntity<?> generalException(Exception e){
 //        ErrorDto error = new ErrorDto(e.getMessage(), 500);
