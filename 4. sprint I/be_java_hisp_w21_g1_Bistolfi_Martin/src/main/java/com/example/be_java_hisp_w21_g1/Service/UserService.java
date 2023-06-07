@@ -2,6 +2,7 @@ package com.example.be_java_hisp_w21_g1.Service;
 
 import com.example.be_java_hisp_w21_g1.DTO.Request.FollowPostDTO;
 import com.example.be_java_hisp_w21_g1.DTO.Request.PostProductDTO;
+import com.example.be_java_hisp_w21_g1.DTO.Request.PostProductWithDiscountDTO;
 import com.example.be_java_hisp_w21_g1.DTO.Response.*;
 import com.example.be_java_hisp_w21_g1.Exception.BadRequestException;
 import com.example.be_java_hisp_w21_g1.Exception.NotFoundException;
@@ -137,6 +138,17 @@ public class UserService implements IUserService {
         userRepository.addPostToUser(post, user.get());
     }
 
+    public void createPost(PostProductWithDiscountDTO postProductWithDiscountDTO) {
+        Optional<User> user =userRepository.findUserById(postProductWithDiscountDTO.getUser_id());
+        if(user.isEmpty()){
+            throw new BadRequestException("No se encontro el usuario con el ID" + postProductWithDiscountDTO.getUser_id());
+        }
+        int postId = user.get().getPosts().size();
+        Post post = Mapper.DTOtoPost(postProductWithDiscountDTO, postId);
+
+        userRepository.addPostToUser(post, user.get());
+    }
+
     public PostBySellerDTO listPostsBySeller(int userId, String alf_order) {
         LocalDate currentDate = LocalDate.now();
 
@@ -174,6 +186,17 @@ public class UserService implements IUserService {
         } else {
             throw new BadRequestException("El parametro order debe ser name_asc o name_desc");
         }
+    }
+
+    public SellerPromoCountDTO getSellerProductWithPromo(int user_id){
+        Optional<User> user =userRepository.findUserById(user_id);
+        if(user.isEmpty()) throw new BadRequestException("No se encontro el usuario con el ID" + user_id);
+
+        if(!user.get().isSeller()) throw new BadRequestException("El usuario con id " + user_id + " no es vendedor");
+
+        int promo_products_count = (int) user.get().getPosts().stream().filter(post -> post.getHas_promo()).count();
+
+        return new SellerPromoCountDTO(user.get().getUser_id(), user.get().getUser_name(), promo_products_count);
     }
 
 

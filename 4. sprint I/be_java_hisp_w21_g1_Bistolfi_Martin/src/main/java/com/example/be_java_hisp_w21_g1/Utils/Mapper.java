@@ -1,6 +1,7 @@
 package com.example.be_java_hisp_w21_g1.Utils;
 
 import com.example.be_java_hisp_w21_g1.DTO.Request.PostProductDTO;
+import com.example.be_java_hisp_w21_g1.DTO.Request.PostProductWithDiscountDTO;
 import com.example.be_java_hisp_w21_g1.DTO.Response.PostBySellerDTO;
 import com.example.be_java_hisp_w21_g1.DTO.Response.PostDTO;
 import com.example.be_java_hisp_w21_g1.Model.Post;
@@ -34,4 +35,19 @@ public class Mapper {
                 postProductDTO.getPrice()
         );
     }
+
+    public static Post DTOtoPost(PostProductWithDiscountDTO postProductWithDiscountDTO, int postId) {
+        return new Post(
+                postProductWithDiscountDTO.getUser_id(),
+                postId,
+                postProductWithDiscountDTO.getDate(),
+                postProductWithDiscountDTO.getProduct(),
+                postProductWithDiscountDTO.getCategory(),
+                postProductWithDiscountDTO.getPrice(),
+                postProductWithDiscountDTO.isHas_promo(),
+                postProductWithDiscountDTO.getDiscount()
+        );
+    }
+
+
 }

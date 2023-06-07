@@ -19,10 +19,24 @@ public class Post {
     private int category;
     private Double price;
 
+    private Boolean has_promo;
+    private double discount;
+
+    public Post(int userId, int postId, LocalDate localDate, Product product, int category, Double price) {
+        this.userId = userId;
+        this.postId = postId;
+        this.localDate = localDate;
+        this.product = product;
+        this.category = category;
+        this.price = price;
+        this.has_promo = false;
+        this.discount = 0;
+    }
 
     public boolean isLatestPost(LocalDate currentDate){
         return (getLocalDate().isAfter(currentDate.minusWeeks(2))
                 && getLocalDate().isBefore(currentDate.plusDays(1))
         );
     }
+
 }
