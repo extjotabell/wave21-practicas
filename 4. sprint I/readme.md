@@ -94,6 +94,7 @@ Responsable: Matias Tato
 
 ## Extra
 
-Documentación de los endpoint extras: https://docs.google.com/document/d/1rVboxf1QVdE7dCEgd4mDYNtPQ9MLyTn9EyGzfqg3IDw/edit?usp=sharing
-  
+Documentación de los endpoint extras:
+
+[Sprint 1 - Extra - Especificación técnica..pdf](https://github.com/extjotabell/wave21-practicas/files/11679947/Sprint.1.-.Extra.-.Especificacion.tecnica.pdf)
 
