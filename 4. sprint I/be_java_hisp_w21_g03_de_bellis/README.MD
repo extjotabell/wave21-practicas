@@ -5,6 +5,10 @@ terminaron modificando un poco el desarrollo individual y grupal.
 Tal es asi que los requerimientos funcionales no estan tal cual fueron especificados.
 Esto no fue consultado con el usuario, a efectos praticos tome la consigna de cualquier propuesta de mejora.
 
+Estos cambios se pueden ver en el ejemplo de collection de postman.
+Esto esta en la carpeta resources.
+Ahi se podran ver las pruebas que realice y un ejemplo de como se utilizaria
+
 ## Token
 
 Observe que es pasaba un `user_id` en todos lados para identificarse.
@@ -30,6 +34,11 @@ la referencia de un product en otro sistema. (Asi lo pense)
 Las promos se guardan como `Post` comunes, y la entidad `PromoPost` guarda la referencia al
 Post y el resto de datos.
 En caso de que `has_promo` sea `false` el `discount` se setea en 0.
+
+## Order
+
+Creo enums de Ordenes para tener una forma comun a las entidades de ordenarlas.
+
 
 ## Otros
 
