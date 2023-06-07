@@ -55,26 +55,26 @@ public class UserRepositoryImpl implements IUserRepository{
     }
 
     @Override
-    public List<Integer> getFollowersById(int user_id) {
+    public List<Integer> getFollowersById(int userId) {
         return this.users.stream()
-                         .filter(user -> user.getUserId()==user_id)
+                         .filter(user -> user.getUserId()==userId)
                          .findFirst().orElseThrow(()-> new IllegalDataException("Vendedor no registrado"))
                          .getFollowers();
     }
 
     @Override
-    public List<Integer> getFollowedById(int user_id) {
+    public List<Integer> getFollowedById(int userId) {
         return this.users.stream()
-                         .filter(user -> user.getUserId()==user_id)
+                         .filter(user -> user.getUserId()==userId)
                          .findFirst()
                          .orElseThrow(()-> new IllegalDataException("Usuario no registrado"))
                          .getFollowed();
     }
 
     @Override
-    public User getById(int user_id) {
+    public User getById(int userId) {
         return this.users.stream()
-                         .filter(user -> user.getUserId()==user_id)
+                         .filter(user -> user.getUserId()==userId)
                          .findFirst()
                          .orElseThrow(()-> new IllegalDataException("Usuario no registrado"));
     }

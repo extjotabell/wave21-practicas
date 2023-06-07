@@ -8,5 +8,5 @@ import java.util.List;
 public interface IPostRepository {
     void post(Post post);
     List<Post> getAll();
-    public List<Post> getSellerFollowed(int user_id);
+    public List<Post> getSellerFollowed(int userId);
 }
