@@ -42,4 +42,10 @@ public class ProductsController {
 
         return result;
     }
+
+    @GetMapping("/promo-post/count")
+    public ResponseEntity<?> listPromoPost(@RequestParam(name = "user_id") int userId){
+
+        return productsService.countPromoPosts(userId);
+    }
 }

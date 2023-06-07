@@ -4,6 +4,7 @@ import com.example.be_java_hisp_w21_g02.dto.response.FollowedListDTO;
 import com.example.be_java_hisp_w21_g02.dto.response.FollowerDTO;
 import com.example.be_java_hisp_w21_g02.dto.response.FollowersCountDTO;
 import com.example.be_java_hisp_w21_g02.dto.response.FollowersListDTO;
+import com.example.be_java_hisp_w21_g02.exceptions.ExceptionChecker;
 import com.example.be_java_hisp_w21_g02.exceptions.UserNotFoundException;
 import com.example.be_java_hisp_w21_g02.exceptions.UserNotSellerException;
 import com.example.be_java_hisp_w21_g02.exceptions.UserFollowingException;
@@ -28,7 +29,7 @@ public class UsersServiceImpl implements IUsersService{
         User persistedUser = _usersRepository.getUser(userId);
         User persistedFollowUser = _usersRepository.getUser(userIdToFollow);
 
-        checkFollowAndSellerException(persistedUser, persistedFollowUser);
+        ExceptionChecker.checkFollowAndSellerException(persistedUser, persistedFollowUser);
 
         if (!persistedUser.follow(userIdToFollow)){
             throw new UserFollowingException("El usuario ya seguia al usuario indicado");
@@ -42,7 +43,7 @@ public class UsersServiceImpl implements IUsersService{
         User persistedUnUser = _usersRepository.getUser(userId);
         User persistedUnFollowUser = _usersRepository.getUser(userIdToUnFollow); //flav
 
-        checkFollowAndSellerException(persistedUnUser, persistedUnFollowUser);
+        ExceptionChecker.checkFollowAndSellerException(persistedUnUser, persistedUnFollowUser);
 
         if(persistedUnUser.verifyFollower(userIdToUnFollow)){
             persistedUnUser.unFollow(userIdToUnFollow);
@@ -58,7 +59,7 @@ public class UsersServiceImpl implements IUsersService{
 
         User persistedUser = _usersRepository.getUser(userId);
 
-        checkUserAndSellerException(persistedUser);
+        ExceptionChecker.checkUserAndSellerException(persistedUser);
         
         return new FollowersCountDTO(
                 persistedUser.getId(),
@@ -69,7 +70,7 @@ public class UsersServiceImpl implements IUsersService{
 
     public FollowersListDTO getFollowersList(int userId){
         User persistedUser = _usersRepository.getUser(userId);
-        checkUserAndSellerException(persistedUser);
+        ExceptionChecker.checkUserAndSellerException(persistedUser);
 
         return new FollowersListDTO(
                 persistedUser.getId(),
@@ -80,7 +81,7 @@ public class UsersServiceImpl implements IUsersService{
 
     public FollowersListDTO getFollowersList(int userId, String order){
         User persistedUser = _usersRepository.getUser(userId);
-        checkUserAndSellerException(persistedUser);
+        ExceptionChecker.checkUserAndSellerException(persistedUser);
 
         List<FollowerDTO> followersDTO = getFollowDTO(persistedUser.getFollowers());
 
@@ -126,25 +127,6 @@ public class UsersServiceImpl implements IUsersService{
     }
 
     //region Extra Methods
-    private static void checkFollowAndSellerException(User persistedUser, User persistedOtherUser) {
-        
-        if(persistedUser == null || persistedOtherUser == null){
-            throw new UserNotFoundException("No se pudo encontrar un usuario con el ID mencionado");
-        }
-
-        if (!persistedOtherUser.isSeller()){
-            throw new UserNotSellerException("El usuario no es un vendedor");
-        }
-    }
-
-    private static void checkUserAndSellerException(User persistedUser) {
-        if(persistedUser == null){
-            throw new UserNotFoundException("No se pudo encontrar un usuario con el ID mencionado");
-        }
-        if (!persistedUser.isSeller()) {
-            throw new UserNotSellerException("El usuario no es un vendedor");
-        }
-    }
 
     private List<FollowerDTO> getFollowDTO(Set<Integer> usersIds){
         List<User> followers = _usersRepository.getUsers(usersIds);

@@ -4,7 +4,9 @@ import com.example.be_java_hisp_w21_g02.dto.PostDTO;
 import com.example.be_java_hisp_w21_g02.dto.request.PostRequestDTO;
 import com.example.be_java_hisp_w21_g02.dto.ProductDTO;
 import com.example.be_java_hisp_w21_g02.dto.request.PromoPostRequestDTO;
+import com.example.be_java_hisp_w21_g02.dto.response.PromoPostCountDTO;
 import com.example.be_java_hisp_w21_g02.dto.response.UserPostResponseDTO;
+import com.example.be_java_hisp_w21_g02.exceptions.ExceptionChecker;
 import com.example.be_java_hisp_w21_g02.exceptions.PostBadRequestException;
 import com.example.be_java_hisp_w21_g02.exceptions.UserNotFoundException;
 import com.example.be_java_hisp_w21_g02.model.Post;
@@ -51,6 +53,19 @@ public class ProductsServiceImpl implements IProductsService{
         addPost(post);
 
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<?> countPromoPosts(int userId) {
+        User persistedUser = userRepository.getUser(userId);
+
+        ExceptionChecker.checkUserAndSellerException(persistedUser);
+
+        long promoPostsCount = persistedUser.getPosts().stream()
+                .filter(Post::isHasPromo).count();
+
+        PromoPostCountDTO promoPostCountDTO = new PromoPostCountDTO(persistedUser.getId(), persistedUser.getUsername(), promoPostsCount);
+        return ResponseEntity.ok(promoPostCountDTO);
     }
 
     private boolean isPromo(PromoPostRequestDTO postRequestDTO) {
