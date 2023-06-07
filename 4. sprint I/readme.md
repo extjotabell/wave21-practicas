@@ -23,7 +23,8 @@ Se debe abrir el proyecto desde la carpeta 4.Sprint 1
 
 Si no compila correctamente, realizar los siguientes pasos:
     Seleccionar Edit Configurations en el panel de Run/Debug Configurations
-    Seleccionar New configuration
+    Seleccionar Add new configuration
+    Seleccionar Maven
     En el text area de Run completar con "spring-boot:run"
     Seleccionar Apply - OK.
 
