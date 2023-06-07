@@ -20,7 +20,7 @@ La aplicación "SocialMeli" es una plataforma innovadora que te permite seguir y
 - José Juan Durón (Grupo 2) 🇲🇽
 - Laura Nataly Sanabria Cepeda (Grupo 2) 🇨🇴
 - Marielena Barrios Reinoso (Grupo 2) 🇨🇴
-- Juan Manuel Arango (Grupo 2) 🇨🇴
+- Juan Manuel Arango (Grupo 3) 🇨🇴
 - Helmer David Hernandez Ramirez (Grupo 3) 🇨🇴
 
 ### Descripción de los Endpoint:
