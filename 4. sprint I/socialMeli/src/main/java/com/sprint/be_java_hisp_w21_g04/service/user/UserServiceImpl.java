@@ -15,6 +15,8 @@ import java.util.stream.Collectors;
 @Service
 public class UserServiceImpl implements IUserService {
     private final UserRepositoryImpl _userRepository;
+
+
     private ModelMapper _mapper;
     public UserServiceImpl(UserRepositoryImpl userRepository) {
         this._userRepository = userRepository;
@@ -120,4 +122,14 @@ public class UserServiceImpl implements IUserService {
         if (followedList.isEmpty()) throw new NotFoundException("El usuario no sigue a ningún vendedor");
         return new FollowedResponseDto(userId, _userRepository.getById(userId).getUserName(), followedList);
     }
+
+    @Override
+    public ResponseDto removeUser(int userId) {
+        String user = _userRepository.removeUser(userId);
+        ResponseDto responseDto = new ResponseDto();
+        responseDto.setMessage(String.format("El usuario %s ha sido eliminado", user));
+        return responseDto;
+    }
+
+
 }

@@ -1,5 +1,6 @@
 package com.sprint.be_java_hisp_w21_g04.repository.user;
 
+import com.sprint.be_java_hisp_w21_g04.dto.response.ResponseDto;
 import com.sprint.be_java_hisp_w21_g04.entity.User;
 
 import java.util.List;
@@ -15,5 +16,7 @@ public interface IUserRepository {
     List<User> getAll();
 
     String getUsernameById(int userId);
+
+    String removeUser(int userId);
 
 }

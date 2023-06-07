@@ -7,11 +7,7 @@ import com.sprint.be_java_hisp_w21_g04.dto.response.FollowersResponseDto;
 import com.sprint.be_java_hisp_w21_g04.service.user.IUserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class UserController {
@@ -50,6 +46,11 @@ public class UserController {
             return new ResponseEntity<>(_userService.getFollowedById(userId), HttpStatus.OK);
         }
         return new ResponseEntity<>(_userService.getFollowedByIdSorted(userId, order), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/users/{userId}/remove")
+    public ResponseEntity<ResponseDto> removeUser(@PathVariable int userId){
+        return ResponseEntity.ok(_userService.removeUser(userId));
     }
 
 }

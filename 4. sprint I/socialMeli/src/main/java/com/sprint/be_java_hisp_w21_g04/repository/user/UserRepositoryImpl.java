@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.sprint.be_java_hisp_w21_g04.dto.response.ResponseDto;
 import com.sprint.be_java_hisp_w21_g04.entity.User;
 import com.sprint.be_java_hisp_w21_g04.exception.IllegalDataException;
 import org.springframework.stereotype.Repository;
@@ -91,5 +92,13 @@ public class UserRepositoryImpl implements IUserRepository{
                          .findFirst()
                          .orElseThrow(()-> new IllegalDataException("Usuario no registrado"))
                          .getUserName();
+    }
+
+    @Override
+    public String removeUser(int userId) {
+        String deletedUserName = getUsernameById(userId);
+        this.users.removeIf(user -> user.getUserId() == userId);
+        System.out.println(users.size());
+        return deletedUserName;
     }
 }
