@@ -28,7 +28,7 @@ public class PostController {
         return new ResponseEntity<>("Post agregado exitosamente",HttpStatus.OK);
     }
 
-    @GetMapping("/posts/promotions/count{userId}")
+    @GetMapping("/products/promo-post/count?user_id={userId}")
     public ResponseEntity<PostPromoResponseDto> countPromotions(@RequestParam("userId") int userId){
         return new ResponseEntity<PostPromoResponseDto>((PostPromoResponseDto) this._service.getPromoPosts(userId), HttpStatus.OK);
     }
