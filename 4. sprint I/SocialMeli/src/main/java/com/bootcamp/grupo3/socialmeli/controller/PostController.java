@@ -1,7 +1,9 @@
 package com.bootcamp.grupo3.socialmeli.controller;
 
 import com.bootcamp.grupo3.socialmeli.dto.request.PostDTO;
+import com.bootcamp.grupo3.socialmeli.dto.request.PostOnSaleDTO;
 import com.bootcamp.grupo3.socialmeli.dto.response.MessageDTO;
+import com.bootcamp.grupo3.socialmeli.dto.response.PromoCountDTO;
 import com.bootcamp.grupo3.socialmeli.service.interfaces.IPostService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,5 +30,15 @@ public class PostController {
         UserPostListDTO posts = postService.getPostList(userId, order);
 
         return new ResponseEntity<>(posts, HttpStatus.OK);
+    }
+
+    @PostMapping("/promo-post")
+    public ResponseEntity<MessageDTO> createPostOnSale(@RequestBody PostOnSaleDTO postOnSaleDTO){
+        return ResponseEntity.ok(postService.createPostOnSale(postOnSaleDTO));
+    }
+
+    @GetMapping("/promo-post/count")
+    public ResponseEntity<PromoCountDTO> countProductsOnSale(@RequestParam(value = "user_id") int userId){
+        return ResponseEntity.ok(postService.countProductsOnSale(userId));
     }
 }

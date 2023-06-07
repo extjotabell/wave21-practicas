@@ -1,9 +1,13 @@
 package com.bootcamp.grupo3.socialmeli.service;
 
 import com.bootcamp.grupo3.socialmeli.dto.request.PostDTO;
+import com.bootcamp.grupo3.socialmeli.dto.request.PostOnSaleDTO;
+import com.bootcamp.grupo3.socialmeli.dto.response.MessageDTO;
+import com.bootcamp.grupo3.socialmeli.dto.response.PromoCountDTO;
 import com.bootcamp.grupo3.socialmeli.dto.response.UserPostListDTO;
 import com.bootcamp.grupo3.socialmeli.exception.UserNotFoundException;
 import com.bootcamp.grupo3.socialmeli.model.Post;
+import com.bootcamp.grupo3.socialmeli.model.PostOnSale;
 import com.bootcamp.grupo3.socialmeli.repository.interfaces.IPostRepository;
 import com.bootcamp.grupo3.socialmeli.service.interfaces.IPostService;
 import com.bootcamp.grupo3.socialmeli.service.interfaces.IUserService;
@@ -66,10 +70,16 @@ public class PostService implements IPostService {
     @Override
     public UserPostListDTO getPostList(final int userId, final String order) {
 
-        List<PostDTO> followedPostDto = this.getFollowedPosts(userId)
-          .stream()
-          .map(p -> modelMapper.map(p, PostDTO.class))
-          .toList();
+        List<Post> followedPosts = this.getFollowedPosts(userId);
+
+        List<PostDTO> followedPostDto= new ArrayList<>();
+
+        followedPosts.forEach(f -> {
+            if(f instanceof PostOnSale)
+                followedPostDto.add(modelMapper.map(f, PostOnSaleDTO.class));
+            else if(f instanceof Post)
+                followedPostDto.add(modelMapper.map(f,PostDTO.class));
+        });
 
         Comparator<PostDTO> c = this.getComparator(order);
 
@@ -80,5 +90,25 @@ public class PostService implements IPostService {
             .sorted(c)
             .toList()
         );
+    }
+
+    @Override
+    public MessageDTO createPostOnSale(PostOnSaleDTO postOnSaleDTO) {
+        PostOnSale newPost = modelMapper.map(postOnSaleDTO, PostOnSale.class);
+        if (userService.userExists(newPost.getUserId())) {
+            int id=postRepository.createPostOnSale(newPost);
+            return new MessageDTO("Post agregado exitosamente con id: " + id);
+        } else {
+            throw new UserNotFoundException("No se ha encontrado el usuario");
+        }
+    }
+
+    @Override
+    public PromoCountDTO countProductsOnSale(int userId) {
+        if(!userService.userExists(userId))
+            throw new UserNotFoundException("No se ha encontrado el usuario");
+        List<PostOnSale> postsOnSaleResponse = postRepository.getPostsOnSaleByUserId(userId);
+        String userName=userService.getUserName(userId);
+        return new PromoCountDTO(userId,userName,postsOnSaleResponse.size());
     }
 }

@@ -6,10 +6,10 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Product {
-    private int productId;
-    private String productName;
-    private String type;
-    private String brand;
-    private String color;
-    private String notes;
+    protected int productId;
+    protected String productName;
+    protected String type;
+    protected String brand;
+    protected String color;
+    protected String notes;
 }

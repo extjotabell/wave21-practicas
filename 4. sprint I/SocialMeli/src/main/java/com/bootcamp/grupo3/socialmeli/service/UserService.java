@@ -103,6 +103,11 @@ public class UserService implements IUserService {
     }
 
     @Override
+    public String getUserName(int userId) {
+        return userRepository.getUserByID(userId).get().getName();
+    }
+
+    @Override
     public UserFollowerCountDTO getUserFollowersCount(int id) {
         User user = this.getUserByID(id);
         UserFollowerCountDTO userFollowerCountDTO = modelMapper.map(user,UserFollowerCountDTO.class);

@@ -15,4 +15,6 @@ public interface IUserService {
     UserFollowerCountDTO getUserFollowersCount(int id);
     boolean userExists(int id);
     List<Integer> getFollowedByUser(int id);
+
+    String getUserName(int userId);
 }
