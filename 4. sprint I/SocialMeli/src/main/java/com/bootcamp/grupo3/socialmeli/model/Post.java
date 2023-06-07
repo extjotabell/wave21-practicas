@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collection;
 
 @Getter @Setter
 @NoArgsConstructor
@@ -19,4 +21,9 @@ public class Post {
     private double price;
     private boolean hasPromo;
     private double discount;
+    private Collection<Integer> likes = new ArrayList<>();
+
+    public int getLikeSize(){
+        return this.likes.size();
+    }
 }

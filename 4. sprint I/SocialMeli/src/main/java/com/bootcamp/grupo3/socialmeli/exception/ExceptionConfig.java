@@ -27,4 +27,14 @@ public class ExceptionConfig {
     public ResponseEntity<?> promotionPostException(Exception e){
         return ResponseEntity.badRequest().body(new MessageDTO(e.getMessage()));
     }
+
+    @ExceptionHandler(PostNotFoundException.class)
+    public ResponseEntity<?> postNotFoundException(Exception e){
+        return ResponseEntity.badRequest().body(new MessageDTO(e.getMessage()));
+    }
+
+    @ExceptionHandler(UserAlreadyLikeException.class)
+    public ResponseEntity<?> userAlreadyLikeException(Exception e){
+        return ResponseEntity.badRequest().body(new MessageDTO(e.getMessage()));
+    }
 }

@@ -2,9 +2,13 @@ package com.bootcamp.grupo3.socialmeli.service;
 
 import com.bootcamp.grupo3.socialmeli.dto.request.PostDTO;
 import com.bootcamp.grupo3.socialmeli.dto.request.PromotionPostDTO;
+import com.bootcamp.grupo3.socialmeli.dto.response.MessageDTO;
+import com.bootcamp.grupo3.socialmeli.dto.response.TrendingPostsDTO;
 import com.bootcamp.grupo3.socialmeli.dto.response.UserPostListDTO;
 import com.bootcamp.grupo3.socialmeli.dto.response.UserPromoPostCountDTO;
+import com.bootcamp.grupo3.socialmeli.exception.PostNotFoundException;
 import com.bootcamp.grupo3.socialmeli.exception.PromotionPostException;
+import com.bootcamp.grupo3.socialmeli.exception.UserAlreadyLikeException;
 import com.bootcamp.grupo3.socialmeli.exception.UserNotFoundException;
 import com.bootcamp.grupo3.socialmeli.model.Post;
 import com.bootcamp.grupo3.socialmeli.model.User;
@@ -103,5 +107,48 @@ public class PostService implements IPostService {
         User user = userService.getUserByID(userId);
 
         return new UserPromoPostCountDTO(user.getId(), user.getName(), postRepository.getPromotionPost(userId).size());
+    }
+
+    @Override
+    public MessageDTO like(int userId, int postId) {
+        if(!userService.userExists(userId)) throw new UserNotFoundException("No se ha encontrado el usuario");
+
+        Post post = this.getPostById(postId);
+        if(post.getLikes().contains(userId)) throw new UserAlreadyLikeException("El usuario ya le dio like a este post");
+
+        post.getLikes().add(userId);
+        return new MessageDTO("El usuario dio like correctamente!");
+    }
+
+    @Override
+    public MessageDTO unlike(int userId, int postId) {
+        if(!userService.userExists(userId)) throw new UserNotFoundException("No se ha encontrado el usuario");
+
+        Post post = this.getPostById(postId);
+        if(!post.getLikes().contains(userId)) throw new UserAlreadyLikeException("El usuario no le dio like a este post");
+
+        post.getLikes().remove(userId);
+        return new MessageDTO("El usuario saco el like correctamente!");
+    }
+
+    @Override
+    public TrendingPostsDTO getTrendingPosts(int amount, String order) {
+        List<Post> posts = new ArrayList<>(postRepository.getAll());
+        posts.sort(Comparator.comparing(Post::getLikeSize).reversed());
+
+        List<PostDTO> trendingPosts = posts.subList(0, Math.min(amount, posts.size()))
+                .stream()
+                .map(post -> modelMapper.map(post, PostDTO.class))
+                .collect(Collectors.toList());
+
+        if(DATE_ASC.equals(order)) trendingPosts.sort(Comparator.comparing(PostDTO::getDate));
+        else if(DATE_DES.equals(order)) trendingPosts.sort(Comparator.comparing(PostDTO::getDate).reversed());
+
+        return new TrendingPostsDTO(trendingPosts);
+    }
+
+    private Post getPostById(int postId){
+        return postRepository.getPostById(postId)
+                .orElseThrow(() -> new PostNotFoundException("No se ha encontrado el post"));
     }
 }

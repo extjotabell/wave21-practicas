@@ -1,0 +1,247 @@
+{
+	"info": {
+		"_postman_id": "a036a83d-5dc9-490d-a0de-d5bead15cbda",
+		"name": "Sprint 1 - g03 - Extra - Matias Tato",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "US13",
+			"item": [
+				{
+					"name": "Darle like a un post",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/products/post/1/like/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"post",
+								"1",
+								"like",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Error - Usuario no existe",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/products/post/30/like/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"post",
+								"30",
+								"like",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Error - Post no existe",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/products/post/1/like/30",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"post",
+								"1",
+								"like",
+								"30"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Error - Usuario ya dio like",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/products/post/1/like/30",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"post",
+								"1",
+								"like",
+								"30"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "US14",
+			"item": [
+				{
+					"name": "Sacarle like a un post",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/products/post/1/unlike/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"post",
+								"1",
+								"unlike",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Error - Usuario no existe",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/products/post/30/unlike/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"post",
+								"30",
+								"unlike",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Error - Post no existe",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/products/post/1/unlike/30",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"post",
+								"1",
+								"unlike",
+								"30"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Error - Usuario no dio like",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/products/post/1/unlike/30",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"post",
+								"1",
+								"unlike",
+								"30"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "US15",
+			"item": [
+				{
+					"name": "Lista de Post con mas likes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/products/post/trending/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"post",
+								"trending",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "US16",
+			"item": [
+				{
+					"name": "Lista de Post con mas likes ordenado por fecha",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/products/post/trending/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"post",
+								"trending",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
