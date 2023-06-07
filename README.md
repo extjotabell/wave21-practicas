@@ -7,7 +7,7 @@ La aplicación "SocialMeli" es una plataforma innovadora que te permite seguir y
 <p align="left"> <a href="https://git-scm.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" alt="git" width="40" height="40"/> </a> <a href="https://www.java.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg" alt="java" width="40" height="40"/> </a> <a href="https://postman.com" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/getpostman/getpostman-icon.svg" alt="postman" width="40" height="40"/> </a> <a href="https://spring.io/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/springio/springio-icon.svg" alt="spring" width="40" height="40"/> </a> </p>
 
 ### Diagrama del proyecto:
-![](https://raw.githubusercontent.com/extjotabell/wave21-practicas/be_java_hisp_w21_g4/4.%20sprint%20I/Diagrama%20Sprint.png)
+<img width="663" alt="image" src="https://github.com/extjotabell/wave21-practicas/assets/133796182/93c7b932-3e8c-4eae-99fd-61a31cb18610">
 
 ### Decisiones de Equipo:
 - Decisión 1: Un usuario puede seguir a otro usuario, sin importar si tiene post (Usuario)
