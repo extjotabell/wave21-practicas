@@ -2,6 +2,7 @@ package com.bootcamp.grupo3.socialmeli.controller;
 
 import com.bootcamp.grupo3.socialmeli.dto.request.PostDTO;
 import com.bootcamp.grupo3.socialmeli.dto.request.PromoPostDTO;
+import com.bootcamp.grupo3.socialmeli.dto.response.FollowedPromoListDTO;
 import com.bootcamp.grupo3.socialmeli.dto.response.MessageDTO;
 import com.bootcamp.grupo3.socialmeli.dto.response.PromoCountDTO;
 import com.bootcamp.grupo3.socialmeli.service.interfaces.IPostService;
@@ -39,8 +40,14 @@ public class PostController {
     }
 
     @GetMapping("/promo-post/count")
-    public ResponseEntity<PromoCountDTO> getProductsInPromotionForAVendor(@RequestParam("user_id") int userId){
+    public ResponseEntity<PromoCountDTO> getCountOfProductsInPromotionForAVendor(@RequestParam("user_id") int userId){
         PromoCountDTO countDTO = postService.getPromotionsFromUser(userId);
         return ResponseEntity.ok(countDTO);
+    }
+
+    @GetMapping("/promo-post/list")
+    public ResponseEntity<FollowedPromoListDTO> getUserFollowedVendorsPromotionalPosts(@RequestParam("user_id") int userId){
+        FollowedPromoListDTO followedPromoListDTO = postService.getPromoPostsFromVendorsFollowedByUser(userId);
+        return ResponseEntity.ok(followedPromoListDTO);
     }
 }

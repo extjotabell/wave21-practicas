@@ -1,5 +1,6 @@
 package com.bootcamp.grupo3.socialmeli.repository;
 
+import com.bootcamp.grupo3.socialmeli.model.CompletePromoPost;
 import com.bootcamp.grupo3.socialmeli.model.Post;
 import com.bootcamp.grupo3.socialmeli.model.PromoPost;
 import com.bootcamp.grupo3.socialmeli.repository.interfaces.IPostRepository;
@@ -57,5 +58,25 @@ public class PostRepository implements IPostRepository {
     @Override
     public void addPromotion(int postId, double discount) {
         discounts.put(postId, discount);
+    }
+
+
+    public List<CompletePromoPost> getPromoPostsFromFollowedUsers(List<Integer> followedIds){
+        List<Post> promoPostsFromFollowedUsers = posts.stream()
+                .filter(p -> followedIds.contains(p.getUserId()))
+                .filter(p -> discounts.containsKey(p.getId()))
+                .toList();
+        return promoPostsFromFollowedUsers.stream().map(this::createCompletePromoPost).toList();
+    }
+    private CompletePromoPost createCompletePromoPost(Post post){
+        return new CompletePromoPost(
+                post.getId(),
+                post.getUserId(),
+                post.getDate(),
+                post.getProduct(),
+                post.getCategory(),
+                post.getPrice(),
+                discounts.get(post.getId())
+        );
     }
 }

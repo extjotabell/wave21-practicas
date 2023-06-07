@@ -29,6 +29,8 @@ Si no compila correctamente, realizar los siguientes pasos:
 
 Se deja la coleccion de Postman en la carpeta resources del proyecto
 
+Se deja documentación tecnica de US12 bonus dentro de la carpeta resources del proyecto.
+
 ## Miembros del Equipo
 
 Fabrizzio Cámera
@@ -83,10 +85,13 @@ GET /products/followed/{userId}/list?order=date_asc
 Responsables: Gabriel Antonietti y Nahuel De Bellis
 
 POST /products/promo-post
-Responsable: Individual
+Responsable: Fabrizzio Cámera
 
 GET /products/promo-post/count?user_id={userId}
-Responsable: Individual
+Responsable: Fabrizzio Cámera
+
+GET /products/promo-post/list?user_id={userId}
+Responsable: Fabrizzio Cámera
 
   
 

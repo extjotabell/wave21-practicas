@@ -2,11 +2,11 @@ package com.bootcamp.grupo3.socialmeli.service;
 
 import com.bootcamp.grupo3.socialmeli.dto.request.PostDTO;
 import com.bootcamp.grupo3.socialmeli.dto.request.PromoPostDTO;
-import com.bootcamp.grupo3.socialmeli.dto.response.PromoCountDTO;
-import com.bootcamp.grupo3.socialmeli.dto.response.UserDTO;
-import com.bootcamp.grupo3.socialmeli.dto.response.UserPostListDTO;
+import com.bootcamp.grupo3.socialmeli.dto.response.*;
 import com.bootcamp.grupo3.socialmeli.exception.UserNotFoundException;
+import com.bootcamp.grupo3.socialmeli.model.CompletePromoPost;
 import com.bootcamp.grupo3.socialmeli.model.Post;
+import com.bootcamp.grupo3.socialmeli.model.PromoPost;
 import com.bootcamp.grupo3.socialmeli.repository.interfaces.IPostRepository;
 import com.bootcamp.grupo3.socialmeli.service.interfaces.IPostService;
 import com.bootcamp.grupo3.socialmeli.service.interfaces.IUserService;
@@ -83,6 +83,17 @@ public class PostService implements IPostService {
             .sorted(c)
             .toList()
         );
+    }
+
+    @Override
+    public FollowedPromoListDTO getPromoPostsFromVendorsFollowedByUser(int userId) {
+       UserDTO user = userService.getUser(userId);
+       List<Integer> usersFollowedIds = userService.getFollowedByUser(userId);
+       List<CompletePromoPost> promoPosts = postRepository.getPromoPostsFromFollowedUsers(usersFollowedIds);
+       List<PromoPostResponseDTO> promoPostResponseDTOs = promoPosts.stream().map(p -> modelMapper.map(p, PromoPostResponseDTO.class)).toList();
+       FollowedPromoListDTO followedPromoListDTO = modelMapper.map(user, FollowedPromoListDTO.class);
+       followedPromoListDTO.setPromotionalPosts(promoPostResponseDTOs);
+       return followedPromoListDTO;
     }
 
     @Override
