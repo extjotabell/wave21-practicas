@@ -74,7 +74,7 @@ public class UsersServiceImpl implements IUsersService{
         return new FollowersListDTO(
                 persistedUser.getId(),
                 persistedUser.getUsername(),
-                getFollowDTO(persistedUser, persistedUser.getFollowers())
+                getFollowDTO(persistedUser.getFollowers())
         );
     }
 
@@ -82,7 +82,7 @@ public class UsersServiceImpl implements IUsersService{
         User persistedUser = _usersRepository.getUser(userId);
         checkUserAndSellerException(persistedUser);
 
-        List<FollowerDTO> followersDTO = getFollowDTO(persistedUser, persistedUser.getFollowers());
+        List<FollowerDTO> followersDTO = getFollowDTO(persistedUser.getFollowers());
 
         orderCollectionByOrderParam(followersDTO, order);
 
@@ -103,7 +103,7 @@ public class UsersServiceImpl implements IUsersService{
         return new FollowedListDTO(
                 persistedUser.getId(),
                 persistedUser.getUsername(),
-                getFollowDTO(persistedUser, persistedUser.getFollowing())
+                getFollowDTO(persistedUser.getFollowing())
         );
     }
 
@@ -114,7 +114,7 @@ public class UsersServiceImpl implements IUsersService{
             throw new UserNotFoundException("No se pudo encontrar un usuario con el ID mencionado");
         }
 
-        List<FollowerDTO> followedDTO = getFollowDTO(persistedUser, persistedUser.getFollowing());
+        List<FollowerDTO> followedDTO = getFollowDTO(persistedUser.getFollowing());
 
         orderCollectionByOrderParam(followedDTO, order);
 
@@ -146,7 +146,7 @@ public class UsersServiceImpl implements IUsersService{
         }
     }
 
-    private List<FollowerDTO> getFollowDTO(User  persistedUser, Set<Integer> usersIds){
+    private List<FollowerDTO> getFollowDTO(Set<Integer> usersIds){
         List<User> followers = _usersRepository.getUsers(usersIds);
         List<FollowerDTO> followersDTO = new ArrayList<>();
         followers.forEach(follower -> followersDTO.add(new FollowerDTO(follower.getId(),follower.getUsername())));
