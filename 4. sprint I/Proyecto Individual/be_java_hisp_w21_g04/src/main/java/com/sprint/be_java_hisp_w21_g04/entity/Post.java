@@ -1,10 +1,7 @@
 package com.sprint.be_java_hisp_w21_g04.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 
@@ -12,6 +9,7 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class Post {
 
     private int userId;
@@ -22,5 +20,4 @@ public class Post {
     private double price;
     private boolean hasPromo;
     private double discount;
-
 }

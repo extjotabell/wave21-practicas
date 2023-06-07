@@ -51,7 +51,10 @@ public class PostRepositoryImpl implements IPostRepository {
 
     @Override
     public void post(Post post) {
+        System.out.println(post.toString());
         this.posts.add(post);
+        // print posts as a list
+        System.out.println(this.posts.toString());
     }
 
     @Override

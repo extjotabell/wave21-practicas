@@ -1,6 +1,7 @@
 package com.sprint.be_java_hisp_w21_g04.controller;
 
 import com.sprint.be_java_hisp_w21_g04.dto.request.PostRequestDto;
+import com.sprint.be_java_hisp_w21_g04.dto.response.PostPromoResponseDto;
 import com.sprint.be_java_hisp_w21_g04.dto.response.PostResponseDto;
 import com.sprint.be_java_hisp_w21_g04.dto.response.SellerFollowedListPostResponseDto;
 import com.sprint.be_java_hisp_w21_g04.entity.Post;
@@ -22,9 +23,14 @@ public class PostController {
     }
 
     @PostMapping("/post")
-    public ResponseEntity<String> post(@RequestBody(required = true) PostRequestDto post) {
+    public ResponseEntity<String> post(@RequestBody(required = true) PostRequestDto post){
         this._service.post(post);
         return new ResponseEntity<>("Post agregado exitosamente",HttpStatus.OK);
+    }
+
+    @GetMapping("/posts/promotions/count{userId}")
+    public ResponseEntity<PostPromoResponseDto> countPromotions(@RequestParam("userId") int userId){
+        return new ResponseEntity<PostPromoResponseDto>((PostPromoResponseDto) this._service.getPromoPosts(userId), HttpStatus.OK);
     }
 
     @GetMapping("/followed/{userId}/list")
