@@ -78,7 +78,6 @@ public class UserRepositoryImpl implements IUserRepository{
     public List<Post> getPostsByRange(double minimumPrice, double maximumPrice) {
         List<Post> result = new ArrayList<>();
 
-
         dataUser.values().forEach(
                 user -> result.addAll(
                         user.getPosts().stream()

@@ -56,6 +56,7 @@ http://localhost:8080/users/{userId}/unfollow/{userIdToUnfollow}
 Products
 
 http://localhost:8080/products/post
+http://localhost:8080/products/promo-post
 
 ### Metodos GET:
 
@@ -68,6 +69,8 @@ http://localhost:8080/users/{userId}/followers/count
 Products
 
 http://localhost:8080/products/followed/{userId}/list?order=date_asc
+http://localhost:8080/products/list?filter=price&minimum_price=1&maximum_price=100
+http://localhost:8080/products/promo-post/count?user_id=4
 
 ## Distribución de tareas del equipo
 Para visualizar los responsables de cada tarea, adjuntamos la plataforma utilizada para tener un seguimiento de las tareas y responsables de las mismas.
