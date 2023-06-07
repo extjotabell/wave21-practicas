@@ -3,6 +3,7 @@ package com.bootcamp.grupo3.socialmeli.service;
 import com.bootcamp.grupo3.socialmeli.dto.request.PostDTO;
 import com.bootcamp.grupo3.socialmeli.dto.request.PostOnSaleDTO;
 import com.bootcamp.grupo3.socialmeli.dto.response.MessageDTO;
+import com.bootcamp.grupo3.socialmeli.dto.response.PostOnSaleUserDTO;
 import com.bootcamp.grupo3.socialmeli.dto.response.PromoCountDTO;
 import com.bootcamp.grupo3.socialmeli.dto.response.UserPostListDTO;
 import com.bootcamp.grupo3.socialmeli.exception.UserNotFoundException;
@@ -15,8 +16,10 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PostService implements IPostService {
@@ -24,6 +27,10 @@ public class PostService implements IPostService {
     private static String DATE_DES = "date_desc";
     private static String PRICE_ASC = "price_asc";
     private static String PRICE_DESC = "price_desc";
+
+    private static final String NAME_ASC="name_asc";
+
+    private static final String NAME_DESC= "name_desc";
 
     private IPostRepository postRepository;
     private IUserService userService;
@@ -110,5 +117,25 @@ public class PostService implements IPostService {
         List<PostOnSale> postsOnSaleResponse = postRepository.getPostsOnSaleByUserId(userId);
         String userName=userService.getUserName(userId);
         return new PromoCountDTO(userId,userName,postsOnSaleResponse.size());
+    }
+
+    @Override
+    public PostOnSaleUserDTO getPromoPostByUserId(int userId,String order) {
+        if(!userService.userExists(userId))
+            throw new UserNotFoundException("No se ha encontrado el usuario");
+        List<PostOnSaleDTO> postOnSaleDTOResponse= postRepository.getPostsOnSaleByUserId(userId)
+                .stream().map(postOnSale -> modelMapper.map(postOnSale,PostOnSaleDTO.class))
+                .sorted(((o1, o2) -> {
+                    if(order.equals(NAME_ASC))
+                        return o1.getProduct().getProductName().compareTo(o2.getProduct().getProductName());
+                    else if(order.equals(NAME_DESC))
+                        return o2.getProduct().getProductName().compareTo(o1.getProduct().getProductName());
+                    else
+                        return 0;
+                }))
+                .collect(Collectors.toList());
+
+        String userName= userService.getUserName(userId);
+        return new PostOnSaleUserDTO(userId,userName,postOnSaleDTOResponse);
     }
 }
