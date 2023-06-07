@@ -22,4 +22,9 @@ public class ExceptionConfig {
     public ResponseEntity<?> userEqualsException(Exception e){
         return ResponseEntity.badRequest().body(new MessageDTO(e.getMessage()));
     }
+
+    @ExceptionHandler(PromotionPostException.class)
+    public ResponseEntity<?> promotionPostException(Exception e){
+        return ResponseEntity.badRequest().body(new MessageDTO(e.getMessage()));
+    }
 }

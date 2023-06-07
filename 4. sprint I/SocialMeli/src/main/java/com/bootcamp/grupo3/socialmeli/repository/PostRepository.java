@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class PostRepository implements IPostRepository {
@@ -35,5 +36,13 @@ public class PostRepository implements IPostRepository {
           .filter(p -> p.getUserId() == userId)
           .filter(post -> post.getDate().isAfter(pastTwoWeek))
           .toList();
+    }
+
+    @Override
+    public List<Post> getPromotionPost(int userId) {
+        return posts
+                .stream()
+                .filter(post -> post.getUserId() == userId && post.isHasPromo())
+                .collect(Collectors.toList());
     }
 }

@@ -1,9 +1,13 @@
 package com.bootcamp.grupo3.socialmeli.service;
 
 import com.bootcamp.grupo3.socialmeli.dto.request.PostDTO;
+import com.bootcamp.grupo3.socialmeli.dto.request.PromotionPostDTO;
 import com.bootcamp.grupo3.socialmeli.dto.response.UserPostListDTO;
+import com.bootcamp.grupo3.socialmeli.dto.response.UserPromoPostCountDTO;
+import com.bootcamp.grupo3.socialmeli.exception.PromotionPostException;
 import com.bootcamp.grupo3.socialmeli.exception.UserNotFoundException;
 import com.bootcamp.grupo3.socialmeli.model.Post;
+import com.bootcamp.grupo3.socialmeli.model.User;
 import com.bootcamp.grupo3.socialmeli.repository.interfaces.IPostRepository;
 import com.bootcamp.grupo3.socialmeli.service.interfaces.IPostService;
 import com.bootcamp.grupo3.socialmeli.service.interfaces.IUserService;
@@ -13,6 +17,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PostService implements IPostService {
@@ -33,11 +38,22 @@ public class PostService implements IPostService {
 
     public int createPost(PostDTO body) {
         Post newPost = modelMapper.map(body, Post.class);
+
         if (userService.userExists(newPost.getUserId())) {
             return postRepository.createPost(newPost);
         } else {
             throw new UserNotFoundException("No se ha encontrado el usuario");
         }
+    }
+
+    public int createPromotionPost(PromotionPostDTO postDTO){
+        Post post = modelMapper.map(postDTO, Post.class);
+
+        if(!post.isHasPromo()) throw new PromotionPostException("El post ingresado no esta en promoción");
+        if(post.getDiscount() <= 0) throw new PromotionPostException("El post ingresado no cuenta con un descuento valido");
+        if(!userService.userExists(post.getUserId())) throw new UserNotFoundException("No se ha encontrado el usuario");
+
+        return postRepository.createPost(post);
     }
 
     private List<Post> getFollowedPosts(final int userId) {
@@ -80,5 +96,12 @@ public class PostService implements IPostService {
             .sorted(c)
             .toList()
         );
+    }
+
+    @Override
+    public UserPromoPostCountDTO getListOfPromotionPost(int userId) {
+        User user = userService.getUserByID(userId);
+
+        return new UserPromoPostCountDTO(user.getId(), user.getName(), postRepository.getPromotionPost(userId).size());
     }
 }
