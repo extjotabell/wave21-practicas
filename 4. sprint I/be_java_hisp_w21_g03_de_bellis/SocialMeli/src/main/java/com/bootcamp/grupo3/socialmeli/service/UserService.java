@@ -5,6 +5,8 @@ import com.bootcamp.grupo3.socialmeli.dto.response.*;
 import com.bootcamp.grupo3.socialmeli.exception.UserNotFoundException;
 import com.bootcamp.grupo3.socialmeli.exception.UserPermissionException;
 import com.bootcamp.grupo3.socialmeli.model.User;
+import com.bootcamp.grupo3.socialmeli.order.UserOrder;
+import com.bootcamp.grupo3.socialmeli.order.UserOrderType;
 import com.bootcamp.grupo3.socialmeli.repository.interfaces.IUserRepository;
 import com.bootcamp.grupo3.socialmeli.service.interfaces.IUserService;
 import org.modelmapper.ModelMapper;
@@ -110,16 +112,15 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public UserFollowersListDTO getFollowers(final String token, final String order) throws UserPermissionException {
+    public UserFollowersListDTO getFollowers(final String token, final UserOrderType order) throws UserPermissionException {
         UserFollowersListDTO user = modelMapper.map(
           this.getUserByToken(token),
           UserFollowersListDTO.class
         );
 
-        if(ASCEND_ORDER.equals(order))
-          user.getFollowers().sort(Comparator.naturalOrder());
-        else if(DESCEND_ORDER.equals(order))
-          user.getFollowers().sort(Comparator.reverseOrder());
+        UserOrder userOrderable = new UserOrder();
+        Comparator<UserDTO> c = userOrderable.getComparator(order);
+        user.getFollowers().sort(c);
 
         return user;
     }

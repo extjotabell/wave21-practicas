@@ -5,6 +5,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import java.util.NoSuchElementException;
+
 @ControllerAdvice
 public class ExceptionConfig {
     @ExceptionHandler(PostNotFoundException.class)
@@ -26,6 +28,14 @@ public class ExceptionConfig {
     public ResponseEntity<?> userNotFoundException(UserNotFoundException e){
         return ResponseEntity.badRequest().body(new MessageDTO(e.getMessage()));
     }
+    @ExceptionHandler(NoSuchElementException.class)
+    public ResponseEntity<?> notFound(NoSuchElementException e){
+      return ResponseEntity.badRequest().body(new MessageDTO("No se pudo encontrar el elemento"));
+    }
 
+    @ExceptionHandler(InvalidTokenFormatException.class)
+    public ResponseEntity<?> userNotFoundException(InvalidTokenFormatException e){
+      return ResponseEntity.badRequest().body(new MessageDTO(e.getMessage()));
+    }
 
 }

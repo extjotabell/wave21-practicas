@@ -1,0 +1,644 @@
+{
+	"info": {
+		"_postman_id": "6be06462-681a-45c1-8d5b-fb04bcb87f1f",
+		"name": "Sprint 1 - individual + bonus",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "Creo al usuario 4",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Nahuel\",\n    \"password\": \"1234\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								""
+							]
+						},
+						"description": "crea un usuaio.\nHay algunos usuarios hardcodeados asi que empieza con el id 4"
+					},
+					"response": []
+				},
+				{
+					"name": "Logueo al usuario 4",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonResponse = pm.response.json();",
+									"pm.globals.set(\"token\", jsonResponse.token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": 4,\n    \"password\": \"1234\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"login"
+							],
+							"query": [
+								{
+									"key": "sintoma",
+									"value": "mareos",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Los usuarios 1, 2, 3 tienen un password de 1234 para hacer pruebas. Sino pueden crear los usuarios que quieran.\nEsto devuelve el token que necesito."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Follow/Unfollow",
+			"item": [
+				{
+					"name": "El usuario logueado sigue al usuario 3",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/users/{{token}}/follow/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"{{token}}",
+								"follow",
+								"3"
+							]
+						},
+						"description": "Necesita loguear un usuario antes de poder seguir a otro"
+					},
+					"response": []
+				},
+				{
+					"name": "El usuario logueado deja de seguir al usuario 3",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/users/{{token}}/unfollow/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"{{token}}",
+								"unfollow",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "El usuario logueado sigue al usuario 1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/users/{{token}}/follow/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"{{token}}",
+								"follow",
+								"1"
+							]
+						},
+						"description": "Necesita loguear un usuario antes de poder seguir a otro"
+					},
+					"response": []
+				},
+				{
+					"name": "El usuario logueado sigue al usuario 2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/users/{{token}}/follow/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"{{token}}",
+								"follow",
+								"2"
+							]
+						},
+						"description": "Necesita loguear un usuario antes de poder seguir a otro"
+					},
+					"response": []
+				},
+				{
+					"name": "El usuario logueado sigue al usuario 3",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/users/{{token}}/follow/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"{{token}}",
+								"follow",
+								"3"
+							]
+						},
+						"description": "Necesita loguear un usuario antes de poder seguir a otro"
+					},
+					"response": []
+				},
+				{
+					"name": "Lista de usuarios que sigo",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/users/{{token}}/followed/list?order=name_desc",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"{{token}}",
+								"followed",
+								"list"
+							],
+							"query": [
+								{
+									"key": "order",
+									"value": "name_desc"
+								},
+								{
+									"key": "order",
+									"value": "name_asc",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Agergo seguidores al usuario 2 para mostrar la cantidad y el listado",
+			"item": [
+				{
+					"name": "Logueo al usuario 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonResponse = pm.response.json();",
+									"pm.globals.set(\"token\", jsonResponse.token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": 1,\n    \"password\": \"1234\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"login"
+							],
+							"query": [
+								{
+									"key": "sintoma",
+									"value": "mareos",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Los usuarios 1, 2, 3 tienen un password de 1234 para hacer pruebas. Sino pueden crear los usuarios que quieran.\nEsto devuelve el token que necesito."
+					},
+					"response": []
+				},
+				{
+					"name": "El usuario logueado sigue al usuario 2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/users/{{token}}/follow/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"{{token}}",
+								"follow",
+								"2"
+							]
+						},
+						"description": "Necesita loguear un usuario antes de poder seguir a otro"
+					},
+					"response": []
+				},
+				{
+					"name": "Usuario 1 crea un posteo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"token\": \"{token}\",\n    \"date\": \"01-06-2023\",\n    \"product\":{ \n        \"product_id\": 123,\n        \"product_name\": \"Silla Gamer\",\n        \"type\": \"Silla\",\n        \"brand\": \"Asus\",\n        \"color\": \"Negro y Verde\",\n        \"notes\": \"Silla en impecables condiciones, poco uso\"\n    },\n    \"category\": 1,\n    \"price\": 200.6\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/products/post",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"post"
+							]
+						},
+						"description": "Necesita loguear un usuario para obtener el token"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Listado de seguidos y seguidores",
+			"item": [
+				{
+					"name": "Login usuario 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonResponse = pm.response.json();",
+									"pm.globals.set(\"token\", jsonResponse.token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": 2,\n    \"password\": \"1234\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"login"
+							],
+							"query": [
+								{
+									"key": "sintoma",
+									"value": "mareos",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Los usuarios 1, 2, 3 tienen un password de 1234 para hacer pruebas. Sino pueden crear los usuarios que quieran.\nEsto devuelve el token que necesito."
+					},
+					"response": []
+				},
+				{
+					"name": "Cantidad de seguidores",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/users/{{token}}/followers/count",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"{{token}}",
+								"followers",
+								"count"
+							],
+							"query": [
+								{
+									"key": "order",
+									"value": "name_desc",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lista de seguidores",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/users/{{token}}/followers/list?order=name_asc",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"{{token}}",
+								"followers",
+								"list"
+							],
+							"query": [
+								{
+									"key": "order",
+									"value": "name_desc",
+									"disabled": true
+								},
+								{
+									"key": "order",
+									"value": "name_asc"
+								}
+							]
+						},
+						"description": "Necesita loguear un usuario para obtener un token."
+					},
+					"response": []
+				},
+				{
+					"name": "Usuario 2 crea un posteo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"token\": \"{{token}}\",\n    \"date\": \"06-06-2023\",\n    \"product\":{ \n        \"product_id\": 124,\n        \"product_name\": \"Silla Gamer\",\n        \"type\": \"Silla\",\n        \"brand\": \"Asus\",\n        \"color\": \"Negro y Verde\",\n        \"notes\": \"Silla en impecables condiciones, poco uso\"\n    },\n    \"category\": 1,\n    \"price\": 200.6\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/products/post",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"post"
+							]
+						},
+						"description": "Necesita loguear un usuario para obtener el token"
+					},
+					"response": []
+				},
+				{
+					"name": "Usuario 2 crea un posteo con promo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"token\": \"{{token}}\",\n    \"date\": \"30-05-2023\",\n    \"product\":{ \n        \"product_id\": 125,\n        \"product_name\": \"Silla Normal\",\n        \"type\": \"Silla\",\n        \"brand\": \"Normie\",\n        \"color\": \"Negro y Verde\",\n        \"notes\": \"Silla en impecables condiciones, poco uso\"\n    },\n    \"category\": 1,\n    \"price\": 50.6,\n    \"has_promo\": false,\n    \"discount\": 2.5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/products/promo-post",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"promo-post"
+							]
+						},
+						"description": "Se necesita loguear un usuario para obtener un token."
+					},
+					"response": []
+				},
+				{
+					"name": "Veo la cantidad de posteos con promo del Usuario 2",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/products/promo-post/count/{token}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"promo-post",
+								"count",
+								"{token}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Logueo al usuario 4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonResponse = pm.response.json();",
+							"pm.globals.set(\"token\", jsonResponse.token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_id\": 4,\n    \"password\": \"1234\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/users/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"login"
+					],
+					"query": [
+						{
+							"key": "sintoma",
+							"value": "mareos",
+							"disabled": true
+						}
+					]
+				},
+				"description": "Los usuarios 1, 2, 3 tienen un password de 1234 para hacer pruebas. Sino pueden crear los usuarios que quieran.\nEsto devuelve el token que necesito."
+			},
+			"response": []
+		},
+		{
+			"name": "Lista de publicaciones de los usuarios que segui",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/products/followed/{{token}}/list?order=price_desc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products",
+						"followed",
+						"{{token}}",
+						"list"
+					],
+					"query": [
+						{
+							"key": "order",
+							"value": "date_desc",
+							"disabled": true
+						},
+						{
+							"key": "order",
+							"value": "date_asc",
+							"disabled": true
+						},
+						{
+							"key": "order",
+							"value": "price_desc"
+						},
+						{
+							"key": "order",
+							"value": "price_asc",
+							"disabled": true
+						}
+					]
+				},
+				"description": "Se necesita loguear un usuario para obtener un token."
+			},
+			"response": []
+		}
+	]
+}

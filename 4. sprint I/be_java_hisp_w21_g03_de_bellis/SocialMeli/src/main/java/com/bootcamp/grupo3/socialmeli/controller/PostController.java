@@ -6,13 +6,15 @@ import com.bootcamp.grupo3.socialmeli.dto.response.MessageDTO;
 import com.bootcamp.grupo3.socialmeli.dto.response.PostIdPromoDTO;
 import com.bootcamp.grupo3.socialmeli.dto.response.PostPromoMetricDTO;
 import com.bootcamp.grupo3.socialmeli.exception.UserPermissionException;
+import com.bootcamp.grupo3.socialmeli.order.PostOrderType;
 import com.bootcamp.grupo3.socialmeli.service.interfaces.IPostPromoService;
 import com.bootcamp.grupo3.socialmeli.service.interfaces.IPostService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.bootcamp.grupo3.socialmeli.dto.response.UserPostListDTO;
-import com.bootcamp.grupo3.socialmeli.service.interfaces.IUserService;
 import org.springframework.http.HttpStatus;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/products")
@@ -56,9 +58,14 @@ public class PostController {
     @GetMapping("/followed/{token}/list")
     public ResponseEntity<UserPostListDTO> listPostOfFollowers(
       @PathVariable final String token,
-      @RequestParam(required = false) final String order
+      @RequestParam Optional<String> order
     ) throws UserPermissionException {
-        UserPostListDTO posts = postService.getPostList(token, order);
+
+        PostOrderType orderEnum = order
+          .map(PostOrderType::getEnumValue)
+          .orElse(PostOrderType.DEFAULT);
+
+        UserPostListDTO posts = postService.getPostList(token, orderEnum);
 
         return new ResponseEntity<>(posts, HttpStatus.OK);
     }

@@ -1,19 +1,15 @@
 package com.bootcamp.grupo3.socialmeli.service;
 
 import com.bootcamp.grupo3.socialmeli.dto.request.PostDTO;
-import com.bootcamp.grupo3.socialmeli.dto.request.PostPromoDTO;
-import com.bootcamp.grupo3.socialmeli.dto.response.PostIdPromoDTO;
 import com.bootcamp.grupo3.socialmeli.dto.response.PostResponseDTO;
 import com.bootcamp.grupo3.socialmeli.dto.response.UserPostListDTO;
 import com.bootcamp.grupo3.socialmeli.exception.PostNotFoundException;
-import com.bootcamp.grupo3.socialmeli.exception.UserNotFoundException;
 import com.bootcamp.grupo3.socialmeli.exception.UserPermissionException;
 import com.bootcamp.grupo3.socialmeli.model.Post;
-import com.bootcamp.grupo3.socialmeli.model.PostPromo;
-import com.bootcamp.grupo3.socialmeli.model.Product;
 import com.bootcamp.grupo3.socialmeli.model.User;
+import com.bootcamp.grupo3.socialmeli.order.PostDTOOrder;
+import com.bootcamp.grupo3.socialmeli.order.PostOrderType;
 import com.bootcamp.grupo3.socialmeli.repository.interfaces.IPostRepository;
-import com.bootcamp.grupo3.socialmeli.service.interfaces.IPostPromoService;
 import com.bootcamp.grupo3.socialmeli.service.interfaces.IPostService;
 import com.bootcamp.grupo3.socialmeli.service.interfaces.IProductService;
 import com.bootcamp.grupo3.socialmeli.service.interfaces.IUserService;
@@ -75,7 +71,7 @@ public class PostService implements IPostService {
     }
 
     @Override
-    public UserPostListDTO getPostList(final String token, final String order) throws UserPermissionException {
+    public UserPostListDTO getPostList(final String token, final PostOrderType order) throws UserPermissionException {
 
         List<PostResponseDTO> followedPostDto = this.getFollowedPosts(token)
           .stream()
@@ -88,7 +84,8 @@ public class PostService implements IPostService {
             p.getPrice())
           ).toList();
 
-        Comparator<PostResponseDTO> c = this.getComparator(order);
+        PostDTOOrder postOrderable = new PostDTOOrder();
+        Comparator<PostResponseDTO> c = postOrderable.getComparator(order);
 
         return new UserPostListDTO(
           userService.getUserByToken(token).getId(),

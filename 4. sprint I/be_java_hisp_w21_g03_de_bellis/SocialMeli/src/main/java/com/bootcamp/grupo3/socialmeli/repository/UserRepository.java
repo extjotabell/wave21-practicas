@@ -1,6 +1,7 @@
 package com.bootcamp.grupo3.socialmeli.repository;
 
 import com.bootcamp.grupo3.socialmeli.exception.BadPasswordException;
+import com.bootcamp.grupo3.socialmeli.exception.InvalidTokenFormatException;
 import com.bootcamp.grupo3.socialmeli.exception.UserNotFoundException;
 import com.bootcamp.grupo3.socialmeli.model.User;
 import com.bootcamp.grupo3.socialmeli.repository.interfaces.IUserRepository;
@@ -70,7 +71,7 @@ public class UserRepository implements IUserRepository {
     public Optional<User> getUserByToken(final String token) {
 
         Integer id = Optional.ofNullable(tokens.get(token))
-          .orElseThrow();
+          .orElseThrow(() -> new InvalidTokenFormatException("El token no esta registrado o no es valido"));
         return this.getUserByID(id);
     }
 

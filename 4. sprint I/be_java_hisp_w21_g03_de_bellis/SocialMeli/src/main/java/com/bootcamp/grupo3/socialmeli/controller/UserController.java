@@ -4,10 +4,13 @@ import com.bootcamp.grupo3.socialmeli.dto.request.LoginDTO;
 import com.bootcamp.grupo3.socialmeli.dto.response.UserIdDTO;
 import com.bootcamp.grupo3.socialmeli.dto.response.*;
 import com.bootcamp.grupo3.socialmeli.exception.UserPermissionException;
+import com.bootcamp.grupo3.socialmeli.order.UserOrderType;
 import com.bootcamp.grupo3.socialmeli.service.interfaces.IUserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
@@ -44,10 +47,15 @@ public class UserController {
 
     @GetMapping("/{token}/followers/list")
     public ResponseEntity<UserFollowersListDTO> getFollowers(
-      @PathVariable String token,
-      @RequestParam(value = "order", required = false) String order
+      @PathVariable final String token,
+      @RequestParam final Optional<String> order
     ) throws UserPermissionException {
-        return ResponseEntity.ok().body(this.userService.getFollowers(token, order));
+
+        UserOrderType o = order
+          .map(UserOrderType::getEnumValue)
+          .orElse(UserOrderType.DEFAULT);
+
+        return ResponseEntity.ok().body(this.userService.getFollowers(token, o));
     }
 
     @GetMapping("/{token}/followers/count")
