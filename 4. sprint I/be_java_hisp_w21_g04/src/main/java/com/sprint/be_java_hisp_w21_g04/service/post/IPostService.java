@@ -10,5 +10,5 @@ public interface IPostService {
     void post(PostRequestDto post);
     List<PostResponseDto> getAll();
 
-    SellerFollowedListPostResponseDto sellerFollowedListPosts(int user_id);
+    SellerFollowedListPostResponseDto sellerFollowedListPosts(int user_id, String order);
 }

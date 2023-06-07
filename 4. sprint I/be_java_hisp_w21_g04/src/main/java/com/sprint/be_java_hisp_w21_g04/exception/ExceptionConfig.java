@@ -61,4 +61,20 @@ public class ExceptionConfig {
         return new ResponseEntity<>(errorDto, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(EmptySellerFollowedList.class)
+    public ResponseEntity<?> emptySellerFollowedList(Exception e){
+        ErrorDto error = new ErrorDto(e.getMessage(), 400);
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
+    @ExceptionHandler(PostAlreadyExist.class)
+    public ResponseEntity<?> postAreadyExist(Exception e){
+        ErrorDto error = new ErrorDto(e.getMessage(), 400);
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
+
+//    @ExceptionHandler(Exception.class)
+//    public ResponseEntity<?> generalException(Exception e){
+//        ErrorDto error = new ErrorDto(e.getMessage(), 500);
+//        return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
+//    }
 }

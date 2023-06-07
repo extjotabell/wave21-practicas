@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="6b83f806-f0fb-4ec1-9b04-27b7f35feb36" name="Changes" comment="Ejercicio Integrador PT2 - Supermercado - Refactoring" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectId" id="2QI3ok4J3f9NAChGx8B6uBp4Opa" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "HelmerHdez",
+    "last_opened_file_path": "/Users/hehernandez/Desktop/workplace/java/wave21-practicas/2. java/Supermercado",
+    "onboarding.tips.debug.path": "/Users/hehernandez/Desktop/workplace/java/wave21-practicas/2. java/Supermercado/src/Main.java"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="Supermercado" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6b83f806-f0fb-4ec1-9b04-27b7f35feb36" name="Changes" comment="" />
+      <created>1685027446629</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1685027446629</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Ejercicio Integrador PT1 - Supermercado">
+      <created>1685030175964</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1685030175964</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Ejercicio Integrador PT2 - Supermercado - Refactoring">
+      <created>1685121743094</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1685121743094</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Ejercicio Integrador PT2 - Supermercado - Refactoring">
+      <created>1685121849788</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1685121849788</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Ejercicio Integrador PT1 - Supermercado" />
+    <MESSAGE value="Ejercicio Integrador PT2 - Supermercado - Refactoring" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ejercicio Integrador PT2 - Supermercado - Refactoring" />
+  </component>
+</project>

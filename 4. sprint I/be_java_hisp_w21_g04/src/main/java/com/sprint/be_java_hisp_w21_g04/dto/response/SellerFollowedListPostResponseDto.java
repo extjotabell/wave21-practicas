@@ -11,6 +11,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SellerFollowedListPostResponseDto {
-    private int user_id;
+    private int userId;
     private List<PostResponseDto> posts;
 }
