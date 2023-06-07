@@ -40,7 +40,9 @@ public class UserRepositoryImpl implements IUserRepository{
     public void createPost(Post post) {
         post.setPostId(POST_ID_COUNT);
         POST_ID_COUNT++;
-       dataUser.get(post.getUserId()).getPosts().add(post);
+        dataUser.get(post.getUserId())
+               .getPosts()
+               .add(post);
     }
 
     /*

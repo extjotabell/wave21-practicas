@@ -33,7 +33,6 @@ public class ProductsServiceImpl implements IProductsService{
     public ResponseEntity<?> createPost(PostRequestDTO postRequestDTO) {
         Post post = convertPostRequestDTOtoPost(postRequestDTO);
         try{
-
             if(!isValidRequest(postRequestDTO))
                 throw new PostBadRequestException("Peticion de publicacion invalida.");
 
@@ -81,7 +80,7 @@ public class ProductsServiceImpl implements IProductsService{
         orderCollectionByOrderParam(postList, order);
 
         List<PostDTO> postsDTO = postList.stream().map(this::convertPostToPostDTO).toList();
-        
+
         return ResponseEntity.ok(postsDTO);
     }
 

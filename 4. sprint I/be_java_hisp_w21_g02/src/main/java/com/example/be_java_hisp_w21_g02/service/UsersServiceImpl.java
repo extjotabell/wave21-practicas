@@ -28,7 +28,7 @@ public class UsersServiceImpl implements IUsersService{
         User persistedUser = _usersRepository.getUser(userId);
         User persistedFollowUser = _usersRepository.getUser(userIdToFollow);
 
-        validatePersistedFollowingsAndSeller(persistedUser, persistedFollowUser);
+        checkFollowAndSellerException(persistedUser, persistedFollowUser);
 
         if (!persistedUser.follow(userIdToFollow)){
             throw new UserFollowingException("El usuario ya seguia al usuario indicado");
@@ -42,7 +42,7 @@ public class UsersServiceImpl implements IUsersService{
         User persistedUnUser = _usersRepository.getUser(userId);
         User persistedUnFollowUser = _usersRepository.getUser(userIdToUnFollow); //flav
 
-        validatePersistedFollowingsAndSeller(persistedUnUser, persistedUnFollowUser);
+        checkFollowAndSellerException(persistedUnUser, persistedUnFollowUser);
 
         if(persistedUnUser.verifyFollower(userIdToUnFollow)){
             persistedUnUser.unFollow(userIdToUnFollow);
@@ -58,7 +58,7 @@ public class UsersServiceImpl implements IUsersService{
 
         User persistedUser = _usersRepository.getUser(userId);
 
-        validateUserExistenceAndIsSeller(persistedUser);
+        checkUserAndSellerException(persistedUser);
         
         return new FollowersCountDTO(
                 persistedUser.getId(),
@@ -67,25 +67,20 @@ public class UsersServiceImpl implements IUsersService{
         );
     }
 
-
-
-    
     public FollowersListDTO getFollowersList(int userId){
         User persistedUser = _usersRepository.getUser(userId);
-        validateUserExistenceAndIsSeller(persistedUser);
+        checkUserAndSellerException(persistedUser);
 
         return new FollowersListDTO(
                 persistedUser.getId(),
                 persistedUser.getUsername(),
                 getFollowDTO(persistedUser, persistedUser.getFollowers())
         );
-
-
     }
 
     public FollowersListDTO getFollowersList(int userId, String order){
         User persistedUser = _usersRepository.getUser(userId);
-        validateUserExistenceAndIsSeller(persistedUser);
+        checkUserAndSellerException(persistedUser);
 
         List<FollowerDTO> followersDTO = getFollowDTO(persistedUser, persistedUser.getFollowers());
 
@@ -110,7 +105,6 @@ public class UsersServiceImpl implements IUsersService{
                 persistedUser.getUsername(),
                 getFollowDTO(persistedUser, persistedUser.getFollowing())
         );
-
     }
 
     public FollowedListDTO getFollowedList(int userId, String order){
@@ -131,9 +125,9 @@ public class UsersServiceImpl implements IUsersService{
         );
     }
 
-
     //region Extra Methods
-    private static void validatePersistedFollowingsAndSeller(User persistedUser, User persistedOtherUser) {
+    private static void checkFollowAndSellerException(User persistedUser, User persistedOtherUser) {
+        
         if(persistedUser == null || persistedOtherUser == null){
             throw new UserNotFoundException("No se pudo encontrar un usuario con el ID mencionado");
         }
@@ -143,7 +137,7 @@ public class UsersServiceImpl implements IUsersService{
         }
     }
 
-    private static void validateUserExistenceAndIsSeller(User persistedUser) {
+    private static void checkUserAndSellerException(User persistedUser) {
         if(persistedUser == null){
             throw new UserNotFoundException("No se pudo encontrar un usuario con el ID mencionado");
         }
@@ -153,7 +147,6 @@ public class UsersServiceImpl implements IUsersService{
     }
 
     private List<FollowerDTO> getFollowDTO(User  persistedUser, Set<Integer> usersIds){
-
         List<User> followers = _usersRepository.getUsers(usersIds);
         List<FollowerDTO> followersDTO = new ArrayList<>();
         followers.forEach(follower -> followersDTO.add(new FollowerDTO(follower.getId(),follower.getUsername())));
@@ -169,7 +162,4 @@ public class UsersServiceImpl implements IUsersService{
         }
     }
     //endregion
-
-
-
 }
