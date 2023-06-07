@@ -66,4 +66,5 @@ public class PostRepositoryImpl implements IPostRepository {
                 .flatMap(user -> user.getFollowed().stream()).toList();
         return this.posts.stream().filter(post -> ids.contains(post.getUserId())).toList();
     }
+
 }
