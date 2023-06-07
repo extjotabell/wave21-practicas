@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "932b4dde-9b61-4f5c-ba33-bbaa0592b76b",
+		"_postman_id": "99ff99a4-718c-44d2-927a-dfa84533368c",
 		"name": "Sprint 1 - g03",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27456240"
 	},
 	"item": [
 		{
@@ -629,6 +630,124 @@
 								{
 									"key": "order",
 									"value": "price_desc"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "US10 - Publicación de un nuevo producto en promoción",
+			"item": [
+				{
+					"name": "Agregar una publicación en promoción",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": 1,\n    \"date\": \"05-06-2023\",\n    \"product\":{\n        \"product_id\": 123,\n        \"product_name\": \"Silla Gamer\",\n        \"type\": \"Silla\",\n        \"brand\": \"Asus\",\n        \"color\": \"Negro y Verde\",\n        \"notes\": \"Silla en impecables condiciones, poco uso\"\n    },\n    \"category\": 100,\n    \"price\": 250.50,\n    \"has_promo\": true,\n    \"discount\": 3.5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/products/promo-post",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"promo-post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Error - No existe usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": 20,\n    \"date\": \"22-05-2023\",\n    \"product\":{\n        \"product_id\": 123,\n        \"product_name\": \"Silla Gamer\",\n        \"type\": \"Silla\",\n        \"brand\": \"Asus\",\n        \"color\": \"Negro y Verde\",\n        \"notes\": \"Silla en impecables condiciones, poco uso\"\n    },\n    \"category\": 100,\n    \"price\": 200.50,\n    \"has-promo\": true,\n    \"discount\": 3.5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/products/promo-post",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"promo-post"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "US11 -  Cantidad de productos en promoción de un determinado vendedor",
+			"item": [
+				{
+					"name": "Count para usuario de id 1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/products/promo-post/count?user_id=1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"promo-post",
+								"count"
+							],
+							"query": [
+								{
+									"key": "user_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Error - Count para usuario no existente",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/products/promo-post/count?user_id=25",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"promo-post",
+								"count"
+							],
+							"query": [
+								{
+									"key": "user_id",
+									"value": "25"
 								}
 							]
 						}

@@ -87,7 +87,7 @@ public class PostService implements IPostService {
 
     @Override
     public int createPromoPost(PromoPostDTO promoPostDTO) {
-        int postId = this.createPost(promoPostDTO.getPost());
+        int postId = this.createPost(modelMapper.map(promoPostDTO, PostDTO.class));
         if (promoPostDTO.isHasPromo()){
             postRepository.addPromotion(postId, promoPostDTO.getDiscount());
         }

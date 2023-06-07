@@ -1,5 +1,6 @@
 package com.bootcamp.grupo3.socialmeli.dto.request;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
@@ -12,7 +13,12 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class PromoPostDTO {
-    private PostDTO post;
+    private int userId;
+    @JsonFormat(pattern="dd-MM-yyyy")
+    private LocalDate date;
+    private ProductDTO product;
+    private int category;
+    private double price;
     private boolean hasPromo;
     private double discount;
 }
