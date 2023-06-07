@@ -30,11 +30,14 @@ La aplicación "SocialMeli" es una plataforma innovadora que te permite seguir y
 - US 0007: Permite a un usuario dejar de seguir a un vendedor.
 - US 0008: Ordena alfabéticamente en orden ascendente y descendente las US 0003 y 0004
 - US 0009: Ordena por fecha ascendente y descendente la US 0006
+- US 0010: Lleva a cabo la publicación de un nuevo producto en promoción
+- US 0011: Obtiene la cantidad de productos en promoción de un determinado vendedor
+- US 0012: Obtiene un listado de todos los productos en promoción de un determinado vendedor
 
 ### Endpoints y responsables del desarrollo por grupo:
 - US 0001 (Grupo 1): POST /users/{userId}/follow/{userIdToFollow}
 - US 0002 (Grupo 1): GET /users/{userId}/followers/count 
-- US 0003 (Grupo 2): GET /users/{userId}/followers/list
+- US 0003 (Grupo 2): GET /users/{userId}/followers/listß
 - US 0004 (Grupo 2): GET /users/{userId}/followed/list
 - US 0005 (Grupo 3): POST /products/post
 - US 0006 (Grupo 3): GET /products/followed/{userId}/list
@@ -46,6 +49,10 @@ La aplicación "SocialMeli" es una plataforma innovadora que te permite seguir y
 
 - US 0009 (Grupo 3): GET /products/followed/{userId}/list?order=date_asc
                /products/followed/{userId}/list?order=date_desc
+
+- US 0010 Individual: POST /products/promo-post
+- US 0011 Individual: GET /products/promo-post/count?user_id={userId}
+- US 0012 Individual: GET /products/promo-post/list?user_id={userId}
                
 ### Mejoras futuras:
 - Validar cuando un usuario no existe en las historias US 0005 y US 0006.

@@ -1,8 +1,8 @@
 package com.sprint.be_java_hisp_w21_g04.controller;
 
 import com.sprint.be_java_hisp_w21_g04.dto.request.PostRequestDto;
-import com.sprint.be_java_hisp_w21_g04.dto.response.PostResponseDto;
-import com.sprint.be_java_hisp_w21_g04.dto.response.SellerFollowedListPostResponseDto;
+import com.sprint.be_java_hisp_w21_g04.dto.request.PostRequestPromoDto;
+import com.sprint.be_java_hisp_w21_g04.dto.response.*;
 import com.sprint.be_java_hisp_w21_g04.entity.Post;
 import com.sprint.be_java_hisp_w21_g04.service.post.IPostService;
 import org.springframework.http.HttpStatus;
@@ -36,4 +36,21 @@ public class PostController {
     public ResponseEntity<List<PostResponseDto>> getAll(){
         return new ResponseEntity<>(this._service.getAll(), HttpStatus.OK);
     }
+
+    @PostMapping("/promo-post")
+    public ResponseEntity<ResponseDto> promoPost(@RequestBody(required = true) PostRequestPromoDto post) {
+        this._service.promoPost(post);
+        return new ResponseEntity<>(new ResponseDto("Promo-post agregado correctamente"),HttpStatus.OK);
+    }
+
+    @GetMapping("/promo-post/count")
+    public ResponseEntity<PromoCountDto> promoPostCount(@RequestParam("user_id") int userId) {
+        return new ResponseEntity<>(this._service.promoPostCount(userId),HttpStatus.OK);
+    }
+
+    @GetMapping("/promo-post/list")
+    public ResponseEntity<PromoListDto> promoPostList(@RequestParam("user_id") int userId) {
+        return new ResponseEntity<>(this._service.promoList(userId),HttpStatus.OK);
+    }
+
 }

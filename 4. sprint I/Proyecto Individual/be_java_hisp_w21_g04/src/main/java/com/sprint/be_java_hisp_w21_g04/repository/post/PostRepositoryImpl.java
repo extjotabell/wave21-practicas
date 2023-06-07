@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.sprint.be_java_hisp_w21_g04.dto.response.PromoCountDto;
 import com.sprint.be_java_hisp_w21_g04.entity.Post;
 import com.sprint.be_java_hisp_w21_g04.repository.user.IUserRepository;
 import org.springframework.stereotype.Repository;
@@ -21,10 +22,12 @@ public class PostRepositoryImpl implements IPostRepository {
 
     private IUserRepository _userRepository;
     private List<Post> posts = new ArrayList<>();
+    private List<Post> postPromo;
 
     public PostRepositoryImpl(IUserRepository userRepository) {
         this._userRepository = userRepository;
         this.posts = this.getPostsJSON();
+        this.postPromo = new ArrayList<>();
     }
 
     private List<Post> getPostsJSON() {
@@ -55,8 +58,19 @@ public class PostRepositoryImpl implements IPostRepository {
     }
 
     @Override
+    public void postPromo(Post post){
+        this.postPromo.add(post);
+        //System.out.println(postPromo);
+    }
+
+    @Override
     public List<Post> getAll() {
         return this.posts;
+    }
+
+    @Override
+    public List<Post> getAllPromo() {
+        return this.postPromo;
     }
 
     @Override
