@@ -1,0 +1,190 @@
+[
+  {
+    "user_id": 1,
+    "date": "05-06-2023",
+    "product": {
+      "product_id": 1,
+      "product_name": "Camiseta",
+      "type": "Ropa",
+      "brand": "Adidas",
+      "color": "Rojo con blanco",
+      "notes": "Camiseta de algodón con estampado"
+    },
+    "category": 1,
+    "price": 10.0,
+    "has_promo": false,
+    "discount": 0.0
+  },
+  {
+    "user_id": 1,
+    "date": "05-06-2023",
+    "product": {
+      "product_id": 2,
+      "product_name": "Pantalón vaquero",
+      "type": "Ropa",
+      "brand": "Levi's",
+      "color": "Azul",
+      "notes": "Pantalón vaquero ajustado para hombre"
+    },
+    "category": 2,
+    "price": 20.0,
+    "has_promo": false,
+    "discount": 0.0
+  },
+  {
+    "user_id": 1,
+    "date": "05-06-2023",
+    "product": {
+      "product_id": 3,
+      "product_name": "Vestido",
+      "type": "Ropa",
+      "brand": "Zara",
+      "color": "Rosa",
+      "notes": "Vestido de verano con estampado floral"
+    },
+    "category": 3,
+    "price": 30.0,
+    "has_promo": false,
+    "discount": 0.0
+  },
+  {
+    "user_id": 1,
+    "date": "05-06-2023",
+    "product": {
+      "product_id": 4,
+      "product_name": "Zapatos de deporte",
+      "type": "Calzado",
+      "brand": "Nike",
+      "color": "Negro",
+      "notes": "Zapatos deportivos para correr"
+    },
+    "category": 4,
+    "price": 40.0,
+    "has_promo": false,
+    "discount": 0.0
+  },
+  {
+    "user_id": 2,
+    "date": "05-06-2023",
+    "product": {
+      "product_id": 5,
+      "product_name": "Abrigo",
+      "type": "Ropa",
+      "brand": "H&M",
+      "color": "Beige",
+      "notes": "Abrigo largo para mujer"
+    },
+    "category": 5,
+    "price": 50.0,
+    "has_promo": false,
+    "discount": 0.0
+  },
+  {
+    "user_id": 2,
+    "date": "05-06-2023",
+    "product": {
+      "product_id": 6,
+      "product_name": "Sombrero",
+      "type": "Accesorio",
+      "brand": "Gucci",
+      "color": "Negro",
+      "notes": "Sombrero de paja con lazo"
+    },
+    "category": 6,
+    "price": 60.0,
+    "has_promo": false,
+    "discount": 0.0
+  },
+
+
+
+  {
+    "user_id": 1,
+    "date": "07-06-2023",
+    "product": {
+      "product_id": 7,
+      "product_name": "Bolso de mano",
+      "type": "Accesorio",
+      "brand": "Louis Vuitton",
+      "color": "Marrón",
+      "notes": "Elegante bolso de mano de cuero genuino"
+    },
+    "category": 6,
+    "price": 250.0,
+    "has_promo": true,
+    "discount": 0.15
+  },
+  {
+    "user_id": 4,
+    "date": "08-06-2023",
+    "product": {
+      "product_id": 8,
+      "product_name": "Reloj de pulsera",
+      "type": "Accesorio",
+      "brand": "Rolex",
+      "color": "Plata",
+      "notes": "Reloj de pulsera de lujo con correa de acero inoxidable"
+    },
+    "category": 6,
+    "price": 5000.0,
+    "has_promo": false,
+    "discount": 0.0
+  },
+  {
+    "user_id": 5,
+    "date": "09-05-2023",
+    "product": {
+      "product_id": 9,
+      "product_name": "Cartera de cuero",
+      "type": "Accesorio",
+      "brand": "Prada",
+      "color": "Negro",
+      "notes": "Cartera de cuero genuino con múltiples compartimentos"
+    },
+    "category": 6,
+    "price": 300.0,
+    "has_promo": true,
+    "discount": 0.10
+  },
+  {
+    "user_id": 6,
+    "date": "10-06-2023",
+    "product": {
+      "product_id": 10,
+      "product_name": "Gafas de sol",
+      "type": "Accesorio",
+      "brand": "Ray-Ban",
+      "color": "Dorado",
+      "notes": "Gafas de sol estilo aviador con lentes polarizadas"
+    },
+    "category": 6,
+    "price": 150.0,
+    "has_promo": false,
+    "discount": 0.0
+  },
+  {
+    "user_id": 1,
+    "date": "10-05-2023",
+    "product": {
+      "product_id": 10,
+      "product_name": "gafas de sol",
+      "type": "Accesorio",
+      "brand": "Ray-Ban",
+      "color": "Dorado",
+      "notes": "Gafas de sol estilo aviador con lentes polarizadas"
+    },
+    "category": 6,
+    "price": 150.0,
+    "has_promo": false,
+    "discount": 0.0
+  }
+]
+
+
+
+
+
+
+
+
+
