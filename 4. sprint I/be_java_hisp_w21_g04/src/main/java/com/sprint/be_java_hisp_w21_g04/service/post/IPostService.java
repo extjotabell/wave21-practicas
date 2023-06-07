@@ -8,6 +8,9 @@ import java.util.List;
 
 public interface IPostService {
     void post(PostRequestDto post);
+
+    void promoPost(PostRequestDto post);
+
     List<PostResponseDto> getAll();
 
     SellerFollowedListPostResponseDto sellerFollowedListPosts(int user_id, String order);

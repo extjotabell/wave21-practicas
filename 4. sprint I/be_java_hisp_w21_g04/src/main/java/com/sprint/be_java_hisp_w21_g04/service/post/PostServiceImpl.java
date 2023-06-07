@@ -38,6 +38,16 @@ public class PostServiceImpl implements IPostService{
     }
 
     @Override
+    public void promoPost(PostRequestDto post) {
+        List<PostResponseDto> posts = this._repository.getAll().stream().
+                filter(post1 -> post1.getUserId() == post.getUserId() && post1.getDate().equals(post.getDate()) && post1.getProduct().getProductId() == post.getProduct().getProductId())
+                .map(post1 -> modelMapper.map(post, PostResponseDto.class))
+                .toList();
+        if(!posts.isEmpty()) throw new PostAlreadyExist("Ya existe un post para este producto");
+        this._repository.promoPost(modelMapper.map(post, Post.class));
+    }
+
+    @Override
     public List<PostResponseDto> getAll() {
         return this._repository.getAll().stream().map(post -> modelMapper.map(post, PostResponseDto.class)).toList();
     }

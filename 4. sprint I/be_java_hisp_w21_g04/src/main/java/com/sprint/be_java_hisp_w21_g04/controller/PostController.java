@@ -27,6 +27,17 @@ public class PostController {
         return new ResponseEntity<>("Post agregado exitosamente",HttpStatus.OK);
     }
 
+    @PostMapping("/promo-post")
+    public ResponseEntity<String> promoPost(@RequestBody(required = true) PostRequestDto post) {
+        try {
+            this._service.promoPost(post);
+            return new ResponseEntity<>("Post agregado exitosamente",HttpStatus.OK);
+        } catch (Exception e) {
+            // se muestra el error en caso de que se genere una excepcion
+            return new ResponseEntity<>("Hubo un error al procesar la solicitud", HttpStatus.BAD_REQUEST);
+        }
+    }
+
     @GetMapping("/followed/{userId}/list")
     public ResponseEntity<SellerFollowedListPostResponseDto> sellerFollowedListPosts(@PathVariable int userId, @RequestParam(required = false, value = "order", defaultValue = "date_asc") String order){
         return new ResponseEntity<>(this._service.sellerFollowedListPosts(userId, order), HttpStatus.OK);

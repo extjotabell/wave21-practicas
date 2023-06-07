@@ -55,6 +55,11 @@ public class PostRepositoryImpl implements IPostRepository {
     }
 
     @Override
+    public void promoPost(Post post) {
+        this.posts.add(post);
+    }
+
+    @Override
     public List<Post> getAll() {
         return this.posts;
     }
