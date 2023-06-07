@@ -14,7 +14,11 @@ public interface IPostService {
 
     PromoPostCountProductsDto getPromoPostCountProducts(int userId);
 
+    ProdPromoPostResponseDto getPromoPostList(int userId);
+
     List<PostResponseDto> getAll();
+
+    List<PromoPostResponseDto> getAllPromo();
 
     SellerFollowedListPostResponseDto sellerFollowedListPosts(int user_id, String order);
 }

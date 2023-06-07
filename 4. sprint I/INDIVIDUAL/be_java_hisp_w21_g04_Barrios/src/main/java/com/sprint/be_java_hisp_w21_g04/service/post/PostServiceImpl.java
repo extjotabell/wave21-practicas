@@ -80,10 +80,24 @@ public class PostServiceImpl implements IPostService {
         promoPosts.setUserName(user.getUserName());
         promoPosts.setPromoProductsCount((int) _postRepository.getAll()
                                                               .stream()
-                                                              .filter(postPromo -> postPromo.isHasPromo() == true && postPromo.getUserId() == userId)
+                                                              .filter(postPromo -> postPromo.isHasPromo() && postPromo.getUserId() == userId)
                                                               .count());
         return promoPosts;
 
+
+    }
+    @Override
+    public ProdPromoPostResponseDto getPromoPostList(int userId) {
+
+        User user = getUserDto(userId);
+
+        return ProdPromoPostResponseDto.builder()
+                .userId(userId)
+                .userName(user.getUserName())
+                .posts(getAllPromo().stream()
+                                    .filter(postPromo -> postPromo.isHasPromo() && postPromo.getUserId() == userId)
+                                    .collect(Collectors.toList()))
+                .build();
 
     }
 
@@ -93,6 +107,14 @@ public class PostServiceImpl implements IPostService {
                                .stream()
                                .map(post -> modelMapper.map(post, PostResponseDto.class))
                                .toList();
+    }
+
+    @Override
+    public List<PromoPostResponseDto> getAllPromo() {
+        return this._postRepository.getAll()
+                .stream()
+                .map(post -> modelMapper.map(post, PromoPostResponseDto.class))
+                .toList();
     }
 
     // metodo sobrecargado para prueba

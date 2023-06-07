@@ -2,10 +2,7 @@ package com.sprint.be_java_hisp_w21_g04.controller;
 
 import com.sprint.be_java_hisp_w21_g04.dto.request.PromoPostRequestDto;
 import com.sprint.be_java_hisp_w21_g04.dto.request.PostRequestDto;
-import com.sprint.be_java_hisp_w21_g04.dto.response.PostResponseDto;
-import com.sprint.be_java_hisp_w21_g04.dto.response.PromoPostCountProductsDto;
-import com.sprint.be_java_hisp_w21_g04.dto.response.ResponseDto;
-import com.sprint.be_java_hisp_w21_g04.dto.response.SellerFollowedListPostResponseDto;
+import com.sprint.be_java_hisp_w21_g04.dto.response.*;
 import com.sprint.be_java_hisp_w21_g04.service.post.IPostService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -49,5 +46,10 @@ public class PostController {
     @GetMapping("/promo-post/count")
     public ResponseEntity<PromoPostCountProductsDto> getPromoPostCountProducts(@RequestParam(value = "user_id") int userId) {
         return new ResponseEntity<>(this._service.getPromoPostCountProducts(userId), HttpStatus.OK);
+    }
+
+    @GetMapping("/promo-post/list")
+    public ResponseEntity<ProdPromoPostResponseDto>  getPromoPostList(@RequestParam(value = "user_id") int userId){
+        return new ResponseEntity<>(this._service.getPromoPostList(userId), HttpStatus.OK);
     }
 }
