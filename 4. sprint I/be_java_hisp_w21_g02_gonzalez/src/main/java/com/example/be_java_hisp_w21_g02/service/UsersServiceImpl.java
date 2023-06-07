@@ -19,7 +19,7 @@ import java.util.*;
 @Service
 public class UsersServiceImpl implements IUsersService{
 
-    private static final String BAD_REQUEST_USER = "Request is invalid";
+    private static final String BAD_REQUEST_USER = "Field 'user_name' is required.";
     private static final String USER_CREATED = "User created successfully with the id %s";
 
     @Autowired
@@ -172,8 +172,8 @@ public class UsersServiceImpl implements IUsersService{
         User user = new User(0, userRequestDTO.getUserName(), new HashSet<>(), new HashSet<>(), new ArrayList<>());
         User responseRepository = _usersRepository.createUser(user);
 
-        return new ResponseEntity<>(getGenericResponseDTO(200, String.format(USER_CREATED,
-                responseRepository.getId())), HttpStatus.OK);
+        return new ResponseEntity<>(getGenericResponseDTO(201, String.format(USER_CREATED,
+                responseRepository.getId())), HttpStatus.CREATED);
     }
 
     private boolean isValidRequest(UserRequestDTO userDTO){
