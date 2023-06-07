@@ -19,6 +19,7 @@ public class Post {
     private int category;
     private Double price;
 
+
     public boolean isLatestPost(LocalDate currentDate){
         return (getLocalDate().isAfter(currentDate.minusWeeks(2))
                 && getLocalDate().isBefore(currentDate.plusDays(1))
