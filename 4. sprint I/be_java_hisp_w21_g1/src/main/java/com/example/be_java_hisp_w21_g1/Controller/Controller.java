@@ -54,6 +54,8 @@ public class Controller {
     //Retorna status code
     @PostMapping("/products/post")
     public ResponseEntity<?> createPost(@RequestBody PostProductDTO postProductDTO){
+        String promoErrorMessage = "No se puede agregar un post con promoción con este endpoint, porfavor usar el endepoint /products/promo-post";
+        if (postProductDTO.isHasPromo()||postProductDTO.getDiscount()>0.0) return new ResponseEntity<>(promoErrorMessage,HttpStatus.BAD_REQUEST);
         userService.createPost(postProductDTO);
         return new ResponseEntity<>("Se ha creado el post!", HttpStatus.OK);
     }
@@ -101,15 +103,19 @@ public class Controller {
 
     //US 0010: Llevar a cabo la publicación de un nuevo producto en promoción
     @PostMapping("/products/promo-post")
-    public ResponseEntity<?> newProductInSale() {
-        return null;
+    public ResponseEntity<?> newProductInSale(@RequestBody PostProductDTO postProductDTO) {
+        String promoErrorMessage = "No se puede agregar un post sin promoción con este endpoint, porfavor usar el endepoint /products";
+        if (!postProductDTO.isHasPromo()||postProductDTO.getDiscount()==0.0) return new ResponseEntity<>(promoErrorMessage,HttpStatus.BAD_REQUEST);
+        userService.createPost(postProductDTO);
+        return new ResponseEntity<>("Se ha creado el post!", HttpStatus.OK);
     }
 
     //US 0011: Obtener la cantidad de productos en promoción de un determinado vendedor
 
     @GetMapping("/products/promo-post/count")
-    public ResponseEntity<?> promoProductsCount(@RequestParam(value = "user_id", required = true) int userId) {
-        return null;
+    public ResponseEntity<CountPromosDTO> promoProductsCount(@RequestParam(value = "user_id", required = true) int userId) {
+        CountPromosDTO count = userService.countPromoPosts(userId);
+        return new ResponseEntity<>(count,HttpStatus.OK);
     }
 
     //US 0012: OPCIONAL

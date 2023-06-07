@@ -31,7 +31,7 @@ public class PostDTO {
         this.product = product;
         this.category = category;
         this.price = price;
-        this.hasPromo = true;
-        this. discount = 0.0;
+        this.hasPromo = false;
+        this.discount = 0.0;
     }
 }

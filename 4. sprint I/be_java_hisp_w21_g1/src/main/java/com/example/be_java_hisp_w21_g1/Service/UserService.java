@@ -176,5 +176,15 @@ public class UserService implements IUserService {
         }
     }
 
+    public CountPromosDTO countPromoPosts(int userId){
+        CountPromosDTO count = new CountPromosDTO();
+        Optional<User> user = userRepository.findUserById(userId);
+        if(user.isEmpty()){
+            throw new BadRequestException("No se encontro el usuario con el ID" + userId);
+        }
+        count.setCount(user.get().getPosts().stream().filter(post -> post.isHasPromo()).count());
+        return count;
+    }
+
 
 }
