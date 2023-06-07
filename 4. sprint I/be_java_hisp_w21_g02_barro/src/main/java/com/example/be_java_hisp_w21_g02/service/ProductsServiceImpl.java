@@ -102,8 +102,8 @@ public class ProductsServiceImpl implements IProductsService{
 
     @Override
     public ResponseEntity<?> countPromoPostByUserId(int userId){
-        if (userId == 0) {
-            throw new UserNotFoundException("El parámetro user_id es obligatorio");
+        if (userRepository.getUser(userId) == null) {
+            throw new UserNotFoundException("El usuario indicado no existe");
         } else
         return ResponseEntity.ok(
                 new PromoPostCountDTO(
