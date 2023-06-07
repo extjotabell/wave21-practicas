@@ -22,6 +22,11 @@ public class ProductsController {
         return productsService.createPost(postRequestDTO);
     }
 
+    @DeleteMapping("/post/{postId}/user/{userId}")
+    public ResponseEntity<?> removePost(@PathVariable int userId, @PathVariable int postId){
+        return productsService.removePost(userId, postId);
+    }
+
     @PostMapping("/promo-post")
     public ResponseEntity<?> createPromoPost(@RequestBody PromoPostRequestDTO promoPostRequestDTO){
         return productsService.createPost(promoPostRequestDTO);
@@ -45,7 +50,6 @@ public class ProductsController {
 
     @GetMapping("/promo-post/count")
     public ResponseEntity<?> listPromoPost(@RequestParam(name = "user_id") int userId){
-
         return productsService.countPromoPosts(userId);
     }
 }

@@ -477,6 +477,34 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Eliminar post",
+			"item": [
+				{
+					"name": "Eliminar post 1 user 2",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/products/post/1/user/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"post",
+								"1",
+								"user",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }

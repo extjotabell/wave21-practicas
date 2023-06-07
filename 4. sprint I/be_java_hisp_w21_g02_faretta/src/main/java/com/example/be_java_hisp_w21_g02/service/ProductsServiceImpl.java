@@ -8,6 +8,7 @@ import com.example.be_java_hisp_w21_g02.dto.response.PromoPostCountDTO;
 import com.example.be_java_hisp_w21_g02.dto.response.UserPostResponseDTO;
 import com.example.be_java_hisp_w21_g02.exceptions.ExceptionChecker;
 import com.example.be_java_hisp_w21_g02.exceptions.PostBadRequestException;
+import com.example.be_java_hisp_w21_g02.exceptions.PostNotFoundException;
 import com.example.be_java_hisp_w21_g02.exceptions.UserNotFoundException;
 import com.example.be_java_hisp_w21_g02.model.Post;
 import com.example.be_java_hisp_w21_g02.model.Product;
@@ -24,6 +25,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductsServiceImpl implements IProductsService{
@@ -66,6 +68,22 @@ public class ProductsServiceImpl implements IProductsService{
 
         PromoPostCountDTO promoPostCountDTO = new PromoPostCountDTO(persistedUser.getId(), persistedUser.getUsername(), promoPostsCount);
         return ResponseEntity.ok(promoPostCountDTO);
+    }
+
+    @Override
+    public ResponseEntity<?> removePost(int userId, int postId) {
+        User user = userRepository.getUser(userId);
+        ExceptionChecker.checkUserException(user);
+        List<Post> posts = user.getPosts();
+
+        Post postToRemove = posts.stream().filter(post -> post.getPostId() == postId).findFirst().orElse(null);
+        if(postToRemove == null){
+            throw new PostNotFoundException("No existe un post con id " + postId + " del usuario " + userId);
+        }
+        posts.remove(postToRemove);
+        user.setPosts(posts);
+        userRepository.persistUser(user);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     private boolean isPromo(PromoPostRequestDTO postRequestDTO) {

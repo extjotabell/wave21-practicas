@@ -7,6 +7,7 @@ import java.util.Set;
 
 public interface IUserRepository {
     User getUser(int userIdToFollow);
+    void persistUser(User userId);
     void persistFollows(User persistedUser, User persistedFollowUser);
     void createPost(Post post);
     List<User> getUsers(Set<Integer> users);

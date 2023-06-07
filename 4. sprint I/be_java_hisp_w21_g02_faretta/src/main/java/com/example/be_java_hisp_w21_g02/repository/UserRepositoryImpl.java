@@ -21,6 +21,7 @@ public class UserRepositoryImpl implements IUserRepository{
     public User getUser(int userIdToFollow){
         return  dataUser.get(userIdToFollow);
     }
+    public void persistUser(User user){dataUser.put(user.getId(), user);}
 
     public void persistFollows(User persistedUser, User persistedFollowUser){
         dataUser.put(persistedUser.getId(), persistedUser);

@@ -4,19 +4,21 @@ import com.example.be_java_hisp_w21_g02.model.User;
 
 public class ExceptionChecker {
     public static void checkUserAndSellerException(User persistedUser) {
-        if(persistedUser == null){
-            throw new UserNotFoundException("No se pudo encontrar un usuario con el ID mencionado");
-        }
+        checkUserException(persistedUser);
         if (!persistedUser.isSeller()) {
             throw new UserNotSellerException("El usuario no es un vendedor");
         }
     }
 
-    public static void checkFollowAndSellerException(User persistedUser, User persistedOtherUser) {
-
-        if(persistedUser == null || persistedOtherUser == null){
+    public static void checkUserException(User persistedUser) {
+        if(persistedUser == null){
             throw new UserNotFoundException("No se pudo encontrar un usuario con el ID mencionado");
         }
+    }
+
+    public static void checkFollowAndSellerException(User persistedUser, User persistedOtherUser) {
+        checkUserException(persistedUser);
+        checkUserException(persistedOtherUser);
 
         if (!persistedOtherUser.isSeller()){
             throw new UserNotSellerException("El usuario no es un vendedor");

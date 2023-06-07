@@ -14,4 +14,6 @@ public interface IProductsService {
     ResponseEntity<?> createPost(PromoPostRequestDTO promoPostRequestDTO);
 
     ResponseEntity<?> countPromoPosts(int userId);
+
+    ResponseEntity<?> removePost(int userId, int postId);
 }

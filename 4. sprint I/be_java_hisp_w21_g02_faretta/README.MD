@@ -73,3 +73,29 @@ http://localhost:8080/products/followed/{userId}/list?order=date_asc
 Para visualizar los responsables de cada tarea, adjuntamos la plataforma utilizada para tener un seguimiento de las tareas y responsables de las mismas.
 
 https://trello.com/b/e7TQCB93/sprint-1
+
+## Individual
+### Promos
+#### Metodos GET:
+http://localhost:8080/products/promo-post/count?user_id=2
+#### Metodos POST:
+http://localhost:8080/products/promo-post
+
+### Metodos DELETE:
+Delete post 
+
+http://localhost:8080/products/post/{postId}/user/{userId}
+#### Documentacion: 
+Se le debe enviar un id de post que es un número 
+entero y un id de usuario que también es un número entero. 
+No requiere body. 
+* Si se logra eliminar el post se retorna un 200.
+* Si no se le envia un id incorrecto retorna 400 y un Json con error_message y status.
+
+Por ejemplo: 
+```
+{
+    "error_message": "El usuario no es un vendedor",
+    "status": "BAD_REQUEST"
+}
+```
