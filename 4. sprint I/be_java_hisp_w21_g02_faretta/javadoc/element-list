@@ -1,0 +1,10 @@
+com.example.be_java_hisp_w21_g02
+com.example.be_java_hisp_w21_g02.controller
+com.example.be_java_hisp_w21_g02.dto
+com.example.be_java_hisp_w21_g02.dto.request
+com.example.be_java_hisp_w21_g02.dto.response
+com.example.be_java_hisp_w21_g02.exceptions
+com.example.be_java_hisp_w21_g02.model
+com.example.be_java_hisp_w21_g02.repository
+com.example.be_java_hisp_w21_g02.service
+com.example.be_java_hisp_w21_g02.utils
