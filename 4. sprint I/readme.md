@@ -77,10 +77,23 @@ GET /products/followed/{userId}/list?order=date_asc
 Responsables: Gabriel Antonietti y Nahuel De Bellis
 
 POST /products/promo-post
-Responsable: Individual
+Responsable: Matias Tato
 
 GET /products/promo-post/count?user_id={userId}
-Responsable: Individual
+Responsable: Matias Tato
 
+PUT /products/post/{userId}/like/{postId}
+Responsable: Matias Tato
+
+PUT /products/post/{userId}/unlike/{postId}
+Responsable: Matias Tato
+
+GET /products/post/trending/amount?order=date_asc
+Responsable: Matias Tato
+
+
+## Extra
+
+Documentación de los endpoint extras: https://docs.google.com/document/d/1rVboxf1QVdE7dCEgd4mDYNtPQ9MLyTn9EyGzfqg3IDw/edit?usp=sharing
   
 
