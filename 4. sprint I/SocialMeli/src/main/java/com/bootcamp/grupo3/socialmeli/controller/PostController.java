@@ -1,6 +1,7 @@
 package com.bootcamp.grupo3.socialmeli.controller;
 
 import com.bootcamp.grupo3.socialmeli.dto.request.PostDTO;
+import com.bootcamp.grupo3.socialmeli.dto.request.PromoPostDTO;
 import com.bootcamp.grupo3.socialmeli.dto.response.MessageDTO;
 import com.bootcamp.grupo3.socialmeli.service.interfaces.IPostService;
 import org.springframework.http.ResponseEntity;
@@ -28,5 +29,11 @@ public class PostController {
         UserPostListDTO posts = postService.getPostList(userId, order);
 
         return new ResponseEntity<>(posts, HttpStatus.OK);
+    }
+
+    @PostMapping("/promo-post")
+    public ResponseEntity<MessageDTO> createPromoPost(@RequestBody PromoPostDTO body) {
+        int promoPostId = postService.createPromoPost(body);
+        return ResponseEntity.ok(new MessageDTO("Post con promo agregado exitosamente con id: " + promoPostId));
     }
 }

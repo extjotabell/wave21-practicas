@@ -36,4 +36,11 @@ public class PostRepository implements IPostRepository {
           .filter(post -> post.getDate().isAfter(pastTwoWeek))
           .toList();
     }
+
+    @Override
+    public int createPromoPost(Post body) {
+        body.setId(getNextId());
+        posts.add(body);
+        return body.getId();
+    }
 }

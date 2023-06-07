@@ -1,6 +1,7 @@
 package com.bootcamp.grupo3.socialmeli.service;
 
 import com.bootcamp.grupo3.socialmeli.dto.request.PostDTO;
+import com.bootcamp.grupo3.socialmeli.dto.request.PromoPostDTO;
 import com.bootcamp.grupo3.socialmeli.dto.response.UserPostListDTO;
 import com.bootcamp.grupo3.socialmeli.exception.UserNotFoundException;
 import com.bootcamp.grupo3.socialmeli.model.Post;
@@ -35,6 +36,15 @@ public class PostService implements IPostService {
         Post newPost = modelMapper.map(body, Post.class);
         if (userService.userExists(newPost.getUserId())) {
             return postRepository.createPost(newPost);
+        } else {
+            throw new UserNotFoundException("No se ha encontrado el usuario");
+        }
+    }
+
+    public int createPromoPost(PromoPostDTO body) {
+        Post newPromoPost = modelMapper.map(body, Post.class);
+        if (userService.userExists(newPromoPost.getUserId())) {
+            return postRepository.createPromoPost(newPromoPost);
         } else {
             throw new UserNotFoundException("No se ha encontrado el usuario");
         }
