@@ -160,6 +160,11 @@ public class ProductsServiceImpl implements IProductsService{
     }
 
 
+    /**
+     * <p>Convert from PostRequestPromoDTO to Post</p>
+     * @param promoRequestDTO
+     * @return
+     */
     private Post convertPostRequestPromoDTOtoPost(PromoRequestDTO promoRequestDTO){
         Post post = new Post();
         post.setUserId(promoRequestDTO.getUserId());
@@ -173,12 +178,22 @@ public class ProductsServiceImpl implements IProductsService{
         return post;
     }
 
+    /**
+     * <p>Convert from post to PromoDTO </p>
+     * @param post
+     * @return
+     */
     private PostPromoDTO convertPostToPromoDTO(Post post){
         return new PostPromoDTO(post.getUserId(),post.getPostId(),convertLocalDateToString(post.getDate()),
                 convertProductToProductDTO(post.getProduct()),post.getCategory(),post.getPrice(),post.isHasPromo(),post.getDiscount());
     }
 
 
+    /**
+     * <p>Create a Post with promotion</p>
+     * @param promoRequestDTO
+     * @return
+     */
     public ResponseEntity<?> createPostHasPromo(PromoRequestDTO promoRequestDTO) {
         Post post = convertPostRequestPromoDTOtoPost(promoRequestDTO);
         try{
@@ -193,6 +208,11 @@ public class ProductsServiceImpl implements IProductsService{
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    /**
+     * <p>Count the posts on discount that a seller has</p>
+     * @param userId
+     * @return
+     */
     public PromoCountDTO getPostCount(int userId){
         try {
             User persistedUser = userRepository.getUser(userId);
