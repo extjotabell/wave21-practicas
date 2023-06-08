@@ -2,13 +2,12 @@ package com.example.be_java_hisp_w21_g1.Utils;
 
 import com.example.be_java_hisp_w21_g1.DTO.Request.PostProductDTO;
 import com.example.be_java_hisp_w21_g1.DTO.Request.PostProductPromoDTO;
-import com.example.be_java_hisp_w21_g1.DTO.Response.PostBySellerDTO;
-import com.example.be_java_hisp_w21_g1.DTO.Response.PostDTO;
-import com.example.be_java_hisp_w21_g1.DTO.Response.PromoProductsCountDTO;
+import com.example.be_java_hisp_w21_g1.DTO.Response.*;
 import com.example.be_java_hisp_w21_g1.Model.Post;
 import com.example.be_java_hisp_w21_g1.Model.User;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Mapper {
     public static PostBySellerDTO SellerPostToDTO(List<PostDTO> sellerPost, int user_id){
@@ -47,8 +46,7 @@ public class Mapper {
                 postProductPromoDTO.getCategory(),
                 postProductPromoDTO.getPrice(),
                 postProductPromoDTO.getHas_promo(),
-                postProductPromoDTO.getDiscount()
-        );
+                postProductPromoDTO.getDiscount());
     }
 
     public static PromoProductsCountDTO SellerInfoTOPromoProductsCount(User user, int countProducts) {
@@ -57,5 +55,29 @@ public class Mapper {
                 user.getUser_name(),
                 countProducts
         );
+    }
+
+    public static Object PostWithPromoToSellerPromosDTO(User user, List<Post> postWithPromo) {
+        return new SellerPromosDTO(
+                user.getUser_id(),
+                user.getUser_name(),
+                Mapper.PostToPostPromoDTO(postWithPromo)
+        );
+    }
+
+    private static List<PostPromoDTO> PostToPostPromoDTO(List<Post> postWithPromo) {
+        List<PostPromoDTO> promos = postWithPromo.stream().map(
+                post -> new PostPromoDTO(
+                        post.getUserId(),
+                        post.getPostId(),
+                        post.getLocalDate(),
+                        post.getProduct(),
+                        post.getCategory(),
+                        post.getPrice(),
+                        post.getHasPromo(),
+                        post.getDiscount()
+                )
+        ).collect(Collectors.toList());
+        return promos;
     }
 }

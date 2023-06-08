@@ -2,7 +2,6 @@ package com.example.be_java_hisp_w21_g1.Controller;
 
 import com.example.be_java_hisp_w21_g1.DTO.Request.FollowPostDTO;
 import com.example.be_java_hisp_w21_g1.DTO.Request.PostProductDTO;
-import com.example.be_java_hisp_w21_g1.DTO.Request.PostProductPromoDTO;
 import com.example.be_java_hisp_w21_g1.DTO.Response.*;
 import com.example.be_java_hisp_w21_g1.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,23 +83,39 @@ public class Controller {
             response = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         return response;
     }
+    /*
+    @GetMapping("/users/{UserID}/followed/list?order=name_asc")
+    public ResponseEntity<?> orderFollowedBy(@PathVariable int userId, @RequestParam(value = "order", required = true) String alf_order){
+        return null;
+    }
+    //US 0009: Ordenamiento por fecha ascendente y descendente
+    /*
+    * /products/followed/{userId}/list?order=date_asc
+    /products/followed/{userId}/list?order=date_desc
+
+    @GetMapping("products/followed/{userId}/list//")
+    public ResponseEntity<?> orderProductsBy(@PathVariable int userId, @RequestParam(value = "order", required = true) String dateOrder){
+        return null;
+    }
+   */
 
     //US 0010: Llevar a cabo la publicación de un nuevo producto en promoción
     @PostMapping("/products/promo-post")
-    public ResponseEntity<?> newProductInSale(@RequestBody PostProductPromoDTO postProductPromoDTO) {
-        return userService.createPromoPost(postProductPromoDTO);
+    public ResponseEntity<?> newProductInSale() {
+        return null;
     }
 
     //US 0011: Obtener la cantidad de productos en promoción de un determinado vendedor
+
     @GetMapping("/products/promo-post/count")
     public ResponseEntity<?> promoProductsCount(@RequestParam(value = "user_id", required = true) int userId) {
-        return userService.getPromoProductsCount(userId);
+        return null;
     }
 
     //US 0012: OPCIONAL
-    @GetMapping("/products/promo-post/list")
-    public ResponseEntity<?> productsInSaleBySeller(@RequestParam(value = "user_id", required = true) int userId) {
-        return userService.getPromoProductsByUser(userId);
+    @GetMapping("/products/promo-post/list?user_id={userId}")
+    public ResponseEntity<?> productsInSaleBySeller(@PathVariable int userId) {
+        return null;
     }
 
 }

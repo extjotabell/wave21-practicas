@@ -2,7 +2,6 @@ package com.example.be_java_hisp_w21_g1.Service;
 
 import com.example.be_java_hisp_w21_g1.DTO.Request.FollowPostDTO;
 import com.example.be_java_hisp_w21_g1.DTO.Request.PostProductDTO;
-import com.example.be_java_hisp_w21_g1.DTO.Request.PostProductPromoDTO;
 import com.example.be_java_hisp_w21_g1.DTO.Response.*;
 import com.example.be_java_hisp_w21_g1.Exception.BadRequestException;
 import com.example.be_java_hisp_w21_g1.Exception.NotFoundException;
@@ -12,8 +11,6 @@ import com.example.be_java_hisp_w21_g1.Model.User;
 import com.example.be_java_hisp_w21_g1.Repository.UserRepository;
 import com.example.be_java_hisp_w21_g1.Utils.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -180,30 +177,4 @@ public class UserService implements IUserService {
     }
 
 
-    public ResponseEntity<?> createPromoPost(PostProductPromoDTO postProductPromoDTO) {
-        User user = getUser(postProductPromoDTO.getUser_id());
-        int postId = user.getPosts().size();
-        userRepository.addPromoPostToUser(Mapper.PostPromoDTOToPost(postProductPromoDTO,postId),user);
-        return new ResponseEntity<>("Se creo la publicacion con el producto en promo!", HttpStatus.OK);
-    }
-
-    private User getUser(int userId){
-        Optional<User> user =userRepository.findUserById(userId);
-        if(user.isEmpty()){
-            throw new BadRequestException("No se encontro el usuario con el ID" + userId);
-        }
-        return user.get();
-    }
-
-    public ResponseEntity<?> getPromoProductsCount(int userId) {
-        User user = getUser(userId);
-        int countProducts = user.getPosts().stream().filter(Post::getHasPromo).collect(Collectors.toList()).size();
-        return new ResponseEntity<>(Mapper.SellerInfoTOPromoProductsCount(user,countProducts),HttpStatus.OK);
-    }
-
-    public ResponseEntity<?> getPromoProductsByUser(int userId) {
-        User user = getUser(userId);
-        List<Post> postWithPromo = user.getPosts().stream().filter(Post::getHasPromo).collect(Collectors.toList());
-        return new ResponseEntity<>(Mapper.PostWithPromoToSellerPromosDTO(user,postWithPromo),HttpStatus.OK);
-    }
 }

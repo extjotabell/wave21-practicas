@@ -32,6 +32,9 @@ public class UserRepository implements IUserRepository {
         Post post3 = new Post(1, 3, LocalDate.of(2022, 04, 04), product3, 1, 190.00);
         Post post4 = new Post(1, 4, LocalDate.of(2023, 05, 29), product2, 1, 90.90);
 
+        // asList crea un array de tamaño fijo y tratamos de agregar mas cosas
+        // List<Post> posts = Arrays.asList(post1, post2, post3, post4);
+        // Revisar excepciones
         List<Post> posts = new ArrayList<>();
         posts.add(post1);
         posts.add(post2);
@@ -86,7 +89,4 @@ public class UserRepository implements IUserRepository {
     }
 
 
-    public void addPromoPostToUser(Post post, User user) {
-        user.getPosts().add(post);
-    }
 }
