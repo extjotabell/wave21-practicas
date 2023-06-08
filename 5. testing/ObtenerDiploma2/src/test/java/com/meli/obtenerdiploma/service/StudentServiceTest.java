@@ -1,7 +1,6 @@
-package com.meli.obtenerdiploma.StudentServiceTest;
+package com.meli.obtenerdiploma.service;
 
 import com.meli.obtenerdiploma.model.StudentDTO;
-import com.meli.obtenerdiploma.repository.IStudentDAO;
 import com.meli.obtenerdiploma.repository.StudentDAO;
 import com.meli.obtenerdiploma.repository.StudentRepository;
 import com.meli.obtenerdiploma.service.StudentService;
@@ -26,14 +25,37 @@ import static org.mockito.Mockito.*;
 public class StudentServiceTest {
     @Mock
     StudentDAO IStudentDAO;
+    @Mock
     StudentRepository IStudentRepository;
 
     @InjectMocks
     StudentService studentService;
 
     @Test
+    @DisplayName("Create Test")
+    void createTestOk(){
+        //Arrange
+        StudentDTO expected = new StudentDTO(23L, "Javier", "", 8.0, new ArrayList<>());
+        //Act
+        studentService.create(expected);
+        //Assert
+        verify(IStudentDAO, times(1)).save(expected);
+    }
+
+    @Test
+    @DisplayName("Update Test")
+    void updateTestOk(){
+        //Arrange
+        StudentDTO expected = new StudentDTO(23L, "Javier", "", 8.0, new ArrayList<>());
+        //Act
+        studentService.update(expected);
+        //Assert
+        verify(IStudentDAO, times(1)).save(expected);
+    }
+
+    @Test
     @DisplayName("Read Test")
-    void readTest(){
+    void readTestOk(){
         //Arrange
         Long studentId = 23L;
         StudentDTO expected = new StudentDTO(23L, "Javier", "", 8.0, new ArrayList<>());
@@ -45,8 +67,20 @@ public class StudentServiceTest {
     }
 
     @Test
+    @DisplayName("Delete Test")
+    void deleteTestOk(){
+        //Arrange
+        Long studentId = 23L;
+        StudentDTO expected = new StudentDTO(23L, "Javier", "", 8.0, new ArrayList<>());
+        //Act
+        studentService.delete(studentId);
+        //Assert
+        verify(IStudentDAO).delete(studentId);
+    }
+
+    @Test
     @DisplayName("Get All Test")
-    void getAllTest(){      //El test está fallando :(
+    void getAllTestOk(){
         //Arrange
         Set<StudentDTO> expected = new HashSet<>();
         when(IStudentRepository.findAll()).thenReturn(expected);
