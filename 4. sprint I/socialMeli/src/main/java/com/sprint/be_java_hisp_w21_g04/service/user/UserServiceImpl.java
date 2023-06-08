@@ -2,6 +2,7 @@ package com.sprint.be_java_hisp_w21_g04.service.user;
 import com.sprint.be_java_hisp_w21_g04.dto.response.*;
 import com.sprint.be_java_hisp_w21_g04.entity.User;
 import com.sprint.be_java_hisp_w21_g04.exception.*;
+import com.sprint.be_java_hisp_w21_g04.repository.user.IUserRepository;
 import com.sprint.be_java_hisp_w21_g04.repository.user.UserRepositoryImpl;
 import com.sprint.be_java_hisp_w21_g04.dto.response.FollowedResponseDto;
 import com.sprint.be_java_hisp_w21_g04.dto.response.FollowersResponseDto;
@@ -14,7 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 @Service
 public class UserServiceImpl implements IUserService {
-    private final UserRepositoryImpl _userRepository;
+    private final IUserRepository _userRepository;
 
 
     private ModelMapper _mapper;
@@ -55,22 +56,20 @@ public class UserServiceImpl implements IUserService {
         return userFollowersCountDto;
     }
     @Override
-    public ResponseDto unfollowUser(int userId, int userIdToUnfollow) {
+    public ResponseDto unfollowUser(int userId, int userIdToUnfollow){
         User user = _userRepository.findUserById(userId);
         User userToUnfollow = _userRepository.findUserById(userIdToUnfollow);
         if (user == null || userToUnfollow == null){
             throw new UserNotFoundException("Usuario no encontrado.");
         }
+        if (!user.getFollowed().contains(userToUnfollow.getUserId()) || !userToUnfollow.getFollowers().contains(user.getUserId())){
+            throw new UserNotFollowedException(String.format("No sigues a %s.", userToUnfollow.getUserName()));
+        }
         if (user.getUserId() == userToUnfollow.getUserId()){
             throw new UserUnfollowNotAllowedException("No puedes dejar de seguirte a ti mismo.");
         }
-        if (!user.getFollowed().contains(userToUnfollow.getUserId()) || !userToUnfollow.getFollowers().contains(user.getUserId())){
-            throw new UserNotFollowedException("No se están siguiendo.");
-        }
-        int userIndex = user.getFollowed().indexOf(userToUnfollow.getUserId());
-        user.getFollowed().remove(userIndex);
-        int userToUnfollowIndex = userToUnfollow.getFollowers().indexOf(user.getUserId());
-        userToUnfollow.getFollowers().remove(userToUnfollowIndex);
+        user.getFollowed().remove(userToUnfollow.getUserId());
+        userToUnfollow.getFollowers().remove(user.getUserId());
         ResponseDto userUnfollowResponseDto = new ResponseDto();
         userUnfollowResponseDto.setMessage(String.format("Dejaste de seguir a %s.", userToUnfollow.getUserName()));
         return userUnfollowResponseDto;
