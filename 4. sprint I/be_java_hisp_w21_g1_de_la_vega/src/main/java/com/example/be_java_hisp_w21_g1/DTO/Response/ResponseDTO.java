@@ -10,5 +10,5 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ResponseDTO {
     private String message;
-    private int status;
+    //private int status;
 }

@@ -23,11 +23,10 @@ public class Controller {
         FollowPostDTO followPostDTO = new FollowPostDTO(userId, userIdToFollow);
         ResponseEntity<ResponseDTO> response;
         userService.follow(followPostDTO);
-        return new ResponseEntity<>(new ResponseDTO("Accion realizada con exito.", 200),HttpStatus.OK);
+        return new ResponseEntity<>(new ResponseDTO("Accion realizada con exito."),HttpStatus.OK);
     }
 
     //US 0002: Obtener el resultado de la cantidad de usuarios que siguen a un determinado vendedor
-    //Recibe UserIdDTO
     //Retorna FollowersCountDTO
     @GetMapping("/users/{userId}/followers/count")
     public ResponseEntity<FollowersCountDTO> countFollowers(@PathVariable int userId) {
@@ -35,7 +34,6 @@ public class Controller {
     }
 
     //US 0003: Obtener un listado de todos los usuarios que siguen a un determinado vendedor (¿Quién me sigue?)
-    //Recibe UserIdDTO
     //Retorna FollowerListDTO
     @GetMapping("/users/{userId}/followers/list")
     public ResponseEntity<FollowerListDTO> listFollowers(@PathVariable int userId, @RequestParam(value = "order", required = false) String alf_order) {
@@ -104,7 +102,7 @@ public class Controller {
     @PostMapping("/products/promo-post")
     public ResponseEntity<ResponseDTO> newProductInSale(@RequestBody ProductInSaleDTO dto) {
         userService.saveProductInSale(dto);
-        return new ResponseEntity<>( new ResponseDTO("Creacion de Producto exitosa", 200),HttpStatus.OK);
+        return new ResponseEntity<>( new ResponseDTO("Creacion de Producto exitosa"),HttpStatus.OK);
     }
 
     //US 0011: Obtener la cantidad de productos en promoción de un determinado vendedor
