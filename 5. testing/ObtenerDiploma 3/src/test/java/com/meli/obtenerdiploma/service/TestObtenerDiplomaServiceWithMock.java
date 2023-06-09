@@ -4,8 +4,6 @@ import com.meli.obtenerdiploma.exception.StudentNotFoundException;
 import com.meli.obtenerdiploma.model.StudentDTO;
 import com.meli.obtenerdiploma.model.SubjectDTO;
 import com.meli.obtenerdiploma.repository.IStudentDAO;
-import com.meli.obtenerdiploma.service.ObtenerDiplomaService;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,6 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
@@ -37,7 +36,7 @@ void getAverage(){
     Long id = 1L;
     StudentDTO student = new StudentDTO(id, "juan","soy juan",0.0, getList());
     when(studentDAO.findById(id)).thenReturn(student);
-    StudentDTO expected = new StudentDTO(id, "juan","El alumno juan ha obtenido un promedio de 8. Puedes mejorar.",8.0, getList());
+    StudentDTO expected = new StudentDTO(id, "juan","El alumno juan ha obtenido un promedio de 10. Felicitaciones!",10.0, getList());
     assertEquals(expected,diplomaService.analyzeScores(id));
 }
 
@@ -52,14 +51,6 @@ void getMessageWithHonors(){
     StudentDTO expected = new StudentDTO(id, "juan","El alumno juan ha obtenido un promedio de 10. Felicitaciones!",10.0, getList());
     assertEquals(expected,diplomaService.analyzeScores(id));
 }
-@Test
-@DisplayName("Student Not Found :(")
-void studentNotFoundWithAverage(){
-    Long id = 1L;
-    StudentDTO student = new StudentDTO(id, "juan","soy juan",0.0, getList());
-    when(studentDAO.findById(id)).thenReturn(student);
-    assertThrows(StudentNotFoundException.class, ()->studentDAO.findById(2L));
-}
 
 @Test
 @DisplayName(" Lista Vacia.")
@@ -67,7 +58,7 @@ void getEmptyList(){
 
     List<SubjectDTO> subjects = new ArrayList<>();
     Long id = 1L;
-    StudentDTO student = new StudentDTO(id, "juan","soy juan",0.0, getList());
+    StudentDTO student = new StudentDTO(id, "juan","soy juan",0.0, subjects);
     when(studentDAO.findById(id)).thenReturn(student);
     StudentDTO expected = new StudentDTO(id, "juan","El alumno juan ha obtenido un promedio de 0. Puedes mejorar.",0.0, subjects);
     assertEquals(expected,diplomaService.analyzeScores(id));

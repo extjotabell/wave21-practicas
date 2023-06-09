@@ -5,13 +5,10 @@ import com.meli.obtenerdiploma.model.StudentDTO;
 import com.meli.obtenerdiploma.model.SubjectDTO;
 import com.meli.obtenerdiploma.repository.IStudentDAO;
 import com.meli.obtenerdiploma.repository.IStudentRepository;
-import com.meli.obtenerdiploma.service.IStudentService;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.event.annotation.BeforeTestExecution;
 
-import javax.security.auth.Subject;
 import java.util.ArrayList;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -32,17 +29,13 @@ public class TestStudentDAO {
         studentDAO.save(user);
     }
 
-    @AfterEach
-    void deleteConfig(){
-        studentDAO.delete(1L);
-    }
     @Test
     @DisplayName("Camino Feliz crear estudiante...")
     void readStudentByID(){
         Long id = 1L;
         StudentDTO espected = new StudentDTO(id, "juan","soy juan",0.0, getList());
 
-        assertEquals(espected,studentDAO.findById(id));
+        Assertions.assertEquals(espected,studentDAO.findById(id));
     }
     @Test
     @DisplayName("Encontrar Estudiante por ID, camino triste :(")
@@ -63,7 +56,7 @@ public class TestStudentDAO {
         studentDAO.save(user);
         StudentDTO espected = new StudentDTO(id, "Rogelio","soy juan",0.0, getList());
 
-        assertEquals(espected,studentDAO.findById(id));
+        Assertions.assertEquals(espected,studentDAO.findById(id));
 
 
 

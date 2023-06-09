@@ -4,7 +4,33 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d75b3f77-2b5a-4820-8c7f-fa11d911ca9a" name="Default Changelist" comment="Spring 2 - Practica TT - Obetener Diploma" />
+    <list default="true" id="d75b3f77-2b5a-4820-8c7f-fa11d911ca9a" name="Default Changelist" comment="Spring 2 - Practica TT - Obetener Diploma">
+      <change afterPath="$PROJECT_DIR$/../ObtenerDiploma 3/src/main/java/com/meli/obtenerdiploma/unitarias/model/ResponseDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ObtenerDiploma 3/src/test/java/com/meli/obtenerdiploma/controller/TestObtenerDiplomaController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ObtenerDiploma 3/src/test/java/com/meli/obtenerdiploma/controller/TestStudentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ObtenerDiploma 3/src/main/java/com/meli/obtenerdiploma/ObtenerDiplomaApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ObtenerDiploma 3/src/main/java/com/meli/obtenerdiploma/unitarias/ObtenerDiplomaApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ObtenerDiploma 3/src/main/java/com/meli/obtenerdiploma/controller/ObtenerDiplomaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ObtenerDiploma 3/src/main/java/com/meli/obtenerdiploma/controller/ObtenerDiplomaController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ObtenerDiploma 3/src/main/java/com/meli/obtenerdiploma/controller/ObtenerDiplomaExceptionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ObtenerDiploma 3/src/main/java/com/meli/obtenerdiploma/controller/ObtenerDiplomaExceptionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ObtenerDiploma 3/src/main/java/com/meli/obtenerdiploma/controller/StudentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ObtenerDiploma 3/src/main/java/com/meli/obtenerdiploma/controller/StudentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ObtenerDiploma 3/src/main/java/com/meli/obtenerdiploma/exception/ObtenerDiplomaException.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ObtenerDiploma 3/src/main/java/com/meli/obtenerdiploma/unitarias/exception/ObtenerDiplomaException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ObtenerDiploma 3/src/main/java/com/meli/obtenerdiploma/exception/StudentNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ObtenerDiploma 3/src/main/java/com/meli/obtenerdiploma/unitarias/exception/StudentNotFoundException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ObtenerDiploma 3/src/main/java/com/meli/obtenerdiploma/model/ErrorDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ObtenerDiploma 3/src/main/java/com/meli/obtenerdiploma/unitarias/model/ErrorDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ObtenerDiploma 3/src/main/java/com/meli/obtenerdiploma/model/StudentDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ObtenerDiploma 3/src/main/java/com/meli/obtenerdiploma/unitarias/model/StudentDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ObtenerDiploma 3/src/main/java/com/meli/obtenerdiploma/model/SubjectDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ObtenerDiploma 3/src/main/java/com/meli/obtenerdiploma/unitarias/model/SubjectDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ObtenerDiploma 3/src/main/java/com/meli/obtenerdiploma/repository/IStudentDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ObtenerDiploma 3/src/main/java/com/meli/obtenerdiploma/unitarias/repository/IStudentDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ObtenerDiploma 3/src/main/java/com/meli/obtenerdiploma/repository/IStudentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ObtenerDiploma 3/src/main/java/com/meli/obtenerdiploma/unitarias/repository/IStudentRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ObtenerDiploma 3/src/main/java/com/meli/obtenerdiploma/repository/StudentDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ObtenerDiploma 3/src/main/java/com/meli/obtenerdiploma/unitarias/repository/StudentDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ObtenerDiploma 3/src/main/java/com/meli/obtenerdiploma/repository/StudentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ObtenerDiploma 3/src/main/java/com/meli/obtenerdiploma/unitarias/repository/StudentRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ObtenerDiploma 3/src/main/java/com/meli/obtenerdiploma/service/IObtenerDiplomaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ObtenerDiploma 3/src/main/java/com/meli/obtenerdiploma/service/IObtenerDiplomaService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ObtenerDiploma 3/src/main/java/com/meli/obtenerdiploma/service/IStudentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ObtenerDiploma 3/src/main/java/com/meli/obtenerdiploma/service/IStudentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ObtenerDiploma 3/src/main/java/com/meli/obtenerdiploma/service/ObtenerDiplomaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ObtenerDiploma 3/src/main/java/com/meli/obtenerdiploma/service/ObtenerDiplomaService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ObtenerDiploma 3/src/main/java/com/meli/obtenerdiploma/service/StudentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ObtenerDiploma 3/src/main/java/com/meli/obtenerdiploma/service/StudentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ObtenerDiploma 3/src/main/resources/users.json" beforeDir="false" afterPath="$PROJECT_DIR$/../ObtenerDiploma 3/src/main/resources/users.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ObtenerDiploma 3/src/test/java/com/meli/obtenerdiploma/ObtenerDiplomaApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ObtenerDiploma 3/src/test/java/com/meli/obtenerdiploma/unitarias/ObtenerDiplomaApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ObtenerDiploma 3/src/test/java/com/meli/obtenerdiploma/repositoy/TestStudentDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ObtenerDiploma 3/src/test/java/com/meli/obtenerdiploma/repositoy/TestStudentDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ObtenerDiploma 3/src/test/java/com/meli/obtenerdiploma/service/TestObtenerDiplomaServiceWithMock.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ObtenerDiploma 3/src/test/java/com/meli/obtenerdiploma/service/TestObtenerDiplomaServiceWithMock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ObtenerDiploma 3/src/test/java/com/meli/obtenerdiploma/service/TestStudentServiceWithMoch.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ObtenerDiploma 3/src/test/java/com/meli/obtenerdiploma/service/TestStudentServiceWithMoch.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -181,6 +207,7 @@
       <workItem from="1686242796242" duration="49000" />
       <workItem from="1686242860185" duration="315000" />
       <workItem from="1686243216043" duration="102000" />
+      <workItem from="1686334993176" duration="1000" />
     </task>
     <task id="LOCAL-00001" summary="Spring 2 - Practica TT - Obetener Diploma">
       <created>1619721212242</created>

@@ -3,6 +3,7 @@ import com.meli.obtenerdiploma.model.StudentDTO;
 import com.meli.obtenerdiploma.model.SubjectDTO;
 import com.meli.obtenerdiploma.repository.IStudentDAO;
 import com.meli.obtenerdiploma.repository.IStudentRepository;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -44,7 +45,7 @@ public class TestStudentServiceWithMoch {
         StudentDTO student = new StudentDTO(id, "juan","soy juan",0.0, subjects);
         when(studentService.read(id)).thenReturn(student);
 
-        assertEquals(student,studentDAO.findById(id));
+        Assertions.assertEquals(student,studentDAO.findById(id));
 
     }
 }

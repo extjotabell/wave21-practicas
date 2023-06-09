@@ -1,6 +1,5 @@
 package com.meli.obtenerdiploma.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import javax.validation.Valid;
