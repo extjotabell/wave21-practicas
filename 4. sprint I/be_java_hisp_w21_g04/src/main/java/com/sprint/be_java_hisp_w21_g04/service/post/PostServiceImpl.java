@@ -48,6 +48,11 @@ public class PostServiceImpl implements IPostService{
     }
 
     @Override
+    public int getPromoProductCount(int userId) {
+        return this._repository.getPromoProductCount(userId);
+    }
+
+    @Override
     public List<PostResponseDto> getAll() {
         return this._repository.getAll().stream().map(post -> modelMapper.map(post, PostResponseDto.class)).toList();
     }

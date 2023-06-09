@@ -9,5 +9,6 @@ public interface IPostRepository {
     void post(Post post);
     void promoPost(Post post);
     List<Post> getAll();
+    int getPromoProductCount(int userId);
     public List<Post> getSellerFollowed(int user_id);
 }
