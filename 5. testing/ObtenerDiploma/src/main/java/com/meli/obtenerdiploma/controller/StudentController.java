@@ -1,5 +1,6 @@
 package com.meli.obtenerdiploma.controller;
 
+import com.meli.obtenerdiploma.dto.response.ResponseDTO;
 import com.meli.obtenerdiploma.model.StudentDTO;
 import com.meli.obtenerdiploma.service.IStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +18,8 @@ public class StudentController {
     IStudentService studentService;
 
     @PostMapping("/registerStudent")
-    public ResponseEntity<?> registerStudent(@RequestBody @Valid StudentDTO stu) {
-        this.studentService.create(stu);
-        return ResponseEntity.ok(null);
+    public ResponseEntity<ResponseDTO> registerStudent(@RequestBody @Valid StudentDTO stu) {
+        return ResponseEntity.ok(this.studentService.create(stu));
     }
 
     @GetMapping("/getStudent/{id}")

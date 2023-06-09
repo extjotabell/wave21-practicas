@@ -1,5 +1,6 @@
 package com.meli.obtenerdiploma.service;
 
+import com.meli.obtenerdiploma.dto.response.ResponseDTO;
 import com.meli.obtenerdiploma.model.StudentDTO;
 import com.meli.obtenerdiploma.repository.IStudentDAO;
 import com.meli.obtenerdiploma.repository.IStudentRepository;
@@ -18,8 +19,9 @@ public class StudentService implements IStudentService {
     IStudentRepository studentRepository;
 
     @Override
-    public void create(StudentDTO stu) {
+    public ResponseDTO create(StudentDTO stu) {
         studentDAO.save(stu);
+        return new ResponseDTO("Creacion realizada con exito!");
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.meli.obtenerdiploma.repository;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.meli.obtenerdiploma.dto.response.ResponseDTO;
 import com.meli.obtenerdiploma.exception.StudentNotFoundException;
 import com.meli.obtenerdiploma.model.StudentDTO;
 import org.springframework.core.io.ClassPathResource;
@@ -38,7 +39,6 @@ public class StudentDAO implements IStudentDAO {
     @Override
     public void save(StudentDTO stu) {
         boolean removed = this.delete(stu.getId());
-
         if (!removed) stu.setId((this.students.size() + 1L));
 
         students.add(stu);
