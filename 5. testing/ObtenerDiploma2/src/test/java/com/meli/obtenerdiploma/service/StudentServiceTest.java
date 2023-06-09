@@ -1,6 +1,7 @@
 package com.meli.obtenerdiploma.service;
 
 import com.meli.obtenerdiploma.model.StudentDTO;
+import com.meli.obtenerdiploma.model.SubjectDTO;
 import com.meli.obtenerdiploma.repository.StudentDAO;
 import com.meli.obtenerdiploma.repository.StudentRepository;
 import lombok.AllArgsConstructor;
@@ -15,6 +16,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -32,10 +34,10 @@ public class StudentServiceTest {
     StudentService studentService;
 
     @Test
-    @DisplayName("Create Test")
+    @DisplayName("Create Test HappyPath")
     void createTestOk(){
         //Arrange
-        StudentDTO expected = new StudentDTO(23L, "Javier", "", 8.0, new ArrayList<>());
+        StudentDTO expected = new StudentDTO(1L, "Juan", "", 0.00, List.of(new SubjectDTO("Matematica", 9.50)));
         //Act
         studentService.create(expected);
         //Assert
@@ -43,11 +45,11 @@ public class StudentServiceTest {
     }
 
     @Test
-    @DisplayName("Read Test")
+    @DisplayName("Read Test HappyPath")
     void readTestOk(){
         //Arrange
         Long studentId = 23L;
-        StudentDTO expected = new StudentDTO(23L, "Javier", "", 8.0, new ArrayList<>());
+        StudentDTO expected = new StudentDTO(1L, "Juan", "", 0.00, List.of(new SubjectDTO("Matematica", 9.50)));
         when(IStudentDAO.findById( any() )).thenReturn(expected);
         //Act
         StudentDTO result = studentService.read(studentId);
@@ -56,10 +58,10 @@ public class StudentServiceTest {
     }
 
     @Test
-    @DisplayName("Update Test")
+    @DisplayName("Update Test HappyPath")
     void updateTestOk(){
         //Arrange
-        StudentDTO expected = new StudentDTO(23L, "Javier", "", 8.0, new ArrayList<>());
+        StudentDTO expected = new StudentDTO(1L, "Juan", "", 0.00, List.of(new SubjectDTO("Matematica", 9.50)));
         //Act
         studentService.update(expected);
         //Assert
@@ -68,7 +70,7 @@ public class StudentServiceTest {
     }
 
     @Test
-    @DisplayName("Delete Test")
+    @DisplayName("Delete Test HappyPath")
     void deleteTestOk(){
         //Arrange
         long idExpected = 1;
@@ -79,7 +81,7 @@ public class StudentServiceTest {
     }
 
     @Test
-    @DisplayName("Get All Test")
+    @DisplayName("Get All Test HappyPath")
     void getAllTestOk(){
         //Arrange
         Set<StudentDTO> expected = new HashSet<>();

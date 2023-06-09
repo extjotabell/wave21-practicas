@@ -12,9 +12,6 @@ import org.springframework.stereotype.Service;
 import java.util.Set;
 
 @Service
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class StudentService implements IStudentService {
     @Autowired
     IStudentDAO studentDAO;

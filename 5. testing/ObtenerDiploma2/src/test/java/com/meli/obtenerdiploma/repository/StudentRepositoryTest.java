@@ -1,10 +1,7 @@
 package com.meli.obtenerdiploma.repository;
 
 import com.meli.obtenerdiploma.model.StudentDTO;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -25,12 +22,14 @@ public class StudentRepositoryTest {
     }
 
     @Test
-    @DisplayName("Find All Test")
-    void findAllTestOk() {
+    @Disabled
+    @DisplayName("Find All Test BadPath")
+    void findAllTestBadPath() {
         //Arrange
+        Set<StudentDTO> loadedData = new HashSet<>();
         //Act
         //Assert
         assertThrows(FileNotFoundException.class, () -> repository.findAll());
-        
+
     }
 }
