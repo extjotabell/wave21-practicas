@@ -32,7 +32,7 @@ public class StudentServiceTest {
     StudentService studentService;
 
     @Test
-    @DisplayName("Create Test")
+    @DisplayName("Create - Unit Test")
     void createTestOk(){
         //Arrange
         StudentDTO expected = new StudentDTO(23L, "Javier", "", 8.0, new ArrayList<>());
@@ -43,7 +43,7 @@ public class StudentServiceTest {
     }
 
     @Test
-    @DisplayName("Update Test")
+    @DisplayName("Update - Unit Test")
     void updateTestOk(){
         //Arrange
         StudentDTO expected = new StudentDTO(23L, "Javier", "", 8.0, new ArrayList<>());
@@ -54,7 +54,7 @@ public class StudentServiceTest {
     }
 
     @Test
-    @DisplayName("Read Test")
+    @DisplayName("Read - Unit Test")
     void readTestOk(){
         //Arrange
         Long studentId = 23L;
@@ -67,7 +67,7 @@ public class StudentServiceTest {
     }
 
     @Test
-    @DisplayName("Delete Test")
+    @DisplayName("Delete - Unit Test")
     void deleteTestOk(){
         //Arrange
         Long studentId = 23L;
@@ -79,7 +79,7 @@ public class StudentServiceTest {
     }
 
     @Test
-    @DisplayName("Get All Test")
+    @DisplayName("Get All - Unit Test")
     void getAllTestOk(){
         //Arrange
         Set<StudentDTO> expected = new HashSet<>();

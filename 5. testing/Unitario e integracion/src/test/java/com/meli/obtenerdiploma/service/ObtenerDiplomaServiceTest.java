@@ -27,20 +27,16 @@ public class ObtenerDiplomaServiceTest {
     ObtenerDiplomaService diplomaService;
 
     @Test
-    @DisplayName("US- AnalizeScores Caso feliz!!!!")
+    @DisplayName("AnalyzeScores Unit Test")
     void analyzeScoresTestOk() {
         //Arrange
         Long studentId = 23L;
         StudentDTO expected = new StudentDTO(23L, "Javier", "", 8.0, new ArrayList<>());
-        when(studentDAO.findById( any() )).thenReturn(expected);
+        when(studentDAO.findById(any())).thenReturn(expected);
         //Act
         StudentDTO result = diplomaService.analyzeScores(studentId);
         //Assert
         assertEquals(expected, result);
     }
-
-
-
-
 }
 
