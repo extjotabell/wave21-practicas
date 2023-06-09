@@ -49,6 +49,23 @@ La aplicación "SocialMeli" es una plataforma innovadora que te permite seguir y
 
 - US 0009 (Grupo 3): GET /products/followed/{userId}/list?order=date_asc
                /products/followed/{userId}/list?order=date_desc
+
+### Endpoints - trabajo individual
+               
+- US 0010 : Llevar a cabo la publicación de un nuevo producto en promoción
+  /products/promo-post
+               
+- US 0011: Obtener la cantidad de productos en promoción de un determinado vendedor
+  /products/promo-post/count?user_id={userId}
+
+- US 0012: Obtener un listado de todos los productos en promoción de un determinado vendedor
+  /products/promo-post/list?user_id={userId}
+
+La US 0010 realiza una publicación de un nuevo producto en promoción, por lo que se utilizaron los atributos has_product y discount para validar que sea un producto en promoción, si has_product no está en true o el descuento no es mayor a cero ,no realiza el descuento.
+
+En la US 0011 se puede obtener la cantidad de post con productos en descuento que tiene un usuario, si el usuario no tiene post, en la cantidad muestra un cero
+
+En la US 0012 se obtiene el listado de post en rpomoción que tenga un usuario, por defecto está en orden ascendente, para descendente hay que indicar un parámetro ?order=date_desc  
                
 ### Mejoras futuras:
 - Validar cuando un usuario no existe en las historias US 0005 y US 0006.
