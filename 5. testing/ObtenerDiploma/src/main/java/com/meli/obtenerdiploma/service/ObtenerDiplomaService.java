@@ -21,7 +21,6 @@ public class ObtenerDiplomaService implements IObtenerDiplomaService {
 
         stu.setAverageScore(calculateAverage(stu.getSubjects()));
         stu.setMessage(getGreetingMessage(stu.getStudentName(), stu.getAverageScore()));
-
         return stu;
     }
 
