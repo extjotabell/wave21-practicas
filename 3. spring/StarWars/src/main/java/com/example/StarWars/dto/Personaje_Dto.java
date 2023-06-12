@@ -1,6 +1,6 @@
 package com.example.StarWars.dto;
 
-public class Dto {
+public class Personaje_Dto {
     private String name;
     private int height;
     private int mass;
@@ -56,7 +56,7 @@ public class Dto {
         this.species = species;
     }
 
-    public Dto(String name, int height, int mass, String gender, String homeworld, String species) {
+    public Personaje_Dto(String name, int height, int mass, String gender, String homeworld, String species) {
         this.name = name;
         this.height = height;
         this.mass = mass;
@@ -65,6 +65,6 @@ public class Dto {
         this.species = species;
     }
 
-    public Dto() {
+    public Personaje_Dto() {
     }
 }

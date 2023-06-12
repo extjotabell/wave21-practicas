@@ -1,5 +1,7 @@
 package com.example.StarWars.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Personaje {
     private String name;
     private int height;
@@ -7,9 +9,13 @@ public class Personaje {
     private String gender;
     private String homeworld;
     private String species;
+    @JsonProperty("hair_color")
     private String hairColor;
+    @JsonProperty("skin_color")
     private String skinColor;
+    @JsonProperty("eye_color")
     private String eyeColor;
+    @JsonProperty("birth_year")
     private String birthYear;
 
     public String getName() {
