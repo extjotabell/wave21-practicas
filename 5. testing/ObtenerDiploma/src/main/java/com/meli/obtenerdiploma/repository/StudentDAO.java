@@ -2,7 +2,6 @@ package com.meli.obtenerdiploma.repository;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.meli.obtenerdiploma.dto.response.ResponseDTO;
 import com.meli.obtenerdiploma.exception.StudentNotFoundException;
 import com.meli.obtenerdiploma.model.StudentDTO;
 import org.springframework.core.io.ClassPathResource;
@@ -13,6 +12,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Properties;
 import java.util.Set;
 
@@ -57,7 +57,9 @@ public class StudentDAO implements IStudentDAO {
             ret  = true;
             this.saveData();
 
-        } catch (StudentNotFoundException e) {}
+        } catch (StudentNotFoundException e) {
+            throw new StudentNotFoundException(id);
+        }
 
         return ret;
     }
@@ -78,6 +80,12 @@ public class StudentDAO implements IStudentDAO {
         return students.stream()
                 .filter(stu -> stu.getId().equals(id))
                 .findFirst().orElseThrow(() -> new StudentNotFoundException(id));
+    }
+
+    @Override
+    public Optional<StudentDTO> update(StudentDTO stu) {
+        this.save(stu);
+        return this.students.stream().filter(s -> s.getId() == stu.getId()).findFirst();
     }
 
     private void loadData() {

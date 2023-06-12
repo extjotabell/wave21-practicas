@@ -4,10 +4,13 @@ import com.meli.obtenerdiploma.dto.response.ResponseDTO;
 import com.meli.obtenerdiploma.model.StudentDTO;
 import com.meli.obtenerdiploma.service.IStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.text.html.Option;
 import javax.validation.Valid;
+import java.util.Optional;
 import java.util.Set;
 
 @RestController
@@ -27,16 +30,15 @@ public class StudentController {
         return this.studentService.read(id);
     }
 
-    @PostMapping("/modifyStudent")
-    public ResponseEntity<?> modifyStudent(@RequestBody @Valid StudentDTO stu) {
-        this.studentService.update(stu);
-        return ResponseEntity.ok(null);
+    @PutMapping("/modifyStudent")
+    public ResponseEntity<StudentDTO> modifyStudent(@RequestBody @Valid StudentDTO stu) {
+        Optional<StudentDTO> response = this.studentService.update(stu);
+        return ResponseEntity.ok(response.get());
     }
 
     @GetMapping("/removeStudent/{id}")
-    public ResponseEntity<?> removeStudent(@PathVariable Long id) {
-        this.studentService.delete(id);
-        return ResponseEntity.ok(null);
+    public ResponseEntity<ResponseDTO> removeStudent(@PathVariable Long id) {
+        return ResponseEntity.ok(this.studentService.delete(id));
     }
 
     @GetMapping("/listStudents")

@@ -7,6 +7,7 @@ import com.meli.obtenerdiploma.repository.IStudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -30,13 +31,14 @@ public class StudentService implements IStudentService {
     }
 
     @Override
-    public void update(StudentDTO stu) {
-        studentDAO.save(stu);
+    public Optional<StudentDTO> update(StudentDTO stu) {
+        return studentDAO.update(stu);
     }
 
     @Override
-    public void delete(Long id) {
+    public ResponseDTO delete(Long id) {
         studentDAO.delete(id);
+        return new ResponseDTO("Eliminacion exitosa...");
     }
 
     @Override
