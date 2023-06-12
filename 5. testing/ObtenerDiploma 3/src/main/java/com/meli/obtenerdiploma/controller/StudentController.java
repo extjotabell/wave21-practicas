@@ -38,7 +38,7 @@ public class StudentController {
     @GetMapping("/removeStudent/{id}")
     public ResponseEntity<?> removeStudent(@PathVariable Long id) {
         this.studentService.delete(id);
-        return ResponseEntity.ok(null);
+        return ResponseEntity.ok(new ResponseDTO(id,"El estudiante fue removido con exito"));
     }
 
     @GetMapping("/listStudents")

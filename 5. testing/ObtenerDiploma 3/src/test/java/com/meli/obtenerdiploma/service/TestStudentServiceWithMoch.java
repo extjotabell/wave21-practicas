@@ -33,7 +33,7 @@ public class TestStudentServiceWithMoch {
 
     @Test
     @DisplayName("Leer un estudiante")
-    void readStudent(){
+    void readStudent() {
 
         List<SubjectDTO> subjects = new ArrayList<>();
         subjects.add(new SubjectDTO("Quimica", 7.0));
@@ -42,10 +42,25 @@ public class TestStudentServiceWithMoch {
         subjects.add(new SubjectDTO("Fisica", 9.0));
         subjects.add(new SubjectDTO("Artistica", 7.0));
         Long id = 1L;
-        StudentDTO student = new StudentDTO(id, "juan","soy juan",0.0, subjects);
+        StudentDTO student = new StudentDTO(id, "juan", "soy juan", 0.0, subjects);
         when(studentService.read(id)).thenReturn(student);
 
-        Assertions.assertEquals(student,studentDAO.findById(id));
+        Assertions.assertEquals(student, studentDAO.findById(id));
 
+    }
+
+    @Test
+    @DisplayName("Validacion de mayuscula")
+    void studentWithMay() {
+        /*    El nombre del estudiante debe comenzar con mayúscula.*/
+        List<SubjectDTO> subjects = new ArrayList<>();
+        subjects.add(new SubjectDTO("Quimica", 7.0));
+        subjects.add(new SubjectDTO("Matematica", 8.0));
+        subjects.add(new SubjectDTO("Lengua", 9.0));
+        subjects.add(new SubjectDTO("Fisica", 9.0));
+        subjects.add(new SubjectDTO("Artistica", 7.0));
+        Long id = 1L;
+        StudentDTO student = new StudentDTO(id, "juan", "soy juan", 0.0, subjects);
+        when(studentService.read(id)).thenReturn(student);
     }
 }

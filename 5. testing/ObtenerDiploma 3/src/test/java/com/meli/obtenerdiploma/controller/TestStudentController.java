@@ -3,6 +3,7 @@ package com.meli.obtenerdiploma.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.meli.obtenerdiploma.model.ErrorDTO;
 import com.meli.obtenerdiploma.model.ResponseDTO;
 import com.meli.obtenerdiploma.model.StudentDTO;
 import com.meli.obtenerdiploma.model.SubjectDTO;
@@ -35,28 +36,89 @@ public class TestStudentController {
 MockMvc mockMvc;
 
 @Test
-void TestRegisterUser() throws Exception{
+@DisplayName("La lista de materias no puede ser vacia")
+void registerUserWithSubjectEmpty() throws Exception{
+    ErrorDTO error = new ErrorDTO("MethodArgumentNotValidException","La lista de materias no puede estar vacia.");
+    StudentDTO stu = new StudentDTO(4L, "Marta","soy marta",0.0, new ArrayList<SubjectDTO>());
+    ObjectWriter writer = new ObjectMapper()
+            .configure(SerializationFeature.WRAP_ROOT_VALUE,false)
+            .writer();
 
+    String jsonPayload = writer.writeValueAsString(stu);
+    String responseJson = writer.writeValueAsString(error);
+    MvcResult mvcResult = mockMvc.perform(post("/student/registerStudent")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(jsonPayload))
+            .andDo(print())
+            .andExpect(content().contentType("application/json"))
+            .andExpect(MockMvcResultMatchers.status().isBadRequest())
+            .andReturn();
+    assertEquals(responseJson,mvcResult.getResponse().getContentAsString());
+}
+
+@Test
+@DisplayName("El nombre del estudiante tiene que arrancar con Mayuscula")
+void registerUserWithBadName() throws Exception{
+    ErrorDTO error = new ErrorDTO("MethodArgumentNotValidException","El nombre del estudiante debe comenzar con mayuscula.");
+    StudentDTO stu = new StudentDTO(4L, "marta","soy marta",0.0,  getListWithSubjectAVG10());
+    ObjectWriter writer = new ObjectMapper()
+            .configure(SerializationFeature.WRAP_ROOT_VALUE,false)
+            .writer();
+
+    String jsonPayload = writer.writeValueAsString(stu);
+    String responseJson = writer.writeValueAsString(error);
+    MvcResult mvcResult = mockMvc.perform(post("/student/registerStudent")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(jsonPayload))
+            .andDo(print())
+            .andExpect(content().contentType("application/json"))
+            .andExpect(MockMvcResultMatchers.status().isBadRequest())
+            .andReturn();
+    assertEquals(responseJson,mvcResult.getResponse().getContentAsString());
+}
+
+@Test
+@DisplayName("Registrar un usuario valido")
+void registerUserTest() throws Exception{
+    long id_result = 1L;
     StudentDTO stu = new StudentDTO(4L, "Marta","soy marta",0.0, getListWithSubjectAVG10());
     ObjectWriter writer = new ObjectMapper()
             .configure(SerializationFeature.WRAP_ROOT_VALUE,false)
             .writer();
 
     String jsonPayload = writer.writeValueAsString(stu);
-    String responseJson = writer.writeValueAsString(new ResponseDTO(stu.getId(),"El estudiante ha sido registrado correctamente"));
+    String responseJson = writer.writeValueAsString(new ResponseDTO(id_result,"El estudiante ha sido registrado correctamente"));
     MvcResult mvcResult = mockMvc.perform(post("/student/registerStudent")
             .contentType(MediaType.APPLICATION_JSON)
             .content(jsonPayload))
             .andDo(print())
+            .andExpect(content().contentType("application/json"))
             .andExpect(MockMvcResultMatchers.status().isOk())
             .andReturn();
     assertEquals(responseJson,mvcResult.getResponse().getContentAsString());
 }
 
+@Test
+@DisplayName("Obtener la lista de todos los estudiantes")
+void getStudentTest() throws  Exception{
+    StudentDTO result = new StudentDTO(1L, "Marta","soy marta",0.0, getListWithSubjectAVG10());
+    ObjectWriter writer = new ObjectMapper()
+            .configure(SerializationFeature.WRAP_ROOT_VALUE,false)
+            .writer();
 
+    String expected = "["+ writer.writeValueAsString(result) +"]";
+    MvcResult mvcResult = mockMvc.perform(get("/student/listStudents"))
+            .andDo(print())
+            .andExpect(content().contentType("application/json"))
+            .andExpect(MockMvcResultMatchers.status().isOk())
+            .andReturn();
+    assertEquals(expected,mvcResult.getResponse().getContentAsString());
+
+
+}
 @Test
 public void testGetUser() throws Exception{
-    mockMvc.perform(get("/student/getStudent/{id}", 5L))
+   mockMvc.perform(get("/student/getStudent/{id}", 1L))
             .andDo(print())
             .andExpect(status().isOk())
             .andExpect(content().contentType("application/json"))
@@ -66,7 +128,7 @@ public void testGetUser() throws Exception{
 @Test
 @DisplayName("Modificar el estudiante")
 void testModifyStudent() throws Exception {
-    StudentDTO stu = new StudentDTO(5L, "Marta","soy marta",0.0, getListWithSubjectAVG10());
+    StudentDTO stu = new StudentDTO(1L, "Marta","soy marta",0.0, getListWithSubjectAVG10());
     ObjectWriter writer = new ObjectMapper()
             .configure(SerializationFeature.WRAP_ROOT_VALUE,false)
             .writer();
@@ -83,7 +145,25 @@ void testModifyStudent() throws Exception {
 
 }
 
-    List<SubjectDTO> getListWithSubjectAVG10(){
+@Test
+@DisplayName("Eliminar el estudiante")
+void deleteStudentTest() throws Exception {
+    ObjectWriter writer = new ObjectMapper()
+            .configure(SerializationFeature.WRAP_ROOT_VALUE,false)
+            .writer();
+    String responseJson = writer.writeValueAsString(new ResponseDTO(1L,"El estudiante fue removido con exito"));
+
+    MvcResult mvcResult =mockMvc.perform(get("/student/removeStudent/{id}",1L))
+            .andDo(print())
+            .andExpect(status().isOk())
+            .andExpect(content().contentType("application/json"))
+            .andReturn();
+
+    assertEquals(responseJson,mvcResult.getResponse().getContentAsString());
+}
+
+
+List<SubjectDTO> getListWithSubjectAVG10(){
         List<SubjectDTO> subjects = new ArrayList<>();
         subjects.add(new SubjectDTO("Quimica", 10.0));
         subjects.add(new SubjectDTO("Matematica", 10.0));
