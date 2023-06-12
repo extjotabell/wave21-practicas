@@ -1,5 +1,10 @@
 package com.meli.obtenerdiploma.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.meli.obtenerdiploma.exception.StudentNotFoundException;
 import com.meli.obtenerdiploma.model.StudentDTO;
 import com.meli.obtenerdiploma.model.SubjectDTO;
@@ -12,6 +17,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,33 +33,74 @@ public class ObtenerDiplomaServiceTestConMock {
     @Mock
     IStudentDAO studentDAO;
 
+
+    ObjectWriter writer = new ObjectMapper()
+            .registerModule(new JavaTimeModule())
+            .configure(SerializationFeature.WRAP_ROOT_VALUE, false)
+            .writer();
+
+
     @Test
-    public void obtenerEstudianteOk(){
+    public void analyzeScoresOk() throws JsonProcessingException {
         //arrange
         List<SubjectDTO> listMock = new ArrayList<>();
         listMock.add(new SubjectDTO("Matemática",9.0));
         listMock.add(new SubjectDTO("Fisica",10.0));
         StudentDTO studenMock = new StudentDTO(1L,"Pedro", null, null, listMock);
 
-        StudentDTO studenExpected = studenMock;
+        StudentDTO studenExpected = new StudentDTO(1L,"Pedro", null, null, listMock);
+        studenExpected.setAverageScore(9.5);
+        studenExpected.setMessage("El alumno Pedro ha obtenido un promedio de 9.5. Felicitaciones!");
+
+        // Mock Data Repo
         when(studentDAO.findById(1L)).thenReturn(studenMock);
+
         //act
         StudentDTO result = diplomaService.analyzeScores(1L);
+
         //assert
-        assertEquals(studenExpected, result);
+        assertEquals(writer.writeValueAsString(studenExpected), writer.writeValueAsString(result));
+        assertEquals(studenExpected.getMessage(), result.getMessage());
+        assertEquals(studenExpected.getAverageScore(), result.getAverageScore());
+
     }
 
     @Test
-    public void obtenerEstudianteNoOk(){
+    public void analyzeScoresNoOk() throws JsonProcessingException {
         //arrange
         List<SubjectDTO> listMock = new ArrayList<>();
-        listMock.add(new SubjectDTO("Matemática",9.0));
-        listMock.add(new SubjectDTO("Fisica",10.0));
-        StudentDTO studenMock = new StudentDTO(2L,"Pedro", null, null, listMock);
+        listMock.add(new SubjectDTO("Matemática",2.0));
+        listMock.add(new SubjectDTO("Fisica",3.0));
+        StudentDTO studenMock = new StudentDTO(1L,"Pedro", null, null, listMock);
+
+
+        StudentDTO studenExpected = new StudentDTO(1L,"Pedro", null, null, listMock);
+        studenExpected.setAverageScore(2.5);
+        studenExpected.setMessage("El alumno Pedro ha obtenido un promedio de 2.5. Puedes mejorar.");
+
+        // Mock Data Repo
+        when(studentDAO.findById(1L)).thenReturn(studenMock);
 
         //act
-        when(studentDAO.findById(1L)).thenThrow(StudentNotFoundException.class);
+        StudentDTO result = diplomaService.analyzeScores(1L);
+
         //assert
-        assertThrows(StudentNotFoundException.class,()-> diplomaService.analyzeScores(1L)); //Se comprueba con un id desconocido
+        assertEquals(writer.writeValueAsString(studenExpected), writer.writeValueAsString(result));
+        assertEquals(studenExpected.getMessage(), result.getMessage());
+        assertEquals(studenExpected.getAverageScore(), result.getAverageScore());
     }
+
+    @Test
+    public void analyzeScoresNoOkThrowException(){
+        //arrange
+        Long idStudent = 21L;
+
+        //act
+        when(studentDAO.findById(idStudent)).thenThrow(StudentNotFoundException.class);
+
+        //assert
+        assertThrows(StudentNotFoundException.class,()-> diplomaService.analyzeScores(idStudent)); //Se comprueba con un id desconocido
+
+    }
+
 }
