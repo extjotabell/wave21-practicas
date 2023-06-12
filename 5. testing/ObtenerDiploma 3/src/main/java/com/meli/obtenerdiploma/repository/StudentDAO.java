@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.meli.obtenerdiploma.exception.StudentNotFoundException;
 import com.meli.obtenerdiploma.model.StudentDTO;
+import lombok.Getter;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.ResourceUtils;
@@ -16,11 +17,13 @@ import java.util.Properties;
 import java.util.Set;
 
 @Repository
+@Getter
 public class StudentDAO implements IStudentDAO {
 
     private String SCOPE;
 
     private Set<StudentDTO> students;
+
 
 
     public StudentDAO() {

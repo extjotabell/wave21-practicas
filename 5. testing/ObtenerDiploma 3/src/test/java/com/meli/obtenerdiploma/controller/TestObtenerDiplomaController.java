@@ -30,7 +30,7 @@ public class TestObtenerDiplomaController {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.studentName").value("Rogelio"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.averageScore").value(10));
     }
 
 

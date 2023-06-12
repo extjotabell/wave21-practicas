@@ -7,6 +7,7 @@ import com.meli.obtenerdiploma.model.ErrorDTO;
 import com.meli.obtenerdiploma.model.ResponseDTO;
 import com.meli.obtenerdiploma.model.StudentDTO;
 import com.meli.obtenerdiploma.model.SubjectDTO;
+import com.meli.obtenerdiploma.repository.StudentDAO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -34,6 +37,35 @@ public class TestStudentController {
 
 @Autowired
 MockMvc mockMvc;
+
+
+
+@Test
+@DisplayName("Materia con calificacion 11")
+void invalidNoteTest() throws Exception{
+ErrorDTO error = new ErrorDTO("MethodArgumentNotValidException","La nota máxima de la materia es de 10 pts.");
+StudentDTO stu = new StudentDTO(4L, "Marta","soy marta",0.0, getListWithSubjectAVG10());
+stu.getSubjects().get(0).setScore(11.0);
+
+ObjectWriter writer = new ObjectMapper()
+        .configure(SerializationFeature.WRAP_ROOT_VALUE,false)
+        .writer();
+
+String jsonPayload = writer.writeValueAsString(stu);
+String responseJson = writer.writeValueAsString(error);
+MvcResult mvcResult = mockMvc.perform(post("/student/registerStudent")
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(jsonPayload))
+        .andDo(print())
+        .andExpect(content().contentType("application/json"))
+        .andExpect(MockMvcResultMatchers.status().isBadRequest())
+        .andReturn();
+assertEquals(responseJson,mvcResult.getResponse().getContentAsString(StandardCharsets.UTF_8));
+}
+
+
+
+
 
 @Test
 @DisplayName("La lista de materias no puede ser vacia")
@@ -80,8 +112,8 @@ void registerUserWithBadName() throws Exception{
 @Test
 @DisplayName("Registrar un usuario valido")
 void registerUserTest() throws Exception{
-    long id_result = 1L;
-    StudentDTO stu = new StudentDTO(4L, "Marta","soy marta",0.0, getListWithSubjectAVG10());
+    long id_result = 2L;
+    StudentDTO stu = new StudentDTO(4L, "Alan","soy Alan Brado",0.0, getListWithSubjectAVG10());
     ObjectWriter writer = new ObjectMapper()
             .configure(SerializationFeature.WRAP_ROOT_VALUE,false)
             .writer();
@@ -101,12 +133,13 @@ void registerUserTest() throws Exception{
 @Test
 @DisplayName("Obtener la lista de todos los estudiantes")
 void getStudentTest() throws  Exception{
-    StudentDTO result = new StudentDTO(1L, "Marta","soy marta",0.0, getListWithSubjectAVG10());
+    List<StudentDTO> result = getAllStudents();
+
     ObjectWriter writer = new ObjectMapper()
             .configure(SerializationFeature.WRAP_ROOT_VALUE,false)
             .writer();
 
-    String expected = "["+ writer.writeValueAsString(result) +"]";
+    String expected = writer.writeValueAsString(result) ;
     MvcResult mvcResult = mockMvc.perform(get("/student/listStudents"))
             .andDo(print())
             .andExpect(content().contentType("application/json"))
@@ -171,6 +204,13 @@ List<SubjectDTO> getListWithSubjectAVG10(){
         subjects.add(new SubjectDTO("Fisica", 10.0));
         subjects.add(new SubjectDTO("Artistica", 10.0));
         return subjects;
+    }
+
+    public List<StudentDTO> getAllStudents(){
+        StudentDAO repo = new StudentDAO();
+
+        return repo.getStudents().stream().collect(Collectors.toList());
+
     }
 }
 
