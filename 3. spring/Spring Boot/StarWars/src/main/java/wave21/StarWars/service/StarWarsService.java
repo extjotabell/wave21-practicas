@@ -14,12 +14,15 @@ public class StarWarsService {
     /*@Autowired
     StarWarsRepository repository;*/
 
-    private final StarWarsRepository repository;
+    public StarWarsRepository repository;
 
     public StarWarsService(StarWarsRepository repository) {
         this.repository = repository;
     }
 
+    public List<Personaje> listAll(){
+        return repository.getPersonajesJSON();
+    }
     public List<PersonajeDTO> find(String name){
         List<Personaje> personajes = repository.findAllByName(name);
         List<PersonajeDTO> personajesDTOS = new ArrayList<>();

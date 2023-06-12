@@ -23,7 +23,7 @@ public class Covid19Service {
         //traigo del repo la lista de sintomas del modelo
         List<Sintoma> sintomas = repository.getSintomas();
         //Convierto el modelo a DTO
-        List<SintomaResponseDTO> sintomasDTO = sintomas
+        return sintomas
                 .stream()
                 .map(sintoma -> {
                     SintomaResponseDTO sintomaDTO = new SintomaResponseDTO();
@@ -33,7 +33,6 @@ public class Covid19Service {
                     return sintomaDTO;
                 })
                 .toList();
-        return sintomasDTO;
     }
 
     public SintomaSeverityDTO getSymptomLevel(String name){
@@ -45,7 +44,7 @@ public class Covid19Service {
 
     public List<PersonaFullNameDTO> findRiskPerson(){
         List<PersonaConSintoma> grupoDeRiesgo = repository.findRiskPersonas();
-        List<PersonaFullNameDTO> personas = grupoDeRiesgo
+        return grupoDeRiesgo
                 .stream()
                 .map(PersonaConSintoma -> {
                     Persona p = new Persona();
@@ -56,7 +55,6 @@ public class Covid19Service {
                     return personaDTO;
                 })
                 .toList();
-        return personas;
     }
 
 }
