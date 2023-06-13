@@ -11,8 +11,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
 import java.util.List;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 
 @SpringBootTest
@@ -76,7 +76,7 @@ public class TestStudentDAO {
     void studentExist(){
 
         StudentDTO stu = new StudentDTO(1L,"Rogelio","soy juan",0.0, getList());
-        assertEquals(studentDAO.exists(stu),true);
+        assertTrue(studentDAO.exists(stu));
 
     }
 

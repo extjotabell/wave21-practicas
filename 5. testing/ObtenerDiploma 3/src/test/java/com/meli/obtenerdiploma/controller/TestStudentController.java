@@ -159,6 +159,26 @@ public void testGetUser() throws Exception{
 }
 
 @Test
+public void testGetUserNotFound() throws Exception{
+
+    ErrorDTO error = new ErrorDTO("StudentNotFoundException","El alumno con Id 11 no se encuetra registrado.");
+
+    ObjectWriter writer = new ObjectMapper()
+            .configure(SerializationFeature.WRAP_ROOT_VALUE,false)
+            .writer();
+    String result = writer.writeValueAsString(error);
+
+    MvcResult response = mockMvc.perform(get("/student/getStudent/{id}", 11L))
+            .andDo(print())
+            .andExpect(status().isNotFound())
+            .andExpect(content().contentType("application/json"))
+            .andReturn();
+
+    assertEquals(result,response.getResponse().getContentAsString());
+
+}
+
+@Test
 @DisplayName("Modificar el estudiante")
 void testModifyStudent() throws Exception {
     StudentDTO stu = new StudentDTO(1L, "Marta","soy marta",0.0, getListWithSubjectAVG10());
@@ -168,13 +188,12 @@ void testModifyStudent() throws Exception {
 
     String jsonPayload = writer.writeValueAsString(stu);
     String responseJson = writer.writeValueAsString(new ResponseDTO(stu.getId(),"El estudiante ha sido modificado correctamente"));
-    MvcResult mvcResult = mockMvc.perform(post("/student/modifyStudent")
+    mockMvc.perform(post("/student/modifyStudent")
             .contentType(MediaType.APPLICATION_JSON)
             .content(jsonPayload))
             .andDo(print())
             .andExpect(MockMvcResultMatchers.status().isOk())
-            .andExpect(mvcResult1 -> mvcResult1.getResponse().getContentAsString().equals(responseJson))
-            .andReturn();
+            .andExpect(mvcResult1 -> mvcResult1.getResponse().getContentAsString().equals(responseJson));
 
 }
 
