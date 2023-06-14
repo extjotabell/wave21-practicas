@@ -23,10 +23,6 @@ public class UserRepository implements IUserRepository {
         users.add(juansito);
     }
 
-    public boolean validateToken(String token) {
-      return tokens.containsKey(token); // TODO remove in one point
-    }
-
     @Override
     public boolean userExists(final int id) {
         return users

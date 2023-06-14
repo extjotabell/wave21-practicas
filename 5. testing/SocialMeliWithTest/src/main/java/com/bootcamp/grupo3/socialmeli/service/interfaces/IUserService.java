@@ -14,7 +14,6 @@ public interface IUserService {
     UserFollowedListDTO getFollowed(String token, String order) throws UserPermissionException;
     UserFollowersListDTO getFollowers(String token, UserOrderType order) throws UserPermissionException;
     UserFollowerCountDTO getUserFollowersCount(String token) throws UserPermissionException;
-    boolean userExists(int id);
     boolean userExists(String token) throws UserPermissionException;
     List<Integer> getFollowedByUser(String token) throws UserPermissionException;
     UserIdDTO createUser(UserPasswordDTO u);

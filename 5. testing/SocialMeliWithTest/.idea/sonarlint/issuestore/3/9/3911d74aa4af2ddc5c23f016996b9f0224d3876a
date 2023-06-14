@@ -2,8 +2,8 @@
 H
 java:S1135/"2Complete the task associated to this TODO comment.(šÑÛþ
 i
-java:S6204’"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(ª™¨¹
-J
-java:S1128"4Remove this unused import 'java.util.logging.Level'.(…µÛ¶
-K
-java:S1128"5Remove this unused import 'java.util.logging.Logger'.(ƒ¥óš
+java:S6204“"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(ª™¨¹
+Q
+java:S1128"4Remove this unused import 'java.util.logging.Level'.(…µÛ¶8å—Ñ¹‹1
+R
+java:S1128"5Remove this unused import 'java.util.logging.Logger'.(ƒ¥óš8å—Ñ¹‹1

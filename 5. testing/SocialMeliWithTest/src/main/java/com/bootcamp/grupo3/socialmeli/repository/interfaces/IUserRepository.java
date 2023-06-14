@@ -8,11 +8,7 @@ import java.util.Optional;
 public interface IUserRepository {
     Optional<User> getUserByID(int userID);
     boolean userExists(int id);
-
     int createUser(User u);
-
     String generateToken(int userId, String password);
-    boolean validateToken(String token);
-
     Optional<User> getUserByToken(final String token);
 }

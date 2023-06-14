@@ -49,7 +49,9 @@ public class UserService implements IUserService {
       user.setName(u.name());
       user.setPassword(u.password());
 
-      return new UserIdDTO(userRepository.createUser(user));
+      int id = userRepository.createUser(user);
+
+      return new UserIdDTO(id);
     }
 
     @Override
@@ -125,8 +127,7 @@ public class UserService implements IUserService {
         return user;
     }
 
-    @Override
-    public boolean userExists(final int userId) {
+    private boolean userExists(final int userId) {
         return userRepository.userExists(userId);
     }
 
