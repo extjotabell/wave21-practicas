@@ -17,6 +17,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.ResultMatcher;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.ArrayList;
@@ -66,14 +68,12 @@ public class ObtenerDiplomaControllerTests {
                 .configure(SerializationFeature.WRAP_ROOT_VALUE,false)
                 .writer();
 
-        String responseJson = writer.writeValueAsString(testStudentDto);
-        MvcResult mvcResult = mockMvc.perform(get("/analyzeScores/{studentId}",1))
+        ResultMatcher contentExpected = MockMvcResultMatchers.content().json(writer.writeValueAsString(testStudentDto));
+        mockMvc.perform(get("/analyzeScores/{studentId}",1))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json"))
-                .andReturn();
-
-        System.out.println(mvcResult.getResponse().getContentAsString());
-        assertEquals(responseJson,mvcResult.getResponse().getContentAsString());
+                .andExpect(contentExpected)
+                .andDo(MockMvcResultHandlers.print());
     }
 
 

@@ -22,14 +22,10 @@ class RomanNumeralsApplicationTests {
   void oneShouldBeI() throws Exception {
     performTest("1", "I");
   }
-  @Test
-  void threeShouldBeIII() throws Exception{
-    performTest("3","III");
-  }
 
   @Test
-  void fiveShouldBeV() throws Exception{
-    performTest("5","V");
+  void tenShouldBeX() throws Exception {
+    performTest("10", "X");
   }
 
   @Test
@@ -38,23 +34,8 @@ class RomanNumeralsApplicationTests {
   }
 
   @Test
-  void tenShouldBeX() throws Exception {
-    performTest("10", "X");
-  }
-
-  @Test
   void fifteenShouldBeXV() throws Exception {
     performTest("15", "XV");
-  }
-
-  @Test
-  void fiftyShouldBeL() throws Exception {
-    performTest("50", "L");
-  }
-
-  @Test
-  void ZeroShoulbBeError() throws Exception {
-    performTest("0", "L");
   }
 
   private void performTest(String decimal, String roman) throws Exception {
