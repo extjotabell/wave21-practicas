@@ -17,7 +17,7 @@ public class CalculateService {
     RoomDTO biggest = null;
     Integer maxRoom = 0;
     for (RoomDTO room : house.getRooms()) {
-      Integer squareFeet = room.getSquareFeet();
+      Integer squareFeet = room.squareFeet();
       totalSquareFeet += squareFeet;
       if (biggest == null || squareFeet > maxRoom){
         biggest = room;

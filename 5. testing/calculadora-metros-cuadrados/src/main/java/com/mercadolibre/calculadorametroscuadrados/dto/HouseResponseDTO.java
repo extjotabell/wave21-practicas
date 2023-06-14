@@ -5,8 +5,8 @@ public class HouseResponseDTO extends HouseDTO {
   private Integer price;
   private RoomDTO biggest;
 
-  public HouseResponseDTO() {
-  }
+
+  public HouseResponseDTO(){}
 
   public HouseResponseDTO(HouseDTO house) {
     this.setName(house.getName());

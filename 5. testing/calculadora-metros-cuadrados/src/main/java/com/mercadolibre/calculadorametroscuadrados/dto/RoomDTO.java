@@ -1,12 +1,20 @@
 package com.mercadolibre.calculadorametroscuadrados.dto;
+import jdk.jfr.DataAmount;
+
 
 public class RoomDTO {
   private String name;
   private Integer width;
   private Integer length;
 
-  public RoomDTO() {
+  public RoomDTO() { }
+
+  public RoomDTO(String name, Integer width, Integer len) {
+    this.name = name;
+    this.width = width;
+    this.length = len;
   }
+
 
   public String getName() {
     return name;
@@ -32,7 +40,7 @@ public class RoomDTO {
     this.length = length;
   }
 
-  public Integer getSquareFeet() {
+  public Integer squareFeet() {
     Integer result = 0;
     if(this.width != null && this.length != null)
       result = this.width * this.length;
