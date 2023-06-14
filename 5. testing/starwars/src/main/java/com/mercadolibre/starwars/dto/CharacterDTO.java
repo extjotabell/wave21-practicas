@@ -1,5 +1,8 @@
 package com.mercadolibre.starwars.dto;
 
+import lombok.EqualsAndHashCode;
+
+@EqualsAndHashCode
 public class CharacterDTO {
   private String name;
   private String hair_color;
@@ -13,6 +16,12 @@ public class CharacterDTO {
   private Integer mass;
 
   public CharacterDTO() {
+  }
+
+    public CharacterDTO(String lukeSkywalker, String blond, String fair, String blue, String s, String male, String tatooine, String human, int i, int i1) {
+    }
+
+  public CharacterDTO(String shmiSkywalker, String black, String fair, String brown, String s, String female, String tatooine, String human, int i, Integer o) {
   }
 
   public String getName() {

@@ -1,29 +1,31 @@
-package com.mercadolibre.starwars.UnitTest.repositories;
+package com.mercadolibre.starwars.UnitTest.controller;
 
+import com.mercadolibre.starwars.controller.FindController;
 import com.mercadolibre.starwars.dto.CharacterDTO;
-
-import com.mercadolibre.starwars.repositories.CharacterRepositoryImpl;
-import org.junit.jupiter.api.*;
+import com.mercadolibre.starwars.repositories.CharacterRepository;
+import com.mercadolibre.starwars.service.FindService;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
 
 import java.util.ArrayList;
 import java.util.List;
 
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
+import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
-public class CharacterRepositoryImplTest {
-    CharacterRepositoryImpl repository;
-    @BeforeEach
-    void setup(){
-        repository = new CharacterRepositoryImpl();
-    }
+public class FindControllerTest {
+    @Mock
+    private FindService findService;
+    @InjectMocks
+    private FindController findController;
+
     @Test
-    @DisplayName("FindAllByNameContains happy path")
-    void findAllByNameContainsHappy(){
+    @DisplayName("Find happy path")
+    void findHappy(){
         //Arrange
         String query = "Skywalker";
         List<CharacterDTO> expectedResult = List.of(
@@ -31,20 +33,22 @@ public class CharacterRepositoryImplTest {
                 new CharacterDTO("Anakin Skywalker", "blond", "fair", "blue", "41.9BBY", "male", "Tatooine", "Human", 188, 84),
                 new CharacterDTO("Shmi Skywalker", "black", "fair", "brown", "72BBY", "female", "Tatooine", "Human", 163, null)
         );
+        when(findService.find(query)).thenReturn(expectedResult);
         //Act
-        List<CharacterDTO> actualResult = repository.findAllByNameContains(query);
+        List<CharacterDTO> actualResult = findController.find(query);
         //Assert
         assertEquals(expectedResult,actualResult);
     }
 
     @Test
-    @DisplayName("FindAllByNameContains sad path")
-    void findAllByNameContainsSad(){
+    @DisplayName("Find sad path")
+    void findSad(){
         //Arrange
         String query = "Zkywalker";
         List<CharacterDTO> expectedResult = new ArrayList<>();
+        when(findService.find(query)).thenReturn(expectedResult);
         //Act
-        List<CharacterDTO> actualResult = repository.findAllByNameContains(query);
+        List<CharacterDTO> actualResult = findController.find(query);
         //Assert
         assertEquals(expectedResult,actualResult);
     }

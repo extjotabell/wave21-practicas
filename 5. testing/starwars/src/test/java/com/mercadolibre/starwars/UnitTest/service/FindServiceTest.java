@@ -10,29 +10,46 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class FindServiceTest {
-
     @Mock
-    CharacterRepository characterRepository;
-
+    private CharacterRepository characterRepository;
     @InjectMocks
-    FindService findService;
+    private FindService findService;
 
     @Test
-    @DisplayName("Find Service Test HappyPath")
-    void findServiceTestOk(){
+    @DisplayName("Find happy path")
+    void findHappy(){
         //Arrange
-        List<CharacterDTO> characterDTOList;
+        String query = "Skywalker";
+        List<CharacterDTO> expectedResult = List.of(
+                new CharacterDTO("Luke Skywalker", "blond", "fair", "blue", "19BBY", "male", "Tatooine", "Human", 172, 77),
+                new CharacterDTO("Anakin Skywalker", "blond", "fair", "blue", "41.9BBY", "male", "Tatooine", "Human", 188, 84),
+                new CharacterDTO("Shmi Skywalker", "black", "fair", "brown", "72BBY", "female", "Tatooine", "Human", 163, null)
+        );
+        when(characterRepository.findAllByNameContains(query)).thenReturn(expectedResult);
         //Act
-        String query = "Luke";
-         characterDTOList = findService.find(query);
+        List<CharacterDTO> actualResult = findService.find(query);
         //Assert
-        verify(characterRepository, times(1)).findAllByNameContains(query);
+        assertEquals(expectedResult,actualResult);
+    }
+
+    @Test
+    @DisplayName("Find sad path")
+    void findSad(){
+        //Arrange
+        String query = "Zkywalker";
+        List<CharacterDTO> expectedResult = new ArrayList<>();
+        when(characterRepository.findAllByNameContains(query)).thenReturn(expectedResult);
+        //Act
+        List<CharacterDTO> actualResult = findService.find(query);
+        //Assert
+        assertEquals(expectedResult,actualResult);
     }
 }
