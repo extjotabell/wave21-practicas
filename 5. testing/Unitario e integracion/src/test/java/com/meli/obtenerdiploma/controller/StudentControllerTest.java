@@ -57,7 +57,7 @@ class StudentControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[1].studentName").value("Pedro"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[1].studentName").value("Pepe"))
                 .andReturn();
     }
 
