@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0d97b40d-68f7-45ee-a92a-71bb44f385a1" name="Changes" comment="Desarrollo TestUnitarios con y sin mocks">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/otenerdiploma/OtenerDiploma/OtenerDiplomaApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/otenerdiploma/OtenerDiploma/controller/ObtenerDiplomaController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/otenerdiploma/OtenerDiploma/controller/ObtenerDiplomaExceptionController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/otenerdiploma/OtenerDiploma/controller/StudentController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/otenerdiploma/OtenerDiploma/dto/ResponseDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/otenerdiploma/OtenerDiploma/exception/ObtenerDiplomaException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/otenerdiploma/OtenerDiploma/exception/StudentNotFoundException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/otenerdiploma/OtenerDiploma/model/ErrorDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/otenerdiploma/OtenerDiploma/model/StudentDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/otenerdiploma/OtenerDiploma/model/SubjectDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/otenerdiploma/OtenerDiploma/repository/IStudentDAO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/otenerdiploma/OtenerDiploma/repository/IStudentRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/otenerdiploma/OtenerDiploma/repository/StudentDAO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/otenerdiploma/OtenerDiploma/repository/StudentRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/otenerdiploma/OtenerDiploma/service/IObtenerDiplomaService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/otenerdiploma/OtenerDiploma/service/IStudentService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/otenerdiploma/OtenerDiploma/service/ObtenerDiplomaService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/otenerdiploma/OtenerDiploma/service/StudentService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/users.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/otenerdiploma/OtenerDiploma/Controller/ObtenerDiplomaControllerTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/otenerdiploma/OtenerDiploma/Controller/StudentControllerTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/otenerdiploma/OtenerDiploma/OtenerDiplomaApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/otenerdiploma/OtenerDiploma/Service/ObtenerDiplomaServiceTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/otenerdiploma/OtenerDiploma/Service/StudentServiceTest.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="Use Maven wrapper" />
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="2QyU5zADqQ5og4GzfPFdyVzfcAM" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;HelmerHdez&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/hehernandez/Desktop/workplace/java/wave21-practicas/5. testing/OtenerDiploma(TestUnitarios)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
+  }
+}</component>
+  <component name="RunManager" selected="Application.Unnamed">
+    <configuration name="Unnamed" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="corretto-17" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="com.otenerdiploma.OtenerDiploma.OtenerDiplomaApplication" />
+      <module name="OtenerDiploma" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="GroovyScriptRunConfiguration" factoryName="Groovy">
+      <setting name="path" value="" />
+      <setting name="vmparams" value="" />
+      <setting name="params" value="" />
+      <setting name="workDir" value="file://$PROJECT_DIR$" />
+      <setting name="debug" value="false" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="OftenerDiplomaControllerIntegrationTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="OtenerDiploma" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.otenerdiploma.OtenerDiploma.Controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.otenerdiploma.OtenerDiploma.Controller" />
+      <option name="MAIN_CLASS_NAME" value="com.otenerdiploma.OtenerDiploma.Controller.OftenerDiplomaControllerIntegrationTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="OftenerDiplomaControllerIntegrationTest.analyzeScoresValidResponse" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="OtenerDiploma" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.otenerdiploma.OtenerDiploma.Controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.otenerdiploma.OtenerDiploma.Controller" />
+      <option name="MAIN_CLASS_NAME" value="com.otenerdiploma.OtenerDiploma.Controller.OftenerDiplomaControllerIntegrationTest" />
+      <option name="METHOD_NAME" value="analyzeScoresValidResponse" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="StudentControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="OtenerDiploma" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.otenerdiploma.OtenerDiploma.Controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.otenerdiploma.OtenerDiploma.Controller" />
+      <option name="MAIN_CLASS_NAME" value="com.otenerdiploma.OtenerDiploma.Controller.StudentControllerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="StudentControllerTest.getStudentTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="OtenerDiploma" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.otenerdiploma.OtenerDiploma.Controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.otenerdiploma.OtenerDiploma.Controller" />
+      <option name="MAIN_CLASS_NAME" value="com.otenerdiploma.OtenerDiploma.Controller.StudentControllerTest" />
+      <option name="METHOD_NAME" value="getStudentTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="StudentControllerTest.listStudentsTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="OtenerDiploma" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.otenerdiploma.OtenerDiploma.Controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.otenerdiploma.OtenerDiploma.Controller" />
+      <option name="MAIN_CLASS_NAME" value="com.otenerdiploma.OtenerDiploma.Controller.StudentControllerTest" />
+      <option name="METHOD_NAME" value="listStudentsTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.OftenerDiplomaControllerIntegrationTest" />
+        <item itemvalue="JUnit.OftenerDiplomaControllerIntegrationTest.analyzeScoresValidResponse" />
+        <item itemvalue="JUnit.StudentControllerTest" />
+        <item itemvalue="JUnit.StudentControllerTest.listStudentsTest" />
+        <item itemvalue="JUnit.StudentControllerTest.getStudentTest" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0d97b40d-68f7-45ee-a92a-71bb44f385a1" name="Changes" comment="" />
+      <created>1686325136746</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1686325136746</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Desarrollo ejercicio Validaciones">
+      <created>1686341924528</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1686341924528</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Desarrollo TestUnitarios con y sin mocks">
+      <created>1686674009914</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1686674009914</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Desarrollo ejercicio Validaciones" />
+    <MESSAGE value="Desarrollo TestUnitarios con y sin mocks" />
+    <option name="LAST_COMMIT_MESSAGE" value="Desarrollo TestUnitarios con y sin mocks" />
+  </component>
+</project>
