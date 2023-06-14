@@ -24,7 +24,7 @@ public class StarWarsRepository {
     }
 
     public Character findByName(String name){
-        return charatersList.stream().filter(c -> c.getName().cotains(name)).collect(Collectors.toList())
+        return charatersList.stream().filter(c -> c.getName().contains(name)).collect(Collectors.toList())
     }
 
     private List<Character> getCharatersList() {
