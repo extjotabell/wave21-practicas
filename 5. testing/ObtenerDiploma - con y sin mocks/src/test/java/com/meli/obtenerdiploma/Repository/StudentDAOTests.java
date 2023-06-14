@@ -2,11 +2,10 @@ package com.meli.obtenerdiploma.Repository;
 
 
 
+import com.meli.obtenerdiploma.exception.StudentNotFoundException;
 import com.meli.obtenerdiploma.model.StudentDTO;
 import com.meli.obtenerdiploma.repository.StudentDAO;
-import com.meli.obtenerdiploma.utils.UtilsGenerator;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,40 +14,14 @@ import org.junit.jupiter.api.Test;
 public class StudentDAOTests {
 
     StudentDAO studentDAO;
+    StudentDTO stud0;
     @BeforeEach
     public void beforeEach() {
         studentDAO = new StudentDAO();
         //pensar otra solucion
-        studentDAO.save(new StudentDTO(1L, "Nombre2", null, null, null));
+        stud0 = new StudentDTO(1L, "Nombre2", null, null, null);
+        studentDAO.save(stud0);
     }
-    /* @Test
-    public void createNonExistentStudent() {
-        // arrange
-        StudentDTO stu = TestUtilsGenerator.getStudentWith3Subjects("Marco");
-
-        // act
-        studentDAO.save(stu);
-
-        // assert
-        Assertions.assertTrue(studentDAO.exists(stu));
-        Assertions.assertEquals(1L, stu.getId());
-        Assertions.assertEquals(studentDAO.findById(stu.getId()), stu);
-    }
-
-    @Test
-    public void createExistentStudent() {
-        // arrange
-        StudentDTO stu = TestUtilsGenerator.getStudentWith3Subjects("Marco");
-
-        // act
-        studentDAO.save(stu);
-
-        // assert
-        Assertions.assertTrue(studentDAO.exists(stu));
-        Assertions.assertEquals(1L, stu.getId());
-        Assertions.assertEquals(studentDAO.findById(stu.getId()), stu);
-    }*/
-
 
     @Test
     public void savingANewStudent()  {
@@ -63,7 +36,6 @@ public class StudentDAOTests {
         Assertions.assertEquals(2L, stu.getId());
         Assertions.assertEquals(studentDAO.findById(stu.getId()), stu);
 
-        //Assert
 
 
     }
@@ -84,56 +56,73 @@ public class StudentDAOTests {
 
     @Test
     public void deletingAnExistingStudent(){
-        //Arrange
+        StudentDTO stu = new StudentDTO(1L, "Nombre1", null, null, null);
 
-        //Act
+        studentDAO.save(stu);
 
-        //Assert
+        // act
+        boolean expected = studentDAO.delete(stu.getId());
+
+        // assert
+        Assertions.assertFalse(studentDAO.exists(stu));
+        Assertions.assertTrue(expected);
     }
 
     @Test
     public void deletingANonExistingStudent() {
         //Arrange
+        StudentDTO stu = new StudentDTO(1L, "Nombre2", null, null, null);
 
-        //Act
+        studentDAO.save(stu);
 
-        //Assert
+        // act
+        studentDAO.delete(stu.getId());
+
+        // assert
+        Assertions.assertFalse(studentDAO.exists(stu));
+        Assertions.assertThrows(StudentNotFoundException.class,() -> studentDAO.findById(stu.getId()));
+
     }
 
     @Test
     public void studentExists() {
+
         //Arrange
+        StudentDTO stu = new StudentDTO(1L, "Nombre1", null, null, null);
 
-        //Act
 
-        //Assert
+        // act
+        studentDAO.save(stu);
+
+        // assert
+        Assertions.assertTrue(studentDAO.exists(stu));
     }
 
     @Test
     public void studentDoesNotExists() {
         //Arrange
+        StudentDTO stu = new StudentDTO(99L, "Nombre1", null, null, null);
 
-        //Act
-
-        //Assert
+        // Act & assert
+        Assertions.assertFalse(studentDAO.exists(stu));
+        Assertions.assertThrows(StudentNotFoundException.class,() -> studentDAO.findById(stu.getId()));
     }
 
     @Test
     public void studentFoundById() {
-        //Arrange
 
-        //Act
-
-        //Assert
+        StudentDTO stuExpected = studentDAO.findById(stud0.getId());
+        // act & assert
+        Assertions.assertEquals(stud0, stuExpected);
     }
 
     @Test
     public void studentNotFoundById() {
-        //Arrange
+        StudentDTO stu = new StudentDTO(99L, "Nombre1", null, null, null);
 
-        //Act
-
-        //Assert
+        // Act & assert
+        Assertions.assertFalse(studentDAO.exists(stu));
+        Assertions.assertThrows(StudentNotFoundException.class,() -> studentDAO.findById(stu.getId()));
     }
 
 
