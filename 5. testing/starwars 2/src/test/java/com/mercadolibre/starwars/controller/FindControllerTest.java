@@ -27,6 +27,8 @@ class FindControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").isNotEmpty())
+                .andExpect(jsonPath("$[0].name").value("Darth Vader"))
+                .andExpect(jsonPath("$[1].name").value("Darth Maul"))
                 .andExpect(mvcResult-> mvcResult.getResponse().getContentType().equals("application/json"))
                 .andReturn();
     }
