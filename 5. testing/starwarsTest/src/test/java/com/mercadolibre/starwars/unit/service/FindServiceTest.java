@@ -1,12 +1,17 @@
-package com.mercadolibre.starwars.repositories;
+package com.mercadolibre.starwars.unit.service;
 
 import com.mercadolibre.starwars.dto.CharacterDTO;
+import com.mercadolibre.starwars.repositories.CharacterRepository;
+import com.mercadolibre.starwars.repositories.CharacterRepositoryImpl;
 import com.mercadolibre.starwars.service.FindService;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -14,17 +19,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
-@SpringBootTest
-public class CharacterRepositoryTest {
+@ExtendWith(MockitoExtension.class)
+public class FindServiceTest {
 
     @Mock
-    FindService findService;
+    CharacterRepository characterRepository;
 
     @InjectMocks
-    CharacterRepositoryImpl characterRepository;
+    FindService findService;
+
 
     @Test
-    public void testFindAllByNameContainsOk(){
+    public void testFindOk(){
 
         // Arrange
         String query = "Skywalker";
@@ -33,27 +39,28 @@ public class CharacterRepositoryTest {
                 new CharacterDTO("Anakin Skywalker", "blond", "fair", "blue", "41.9BBY", "male", "Tatooine", "Human", 188, 84),
                 new CharacterDTO("Shmi Skywalker", "black", "fair", "brown", "72BBY", "female", "Tatooine", "Human", 163, null)
         );
-        when(findService.find(query)).thenReturn(expectedResult);
+        when(characterRepository.findAllByNameContains(query)).thenReturn(expectedResult);
 
         // Act
-        List<CharacterDTO> result = characterRepository.findAllByNameContains(query);
+        List<CharacterDTO> actualResult = findService.find(query);
 
         // Assert
 
-        System.out.println(result);
-
-        assertEquals(expectedResult, result);
+        assertEquals(expectedResult, actualResult);
 
     }
 
     @Test
-    public void testFindAllByNameContainsNoOk(){
+    public void testFindNoOk(){
 
         // Arrange
-        String query = "Darth Bader";
+        String query = "Zkywalker";
+
+        List<CharacterDTO> expectedResult = new ArrayList<>();
+        when(characterRepository.findAllByNameContains(query)).thenReturn(expectedResult);
 
         // Act
-        List<CharacterDTO> result = characterRepository.findAllByNameContains(query);
+        List<CharacterDTO> result = findService.find(query);
 
         // Assert
 

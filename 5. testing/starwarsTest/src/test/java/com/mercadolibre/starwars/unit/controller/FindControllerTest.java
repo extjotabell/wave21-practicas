@@ -1,29 +1,32 @@
-package com.mercadolibre.starwars.service;
+package com.mercadolibre.starwars.unit.controller;
 
+import com.mercadolibre.starwars.controller.FindController;
 import com.mercadolibre.starwars.dto.CharacterDTO;
-import com.mercadolibre.starwars.repositories.CharacterRepositoryImpl;
+import com.mercadolibre.starwars.service.FindService;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
-@SpringBootTest
-public class FindServiceTest {
+@ExtendWith(MockitoExtension.class)
+public class FindControllerTest {
 
     @Mock
     FindService findService;
 
     @InjectMocks
-    CharacterRepositoryImpl characterRepository;
+    FindController findController;
 
     @Test
-    public void testFind(){
+    void testFind() {
 
         // Arrange
         String query = "Skywalker";
@@ -32,14 +35,31 @@ public class FindServiceTest {
                 new CharacterDTO("Anakin Skywalker", "blond", "fair", "blue", "41.9BBY", "male", "Tatooine", "Human", 188, 84),
                 new CharacterDTO("Shmi Skywalker", "black", "fair", "brown", "72BBY", "female", "Tatooine", "Human", 163, null)
         );
+
         when(findService.find(query)).thenReturn(expectedResult);
 
         // Act
-        List<CharacterDTO> result = characterRepository.findAllByNameContains(query);
+        List<CharacterDTO> result = findController.find(query);
 
         // Assert
 
-        System.out.println(result);
+        assertEquals(expectedResult, result);
+
+    }
+
+    @Test
+    void testFindEmpty() {
+
+        // Arrange
+        String query = "Zkywalker";
+        List<CharacterDTO> expectedResult = new ArrayList<>();
+
+        when(findService.find(query)).thenReturn(expectedResult);
+
+        // Act
+        List<CharacterDTO> result = findController.find(query);
+
+        // Assert
 
         assertEquals(expectedResult, result);
 

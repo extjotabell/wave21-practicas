@@ -1,4 +1,4 @@
-package com.mercadolibre.starwars.controller;
+package com.mercadolibre.starwars.integration.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
@@ -22,7 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class FindControllerTestIntegration {
+public class FindControllerTest {
 
     @Autowired
     MockMvc mockMvc;
