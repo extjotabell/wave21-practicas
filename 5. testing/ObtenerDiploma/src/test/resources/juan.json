@@ -1,0 +1,24 @@
+{
+  "id":1,
+  "studentName":"Juan",
+  "message":null,
+  "averageScore":null,
+  "subjects":[
+    {
+      "name":"Math",
+      "score":10.0
+    },
+    {
+      "name":"Science",
+      "score":7.0
+    },
+    {
+      "name":"History",
+      "score":9.0
+    },
+    {
+      "name":"Biology",
+      "score":5.0
+    }
+  ]
+}
