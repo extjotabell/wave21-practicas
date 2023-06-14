@@ -6,6 +6,7 @@ import com.meli.obtenerdiploma.repository.StudentDAO;
 import com.meli.obtenerdiploma.repository.StudentRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
@@ -14,10 +15,10 @@ import java.util.*;
 import static org.springframework.test.util.AssertionErrors.assertEquals;
 
 public class StudentRepositoryTests {
-    static StudentRepository repository;
+     StudentRepository repository;
 
-    @BeforeAll
-    public static void beforeAll() {
+    @BeforeEach
+    public void beforeAll() {
         repository = new StudentRepository();
     }
 
@@ -47,7 +48,7 @@ public class StudentRepositoryTests {
         //Assert
 
         //assert
-        Assertions.assertThrows(() -> FileNotFoundException.class, repository.findAll());
+        Assertions.assertThrows(FileNotFoundException.class,() -> repository.findAll());
     }
 
     //me falta probar la otra excepcion pero no sé como generarla

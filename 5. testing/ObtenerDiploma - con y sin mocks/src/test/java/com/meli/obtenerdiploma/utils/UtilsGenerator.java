@@ -32,22 +32,4 @@ public class UtilsGenerator {
         writer.print("[]");
         writer.close();
     }
-
-    /*public static StudentDTO getStudentWith3Subjects(String name) {
-        SubjectDTO subject1 = new SubjectDTO("Matemática", 8.0);
-        SubjectDTO subject2 = new SubjectDTO("Lengua", 6.0);
-        SubjectDTO subject3 = new SubjectDTO("Física", 4.0);
-
-        List<SubjectDTO> subjects = new ArrayList<>();
-        subjects.add(subject1);
-        subjects.add(subject2);
-        subjects.add(subject3);
-
-        StudentDTO stu = new StudentDTO();
-        stu.setId(9999L);
-        stu.setStudentName(name);
-        stu.setSubjects(subjects);
-
-        return stu;
-    }*/
 }
