@@ -29,6 +29,7 @@ public class Post {
         this.product = product;
         this.category = category;
         this.price = price;
+        
         this.has_promo = false;
         this.discount = 0;
     }
