@@ -1,3 +1,5 @@
+package com.dakar.dakar.Entity;
+
 public abstract class Vehiculo {
     private Double velocidad;
     private Double aceleracion;
@@ -13,6 +15,9 @@ public abstract class Vehiculo {
         this.patente = patente;
         this.peso = peso;
         this.ruedas = ruedas;
+    }
+
+    public Vehiculo() {
     }
 
     public Double getVelocidad() {
@@ -78,3 +83,4 @@ public abstract class Vehiculo {
                 '}';
     }
 }
+
