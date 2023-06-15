@@ -38,7 +38,7 @@ public class CarreraTest {
     }
 
     @Test
-    public void darDeAltaAutoTest(){
+    public void darDeAltaMotoTest(){
         //Arrange
         Auto auto = new Auto(180D, 340D, 40D, "Patente");
         ArrayList<Vehiculo> listVehicles = new ArrayList<>();
