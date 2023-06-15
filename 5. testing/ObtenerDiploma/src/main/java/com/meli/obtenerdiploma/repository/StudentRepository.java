@@ -1,4 +1,4 @@
-package com.meli.obtenerdiploma.unit.repository;
+package com.meli.obtenerdiploma.repository;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;

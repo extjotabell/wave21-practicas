@@ -1,8 +1,8 @@
-package com.meli.obtenerdiploma.unit.service;
+package com.meli.obtenerdiploma.service;
 
 import com.meli.obtenerdiploma.model.StudentDTO;
 import com.meli.obtenerdiploma.model.SubjectDTO;
-import com.meli.obtenerdiploma.unit.repository.IStudentDAO;
+import com.meli.obtenerdiploma.repository.IStudentDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

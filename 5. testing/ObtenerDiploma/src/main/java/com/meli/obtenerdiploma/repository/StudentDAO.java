@@ -1,4 +1,4 @@
-package com.meli.obtenerdiploma.unit.repository;
+package com.meli.obtenerdiploma.repository;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -60,8 +60,11 @@ public class StudentDAO implements IStudentDAO {
         } catch (StudentNotFoundException e) {
             throw new StudentNotFoundException(id);
         }
+        finally {
+            return ret;
+        }
 
-        return ret;
+        //return ret;
     }
 
     public boolean exists(StudentDTO stu) {

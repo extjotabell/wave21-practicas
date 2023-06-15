@@ -2,7 +2,7 @@ package com.meli.obtenerdiploma.controller;
 
 import com.meli.obtenerdiploma.dto.response.ResponseDTO;
 import com.meli.obtenerdiploma.model.StudentDTO;
-import com.meli.obtenerdiploma.unit.service.IStudentService;
+import com.meli.obtenerdiploma.service.IStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

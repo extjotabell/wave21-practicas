@@ -1,4 +1,4 @@
-package com.meli.obtenerdiploma.unit.service;
+package com.meli.obtenerdiploma.service;
 
 import com.meli.obtenerdiploma.model.StudentDTO;
 
