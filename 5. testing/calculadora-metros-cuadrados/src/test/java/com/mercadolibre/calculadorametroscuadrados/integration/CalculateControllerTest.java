@@ -24,7 +24,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 @SpringBootTest
-//@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 public class CalculateControllerTest {
     @Autowired
