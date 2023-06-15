@@ -10,6 +10,8 @@ public class SubjectDTO {
 
     @NotNull(message = "El nombre de la materia no puede estar vacío.")
     @Size(max = 30, message ="La longitud del nombre no puede superar los 30 caracteres.")
+    //@Pattern(regexp = "(?=.*[A-Z])[\\p{Punct}A-Z0-9 ]{1,32}", message = "El nombre de la materia debe comenzar con mayúscula.")
+    @Pattern(regexp = "^[A-Z].*$", message = "El nombre de la materia debe comenzar con mayúscula")
     String name;
 
     @NotNull(message = "La nota no puede estar vacía.")

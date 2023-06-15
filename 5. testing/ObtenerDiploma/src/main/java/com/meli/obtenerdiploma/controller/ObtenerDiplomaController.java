@@ -16,7 +16,18 @@ public class ObtenerDiplomaController {
     IObtenerDiplomaService service;
 
     @PostMapping("/analyzeScores")
-    public StudentDTO analyzeScores(@RequestBody @Valid StudentDTO rq) {
-        return service.analyzeScores(rq);
+    public StudentDTO analyzeScores(@RequestBody @Valid StudentDTO rq /*, BindingResult bindingResult*/) {
+        /*if (bindingResult.hasErrors()) {
+            List<String> errores = new ArrayList<>();
+            for (FieldError error : bindingResult.getFieldErrors()) {
+                errores.add(error.getDefaultMessage());
+            }
+            return ResponseEntity.badRequest().body(errores);
+        }
+        return ResponseEntity.ok((List<String>) service.analyzeScores(rq));
+*/
+         return service.analyzeScores(rq);
     }
+
+
 }
