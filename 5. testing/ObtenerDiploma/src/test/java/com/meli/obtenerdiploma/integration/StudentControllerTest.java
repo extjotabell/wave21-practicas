@@ -1,4 +1,4 @@
-package com.meli.obtenerdiploma.controller;
+package com.meli.obtenerdiploma.integration;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -32,7 +32,7 @@ import java.util.Set;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class StudentControllerIntegrationTest {
+public class StudentControllerTest {
 
     @Autowired
     MockMvc mockMvc;

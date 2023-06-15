@@ -1,4 +1,4 @@
-package com.meli.obtenerdiploma.controller;
+package com.meli.obtenerdiploma.integration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
@@ -32,7 +32,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @AutoConfigureMockMvc
 @SpringBootTest
-public class ObtenerDiplomaControllerIntegrationTest {
+public class ObtenerDiplomaControllerTest {
 
     @Autowired
     MockMvc mockMvc;
