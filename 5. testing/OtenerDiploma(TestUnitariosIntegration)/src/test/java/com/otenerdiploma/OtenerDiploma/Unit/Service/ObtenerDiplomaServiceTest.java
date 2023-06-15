@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -46,6 +47,7 @@ public class ObtenerDiplomaServiceTest {
         String expectedMessage = "El alumno " + studentName + " ha obtenido un promedio de 8.75. Puedes mejorar.";
         assertEquals(expectedMessage, result.getMessage());
         assertEquals(studentName, result.getStudentName());
+        assertNotNull(result.getId());
     }
 
     @Test
@@ -66,5 +68,6 @@ public class ObtenerDiplomaServiceTest {
         assertEquals(9.75, result.getAverageScore());
         String expectedMessage = "El alumno " + studentName + " ha obtenido un promedio de 9.75. Felicitaciones!";
         assertEquals(expectedMessage, result.getMessage());
+        assertNotNull(result.getId());
     }
 }
