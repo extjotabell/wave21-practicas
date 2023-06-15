@@ -1,15 +1,10 @@
 package com.mercadolibre.calculadorametroscuadrados.unit;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import com.mercadolibre.calculadorametroscuadrados.controller.CalculateRestController;
 import com.mercadolibre.calculadorametroscuadrados.dto.HouseDTO;
 import com.mercadolibre.calculadorametroscuadrados.dto.HouseResponseDTO;
 import com.mercadolibre.calculadorametroscuadrados.dto.RoomDTO;
 import com.mercadolibre.calculadorametroscuadrados.service.CalculateService;
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,21 +12,14 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 @ExtendWith(MockitoExtension.class)
-
 public class CalculateRestControllerTest {
     @Mock
     CalculateService service;
@@ -52,7 +40,7 @@ public class CalculateRestControllerTest {
         expected.setBiggest(room);
         expected.setPrice(3200);
 
-        Mockito.lenient().when(service.calculate(house))
+        Mockito.when(service.calculate(house))
                 .thenReturn(expected);
         HouseResponseDTO response  = controller.calculate(house);
 
