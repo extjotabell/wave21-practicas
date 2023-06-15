@@ -1,8 +1,9 @@
-package com.meli.obtenerdiploma.service;
+package com.meli.obtenerdiploma.unit.service;
 
 import com.meli.obtenerdiploma.model.StudentDTO;
 import com.meli.obtenerdiploma.repository.IStudentDAO;
 import com.meli.obtenerdiploma.repository.IStudentRepository;
+import com.meli.obtenerdiploma.service.StudentService;
 import com.meli.obtenerdiploma.util.TestUtilsGenerator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,7 +28,7 @@ class StudentServiceTests {
     StudentService service;
 
     @Test
-    void createStudent() {
+    void createStudentOK() {
         // arrange
         StudentDTO stu = TestUtilsGenerator.getStudentWith3Subjects("Marco");
 
@@ -39,7 +40,7 @@ class StudentServiceTests {
     }
 
     @Test
-    void readStudent() {
+    void readStudentOK() {
         // arrange
         StudentDTO stu = TestUtilsGenerator.getStudentWith3Subjects("Marco");
         when(studentDAO.findById(stu.getId())).thenReturn(stu);
@@ -53,7 +54,7 @@ class StudentServiceTests {
     }
 
     @Test
-    void updateStudent() {
+    void updateStudentOK() {
         // arrange
         StudentDTO stu = TestUtilsGenerator.getStudentWith3Subjects("Marco");
 
@@ -65,7 +66,7 @@ class StudentServiceTests {
     }
 
     @Test
-    void deleteStudent() {
+    void deleteStudentOK() {
         // arrange
         StudentDTO stu = TestUtilsGenerator.getStudentWith3Subjects("Marco");
 
@@ -77,7 +78,7 @@ class StudentServiceTests {
     }
 
     @Test
-    void getAllStudents() {
+    void getAllStudentsOK() {
         // arrange
         Set<StudentDTO> students = TestUtilsGenerator.getStudentSet();
         when(studentRepo.findAll()).thenReturn(students);

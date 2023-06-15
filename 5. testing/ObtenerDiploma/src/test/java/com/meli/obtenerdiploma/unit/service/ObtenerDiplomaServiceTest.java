@@ -1,7 +1,8 @@
-package com.meli.obtenerdiploma.service;
+package com.meli.obtenerdiploma.unit.service;
 
 import com.meli.obtenerdiploma.model.StudentDTO;
 import com.meli.obtenerdiploma.repository.StudentDAO;
+import com.meli.obtenerdiploma.service.ObtenerDiplomaService;
 import com.meli.obtenerdiploma.util.TestUtilsGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
