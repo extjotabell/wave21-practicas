@@ -1,11 +1,9 @@
 package com.example.be_java_hisp_w21_g1.unitary;
 
-import com.example.be_java_hisp_w21_g1.DTO.Response.FollowersCountDTO;
+import com.example.be_java_hisp_w21_g1.DTO.Response.*;
 import com.example.be_java_hisp_w21_g1.Model.User;
 import com.example.be_java_hisp_w21_g1.Repository.IUserRepository;
 import com.example.be_java_hisp_w21_g1.DTO.Request.FollowPostDTO;
-import com.example.be_java_hisp_w21_g1.DTO.Response.FollowedListDTO;
-import com.example.be_java_hisp_w21_g1.DTO.Response.FollowerListDTO;
 import com.example.be_java_hisp_w21_g1.Exception.NotFoundException;
 import com.example.be_java_hisp_w21_g1.Model.Post;
 import com.example.be_java_hisp_w21_g1.Model.Product;
@@ -333,6 +331,64 @@ public class UserServiceTest {
         Assertions.assertEquals(2, result.getFollowed().get(1).getUser_id());
 
     }
-    
+    @Test
+    @DisplayName("T-0005 - Verificar que el tipo de ordenamiento por fecha exista")
+    void checkSortOrderDateAscNoOk(){
+        //Arrange
+            int userId = 1;
+            String order = "date_asc";
 
+            User user = new User(userId, "Luz", new ArrayList<>(),new ArrayList<>(),new ArrayList<>());
+            List<User> userTwoFollowers = new ArrayList<>();
+            userTwoFollowers.add(user);
+            List<Post> userTwoPosts = new ArrayList<>();
+            userTwoPosts.add(new Post(
+                    2,
+                    1,
+                    LocalDate.now(),
+                    new Product(
+                            1,
+                            "Yerba",
+                            "No perecedero",
+                            "Mañanita",
+                            "Verde",
+                            "3x2 los jueves"
+                    ),
+                    1,
+                    15.7
+            ));
+            User userFollowed = new User(2,"Diana",userTwoFollowers,new ArrayList<>(),userTwoPosts);
+            List<User> userOneFollowed = new ArrayList<>();
+            userOneFollowed.add(userFollowed);
+            user.setFollowed(userOneFollowed);
+
+            List<PostDTO> postDTOS = new ArrayList<>();
+            userFollowed.getPosts().forEach(
+                    post -> {
+                        postDTOS.add(
+                                new PostDTO(
+                                        post.getUserId(),
+                                        post.getPostId(),
+                                        post.getLocalDate(),
+                                        post.getProduct(),
+                                        post.getCategory(),
+                                        post.getPrice()
+                                )
+                        );
+                    }
+            );
+            PostBySellerDTO expected = new PostBySellerDTO();
+            expected.setUser_id(userId);
+            expected.setPosts(postDTOS);
+
+        //Mock
+        Mockito
+                .when(userRepository.findUserById(userId))
+                .thenReturn(Optional.of(user));
+        //Act
+        PostBySellerDTO result = userService.listPostsBySeller(userId,order);
+        //Assert
+        Assertions.assertEquals(expected, result);
+
+    }
 }
