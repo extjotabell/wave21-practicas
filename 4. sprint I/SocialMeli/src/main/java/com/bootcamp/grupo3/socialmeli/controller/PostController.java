@@ -4,13 +4,17 @@ import com.bootcamp.grupo3.socialmeli.dto.request.PostDTO;
 import com.bootcamp.grupo3.socialmeli.dto.response.MessageDTO;
 import com.bootcamp.grupo3.socialmeli.service.interfaces.IPostService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import com.bootcamp.grupo3.socialmeli.dto.response.UserPostListDTO;
 import com.bootcamp.grupo3.socialmeli.service.interfaces.IUserService;
 import org.springframework.http.HttpStatus;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/products")
+@Validated
 public class PostController {
     private IPostService postService;
 
@@ -19,12 +23,15 @@ public class PostController {
     }
 
     @PostMapping("/post")
-    public ResponseEntity<MessageDTO> createPost(@RequestBody PostDTO body) {
+    public ResponseEntity<MessageDTO> createPost(@RequestBody @Valid PostDTO body) {
         int postId = postService.createPost(body);
         return ResponseEntity.ok(new MessageDTO("Post agregado exitosamente con id: " + postId));
     }
     @GetMapping("/followed/{userId}/list")
-    public ResponseEntity<UserPostListDTO> listPostOfFollowers(@PathVariable final int userId, @RequestParam(required = false) final String order) {
+    public ResponseEntity<UserPostListDTO> listPostOfFollowers(
+            @PathVariable final int userId,
+            @RequestParam(required = false) final String order
+    ) {
         UserPostListDTO posts = postService.getPostList(userId, order);
 
         return new ResponseEntity<>(posts, HttpStatus.OK);
