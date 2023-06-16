@@ -21,6 +21,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 
 import java.nio.file.Files;
@@ -31,10 +32,9 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.content;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
@@ -49,9 +49,6 @@ public class StudentControllerIntegrationTest {
 
     @Autowired
     MockMvc mockMvc;
-
-    @Mock
-    StudentDAO studentDao;
 
     @Mock
     private IStudentService studentService;
@@ -150,7 +147,34 @@ public class StudentControllerIntegrationTest {
     }
 
     //Agregar list students
+    // Arrange
+    @Test
+    void testIntegrationlistStudent() throws Exception {
+        StudentDAO repo = new StudentDAO();
+        SubjectDTO subject1 = new SubjectDTO("Math", 10D);
+        SubjectDTO subject2 = new SubjectDTO("Science", 7D);
+        SubjectDTO subject3 = new SubjectDTO("History", 9D);
+        SubjectDTO subject4 = new SubjectDTO("Biology", 5D);
 
+        List<SubjectDTO> subjects1 = Arrays.asList(subject1, subject2, subject3, subject4);
+        List<SubjectDTO> subjects2 = Arrays.asList(subject1, subject4);
 
+        StudentDTO studentDto = new StudentDTO(1L, "Juan", null, null, new ArrayList<>());
+        studentDto.setSubjects(subjects1);
+        StudentDTO studentDto2 = new StudentDTO(2L, "Pepe", null, null, new ArrayList<>());
+        studentDto2.setSubjects(subjects2);
+
+        repo.save(studentDto);
+        repo.save(studentDto2);
+
+        var request = get("/student/listStudents");
+
+        mockMvc.perform(request)
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].studentName").value("Juan"));
+    }
 
 }
+
