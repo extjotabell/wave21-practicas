@@ -12,16 +12,15 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/products")
 public class ProductsController {
 
-    final
-    IProductsService productsService;
+    private final IProductsService _productsService;
 
     public ProductsController(IProductsService productsService) {
-        this.productsService = productsService;
+        this._productsService = productsService;
     }
 
     @PostMapping("/post")
     public ResponseEntity<?> createPost(@RequestBody PostRequestDTO postRequestDTO){
-        return productsService.createPost(postRequestDTO);
+        return _productsService.createPost(postRequestDTO);
     }
 
     @GetMapping("/followed/{userId}/list")
@@ -32,9 +31,9 @@ public class ProductsController {
         ResponseEntity<?> result = new ResponseEntity<>(HttpStatus.OK);
 
         if (order != null)
-            result =  productsService.listFollowingPosts2Weeks(userId, order);
+            result =  _productsService.listFollowingPosts2Weeks(userId, order);
         else
-            result =  productsService.listFollowingPosts2Weeks(userId);
+            result =  _productsService.listFollowingPosts2Weeks(userId);
 
 
         return result;

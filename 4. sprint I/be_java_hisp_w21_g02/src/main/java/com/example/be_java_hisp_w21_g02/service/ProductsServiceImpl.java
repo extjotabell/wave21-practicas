@@ -23,11 +23,10 @@ import java.util.List;
 @Service
 public class ProductsServiceImpl implements IProductsService{
 
-    final
-    IUserRepository userRepository;
+    private final IUserRepository _userRepository;
 
     public ProductsServiceImpl(IUserRepository userRepository) {
-        this.userRepository = userRepository;
+        this._userRepository = userRepository;
     }
 
     @Override
@@ -36,7 +35,7 @@ public class ProductsServiceImpl implements IProductsService{
         try{
             ExceptionChecker.checkBadRequestException(postRequestDTO);
 
-            userRepository.createPost(post);
+            _userRepository.createPost(post);
         }catch (NullPointerException e) {
             throw new UserNotFoundException("We couldn't find a user with the mentioned ID");
         }
@@ -48,7 +47,7 @@ public class ProductsServiceImpl implements IProductsService{
     public ResponseEntity<?> listFollowingPosts2Weeks(int userId) {
         List<User> responseList;
         try{
-            responseList = userRepository.listFollowingPosts2Weeks(userId);
+            responseList = _userRepository.listFollowingPosts2Weeks(userId);
         }catch (NullPointerException e) {
             throw new UserNotFoundException("We couldn't find a user with the mentioned ID");
         }
@@ -66,7 +65,7 @@ public class ProductsServiceImpl implements IProductsService{
     public ResponseEntity<?> listFollowingPosts2Weeks(int userId, String order) {
         List<User> responseList;
         try {
-            responseList = userRepository.listFollowingPosts2Weeks(userId);
+            responseList = _userRepository.listFollowingPosts2Weeks(userId);
         } catch (NullPointerException e) {
             throw new UserNotFoundException("We couldn't find a user with the mentioned ID");
         }
