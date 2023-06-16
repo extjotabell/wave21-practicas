@@ -6,11 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
+import lombok.*;
 
 
 @Getter
@@ -18,6 +14,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
+@ToString
+@EqualsAndHashCode
 public class Product {
 
     @NotNull(message = "La id del producto no puede estar vacío.")
