@@ -8,6 +8,8 @@ import java.util.Optional;
 public interface IUserRepository {
     public Optional<User> findUserById(int id);
 
+    void relateUserAndSeller(User user, User user1);
+
     void unRelateUserAndSeller(User user, User user1);
 
     void addPostToUser(Post post, User user);
