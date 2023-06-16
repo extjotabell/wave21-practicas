@@ -11,6 +11,8 @@ import com.example.be_java_hisp_w21_g02.utils.Constants;
 import com.example.be_java_hisp_w21_g02.utils.ExceptionChecker;
 import org.springframework.stereotype.Service;
 
+
+import com.example.be_java_hisp_w21_g02.utils.EntityMapper;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -20,6 +22,7 @@ import java.util.Set;
 public class UsersServiceImpl implements IUsersService{
 
     private final IUserRepository _usersRepository;
+
 
     public UsersServiceImpl(IUserRepository _usersRepository) {
         this._usersRepository = _usersRepository;
@@ -50,13 +53,19 @@ public class UsersServiceImpl implements IUsersService{
 
         User persistedUser = _usersRepository.getUser(userId);
 
-        ExceptionChecker.checkUserAndSellerException(persistedUser);
-        
-        return new FollowersCountDTO(
-                persistedUser.getId(),
-                persistedUser.getUsername(),
-                persistedUser.getFollowers().size()
-        );
+        //ExceptionChecker.checkUserAndSellerException(persistedUser);
+
+
+        EntityMapper<User, FollowersCountDTO> mapper = new EntityMapper<User, FollowersCountDTO>();
+
+
+        FollowersCountDTO result = mapper.toDto(persistedUser, FollowersCountDTO.class);
+
+        /*FollowersCountDTO result = new FollowersCountDTO();
+
+        mapper.toDto(persistedUser,result);*/
+
+        return result;
     }
 
     public FollowersListDTO getFollowersList(int userId){

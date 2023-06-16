@@ -91,17 +91,8 @@ public class ProductsServiceImpl implements IProductsService{
         }
     }
 
-
-    private UserPostResponseDTO convertUserToUserPostResponseDTO(User user) {
-        List<PostDTO> postsDTO = new ArrayList<>();
-        user.getPosts().forEach(postDTO -> {
-            postsDTO.add(convertPostToPostDTO(postDTO));
-        });
-        return new UserPostResponseDTO(user.getId(),postsDTO);
-    }
-
     private PostDTO convertPostToPostDTO(Post post){
-        return new PostDTO(post.getUserId(),post.getPostId(), DateConverter.LocalDateToString(post.getDate()),
+        return new PostDTO(post.getUserId(),post.getPostId(), post.getDate(),
                 convertProductToProductDTO(post.getProduct()),post.getCategory(),post.getPrice());
     }
 
@@ -110,13 +101,10 @@ public class ProductsServiceImpl implements IProductsService{
                product.getColor(), product.getNotes());
     }
 
-
-
     private Post convertPostRequestDTOtoPost(PostRequestDTO postRequestDTO){
         Post post = new Post();
         post.setUserId(postRequestDTO.getUserId());
-
-        post.setDate( DateConverter.stringToLocalDate(postRequestDTO.getDate()));
+        post.setDate( postRequestDTO.getDate());
         post.setCategory(postRequestDTO.getCategory());
         post.setPrice(postRequestDTO.getPrice());
         post.setProduct(convertProductDTOtoProduct(postRequestDTO.getProduct()));

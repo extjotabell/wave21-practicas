@@ -30,7 +30,7 @@ public class ExceptionChecker {
     }
 
     private static boolean isValidRequest(PostRequestDTO postRequestDTO){
-        LocalDate date = DateConverter.stringToLocalDate(postRequestDTO.getDate());
+        LocalDate date = postRequestDTO.getDate();
         return postRequestDTO.getDate() != null && (date.isBefore(LocalDate.now()) || date.isEqual(LocalDate.now()))
                 && postRequestDTO.getPrice() >= 0;
     }

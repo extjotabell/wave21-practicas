@@ -13,7 +13,7 @@ import java.util.Set;
 @Getter
 @Setter
 public class User {
-    private int id;
+    private Integer id;
     private String username;
     private Set<Integer> following;
     private Set<Integer> followers;
