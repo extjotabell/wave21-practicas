@@ -17,7 +17,7 @@ public class PostDTO {
     private int post_id;
 
     @JsonFormat(pattern="dd-MM-yyyy")
-    @NotNull(message = "The date cannot be empty")
+    @NotNull(message = "The date cannot be null")
     private LocalDate date;
 
     private Product product;

@@ -5,10 +5,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.PositiveOrZero;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 public class UserIdDTO {
+
+    @NotEmpty(message = "El  id no puede estar vacío.")
+    @PositiveOrZero(message = "El id debe ser mayor a cero")
     int user_id;
 }

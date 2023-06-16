@@ -8,6 +8,7 @@ import com.example.be_java_hisp_w21_g1.Exception.NotFoundException;
 import com.example.be_java_hisp_w21_g1.Exception.UserNotSellerException;
 import com.example.be_java_hisp_w21_g1.Model.Post;
 import com.example.be_java_hisp_w21_g1.Model.User;
+import com.example.be_java_hisp_w21_g1.Repository.IUserRepository;
 import com.example.be_java_hisp_w21_g1.Repository.UserRepository;
 import com.example.be_java_hisp_w21_g1.Utils.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ import java.util.stream.Collectors;
 public class UserService implements IUserService {
 
     @Autowired
-    UserRepository userRepository;
+    IUserRepository userRepository;
 
     public boolean follow(FollowPostDTO followPostDTO){
         Optional<User> user = userRepository.findUserById(followPostDTO.getUserId());
