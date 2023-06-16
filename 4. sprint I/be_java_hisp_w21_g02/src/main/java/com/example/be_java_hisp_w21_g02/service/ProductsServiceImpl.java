@@ -1,24 +1,21 @@
 package com.example.be_java_hisp_w21_g02.service;
 
 import com.example.be_java_hisp_w21_g02.dto.PostDTO;
-import com.example.be_java_hisp_w21_g02.dto.request.PostRequestDTO;
 import com.example.be_java_hisp_w21_g02.dto.ProductDTO;
-import com.example.be_java_hisp_w21_g02.dto.response.FollowerDTO;
+import com.example.be_java_hisp_w21_g02.dto.request.PostRequestDTO;
 import com.example.be_java_hisp_w21_g02.dto.response.UserPostResponseDTO;
-import com.example.be_java_hisp_w21_g02.exceptions.PostBadRequestException;
 import com.example.be_java_hisp_w21_g02.exceptions.UserNotFoundException;
 import com.example.be_java_hisp_w21_g02.model.Post;
 import com.example.be_java_hisp_w21_g02.model.Product;
 import com.example.be_java_hisp_w21_g02.model.User;
 import com.example.be_java_hisp_w21_g02.repository.IUserRepository;
 import com.example.be_java_hisp_w21_g02.utils.Constants;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.be_java_hisp_w21_g02.utils.DateConverter;
+import com.example.be_java_hisp_w21_g02.utils.ExceptionChecker;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -26,19 +23,22 @@ import java.util.List;
 @Service
 public class ProductsServiceImpl implements IProductsService{
 
-    @Autowired
+    final
     IUserRepository userRepository;
+
+    public ProductsServiceImpl(IUserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     public ResponseEntity<?> createPost(PostRequestDTO postRequestDTO) {
         Post post = convertPostRequestDTOtoPost(postRequestDTO);
         try{
-            if(!isValidRequest(postRequestDTO))
-                throw new PostBadRequestException("Peticion de publicacion invalida.");
+            ExceptionChecker.checkBadRequestException(postRequestDTO);
 
             userRepository.createPost(post);
         }catch (NullPointerException e) {
-            throw new UserNotFoundException("No se pudo encontrar un usuario con el ID mencionado.");
+            throw new UserNotFoundException("We couldn't find a user with the mentioned ID");
         }
 
         return new ResponseEntity<>(HttpStatus.OK);
@@ -50,7 +50,7 @@ public class ProductsServiceImpl implements IProductsService{
         try{
             responseList = userRepository.listFollowingPosts2Weeks(userId);
         }catch (NullPointerException e) {
-            throw new UserNotFoundException("No se pudo encontrar un usuario con el ID mencionado.");
+            throw new UserNotFoundException("We couldn't find a user with the mentioned ID");
         }
         List<PostDTO> postsDTO = new ArrayList<>();
         responseList.forEach(user -> {
@@ -68,7 +68,7 @@ public class ProductsServiceImpl implements IProductsService{
         try {
             responseList = userRepository.listFollowingPosts2Weeks(userId);
         } catch (NullPointerException e) {
-            throw new UserNotFoundException("No se pudo encontrar un usuario con el ID mencionado.");
+            throw new UserNotFoundException("We couldn't find a user with the mentioned ID");
         }
 
         List<Post> postList = new ArrayList<>();
@@ -102,7 +102,7 @@ public class ProductsServiceImpl implements IProductsService{
     }
 
     private PostDTO convertPostToPostDTO(Post post){
-        return new PostDTO(post.getUserId(),post.getPostId(),convertLocalDateToString(post.getDate()),
+        return new PostDTO(post.getUserId(),post.getPostId(), DateConverter.LocalDateToString(post.getDate()),
                 convertProductToProductDTO(post.getProduct()),post.getCategory(),post.getPrice());
     }
 
@@ -111,32 +111,20 @@ public class ProductsServiceImpl implements IProductsService{
                product.getColor(), product.getNotes());
     }
 
-    private boolean isValidRequest(PostRequestDTO postRequestDTO){
-        LocalDate date = convertStringToLocalDate(postRequestDTO.getDate());
-        return postRequestDTO.getDate() != null && (date.isBefore(LocalDate.now()) || date.isEqual(LocalDate.now()))
-                && postRequestDTO.getPrice() >= 0;
-    }
+
 
     private Post convertPostRequestDTOtoPost(PostRequestDTO postRequestDTO){
         Post post = new Post();
         post.setUserId(postRequestDTO.getUserId());
 
-        post.setDate(convertStringToLocalDate(postRequestDTO.getDate()));
+        post.setDate( DateConverter.stringToLocalDate(postRequestDTO.getDate()));
         post.setCategory(postRequestDTO.getCategory());
         post.setPrice(postRequestDTO.getPrice());
         post.setProduct(convertProductDTOtoProduct(postRequestDTO.getProduct()));
         return post;
     }
 
-    private LocalDate convertStringToLocalDate(String date){
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        return LocalDate.parse(date, dateFormatter);
-    }
 
-    private String convertLocalDateToString(LocalDate date){
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        return date.format(dateFormatter);
-    }
 
     private Product convertProductDTOtoProduct(ProductDTO productDTO){
         Product product = new Product();

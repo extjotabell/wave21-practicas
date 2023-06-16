@@ -5,12 +5,10 @@ import com.example.be_java_hisp_w21_g02.dto.response.FollowerDTO;
 import com.example.be_java_hisp_w21_g02.dto.response.FollowersCountDTO;
 import com.example.be_java_hisp_w21_g02.dto.response.FollowersListDTO;
 import com.example.be_java_hisp_w21_g02.exceptions.UserNotFoundException;
-import com.example.be_java_hisp_w21_g02.exceptions.UserNotSellerException;
-import com.example.be_java_hisp_w21_g02.exceptions.UserFollowingException;
 import com.example.be_java_hisp_w21_g02.model.User;
 import com.example.be_java_hisp_w21_g02.repository.IUserRepository;
 import com.example.be_java_hisp_w21_g02.utils.Constants;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.be_java_hisp_w21_g02.utils.ExceptionChecker;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -21,44 +19,38 @@ import java.util.Set;
 @Service
 public class UsersServiceImpl implements IUsersService{
 
-    @Autowired
-    private IUserRepository _usersRepository;
+    private final IUserRepository _usersRepository;
+
+    public UsersServiceImpl(IUserRepository _usersRepository) {
+        this._usersRepository = _usersRepository;
+    }
 
     public void followUser(int userId, int userIdToFollow){
         User persistedUser = _usersRepository.getUser(userId);
         User persistedFollowUser = _usersRepository.getUser(userIdToFollow);
 
-        checkFollowAndSellerException(persistedUser, persistedFollowUser);
-
-        if (!persistedUser.follow(userIdToFollow)){
-            throw new UserFollowingException("El usuario ya seguia al usuario indicado");
-        }
+        ExceptionChecker.checkUserFollowingException(persistedUser, persistedFollowUser, "This user is already following the user you want to follow");
 
         persistedFollowUser.beFollowed(userId);
         _usersRepository.persistFollows(persistedUser, persistedFollowUser);
     }
 
     public void unFollowUser(int userId, int userIdToUnFollow){
-        User persistedUnUser = _usersRepository.getUser(userId);
-        User persistedUnFollowUser = _usersRepository.getUser(userIdToUnFollow); //flav
+        User persistedUser = _usersRepository.getUser(userId);
+        User persistedUnFollowUser = _usersRepository.getUser(userIdToUnFollow);
 
-        checkFollowAndSellerException(persistedUnUser, persistedUnFollowUser);
+        ExceptionChecker.checkUserFollowingException(persistedUser, persistedUnFollowUser, "This user is not following the user you want to unfollow");
 
-        if(persistedUnUser.verifyFollower(userIdToUnFollow)){
-            persistedUnUser.unFollow(userIdToUnFollow);
-            persistedUnFollowUser.unBeFollowed(userId);
-            _usersRepository.persistFollows(persistedUnUser, persistedUnFollowUser);
-        }
-        else{
-            throw new UserFollowingException("El id de usuario ingresado no es un seguidor del usuario que quiere dejar de seguir");
-        }
+        persistedUser.unFollow(userIdToUnFollow);
+        persistedUnFollowUser.unBeFollowed(userId);
+        _usersRepository.persistFollows(persistedUser, persistedUnFollowUser);
     }
 
     public FollowersCountDTO getFollowersCount(int userId){
 
         User persistedUser = _usersRepository.getUser(userId);
 
-        checkUserAndSellerException(persistedUser);
+        ExceptionChecker.checkUserAndSellerException(persistedUser);
         
         return new FollowersCountDTO(
                 persistedUser.getId(),
@@ -69,7 +61,7 @@ public class UsersServiceImpl implements IUsersService{
 
     public FollowersListDTO getFollowersList(int userId){
         User persistedUser = _usersRepository.getUser(userId);
-        checkUserAndSellerException(persistedUser);
+        ExceptionChecker.checkUserAndSellerException(persistedUser);
 
         return new FollowersListDTO(
                 persistedUser.getId(),
@@ -80,7 +72,7 @@ public class UsersServiceImpl implements IUsersService{
 
     public FollowersListDTO getFollowersList(int userId, String order){
         User persistedUser = _usersRepository.getUser(userId);
-        checkUserAndSellerException(persistedUser);
+        ExceptionChecker.checkUserAndSellerException(persistedUser);
 
         List<FollowerDTO> followersDTO = getFollowDTO(persistedUser.getFollowers());
 
@@ -97,7 +89,7 @@ public class UsersServiceImpl implements IUsersService{
         User persistedUser = _usersRepository.getUser(userId);
 
         if(persistedUser == null){
-            throw new UserNotFoundException("No se pudo encontrar un usuario con el ID mencionado");
+            throw new UserNotFoundException("We couldn't find a user with the mentioned ID");
         }
 
         return new FollowedListDTO(
@@ -111,7 +103,7 @@ public class UsersServiceImpl implements IUsersService{
         User persistedUser = _usersRepository.getUser(userId);
 
         if(persistedUser == null){
-            throw new UserNotFoundException("No se pudo encontrar un usuario con el ID mencionado");
+            throw new UserNotFoundException("We couldn't find a user with the mentioned ID");
         }
 
         List<FollowerDTO> followedDTO = getFollowDTO(persistedUser.getFollowing());
@@ -126,25 +118,6 @@ public class UsersServiceImpl implements IUsersService{
     }
 
     //region Extra Methods
-    private static void checkFollowAndSellerException(User persistedUser, User persistedOtherUser) {
-        
-        if(persistedUser == null || persistedOtherUser == null){
-            throw new UserNotFoundException("No se pudo encontrar un usuario con el ID mencionado");
-        }
-
-        if (!persistedOtherUser.isSeller()){
-            throw new UserNotSellerException("El usuario no es un vendedor");
-        }
-    }
-
-    private static void checkUserAndSellerException(User persistedUser) {
-        if(persistedUser == null){
-            throw new UserNotFoundException("No se pudo encontrar un usuario con el ID mencionado");
-        }
-        if (!persistedUser.isSeller()) {
-            throw new UserNotSellerException("El usuario no es un vendedor");
-        }
-    }
 
     private List<FollowerDTO> getFollowDTO(Set<Integer> usersIds){
         List<User> followers = _usersRepository.getUsers(usersIds);

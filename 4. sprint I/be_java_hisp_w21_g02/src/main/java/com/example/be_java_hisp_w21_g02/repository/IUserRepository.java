@@ -1,6 +1,7 @@
 package com.example.be_java_hisp_w21_g02.repository;
-import com.example.be_java_hisp_w21_g02.model.User;
+
 import com.example.be_java_hisp_w21_g02.model.Post;
+import com.example.be_java_hisp_w21_g02.model.User;
 
 import java.util.List;
 import java.util.Set;
