@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.Mockito.when;
+import org.springframework.boot.test.context.SpringBootTest;
 
 @ExtendWith(MockitoExtension.class)
 @SpringBootTest
@@ -78,5 +79,40 @@ public class UserServiceTest {
         });
 
     }
+
+    @Test
+    @DisplayName("US-0003 - Happy path :) ")
+    public void orderListOk() {
+
+    }
+
+    @Test
+    @DisplayName("US-0003 - Sad path :( ")
+    public void orderListThrowsException() {
+        //Lanza BadRequestException
+    }
+
+
+
+    @Test
+    @DisplayName("T-0007 - Happy Path :D ")
+    void followerCountOk(){
+
+    }
+
+
+    @Test
+    @DisplayName("T-0007 - Sad Path D:")
+    void followerCountThrowsException(){
+        // Lanza NotFoundException
+
+    }
+
+
+
+
+
+
+
 
 }
