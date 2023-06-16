@@ -39,6 +39,8 @@ public class Product {
     @Size(min = 1, max = 15, message = "La longitud del color del producto no puede superar los 15 caracteres.")
     @Pattern(regexp = "^[a-zA-Z0-9 ]*$", message = "El color del producto no puede poseer caracteres especiales.")
     private String color;
+    @Size(min = 1, max = 80, message = "La longitud de las notas del producto no puede superar los 80 caracteres.")
+    @Pattern(regexp = "^[a-zA-Z0-9 ]*$", message = "Las notas del producto no pueden poseer caracteres especiales.")
     private String notes;
 
 }
