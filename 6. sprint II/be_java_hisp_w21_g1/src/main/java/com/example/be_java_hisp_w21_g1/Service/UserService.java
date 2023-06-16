@@ -172,7 +172,7 @@ public class UserService implements IUserService {
                             .sorted((o1, o2) -> o2.getDate().compareTo(o1.getDate()))
                             .collect(Collectors.toList()));
         } else {
-            throw new BadRequestException("El parametro order debe ser name_asc o name_desc");
+            throw new BadRequestException("El parametro order debe ser date_asc o date_desc");
         }
     }
 
