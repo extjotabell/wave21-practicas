@@ -27,6 +27,9 @@ public class Product {
     @Size(min = 1, max = 40, message = "La longitud del nombre del producto no puede superar los 40 caracteres.")
     @Pattern(regexp = "^[a-zA-Z0-9 ]*$", message = "El nombre del producto no puede poseer caracteres especiales.")
     private String productName;
+    @NotNull(message = "El tipo del producto no puede estar vacío.")
+    @Size(min = 1, max = 15, message = "La longitud del tipo del producto no puede superar los 15 caracteres.")
+    @Pattern(regexp = "^[a-zA-Z0-9 ]*$", message = "El tipo del producto no puede poseer caracteres especiales.")
     private String type;
     private String brand;
     private String color;
