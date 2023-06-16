@@ -2,6 +2,7 @@ package com.sprint.be_java_hisp_w21_g04.controller;
 
 import com.sprint.be_java_hisp_w21_g04.dto.request.PostRequestDto;
 import com.sprint.be_java_hisp_w21_g04.dto.response.PostResponseDto;
+import com.sprint.be_java_hisp_w21_g04.dto.response.ResponseDto;
 import com.sprint.be_java_hisp_w21_g04.dto.response.SellerFollowedListPostResponseDto;
 import com.sprint.be_java_hisp_w21_g04.service.post.IPostService;
 import org.springframework.http.HttpStatus;
@@ -22,9 +23,9 @@ public class PostController {
     }
 
     @PostMapping("/post")
-    public ResponseEntity<String> post(@RequestBody(required = true) @Valid PostRequestDto post) {
+    public ResponseEntity<ResponseDto> post(@RequestBody(required = true) @Valid PostRequestDto post) {
         this._service.post(post);
-        return new ResponseEntity<>("Post agregado exitosamente",HttpStatus.OK);
+        return new ResponseEntity<>(new ResponseDto("Post agregado exitosamente"),HttpStatus.OK);
     }
 
     @GetMapping("/followed/{userId}/list")
