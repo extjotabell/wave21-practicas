@@ -2,17 +2,15 @@ package com.bootcamp.grupo3.socialmeli.exception;
 
 import com.bootcamp.grupo3.socialmeli.dto.response.ErrorDTO;
 import com.bootcamp.grupo3.socialmeli.dto.response.MessageDTO;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolationException;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
-import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import java.util.stream.Collectors;
-
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
 
 
 @ControllerAdvice

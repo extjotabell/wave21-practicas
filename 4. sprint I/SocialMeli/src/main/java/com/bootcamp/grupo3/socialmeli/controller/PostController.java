@@ -3,14 +3,13 @@ package com.bootcamp.grupo3.socialmeli.controller;
 import com.bootcamp.grupo3.socialmeli.dto.request.PostDTO;
 import com.bootcamp.grupo3.socialmeli.dto.response.MessageDTO;
 import com.bootcamp.grupo3.socialmeli.service.interfaces.IPostService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import com.bootcamp.grupo3.socialmeli.dto.response.UserPostListDTO;
 import com.bootcamp.grupo3.socialmeli.service.interfaces.IUserService;
 import org.springframework.http.HttpStatus;
-
-import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/products")
@@ -23,7 +22,7 @@ public class PostController {
     }
 
     @PostMapping("/post")
-    public ResponseEntity<MessageDTO> createPost(@RequestBody @Valid PostDTO body) {
+    public ResponseEntity<MessageDTO> createPost(@Valid @RequestBody PostDTO body) {
         int postId = postService.createPost(body);
         return ResponseEntity.ok(new MessageDTO("Post agregado exitosamente con id: " + postId));
     }

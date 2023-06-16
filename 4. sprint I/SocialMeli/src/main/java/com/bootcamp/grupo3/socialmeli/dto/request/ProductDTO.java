@@ -2,25 +2,22 @@ package com.bootcamp.grupo3.socialmeli.dto.request;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.validation.annotation.Validated;
-
-import javax.validation.constraints.*;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-@Validated
 public class ProductDTO {
 
-    @NotNull(message = "El id no puede estar vacía.")
-    @Positive(message = "El id debe ser mayor a cero")
-    private int productId;
+    @NotNull(message = "El id del producto no puede estar vacío.")
+    @Positive(message = "El id del producto debe ser mayor a cero")
+    private Integer productId;
 
     @NotEmpty( message = "El nombre del producto no puede estar vacío.")
     @Size(max=40, message = "La longitud no puede superar los 40 caracteres.")
