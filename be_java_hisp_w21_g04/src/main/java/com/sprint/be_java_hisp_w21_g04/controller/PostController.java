@@ -22,7 +22,7 @@ public class PostController {
     }
 
     @PostMapping("/post")
-    public ResponseEntity<String> post(@RequestBody(required = true) PostRequestDto post) {
+    public ResponseEntity<String> post(@RequestBody(required = true) @Valid PostRequestDto post) {
         this._service.post(post);
         return new ResponseEntity<>("Post agregado exitosamente",HttpStatus.OK);
     }

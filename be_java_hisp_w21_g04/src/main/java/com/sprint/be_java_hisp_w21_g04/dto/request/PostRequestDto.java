@@ -19,13 +19,13 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @ToString
 public class PostRequestDto {
-     @Positive(message = "El id debe ser mayor a cero.")
-     @NotNull(message = "El id no puede estar vacío.")
+     @Positive(message = "El id del usuario debe ser mayor a cero.")
+     @NotNull(message = "El id del usuario no puede estar vacío.")
      private int userId;
      @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
      @NotNull(message = "La fecha no puede estar vacía.")
      private LocalDate date;
-     private Product product;
+     private @Valid Product product;
      private int category;
      private double price;
 }
