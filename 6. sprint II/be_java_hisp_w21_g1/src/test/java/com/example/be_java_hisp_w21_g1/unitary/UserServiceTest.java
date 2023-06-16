@@ -8,8 +8,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.test.context.SpringBootTest;
 
+@SpringBootTest
 @ExtendWith(MockitoExtension.class)
+
 public class UserServiceTest {
     @Mock
     IUserRepository userRepository;
@@ -21,5 +24,40 @@ public class UserServiceTest {
     void verifiedUserExistence(){
 
     }
+    
+    @Test
+    @DisplayName("US-0003 - Happy path :) ")
+    public void orderListOk() {
+
+    }
+
+    @Test
+    @DisplayName("US-0003 - Sad path :( ")
+    public void orderListThrowsException() {
+        //Lanza BadRequestException
+    }
+
+
+
+    @Test
+    @DisplayName("T-0007 - Happy Path :D ")
+    void followerCountOk(){
+
+    }
+
+
+    @Test
+    @DisplayName("T-0007 - Sad Path D:")
+    void followerCountThrowsException(){
+        // Lanza NotFoundException
+
+    }
+
+
+
+
+
+
+
 
 }

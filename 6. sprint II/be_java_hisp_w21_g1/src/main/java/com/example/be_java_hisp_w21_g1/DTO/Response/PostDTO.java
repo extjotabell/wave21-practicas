@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Data
@@ -16,6 +17,7 @@ public class PostDTO {
     private int post_id;
 
     @JsonFormat(pattern="dd-MM-yyyy")
+    @NotNull(message = "The date cannot be empty")
     private LocalDate date;
 
     private Product product;
