@@ -158,7 +158,7 @@ public class UserServiceTest {
     }
 
     @Test
-    @DisplayName("T-0007 - Happy Path :D ")
+    @DisplayName("T-0007 - Obtener cantidad de seguidores de un usuario existente ")
     void followerCountOk(){
         //Arrange
         int userId = 1;
@@ -176,10 +176,10 @@ public class UserServiceTest {
         //Assert
        Assertions.assertEquals(expected, actual);
 
-    }
+    }∫
 
     @Test
-    @DisplayName("T-0007 - Sad Path D:")
+    @DisplayName("T-0007 - Obtener cantidad de seguidores de un usuario inexistente")
     void followerCountThrowsException(){
         // Lanza NotFoundException
 
