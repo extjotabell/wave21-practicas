@@ -27,16 +27,9 @@ public class CharacterRepositoryImpl implements CharacterRepository {
 
   @Override
   public List<CharacterDTO> findAllByNameContains(String query) {
-   /* return database.stream()
+    return database.stream()
         .filter(characterDTO -> matchWith(query, characterDTO))
-        .collect(Collectors.toList());*/
-    List<CharacterDTO> expected = new ArrayList<>();
-
-    CharacterDTO c3po = new CharacterDTO("C-3PO","NA", "gold", "yellow", "112BBY",
-            "NA", "Tatooine", "Droid", 167, 75);
-
-    expected.add(c3po);
-    return expected;
+        .collect(Collectors.toList());
   }
 
   private boolean matchWith(String query, CharacterDTO characterDTO) {
