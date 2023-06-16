@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.PositiveOrZero;
 import java.time.LocalDate;
 
 @Setter
@@ -14,7 +16,11 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PostProductDTO {
+
+  @NotEmpty(message = "El  id no puede estar vacío.")
+  @PositiveOrZero(message = "El id debe ser mayor a cero")
   int user_id;
+
   @JsonFormat(pattern="dd-MM-yyyy")
   LocalDate date;
   Product product;
