@@ -7,6 +7,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -14,6 +17,8 @@ import lombok.Setter;
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class Product {
 
+    @NotNull(message = "La id no puede estar vacío.")
+    @Positive(message = "El id debe ser mayor a cero.")
     private int productId;
     private String productName;
     private String type;
