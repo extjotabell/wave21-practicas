@@ -29,7 +29,7 @@ public class UsersServiceImpl implements IUsersService{
         User persistedUser = _usersRepository.getUser(userId);
         User persistedFollowUser = _usersRepository.getUser(userIdToFollow);
 
-        ExceptionChecker.checkUserFollowingException(persistedUser, persistedFollowUser, "This user is already following the user you want to follow");
+        ExceptionChecker.checkUserFollowException(persistedUser, persistedFollowUser);
 
         persistedFollowUser.beFollowed(userId);
         _usersRepository.persistFollows(persistedUser, persistedFollowUser);
@@ -39,7 +39,7 @@ public class UsersServiceImpl implements IUsersService{
         User persistedUser = _usersRepository.getUser(userId);
         User persistedUnFollowUser = _usersRepository.getUser(userIdToUnFollow);
 
-        ExceptionChecker.checkUserFollowingException(persistedUser, persistedUnFollowUser, "This user is not following the user you want to unfollow");
+        ExceptionChecker.checkUserUnfollowException(persistedUser, persistedUnFollowUser);
 
         persistedUser.unFollow(userIdToUnFollow);
         persistedUnFollowUser.unBeFollowed(userId);

@@ -35,11 +35,19 @@ public class ExceptionChecker {
                 && postRequestDTO.getPrice() >= 0;
     }
 
-    public static void checkUserFollowingException(User persistedUser, User persistedUnFollowUser, String message) {
+    public static void checkUserFollowException(User persistedUser, User persistedUnFollowUser) {
         checkUserException(persistedUser);
-        checkUserException(persistedUnFollowUser);
+        checkUserAndSellerException(persistedUnFollowUser);
+        if (!persistedUser.follow(persistedUnFollowUser.getId())){
+            throw new UserFollowingException("This user is already following the user you want to follow");
+        }
+    }
+
+    public static void checkUserUnfollowException(User persistedUser, User persistedUnFollowUser) {
+        checkUserException(persistedUser);
+        checkUserAndSellerException(persistedUnFollowUser);
         if(!persistedUser.verifyFollower(persistedUnFollowUser.getId())){
-            throw new UserFollowingException(message);
+            throw new UserFollowingException( "This user is not following the user you want to unfollow");
         }
     }
 }
