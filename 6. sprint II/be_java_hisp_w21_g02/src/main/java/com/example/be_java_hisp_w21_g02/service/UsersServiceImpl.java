@@ -136,6 +136,11 @@ public class UsersServiceImpl implements IUsersService{
         return  followersDTO;
     }
 
+    /**
+     * Orders a list of users by name in ascending or descending order
+     * @param collection list of users to be ordered
+     * @param order parameter to order the list by name in ascending or descending order
+     */
     private void orderCollectionByOrderParam(List<FollowerDTO> collection, String order) {
         if (order.equalsIgnoreCase(Constants.ORDER_NAME_ASC)) {
             collection.sort(Comparator.comparing(FollowerDTO::getUserName));

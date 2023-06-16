@@ -83,6 +83,11 @@ public class ProductsServiceImpl implements IProductsService{
         return ResponseEntity.ok(postsDTO);
     }
 
+    /**
+     * Orders a list of posts by date in ascending or descending order
+     * @param collection List of posts to be ordered
+     * @param order parameter to order the list by date in ascending or descending order
+     */
     private void orderCollectionByOrderParam(List<Post> collection, String order) {
         if (order.equalsIgnoreCase(Constants.ORDER_DATE_ASC)) {
             collection.sort(Comparator.comparing(Post::getDate));
