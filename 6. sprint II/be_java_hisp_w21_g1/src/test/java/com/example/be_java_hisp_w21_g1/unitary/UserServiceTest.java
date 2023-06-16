@@ -1,6 +1,7 @@
 package com.example.be_java_hisp_w21_g1.unitary;
 
 import com.example.be_java_hisp_w21_g1.DTO.Request.FollowPostDTO;
+import com.example.be_java_hisp_w21_g1.DTO.Response.FollowedListDTO;
 import com.example.be_java_hisp_w21_g1.DTO.Response.FollowerListDTO;
 import com.example.be_java_hisp_w21_g1.Exception.NotFoundException;
 import com.example.be_java_hisp_w21_g1.Model.Post;
@@ -16,20 +17,14 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 import java.util.Optional;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
 import static org.mockito.Mockito.when;
-import org.springframework.boot.test.context.SpringBootTest;
 
 @ExtendWith(MockitoExtension.class)
 
@@ -115,7 +110,7 @@ public class UserServiceTest {
     }
 
     @Test
-    @DisplayName("T-0004 - Verificar el correcto ordenamiento ascendente por nombre. (US-0008)")
+    @DisplayName("T-0004 - (Seguidores) Verificar el correcto ordenamiento ascendente por nombre. (US-0008)")
     void getFollowersListAscOk(){
         //ARRANGE
         int idUser = 1;
@@ -150,7 +145,7 @@ public class UserServiceTest {
     }
 
     @Test
-    @DisplayName("T-0004 - Verificar el correcto ordenamiento descendente por nombre. (US-0008)")
+    @DisplayName("T-0004 - (Seguidores) Verificar el correcto ordenamiento descendente por nombre. (US-0008)")
     void getFollowersListDescOk(){
         //ARRANGE
         int idUser = 1;
@@ -184,4 +179,73 @@ public class UserServiceTest {
 
     }
 
+    @Test
+    @DisplayName("T-0004 - (Seguidos) Verificar el correcto ordenamiento ascendente por nombre. (US-0008)")
+    void getFollowedsListAscOk(){
+        //ARRANGE
+        int idUser = 1;
+        String order = "name_asc";
+        User followed1 = new User();
+        User followed2 = new User();
+        followed1.setUser_id(2);
+        followed1.setUser_name("Andrea");
+        followed2.setUser_id(3);
+        followed2.setUser_name("Santiago");
+
+        Optional<User> userMock = Optional.of(new User(
+                idUser,
+                "Pepe",
+                List.of(),
+                List.of(followed2,followed1),
+                List.of()
+        ));
+
+        //MOCK
+        Mockito
+                .when(userRepository.findUserById(idUser)).thenReturn(userMock);
+
+        //ACT
+        FollowedListDTO result = userService.getFollowedList(idUser, order);
+
+        //ASSERT
+        Assertions.assertNotNull(result);
+        Assertions.assertEquals(2, result.getFollowed().get(0).getUser_id());
+        Assertions.assertEquals(3, result.getFollowed().get(1).getUser_id());
+
+    }
+
+    @Test
+    @DisplayName("T-0004 - (Seguidos) Verificar el correcto ordenamiento descendente por nombre. (US-0008)")
+    void getFollowedsListDescOk(){
+        //ARRANGE
+        int idUser = 1;
+        String order = "name_desc";
+        User followed1 = new User();
+        User followed2 = new User();
+        followed1.setUser_id(2);
+        followed1.setUser_name("Andrea");
+        followed2.setUser_id(3);
+        followed2.setUser_name("Santiago");
+
+        Optional<User> userMock = Optional.of(new User(
+                idUser,
+                "Pepe",
+                List.of(),
+                List.of(followed2,followed1),
+                List.of()
+        ));
+
+        //MOCK
+        Mockito
+                .when(userRepository.findUserById(idUser)).thenReturn(userMock);
+
+        //ACT
+        FollowedListDTO result = userService.getFollowedList(idUser, order);
+
+        //ASSERT
+        Assertions.assertNotNull(result);
+        Assertions.assertEquals(3, result.getFollowed().get(0).getUser_id());
+        Assertions.assertEquals(2, result.getFollowed().get(1).getUser_id());
+
+    }
 }
