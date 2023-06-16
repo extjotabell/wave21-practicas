@@ -22,9 +22,12 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 import java.util.Optional;
+
+
 
 import java.util.ArrayList;
 import java.time.LocalDate;
@@ -35,7 +38,7 @@ import static org.mockito.Mockito.when;
 
 
 @ExtendWith(MockitoExtension.class)
-
+@SpringBootTest
 public class UserServiceTest {
    @Autowired
    @Mock
@@ -90,7 +93,58 @@ public class UserServiceTest {
         });
 
     }
-    
+
+    @Test
+    @DisplayName("T-0002 - Verificar que el usuario a dejar de seguir exista")
+    void verifyUnfollow(){
+        // arrange
+        FollowPostDTO followPostDTO = new FollowPostDTO(1, 2);
+
+        User seller = new User(2, "Seller 1", null, null, null);
+        User user = new User(1, "Usuario 1", null, List.of(seller), null);
+        seller.setFollowers(List.of(user));
+
+        Mockito.when(userRepository.findUserById(1)).thenReturn(Optional.of(user));
+        Mockito.when(userRepository.findUserById(2)).thenReturn(Optional.of(seller));
+
+        // assert
+        Assertions.assertTrue(userService.unFollow(followPostDTO));
+    }
+
+    @Test
+    @DisplayName("T-0002.1 - Verificar que retorna false al no encontrar el usuario a dejar de seguir")
+    void unfollowNonexistentUser(){
+        // arrange
+        FollowPostDTO followPostDTO = new FollowPostDTO(1, 2);
+
+        User seller = new User(2, "Seller 1", null, null, null);
+        User user = new User(1, "Usuario 1", null, List.of(seller), null);
+        seller.setFollowers(List.of(user));
+
+        Mockito.when(userRepository.findUserById(1)).thenReturn(Optional.of(user));
+        Mockito.when(userRepository.findUserById(2)).thenReturn(Optional.empty());
+
+
+        // assert
+        Assertions.assertFalse(userService.unFollow(followPostDTO));
+    }
+
+    @Test
+    @DisplayName("T-0002.2 - Verificar que haya una relacion al dejar de seguir")
+    void unfollowNonFollower(){
+        // arrange
+        FollowPostDTO followPostDTO = new FollowPostDTO(1, 2);
+
+        User seller = new User(2, "Seller 1", List.of(), null, null);
+        User user = new User(1, "Usuario 1", null, List.of(), null);
+
+        Mockito.when(userRepository.findUserById(1)).thenReturn(Optional.of(user));
+        Mockito.when(userRepository.findUserById(2)).thenReturn(Optional.of(seller));
+
+        // assert
+        Assertions.assertFalse(userService.unFollow(followPostDTO));
+    }
+
     @Test
     @DisplayName("US-0003 - Happy path :) ")
     public void orderListOk() {
@@ -279,4 +333,6 @@ public class UserServiceTest {
         Assertions.assertEquals(2, result.getFollowed().get(1).getUser_id());
 
     }
+    
+
 }
