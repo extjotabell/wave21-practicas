@@ -26,6 +26,7 @@ public class PostRequestDto {
      @NotNull(message = "La fecha no puede estar vacía.")
      private LocalDate date;
      private @Valid Product product;
+     @NotNull(message = "La categoria no puede estar vacía.")
      private int category;
      private double price;
 }
