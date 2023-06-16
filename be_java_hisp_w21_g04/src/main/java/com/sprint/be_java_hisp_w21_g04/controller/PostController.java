@@ -3,12 +3,12 @@ package com.sprint.be_java_hisp_w21_g04.controller;
 import com.sprint.be_java_hisp_w21_g04.dto.request.PostRequestDto;
 import com.sprint.be_java_hisp_w21_g04.dto.response.PostResponseDto;
 import com.sprint.be_java_hisp_w21_g04.dto.response.SellerFollowedListPostResponseDto;
-import com.sprint.be_java_hisp_w21_g04.entity.Post;
 import com.sprint.be_java_hisp_w21_g04.service.post.IPostService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import jakarta.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 

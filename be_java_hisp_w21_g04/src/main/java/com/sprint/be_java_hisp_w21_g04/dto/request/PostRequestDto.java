@@ -7,8 +7,10 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.sprint.be_java_hisp_w21_g04.entity.Product;
 import lombok.*;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.NotNull;
+
 import java.time.LocalDate;
 
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
