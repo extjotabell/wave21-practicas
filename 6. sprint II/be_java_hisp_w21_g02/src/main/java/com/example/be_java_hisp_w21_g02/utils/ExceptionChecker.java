@@ -12,7 +12,7 @@ import java.time.LocalDate;
 public class ExceptionChecker {
     public static void checkUserAndSellerException(User persistedUser) {
         checkUserException(persistedUser);
-        if (!persistedUser.isSeller()) {
+        if (persistedUser.getPosts().isEmpty()) {
             throw new UserNotSellerException("This user is not a seller");
         }
     }
@@ -46,7 +46,8 @@ public class ExceptionChecker {
     public static void checkUserUnfollowException(User persistedUser, User persistedUnFollowUser) {
         checkUserException(persistedUser);
         checkUserAndSellerException(persistedUnFollowUser);
-        if(!persistedUser.verifyFollower(persistedUnFollowUser.getId())){
+
+        if(!persistedUser.getFollowing().contains(persistedUnFollowUser.getId())){
             throw new UserFollowingException( "This user is not following the user you want to unfollow");
         }
     }

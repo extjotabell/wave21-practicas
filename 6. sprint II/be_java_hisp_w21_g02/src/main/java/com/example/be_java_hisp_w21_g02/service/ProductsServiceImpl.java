@@ -12,6 +12,7 @@ import com.example.be_java_hisp_w21_g02.repository.IUserRepository;
 import com.example.be_java_hisp_w21_g02.utils.Constants;
 import com.example.be_java_hisp_w21_g02.utils.DateConverter;
 import com.example.be_java_hisp_w21_g02.utils.ExceptionChecker;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -19,19 +20,26 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class ProductsServiceImpl implements IProductsService{
 
     private final IUserRepository _userRepository;
+    private final ModelMapper _modelMapper;
 
     public ProductsServiceImpl(IUserRepository userRepository) {
         this._userRepository = userRepository;
+        this._modelMapper = new ModelMapper();
+
     }
 
     @Override
     public ResponseEntity<?> createPost(PostRequestDTO postRequestDTO) {
-        Post post = convertPostRequestDTOtoPost(postRequestDTO);
+        Post post = _modelMapper.map(postRequestDTO, Post.class);
+
         try{
             ExceptionChecker.checkBadRequestException(postRequestDTO);
 
@@ -51,12 +59,12 @@ public class ProductsServiceImpl implements IProductsService{
         }catch (NullPointerException e) {
             throw new UserNotFoundException("We couldn't find a user with the mentioned ID");
         }
-        List<PostDTO> postsDTO = new ArrayList<>();
-        responseList.forEach(user -> {
-            user.getPosts().forEach(post -> {
-                postsDTO.add(convertPostToPostDTO(post));
-            });
-        });
+
+        List<PostDTO> postsDTO =
+            responseList.stream()
+                    .flatMap(user -> user.getPosts().stream())
+                    .map(post -> _modelMapper.map(post, PostDTO.class))
+                    .toList();
 
         return ResponseEntity.ok(new UserPostResponseDTO(userId, postsDTO));
     }
@@ -70,62 +78,18 @@ public class ProductsServiceImpl implements IProductsService{
             throw new UserNotFoundException("We couldn't find a user with the mentioned ID");
         }
 
-        List<Post> postList = new ArrayList<>();
+        List<Post> postList =
+                responseList.stream()
+                        .flatMap(user -> user.getPosts().stream())
+                        .sorted(
+                                Objects.equals(order, Constants.ORDER_DATE_DESC) ?
+                                        Comparator.comparing(Post::getDate).reversed() :
+                                        Comparator.comparing(Post::getDate))
+                        .toList();
 
-        responseList.forEach(user -> {
-            postList.addAll(user.getPosts());
-        });
 
-        orderCollectionByOrderParam(postList, order);
-
-        List<PostDTO> postsDTO = postList.stream().map(this::convertPostToPostDTO).toList();
+        List<PostDTO> postsDTO = postList.stream().map( p -> _modelMapper.map(p, PostDTO.class)).toList();
 
         return ResponseEntity.ok(postsDTO);
-    }
-
-    /**
-     * Orders a list of posts by date in ascending or descending order
-     * @param collection List of posts to be ordered
-     * @param order parameter to order the list by date in ascending or descending order
-     */
-    private void orderCollectionByOrderParam(List<Post> collection, String order) {
-        if (order.equalsIgnoreCase(Constants.ORDER_DATE_ASC)) {
-            collection.sort(Comparator.comparing(Post::getDate));
-        } else if (order.equalsIgnoreCase(Constants.ORDER_DATE_DESC)) {
-            collection.sort(Comparator.comparing(Post::getDate).reversed());
-        }
-    }
-
-    private PostDTO convertPostToPostDTO(Post post){
-        return new PostDTO(post.getUserId(),post.getPostId(), post.getDate(),
-                convertProductToProductDTO(post.getProduct()),post.getCategory(),post.getPrice());
-    }
-
-    private ProductDTO convertProductToProductDTO(Product product){
-        return new ProductDTO(product.getProductId(),product.getProductName(),product.getBrand(), product.getType(),
-               product.getColor(), product.getNotes());
-    }
-
-    private Post convertPostRequestDTOtoPost(PostRequestDTO postRequestDTO){
-        Post post = new Post();
-        post.setUserId(postRequestDTO.getUserId());
-        post.setDate( postRequestDTO.getDate());
-        post.setCategory(postRequestDTO.getCategory());
-        post.setPrice(postRequestDTO.getPrice());
-        post.setProduct(convertProductDTOtoProduct(postRequestDTO.getProduct()));
-        return post;
-    }
-
-
-
-    private Product convertProductDTOtoProduct(ProductDTO productDTO){
-        Product product = new Product();
-        product.setProductId(productDTO.getProductId());
-        product.setProductName(productDTO.getProductName());
-        product.setType(productDTO.getType());
-        product.setBrand(productDTO.getBrand());
-        product.setNotes(productDTO.getNotes());
-        product.setColor(productDTO.getColor());
-        return product;
     }
 }

@@ -19,9 +19,7 @@ public class User {
     private Set<Integer> followers;
     private List<Post> posts;
 
-    public boolean isSeller(){
-        return !posts.isEmpty();
-    }
+
 
     public boolean follow(int userIdToFollow) {
         return following.add(userIdToFollow);
@@ -39,8 +37,6 @@ public class User {
         followers.remove(userId);
     }
 
-    public boolean verifyFollower(int userIdToUnFollow) {
-        return following.contains(userIdToUnFollow);
-    }
+
 
 }

@@ -36,7 +36,7 @@ public interface IUsersService {
     /**
      * @param userId the id of the user that wants to know its list of followers
      * @param order parameter to order the list by name in ascending or descending order
-     * @return A DTO with the username, id and a ordered by name list of followers  which contains the name and id of each follower
+     * @return A DTO with the username, id and an ordered by name list of followers  which contains the name and id of each follower
      */
     FollowersListDTO getFollowersList(int userId, String order);
 
@@ -49,7 +49,7 @@ public interface IUsersService {
     /**
      * @param userId the id of the user that wants to know its list of followed users
      * @param order parameter to order the list by name in ascending or descending order
-     * @return A DTO with the username, id and a ordered by name list of followed users which contains the name and id of each followed user
+     * @return A DTO with the username, id and an ordered by name list of followed users which contains the name and id of each followed user
      */
     FollowedListDTO getFollowedList(int userId, String order);
 

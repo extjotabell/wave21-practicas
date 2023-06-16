@@ -9,23 +9,28 @@ import com.example.be_java_hisp_w21_g02.model.User;
 import com.example.be_java_hisp_w21_g02.repository.IUserRepository;
 import com.example.be_java_hisp_w21_g02.utils.Constants;
 import com.example.be_java_hisp_w21_g02.utils.ExceptionChecker;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-
-import com.example.be_java_hisp_w21_g02.utils.EntityMapper;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 
+
+
 @Service
 public class UsersServiceImpl implements IUsersService{
 
+
     private final IUserRepository _usersRepository;
+
+    private final ModelMapper _modelMapper;
 
 
     public UsersServiceImpl(IUserRepository _usersRepository) {
         this._usersRepository = _usersRepository;
+        this._modelMapper = new ModelMapper();
     }
 
     public void followUser(int userId, int userIdToFollow){
@@ -49,21 +54,13 @@ public class UsersServiceImpl implements IUsersService{
         _usersRepository.persistFollows(persistedUser, persistedUnFollowUser);
     }
 
-    public FollowersCountDTO getFollowersCount(int userId){
+    public FollowersCountDTO getFollowersCount(int userId) {
 
         User persistedUser = _usersRepository.getUser(userId);
+        ExceptionChecker.checkUserAndSellerException(persistedUser);
 
-        //ExceptionChecker.checkUserAndSellerException(persistedUser);
-
-
-        EntityMapper<User, FollowersCountDTO> mapper = new EntityMapper<User, FollowersCountDTO>();
-
-
-        FollowersCountDTO result = mapper.toDto(persistedUser, FollowersCountDTO.class);
-
-        /*FollowersCountDTO result = new FollowersCountDTO();
-
-        mapper.toDto(persistedUser,result);*/
+        FollowersCountDTO result = _modelMapper.map(persistedUser, FollowersCountDTO.class);
+        result.setFollowersCount(persistedUser.getFollowers().size());
 
         return result;
     }
