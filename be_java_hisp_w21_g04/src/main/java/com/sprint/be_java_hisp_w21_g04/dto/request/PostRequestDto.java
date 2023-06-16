@@ -7,6 +7,8 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.sprint.be_java_hisp_w21_g04.entity.Product;
 import lombok.*;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import java.time.LocalDate;
 
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
@@ -15,6 +17,8 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @ToString
 public class PostRequestDto {
+     @Positive(message = "El id debe ser mayor a cero.")
+     @NotNull(message = "El id no puede estar vacío.")
      private int userId;
      @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
      private LocalDate date;
