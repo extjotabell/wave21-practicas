@@ -21,6 +21,7 @@ public class StudentDAOTests {
         //pensar otra solucion
         stud0 = new StudentDTO(1L, "Nombre2", null, null, null);
         studentDAO.save(stud0);
+
     }
 
     @Test
@@ -35,8 +36,6 @@ public class StudentDAOTests {
         Assertions.assertTrue(studentDAO.exists(stu));
         Assertions.assertEquals(2L, stu.getId());
         Assertions.assertEquals(studentDAO.findById(stu.getId()), stu);
-
-
 
     }
 
@@ -71,16 +70,19 @@ public class StudentDAOTests {
     @Test
     public void deletingANonExistingStudent() {
         //Arrange
-        StudentDTO stu = new StudentDTO(1L, "Nombre2", null, null, null);
-
-        studentDAO.save(stu);
-
+        Long nonExistingId = 99L;
+        StudentDTO nonExistingStudent = new StudentDTO(nonExistingId, "Nombre99", null, null, null);
         // act
-        studentDAO.delete(stu.getId());
+        boolean actual = studentDAO.delete(nonExistingId);
 
         // assert
-        Assertions.assertFalse(studentDAO.exists(stu));
-        Assertions.assertThrows(StudentNotFoundException.class,() -> studentDAO.findById(stu.getId()));
+
+        //comprobación de return
+        Assertions.assertFalse(actual);
+
+        // efecto secundario
+        Assertions.assertFalse(studentDAO.exists(nonExistingStudent));
+        Assertions.assertThrows(StudentNotFoundException.class,() -> studentDAO.findById(nonExistingId));
 
     }
 
@@ -89,11 +91,8 @@ public class StudentDAOTests {
 
         //Arrange
         StudentDTO stu = new StudentDTO(1L, "Nombre1", null, null, null);
-
-
         // act
         studentDAO.save(stu);
-
         // assert
         Assertions.assertTrue(studentDAO.exists(stu));
     }
