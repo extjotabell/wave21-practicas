@@ -5,7 +5,6 @@ import com.example.be_java_hisp_w21_g02.dto.response.FollowersListDTO;
 import com.example.be_java_hisp_w21_g02.exceptions.OrderNotFoundException;
 import com.example.be_java_hisp_w21_g02.service.IUsersService;
 import com.example.be_java_hisp_w21_g02.utils.Constants;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,8 +13,11 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/users")
 public class UsersController {
-    @Autowired
-    private IUsersService _userService;
+    private final IUsersService _userService;
+
+    public UsersController(IUsersService _userService) {
+        this._userService = _userService;
+    }
 
 
     @PostMapping("/{userId}/follow/{userIdToFollow}")
@@ -39,7 +41,7 @@ public class UsersController {
     @GetMapping("/{userId}/followers/list")
     public ResponseEntity<?> getFollowersList(@PathVariable int userId, @RequestParam(required = false) String order){
         if (order != null && !Constants.isOrderConstant(order))
-            throw new OrderNotFoundException("El tipo de ordenamiento no existe");
+            throw new OrderNotFoundException("The order type does not exist");
 
         FollowersListDTO followersListDTO;
         if (order != null)
@@ -53,7 +55,7 @@ public class UsersController {
     @GetMapping("/{userId}/followed/list")
     public ResponseEntity<?> getFollowedist(@PathVariable int userId, @RequestParam(required = false) String order){
         if (order != null && !Constants.isOrderConstant(order))
-            throw new OrderNotFoundException("El tipo de ordenamiento no existe");
+            throw new OrderNotFoundException("The order type does not exist");
 
         FollowedListDTO followedListDTO;
         if (order != null)
