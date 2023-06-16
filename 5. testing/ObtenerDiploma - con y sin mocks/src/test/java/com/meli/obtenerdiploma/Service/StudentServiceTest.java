@@ -101,7 +101,6 @@ public class StudentServiceTest {
     @Test
     public void updateStudentTest() {
 
-
         Mockito.doNothing().when(_studentDao).save(student1);
         // Act
         _studentService.update(student1);
@@ -111,7 +110,7 @@ public class StudentServiceTest {
 
     @Test
     public void getAllStudentsTest() {
-        
+
     }
 
 
