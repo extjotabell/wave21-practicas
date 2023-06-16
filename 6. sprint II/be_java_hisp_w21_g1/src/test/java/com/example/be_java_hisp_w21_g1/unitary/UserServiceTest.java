@@ -17,6 +17,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.List;
+import java.util.Optional;
 
 import java.util.List;
 import java.util.Optional;
@@ -27,7 +31,7 @@ import java.util.ArrayList;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-
+@SpringBootTest
 public class UserServiceTest {
 
     @Mock
@@ -81,7 +85,58 @@ public class UserServiceTest {
         });
 
     }
-    
+
+    @Test
+    @DisplayName("T-0002 - Verificar que el usuario a dejar de seguir exista")
+    void verifyUnfollow(){
+        // arrange
+        FollowPostDTO followPostDTO = new FollowPostDTO(1, 2);
+
+        User seller = new User(2, "Seller 1", null, null, null);
+        User user = new User(1, "Usuario 1", null, List.of(seller), null);
+        seller.setFollowers(List.of(user));
+
+        Mockito.when(userRepository.findUserById(1)).thenReturn(Optional.of(user));
+        Mockito.when(userRepository.findUserById(2)).thenReturn(Optional.of(seller));
+
+        // assert
+        Assertions.assertTrue(userService.unFollow(followPostDTO));
+    }
+
+    @Test
+    @DisplayName("T-0002.1 - Verificar que retorna false al no encontrar el usuario a dejar de seguir")
+    void unfollowNonexistentUser(){
+        // arrange
+        FollowPostDTO followPostDTO = new FollowPostDTO(1, 2);
+
+        User seller = new User(2, "Seller 1", null, null, null);
+        User user = new User(1, "Usuario 1", null, List.of(seller), null);
+        seller.setFollowers(List.of(user));
+
+        Mockito.when(userRepository.findUserById(1)).thenReturn(Optional.of(user));
+        Mockito.when(userRepository.findUserById(2)).thenReturn(Optional.empty());
+
+
+        // assert
+        Assertions.assertFalse(userService.unFollow(followPostDTO));
+    }
+
+    @Test
+    @DisplayName("T-0002.2 - Verificar que haya una relacion al dejar de seguir")
+    void unfollowNonFollower(){
+        // arrange
+        FollowPostDTO followPostDTO = new FollowPostDTO(1, 2);
+
+        User seller = new User(2, "Seller 1", List.of(), null, null);
+        User user = new User(1, "Usuario 1", null, List.of(), null);
+
+        Mockito.when(userRepository.findUserById(1)).thenReturn(Optional.of(user));
+        Mockito.when(userRepository.findUserById(2)).thenReturn(Optional.of(seller));
+
+        // assert
+        Assertions.assertFalse(userService.unFollow(followPostDTO));
+    }
+
     @Test
     @DisplayName("US-0003 - Happy path :) ")
     public void orderListOk() {
@@ -92,21 +147,6 @@ public class UserServiceTest {
     @DisplayName("US-0003 - Sad path :( ")
     public void orderListThrowsException() {
         //Lanza BadRequestException
-    }
-
-
-
-    @Test
-    @DisplayName("T-0007 - Happy Path :D ")
-    void followerCountOk(){
-
-    }
-
-    @Test
-    @DisplayName("T-0007 - Sad Path D:")
-    void followerCountThrowsException(){
-        // Lanza NotFoundException
-
     }
 
     @Test
@@ -246,6 +286,19 @@ public class UserServiceTest {
         Assertions.assertNotNull(result);
         Assertions.assertEquals(3, result.getFollowed().get(0).getUser_id());
         Assertions.assertEquals(2, result.getFollowed().get(1).getUser_id());
+
+    }
+    
+    @Test
+    @DisplayName("T-0007 - Happy Path :D ")
+    void followerCountOk(){
+
+    }
+
+    @Test
+    @DisplayName("T-0007 - Sad Path D:")
+    void followerCountThrowsException(){
+        // Lanza NotFoundException
 
     }
 }
