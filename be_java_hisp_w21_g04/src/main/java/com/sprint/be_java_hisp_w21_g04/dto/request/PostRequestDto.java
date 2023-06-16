@@ -21,6 +21,7 @@ public class PostRequestDto {
      @NotNull(message = "El id no puede estar vacío.")
      private int userId;
      @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+     @NotNull(message = "La fecha no puede estar vacía.")
      private LocalDate date;
      private Product product;
      private int category;
