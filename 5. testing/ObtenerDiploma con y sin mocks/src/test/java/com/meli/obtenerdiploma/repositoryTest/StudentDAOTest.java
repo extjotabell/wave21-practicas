@@ -1,4 +1,4 @@
-package com.meli.obtenerdiploma.RepositoryTest;
+package com.meli.obtenerdiploma.repositoryTest;
 
 import com.meli.obtenerdiploma.exception.StudentNotFoundException;
 import com.meli.obtenerdiploma.model.StudentDTO;

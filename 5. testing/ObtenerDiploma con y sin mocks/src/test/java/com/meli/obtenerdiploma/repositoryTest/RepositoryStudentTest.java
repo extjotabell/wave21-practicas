@@ -1,14 +1,11 @@
-package com.meli.obtenerdiploma.RepositoryTest;
+package com.meli.obtenerdiploma.repositoryTest;
 
 
-import com.meli.obtenerdiploma.exception.StudentNotFoundException;
 import com.meli.obtenerdiploma.repository.IStudentRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.util.ResourceUtils;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
