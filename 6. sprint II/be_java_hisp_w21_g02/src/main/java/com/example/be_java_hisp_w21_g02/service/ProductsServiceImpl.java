@@ -1,28 +1,22 @@
 package com.example.be_java_hisp_w21_g02.service;
 
 import com.example.be_java_hisp_w21_g02.dto.PostDTO;
-import com.example.be_java_hisp_w21_g02.dto.ProductDTO;
 import com.example.be_java_hisp_w21_g02.dto.request.PostRequestDTO;
 import com.example.be_java_hisp_w21_g02.dto.response.UserPostResponseDTO;
 import com.example.be_java_hisp_w21_g02.exceptions.UserNotFoundException;
 import com.example.be_java_hisp_w21_g02.model.Post;
-import com.example.be_java_hisp_w21_g02.model.Product;
 import com.example.be_java_hisp_w21_g02.model.User;
 import com.example.be_java_hisp_w21_g02.repository.IUserRepository;
 import com.example.be_java_hisp_w21_g02.utils.Constants;
-import com.example.be_java_hisp_w21_g02.utils.DateConverter;
 import com.example.be_java_hisp_w21_g02.utils.ExceptionChecker;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 public class ProductsServiceImpl implements IProductsService{
@@ -38,8 +32,7 @@ public class ProductsServiceImpl implements IProductsService{
 
     @Override
     public ResponseEntity<?> createPost(PostRequestDTO postRequestDTO) {
-        Post post = _modelMapper.map(postRequestDTO, Post.class);
-
+        Post post = _mapper.mapPostRequestDTOToPost(postRequestDTO);
         try{
             ExceptionChecker.checkBadRequestException(postRequestDTO);
 
@@ -60,11 +53,10 @@ public class ProductsServiceImpl implements IProductsService{
             throw new UserNotFoundException("We couldn't find a user with the mentioned ID");
         }
 
-        List<PostDTO> postsDTO =
-            responseList.stream()
-                    .flatMap(user -> user.getPosts().stream())
-                    .map(post -> _modelMapper.map(post, PostDTO.class))
-                    .toList();
+        List<PostDTO> postsDTO = responseList.stream()
+                .flatMap(user -> user.getPosts().stream())
+                .map(post -> _mapper.mapPostToPostDTO(post))
+                .toList();
 
         return ResponseEntity.ok(new UserPostResponseDTO(userId, postsDTO));
     }
@@ -90,6 +82,6 @@ public class ProductsServiceImpl implements IProductsService{
 
         List<PostDTO> postsDTO = postList.stream().map( p -> _modelMapper.map(p, PostDTO.class)).toList();
 
-        return ResponseEntity.ok(postsDTO);
+        return ResponseEntity.ok(new UserPostResponseDTO(userId, postsDTO));
     }
 }
