@@ -8,6 +8,7 @@ import com.example.be_java_hisp_w21_g02.exceptions.UserNotSellerException;
 import com.example.be_java_hisp_w21_g02.model.User;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class ExceptionChecker {
     public static void checkUserAndSellerException(User persistedUser) {
@@ -40,6 +41,8 @@ public class ExceptionChecker {
         checkUserAndSellerException(persistedUnFollowUser);
         if (!persistedUser.follow(persistedUnFollowUser.getId())){
             throw new UserFollowingException("This user is already following the user you want to follow");
+        } else if(Objects.equals(persistedUser.getId(), persistedUnFollowUser.getId())){
+            throw new UserFollowingException( "The user can't follow itself");
         }
     }
 
