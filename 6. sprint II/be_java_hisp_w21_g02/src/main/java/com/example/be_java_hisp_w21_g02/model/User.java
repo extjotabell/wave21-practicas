@@ -19,8 +19,6 @@ public class User {
     private Set<Integer> followers;
     private List<Post> posts;
 
-
-
     public boolean follow(int userIdToFollow) {
         return following.add(userIdToFollow);
     }
@@ -36,7 +34,4 @@ public class User {
     public void unBeFollowed(int userId) {
         followers.remove(userId);
     }
-
-
-
 }
