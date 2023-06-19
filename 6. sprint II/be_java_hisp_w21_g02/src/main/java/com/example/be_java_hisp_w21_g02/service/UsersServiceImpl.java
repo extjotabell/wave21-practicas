@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class UsersServiceImpl implements IUsersService{
@@ -64,18 +65,12 @@ public class UsersServiceImpl implements IUsersService{
     public FollowersListDTO getFollowersList(int userId){
         User persistedUser = _usersRepository.getUser(userId);
         ExceptionChecker.checkUserAndSellerException(persistedUser);
-
-        return new FollowersListDTO(
-                persistedUser.getId(),
-                persistedUser.getUsername(),
-                getFollowDTO(persistedUser.getFollowers())
-        );
+        return _mapper.mapUserToFollowersListDTO(persistedUser, getFollowDTO(persistedUser.getFollowers()));
     }
 
     public FollowersListDTO getFollowersList(int userId, String order){
         User persistedUser = _usersRepository.getUser(userId);
         ExceptionChecker.checkUserAndSellerException(persistedUser);
-
         List<FollowerDTO> followersDTO = getFollowDTO(persistedUser.getFollowers());
         orderCollectionByOrderParam(followersDTO, order);
         return _mapper.mapUserToFollowersListDTO(persistedUser, followersDTO);
@@ -93,20 +88,12 @@ public class UsersServiceImpl implements IUsersService{
 
     public FollowedListDTO getFollowedList(int userId, String order){
         User persistedUser = _usersRepository.getUser(userId);
-
         if(persistedUser == null){
             throw new UserNotFoundException("We couldn't find a user with the mentioned ID");
         }
-
         List<FollowerDTO> followedDTO = getFollowDTO(persistedUser.getFollowing());
-
         orderCollectionByOrderParam(followedDTO, order);
-
-        return new FollowedListDTO(
-                persistedUser.getId(),
-                persistedUser.getUsername(),
-                followedDTO
-        );
+        return _mapper.mapUserToFollowedListDTO(persistedUser, followedDTO);
     }
 
     //region Extra Methods
@@ -123,9 +110,9 @@ public class UsersServiceImpl implements IUsersService{
      */
     private void orderCollectionByOrderParam(List<FollowerDTO> collection, String order) {
         if (order.equalsIgnoreCase(Constants.ORDER_NAME_ASC)) {
-            collection.sort(Comparator.comparing(FollowerDTO::getUserName));
+            collection.sort(Comparator.comparing(FollowerDTO::getUsername));
         } else if (order.equalsIgnoreCase(Constants.ORDER_NAME_DESC)) {
-            collection.sort(Comparator.comparing(FollowerDTO::getUserName).reversed());
+            collection.sort(Comparator.comparing(FollowerDTO::getUsername).reversed());
         }
     }
     //endregion

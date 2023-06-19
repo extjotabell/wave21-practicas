@@ -9,6 +9,7 @@ import com.example.be_java_hisp_w21_g02.model.User;
 import com.example.be_java_hisp_w21_g02.repository.IUserRepository;
 import com.example.be_java_hisp_w21_g02.utils.Constants;
 import com.example.be_java_hisp_w21_g02.utils.ExceptionChecker;
+import com.example.be_java_hisp_w21_g02.utils.Mapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,12 +23,11 @@ import java.util.Objects;
 public class ProductsServiceImpl implements IProductsService{
 
     private final IUserRepository _userRepository;
-    private final ModelMapper _modelMapper;
+    private Mapper _mapper;
 
     public ProductsServiceImpl(IUserRepository userRepository) {
         this._userRepository = userRepository;
-        this._modelMapper = new ModelMapper();
-
+        this._mapper = new Mapper();
     }
 
     @Override
@@ -80,7 +80,7 @@ public class ProductsServiceImpl implements IProductsService{
                         .toList();
 
 
-        List<PostDTO> postsDTO = postList.stream().map( p -> _modelMapper.map(p, PostDTO.class)).toList();
+        List<PostDTO> postsDTO = postList.stream().map( post -> _mapper.mapPostToPostDTO(post)).toList();
 
         return ResponseEntity.ok(new UserPostResponseDTO(userId, postsDTO));
     }
