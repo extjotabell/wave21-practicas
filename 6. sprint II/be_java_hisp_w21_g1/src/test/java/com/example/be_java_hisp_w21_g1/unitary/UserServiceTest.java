@@ -1,6 +1,8 @@
 package com.example.be_java_hisp_w21_g1.unitary;
 
+import com.example.be_java_hisp_w21_g1.DTO.Response.FollowUserDTO;
 import com.example.be_java_hisp_w21_g1.DTO.Response.FollowersCountDTO;
+import com.example.be_java_hisp_w21_g1.Exception.BadRequestException;
 import com.example.be_java_hisp_w21_g1.Model.User;
 import com.example.be_java_hisp_w21_g1.Repository.IUserRepository;
 import com.example.be_java_hisp_w21_g1.DTO.Request.FollowPostDTO;
@@ -24,12 +26,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 
-
-import java.util.ArrayList;
 import java.time.LocalDate;
 
 
@@ -146,15 +145,58 @@ public class UserServiceTest {
     }
 
     @Test
-    @DisplayName("US-0003 - Happy path :) ")
+    @DisplayName("US-0003 - Verificar que el criterio de ordenación exista, caso exitoso")
     public void orderListOk() {
+        //Arrange
+        String orderCriteria = "name_asc";
 
+        FollowUserDTO pepito = new FollowUserDTO(2, "Pepito");
+        FollowUserDTO jaime = new FollowUserDTO(3, "Jaime");
+
+        List<FollowUserDTO> followed = Arrays.asList(pepito, jaime);
+
+        User pepito1 = new User(2, "Pepito", null, List.of(), null);
+        User jaime1 = new User(3, "Jaime", null, List.of(), null);
+        List<User> followedUsers = Arrays.asList(pepito1, jaime1);
+        User user = new User(1, "Miguel", null, followedUsers, null);
+
+        //Expected
+        List<FollowUserDTO> orderedList = followed.stream().sorted(Comparator.comparing(FollowUserDTO::getUser_name)).toList();
+        FollowedListDTO expected = new FollowedListDTO(1, "Miguel", orderedList);
+
+        //Act
+        Mockito.when(userRepository.findUserById(1)).thenReturn(Optional.of(user));
+        FollowedListDTO actual = userService.getFollowedList(1, orderCriteria);
+
+        //Assert
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
-    @DisplayName("US-0003 - Sad path :( ")
+    @DisplayName("US-0003 - US-0003 - Verificar que el criterio de ordenación exista, caso no exitoso")
     public void orderListThrowsException() {
-        //Lanza BadRequestException
+        //Arrange
+        String orderCriteria = "name_ascending";
+
+        FollowUserDTO pepito = new FollowUserDTO(2, "Pepito");
+        FollowUserDTO jaime = new FollowUserDTO(3, "Jaime");
+
+        List<FollowUserDTO> followed = Arrays.asList(pepito, jaime);
+
+        User pepito1 = new User(2, "Pepito", null, List.of(), null);
+        User jaime1 = new User(3, "Jaime", null, List.of(), null);
+        List<User> followedUsers = Arrays.asList(pepito1, jaime1);
+        User user = new User(1, "Miguel", null, followedUsers, null);
+
+        //Expected
+        List<FollowUserDTO> orderedList = followed.stream().sorted(Comparator.comparing(FollowUserDTO::getUser_name)).toList();
+        FollowedListDTO expected = new FollowedListDTO(1, "Miguel", orderedList);
+
+        //Act
+        Mockito.when(userRepository.findUserById(1)).thenReturn(Optional.of(user));
+
+        //Assert
+        Assertions.assertThrows(BadRequestException.class, ()-> userService.getFollowedList(1, orderCriteria));
     }
 
     @Test
@@ -176,7 +218,7 @@ public class UserServiceTest {
         //Assert
        Assertions.assertEquals(expected, actual);
 
-    }∫
+    }
 
     @Test
     @DisplayName("T-0007 - Obtener cantidad de seguidores de un usuario inexistente")
@@ -333,6 +375,8 @@ public class UserServiceTest {
         Assertions.assertEquals(2, result.getFollowed().get(1).getUser_id());
 
     }
+
+
     
 
 }
