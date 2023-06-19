@@ -9,5 +9,6 @@ import lombok.Setter;
 @NoArgsConstructor @AllArgsConstructor
 public class FollowerDTO {
     private int userId;
-    private String userName;
+    @JsonProperty("user_name")
+    private String username;
 }
