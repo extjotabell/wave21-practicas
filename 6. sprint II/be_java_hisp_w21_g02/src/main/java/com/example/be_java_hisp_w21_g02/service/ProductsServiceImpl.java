@@ -34,13 +34,11 @@ public class ProductsServiceImpl implements IProductsService{
     @Override
     public ResponseEntity<?> createPost(PostRequestDTO postRequestDTO) {
         Post post = _mapper.mapPostRequestDTOToPost(postRequestDTO);
-        try{
-            ExceptionChecker.checkBadRequestException(postRequestDTO);
+        User user = _userRepository.getUser(post.getUserId());
+        ExceptionChecker.checkUserException(user);
 
-            _userRepository.createPost(post);
-        }catch (NullPointerException e) {
-            throw new UserNotFoundException("We couldn't find a user with the mentioned ID");
-        }
+        ExceptionChecker.checkBadRequestException(postRequestDTO);
+        _userRepository.createPost(post);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -52,12 +50,9 @@ public class ProductsServiceImpl implements IProductsService{
 
         ExceptionChecker.checkOrderExistsException(order);
 
-        List<User> responseList;
-        try {
-            responseList = _userRepository.listFollowingPosts2Weeks(userId);
-        } catch (NullPointerException e) {
-            throw new UserNotFoundException("We couldn't find a user with the mentioned ID");
-        }
+        User userPersisted = _userRepository.getUser(userId);
+        ExceptionChecker.checkUserException(userPersisted);
+        List<User> responseList = _userRepository.listFollowingPosts2Weeks(userId);
 
         List<Post> postList =
                 responseList.stream()
