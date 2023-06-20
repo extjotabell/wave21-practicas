@@ -2,24 +2,39 @@ package com.example.be_java_hisp_w21_g02.dto.request;
 
 import com.example.be_java_hisp_w21_g02.dto.ProductDTO;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.validation.constraints.Digits;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.validation.annotation.Validated;
 
+import java.math.BigInteger;
 import java.time.LocalDate;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
+@Validated
 public class PostRequestDTO {
+    @NotNull(message = "User ID is required")
+    @Positive(message = "User ID must be greater than zero")
     private Integer userId;
+
+    @NotNull(message = "Date is required")
+    //@NotEmpty(message = "Date is required")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private LocalDate date;
-    private ProductDTO product;
-    @Digits(integer = 10, fraction = 0, message = "The value must be an integer with up to 10 digits")
-    private Integer category;
+
+    private @Valid ProductDTO product;
+
+    @Max(value = 2147483647 , message = "The category value must be an integer with up to 10 digits")
+    @NotNull(message = "Category is required")
+    private BigInteger category;
+
+    @NotNull(message = "Price is required")
+    @Max(value = 10000000,message = "The maximum price of a product is 10000000")
     private Double price;
 }
