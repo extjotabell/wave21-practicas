@@ -5,13 +5,17 @@ import com.example.be_java_hisp_w21_g02.dto.response.FollowersListDTO;
 import com.example.be_java_hisp_w21_g02.exceptions.OrderNotFoundException;
 import com.example.be_java_hisp_w21_g02.service.IUsersService;
 import com.example.be_java_hisp_w21_g02.utils.Constants;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 
 @RestController
 @RequestMapping("/users")
+@Validated
 public class UsersController {
     private final IUsersService _userService;
 
@@ -19,15 +23,19 @@ public class UsersController {
         this._userService = _userService;
     }
 
-
+    // @Min(value = 1, message = "The id must be greater than zero")
+    //@Size(min = 1, message = "The id must be greater than zero")
     @PostMapping("/{userId}/follow/{userIdToFollow}")
-    public ResponseEntity<?>  followUser(@PathVariable int userId, @PathVariable int userIdToFollow){
+    public ResponseEntity<?> followUser(@PathVariable("userId") @Positive(message = "User ID must be greater than zero")
+                                            Integer userId,
+                                        @PathVariable("userIdToFollow") @Positive(message = "User ID to follow must be greater than zero")
+                                            Integer userIdToFollow){
         _userService.followUser(userId, userIdToFollow);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping("/{userId}/unfollow/{userIdToUnFollow}")
-    public ResponseEntity<?>  unFollowUser(@PathVariable int userId, @PathVariable int userIdToUnFollow){
+    public ResponseEntity<?>  unFollowUser(@PathVariable @Positive(message = "User ID must be greater than zero") int userId, @PathVariable @Positive(message = "User ID to follow must be greater than zero") int userIdToUnFollow){
         _userService.unFollowUser(userId, userIdToUnFollow);
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -39,7 +47,7 @@ public class UsersController {
         );
     }
     @GetMapping("/{userId}/followers/list")
-    public ResponseEntity<?> getFollowersList(@PathVariable int userId, @RequestParam(required = false) String order){
+    public ResponseEntity<?> getFollowersList(@PathVariable("userId") @Positive(message = "User ID must be greater than zero") int userId, @RequestParam(required = false) String order){
         if (order != null && !Constants.isOrderConstant(order))
             throw new OrderNotFoundException("The order type does not exist");
 
@@ -53,7 +61,7 @@ public class UsersController {
     }
 
     @GetMapping("/{userId}/followed/list")
-    public ResponseEntity<?> getFollowedist(@PathVariable int userId, @RequestParam(required = false) String order){
+    public ResponseEntity<?> getFollowedist(@PathVariable @Positive(message = "User ID must be greater than zero") int userId, @RequestParam(required = false) String order){
         if (order != null && !Constants.isOrderConstant(order))
             throw new OrderNotFoundException("The order type does not exist");
 

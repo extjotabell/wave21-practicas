@@ -2,6 +2,7 @@ package com.example.be_java_hisp_w21_g02.dto.request;
 
 import com.example.be_java_hisp_w21_g02.dto.ProductDTO;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.validation.constraints.Digits;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,6 +19,7 @@ public class PostRequestDTO {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private LocalDate date;
     private ProductDTO product;
+    @Digits(integer = 10, fraction = 0, message = "The value must be an integer with up to 10 digits")
     private Integer category;
     private Double price;
 }
