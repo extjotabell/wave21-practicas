@@ -25,17 +25,6 @@ public class ProductsController {
 
     @GetMapping("/followed/{userId}/list")
     public ResponseEntity<?> listFollowingPosts2Weeks(@PathVariable int userId, @RequestParam(required = false) String order){
-        if (order != null && !Constants.isOrderConstant(order))
-            throw new OrderNotFoundException("The order type does not exist");
-
-        ResponseEntity<?> result = new ResponseEntity<>(HttpStatus.OK);
-
-        if (order != null)
-            result =  _productsService.listFollowingPosts2Weeks(userId, order);
-        else
-            result =  _productsService.listFollowingPosts2Weeks(userId);
-
-
-        return result;
+        return _productsService.listFollowingPosts2Weeks(userId, order);
     }
 }

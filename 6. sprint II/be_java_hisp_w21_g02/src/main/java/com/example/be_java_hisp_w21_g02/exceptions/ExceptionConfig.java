@@ -64,21 +64,21 @@ public class ExceptionConfig {
 //        return error;
 //    }
 
-//    @ExceptionHandler(MethodArgumentNotValidException.class)
-//    @ResponseStatus(HttpStatus.BAD_REQUEST)
-//    @ResponseBody
-//    public ErrL handleMethodArgumentNotValidException(HttpServletRequest request, Exception ex) {
-//        ErrL error = new ErrL();
-//
-//        error.setTimestamp(new Date());
-//        error.setStatus(HttpStatus.BAD_REQUEST.value());
-//        error.addError(ex.getMessage());
-//        error.setPath(request.getServletPath());
-//
-//        LOGGER.error(ex.getMessage(), ex);
-//
-//        return error;
-//    }
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public ErrL handleMethodArgumentNotValidException(HttpServletRequest request, Exception ex) {
+        ErrL error = new ErrL();
+
+        error.setTimestamp(new Date());
+        error.setStatus(HttpStatus.BAD_REQUEST.value());
+        error.addError(ex.getMessage());
+        error.setPath(request.getServletPath());
+
+        LOGGER.error(ex.getMessage(), ex);
+
+        return error;
+    }
 
 //    @ExceptionHandler(Exception.class)
 //    public ResponseEntity<Map<String, String>> handleGenericException(Exception ex) {

@@ -30,46 +30,32 @@ public class UsersController {
                                             Integer userId,
                                         @PathVariable("userIdToFollow") @Positive(message = "User ID to follow must be greater than zero")
                                             Integer userIdToFollow){
+
         _userService.followUser(userId, userIdToFollow);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping("/{userId}/unfollow/{userIdToUnFollow}")
     public ResponseEntity<?>  unFollowUser(@PathVariable @Positive(message = "User ID must be greater than zero") int userId, @PathVariable @Positive(message = "User ID to follow must be greater than zero") int userIdToUnFollow){
+
         _userService.unFollowUser(userId, userIdToUnFollow);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/{userId}/followers/count")
     public ResponseEntity<?> getFollowersCount(@PathVariable int userId){
-        return new ResponseEntity<>(
-                _userService.getFollowersCount(userId), HttpStatus.OK
-        );
+
+        return new ResponseEntity<>(_userService.getFollowersCount(userId), HttpStatus.OK);
     }
     @GetMapping("/{userId}/followers/list")
     public ResponseEntity<?> getFollowersList(@PathVariable("userId") @Positive(message = "User ID must be greater than zero") int userId, @RequestParam(required = false) String order){
-        if (order != null && !Constants.isOrderConstant(order))
-            throw new OrderNotFoundException("The order type does not exist");
 
-        FollowersListDTO followersListDTO;
-        if (order != null)
-            followersListDTO =  _userService.getFollowersList(userId, order);
-        else
-            followersListDTO = _userService.getFollowersList(userId);
-
-        return new ResponseEntity<>(followersListDTO, HttpStatus.OK);
+        return new ResponseEntity<>( _userService.getFollowersList(userId, order), HttpStatus.OK);
     }
 
     @GetMapping("/{userId}/followed/list")
     public ResponseEntity<?> getFollowedist(@PathVariable @Positive(message = "User ID must be greater than zero") int userId, @RequestParam(required = false) String order){
-        if (order != null && !Constants.isOrderConstant(order))
-            throw new OrderNotFoundException("The order type does not exist");
 
-        FollowedListDTO followedListDTO;
-        if (order != null)
-            followedListDTO =  _userService.getFollowedList(userId, order);
-        else
-            followedListDTO = _userService.getFollowedList(userId);
-        return new ResponseEntity<> (followedListDTO, HttpStatus.OK);
+        return new ResponseEntity<>( _userService.getFollowedList(userId, order), HttpStatus.OK);
     }
 }

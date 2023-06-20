@@ -12,12 +12,6 @@ public interface IProductsService {
 
     /**
      * @param userId the id of the user that wants to know the posts of the last 2 weeks of the users that he follows
-     * @return A response entity with the status of the request and body with the list of posts ordered by date in descending order
-     */
-    ResponseEntity<?> listFollowingPosts2Weeks(int userId);
-
-    /**
-     * @param userId the id of the user that wants to know the posts of the last 2 weeks of the users that he follows
      * @param order parameter to order the list by date in ascending or descending order
      * @return A response entity with the status of the request and body with the list of posts ordered by date
      */

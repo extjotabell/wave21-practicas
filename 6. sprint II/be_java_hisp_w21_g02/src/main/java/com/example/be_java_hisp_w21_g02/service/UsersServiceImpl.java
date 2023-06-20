@@ -4,6 +4,7 @@ import com.example.be_java_hisp_w21_g02.dto.response.FollowedListDTO;
 import com.example.be_java_hisp_w21_g02.dto.response.FollowerDTO;
 import com.example.be_java_hisp_w21_g02.dto.response.FollowersCountDTO;
 import com.example.be_java_hisp_w21_g02.dto.response.FollowersListDTO;
+import com.example.be_java_hisp_w21_g02.exceptions.OrderNotFoundException;
 import com.example.be_java_hisp_w21_g02.exceptions.UserNotFoundException;
 import com.example.be_java_hisp_w21_g02.model.User;
 import com.example.be_java_hisp_w21_g02.repository.IUserRepository;
@@ -62,13 +63,11 @@ public class UsersServiceImpl implements IUsersService{
         return result;
     }
 
-    public FollowersListDTO getFollowersList(int userId){
-        User persistedUser = _usersRepository.getUser(userId);
-        ExceptionChecker.checkUserAndSellerException(persistedUser);
-        return _mapper.mapUserToFollowersListDTO(persistedUser, getFollowDTO(persistedUser.getFollowers()));
-    }
-
     public FollowersListDTO getFollowersList(int userId, String order){
+
+        order = order != null ? order : Constants.ORDER_DATE_DESC;
+        ExceptionChecker.checkOrderExistsException(order);
+
         User persistedUser = _usersRepository.getUser(userId);
         ExceptionChecker.checkUserAndSellerException(persistedUser);
         List<FollowerDTO> followersDTO = getFollowDTO(persistedUser.getFollowers());
@@ -76,17 +75,11 @@ public class UsersServiceImpl implements IUsersService{
         return _mapper.mapUserToFollowersListDTO(persistedUser, followersDTO);
     }
 
-    public FollowedListDTO getFollowedList(int userId){
-        User persistedUser = _usersRepository.getUser(userId);
-
-        if(persistedUser == null){
-            throw new UserNotFoundException("We couldn't find a user with the mentioned ID");
-        }
-
-        return _mapper.mapUserToFollowedListDTO(persistedUser, getFollowDTO(persistedUser.getFollowing()));
-    }
-
     public FollowedListDTO getFollowedList(int userId, String order){
+
+        order = order != null ? order : Constants.ORDER_DATE_DESC;
+        ExceptionChecker.checkOrderExistsException(order);
+
         User persistedUser = _usersRepository.getUser(userId);
         if(persistedUser == null){
             throw new UserNotFoundException("We couldn't find a user with the mentioned ID");

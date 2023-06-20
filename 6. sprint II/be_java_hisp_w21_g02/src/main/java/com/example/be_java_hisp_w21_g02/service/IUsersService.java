@@ -31,7 +31,7 @@ public interface IUsersService {
      * @param userId the id of the user that wants to know the number of followers
      * @return A DTO with the username, id and a list of followers which contains the name and id of each follower
      */
-    FollowersListDTO getFollowersList(int userId);
+//    FollowersListDTO getFollowersList(int userId);
 
     /**
      * @param userId the id of the user that wants to know its list of followers
@@ -39,12 +39,6 @@ public interface IUsersService {
      * @return A DTO with the username, id and an ordered by name list of followers  which contains the name and id of each follower
      */
     FollowersListDTO getFollowersList(int userId, String order);
-
-    /**
-     * @param userId the id of the user that wants to know its list of followed users
-     * @return A DTO with the username, id and a list of followed users which contains the name and id of each followed user
-     */
-    FollowedListDTO getFollowedList(int userId);
 
     /**
      * @param userId the id of the user that wants to know its list of followed users
