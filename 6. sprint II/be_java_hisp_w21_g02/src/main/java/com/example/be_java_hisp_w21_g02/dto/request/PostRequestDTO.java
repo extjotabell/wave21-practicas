@@ -24,7 +24,6 @@ public class PostRequestDTO {
     private Integer userId;
 
     @NotNull(message = "Date is required")
-    //@NotEmpty(message = "Date is required")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private LocalDate date;
 
