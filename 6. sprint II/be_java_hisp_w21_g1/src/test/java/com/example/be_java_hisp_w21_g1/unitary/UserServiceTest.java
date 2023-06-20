@@ -150,16 +150,16 @@ public class UserServiceTest {
         //Arrange
         String orderCriteria = "name_asc";
 
-        FollowUserDTO pepito = new FollowUserDTO(2, "Pepito");
-        FollowUserDTO jaime = new FollowUserDTO(3, "Jaime");
-
-        List<FollowUserDTO> followed = Arrays.asList(pepito, jaime);
-
-        User pepito1 = new User(2, "Pepito", null, List.of(), null);
-        User jaime1 = new User(3, "Jaime", null, List.of(), null);
-        List<User> followedUsers = Arrays.asList(pepito1, jaime1);
+        User pepito = new User(2, "Pepito", null, List.of(), null);
+        User jaime = new User(3, "Jaime", null, List.of(), null);
+        List<User> followedUsers = Arrays.asList(pepito, jaime);
         User user = new User(1, "Miguel", null, followedUsers, null);
 
+        FollowUserDTO pepitoDTO = new FollowUserDTO(pepito.getUser_id(), pepito.getUser_name());
+        FollowUserDTO jaimeDTO = new FollowUserDTO(jaime.getUser_id(), jaime.getUser_name());
+
+        List<FollowUserDTO> followed = Arrays.asList(pepitoDTO, jaimeDTO);
+        
         //Expected
         List<FollowUserDTO> orderedList = followed.stream().sorted(Comparator.comparing(FollowUserDTO::getUser_name)).toList();
         FollowedListDTO expected = new FollowedListDTO(1, "Miguel", orderedList);
@@ -178,19 +178,12 @@ public class UserServiceTest {
         //Arrange
         String orderCriteria = "name_ascending";
 
-        FollowUserDTO pepito = new FollowUserDTO(2, "Pepito");
-        FollowUserDTO jaime = new FollowUserDTO(3, "Jaime");
+        User pepito = new User(2, "Pepito", null, List.of(), null);
+        User jaime = new User(3, "Jaime", null, List.of(), null);
 
-        List<FollowUserDTO> followed = Arrays.asList(pepito, jaime);
+        List<User> followedUsers = Arrays.asList(pepito, jaime);
 
-        User pepito1 = new User(2, "Pepito", null, List.of(), null);
-        User jaime1 = new User(3, "Jaime", null, List.of(), null);
-        List<User> followedUsers = Arrays.asList(pepito1, jaime1);
         User user = new User(1, "Miguel", null, followedUsers, null);
-
-        //Expected
-        List<FollowUserDTO> orderedList = followed.stream().sorted(Comparator.comparing(FollowUserDTO::getUser_name)).toList();
-        FollowedListDTO expected = new FollowedListDTO(1, "Miguel", orderedList);
 
         //Act
         Mockito.when(userRepository.findUserById(1)).thenReturn(Optional.of(user));
