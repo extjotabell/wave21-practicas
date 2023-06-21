@@ -31,16 +31,16 @@ import java.util.*;
 import java.time.LocalDate;
 
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
-
 
 
 @ExtendWith(MockitoExtension.class)
 @SpringBootTest
 public class UserServiceTest {
-   @Autowired
-   @Mock
-   IUserRepository userRepository;
+    @Autowired
+    @Mock
+    IUserRepository userRepository;
 
 
     @InjectMocks
@@ -48,7 +48,7 @@ public class UserServiceTest {
 
     @Test
     @DisplayName("T-0001 - Verificar que el usuario a seguir exista - Happy Path")
-    void verifiedUserExistenceOk(){
+    void verifiedUserExistenceOk() {
         //Arrange
         Product product1 = new Product(1, "Producto1", "Type1", "Brand1", "Color1", "Notes1");
 
@@ -74,7 +74,7 @@ public class UserServiceTest {
 
     @Test
     @DisplayName("T-0001 - Verificar que el usuario a seguir no exista - Bad Path")
-    void verifiedUserExistenceNonOk(){
+    void verifiedUserExistenceNonOk() {
         //Arrange
         FollowPostDTO followPostDTO = new FollowPostDTO(1, 2);
 
@@ -86,7 +86,7 @@ public class UserServiceTest {
 
         //Act
         //Assert
-        Assertions.assertThrows(NotFoundException.class, ()-> {
+        Assertions.assertThrows(NotFoundException.class, () -> {
             userService.follow(followPostDTO);
         });
 
@@ -94,7 +94,7 @@ public class UserServiceTest {
 
     @Test
     @DisplayName("T-0002 - Verificar que el usuario a dejar de seguir exista")
-    void verifyUnfollow(){
+    void verifyUnfollow() {
         // arrange
         FollowPostDTO followPostDTO = new FollowPostDTO(1, 2);
 
@@ -111,7 +111,7 @@ public class UserServiceTest {
 
     @Test
     @DisplayName("T-0002.1 - Verificar que retorna false al no encontrar el usuario a dejar de seguir")
-    void unfollowNonexistentUser(){
+    void unfollowNonexistentUser() {
         // arrange
         FollowPostDTO followPostDTO = new FollowPostDTO(1, 2);
 
@@ -129,7 +129,7 @@ public class UserServiceTest {
 
     @Test
     @DisplayName("T-0002.2 - Verificar que haya una relacion al dejar de seguir")
-    void unfollowNonFollower(){
+    void unfollowNonFollower() {
         // arrange
         FollowPostDTO followPostDTO = new FollowPostDTO(1, 2);
 
@@ -158,7 +158,7 @@ public class UserServiceTest {
         FollowUserDTO jaimeDTO = new FollowUserDTO(jaime.getUser_id(), jaime.getUser_name());
 
         List<FollowUserDTO> followed = Arrays.asList(pepitoDTO, jaimeDTO);
-        
+
         //Expected
         List<FollowUserDTO> orderedList = followed.stream().sorted(Comparator.comparing(FollowUserDTO::getUser_name)).toList();
         FollowedListDTO expected = new FollowedListDTO(1, "Miguel", orderedList);
@@ -188,33 +188,33 @@ public class UserServiceTest {
         Mockito.when(userRepository.findUserById(1)).thenReturn(Optional.of(user));
 
         //Assert
-        Assertions.assertThrows(BadRequestException.class, ()-> userService.getFollowedList(1, orderCriteria));
+        Assertions.assertThrows(BadRequestException.class, () -> userService.getFollowedList(1, orderCriteria));
     }
 
     @Test
     @DisplayName("T-0007 - Obtener cantidad de seguidores de un usuario existente ")
-    void followerCountOk(){
+    void followerCountOk() {
         //Arrange
         int userId = 1;
         String user_name = "Juan";
         List<User> followers = new ArrayList<>();
-        followers.add(new User(2,"Pepe", null, null, null));
-        User user = new User(userId,user_name, followers, null, null);
+        followers.add(new User(2, "Pepe", null, null, null));
+        User user = new User(userId, user_name, followers, null, null);
 
-        FollowersCountDTO expected = new FollowersCountDTO(userId,user_name, 1);
+        FollowersCountDTO expected = new FollowersCountDTO(userId, user_name, 1);
 
         //Act
         Mockito.when(userRepository.findUserById(userId)).thenReturn(Optional.of(user));
         FollowersCountDTO actual = userService.getFollowersCount(userId);
 
         //Assert
-       Assertions.assertEquals(expected, actual);
+        Assertions.assertEquals(expected, actual);
 
     }
 
     @Test
     @DisplayName("T-0007 - Obtener cantidad de seguidores de un usuario inexistente")
-    void followerCountThrowsException(){
+    void followerCountThrowsException() {
         // Lanza NotFoundException
 
         int userId = 99;
@@ -224,13 +224,13 @@ public class UserServiceTest {
         Mockito.when(userRepository.findUserById(userId)).thenReturn(user);
 
         //Assert
-        Assertions.assertThrows(NotFoundException.class, ()-> userService.getFollowersCount(userId));
+        Assertions.assertThrows(NotFoundException.class, () -> userService.getFollowersCount(userId));
 
     }
 
     @Test
     @DisplayName("T-0004 - (Seguidores) Verificar el correcto ordenamiento ascendente por nombre. (US-0008)")
-    void getFollowersListAscOk(){
+    void getFollowersListAscOk() {
         //ARRANGE
         int idUser = 1;
         String order = "name_asc";
@@ -244,7 +244,7 @@ public class UserServiceTest {
         Optional<User> userMock = Optional.of(new User(
                 idUser,
                 "Pepe",
-                List.of(follower2,follower1),
+                List.of(follower2, follower1),
                 List.of(),
                 List.of()
         ));
@@ -265,7 +265,7 @@ public class UserServiceTest {
 
     @Test
     @DisplayName("T-0004 - (Seguidores) Verificar el correcto ordenamiento descendente por nombre. (US-0008)")
-    void getFollowersListDescOk(){
+    void getFollowersListDescOk() {
         //ARRANGE
         int idUser = 1;
         String order = "name_desc";
@@ -279,7 +279,7 @@ public class UserServiceTest {
         Optional<User> userMock = Optional.of(new User(
                 idUser,
                 "Pepe",
-                List.of(follower2,follower1),
+                List.of(follower2, follower1),
                 List.of(),
                 List.of()
         ));
@@ -300,7 +300,7 @@ public class UserServiceTest {
 
     @Test
     @DisplayName("T-0004 - (Seguidos) Verificar el correcto ordenamiento ascendente por nombre. (US-0008)")
-    void getFollowedsListAscOk(){
+    void getFollowedsListAscOk() {
         //ARRANGE
         int idUser = 1;
         String order = "name_asc";
@@ -315,7 +315,7 @@ public class UserServiceTest {
                 idUser,
                 "Pepe",
                 List.of(),
-                List.of(followed2,followed1),
+                List.of(followed2, followed1),
                 List.of()
         ));
 
@@ -335,7 +335,7 @@ public class UserServiceTest {
 
     @Test
     @DisplayName("T-0004 - (Seguidos) Verificar el correcto ordenamiento descendente por nombre. (US-0008)")
-    void getFollowedsListDescOk(){
+    void getFollowedsListDescOk() {
         //ARRANGE
         int idUser = 1;
         String order = "name_desc";
@@ -350,7 +350,7 @@ public class UserServiceTest {
                 idUser,
                 "Pepe",
                 List.of(),
-                List.of(followed2,followed1),
+                List.of(followed2, followed1),
                 List.of()
         ));
 
@@ -367,64 +367,91 @@ public class UserServiceTest {
         Assertions.assertEquals(2, result.getFollowed().get(1).getUser_id());
 
     }
+
     @Test
     @DisplayName("T-0005 - Verificar que el tipo de ordenamiento por fecha exista")
-    void checkSortOrderDateAscNoOk(){
+    void checkSortOrderDateAscOk() {
         //Arrange
-            int userId = 1;
-            String order = "date_asc";
+        int userId = 1;
+        String order = "date_asc";
 
-            User user = new User(userId, "Luz", new ArrayList<>(),new ArrayList<>(),new ArrayList<>());
-            List<User> userTwoFollowers = new ArrayList<>();
-            userTwoFollowers.add(user);
-            List<Post> userTwoPosts = new ArrayList<>();
-            userTwoPosts.add(new Post(
-                    2,
-                    1,
-                    LocalDate.now(),
-                    new Product(
-                            1,
-                            "Yerba",
-                            "No perecedero",
-                            "Mañanita",
-                            "Verde",
-                            "3x2 los jueves"
-                    ),
-                    1,
-                    15.7
-            ));
-            User userFollowed = new User(2,"Diana",userTwoFollowers,new ArrayList<>(),userTwoPosts);
-            List<User> userOneFollowed = new ArrayList<>();
-            userOneFollowed.add(userFollowed);
-            user.setFollowed(userOneFollowed);
+        User user = new User(userId, "Luz", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
 
-            List<PostDTO> postDTOS = new ArrayList<>();
-            userFollowed.getPosts().forEach(
-                    post -> {
-                        postDTOS.add(
-                                new PostDTO(
-                                        post.getUserId(),
-                                        post.getPostId(),
-                                        post.getLocalDate(),
-                                        post.getProduct(),
-                                        post.getCategory(),
-                                        post.getPrice()
-                                )
-                        );
-                    }
-            );
-            PostBySellerDTO expected = new PostBySellerDTO();
-            expected.setUser_id(userId);
-            expected.setPosts(postDTOS);
+        //Posts para usuario seguido (UserId = 2)
+        List<Post> userTwoPosts = new ArrayList<>();
+        userTwoPosts.add(new Post(
+                2,
+                1,
+                LocalDate.now(),
+                new Product(
+                        1,
+                        "Yerba",
+                        "No perecedero",
+                        "Mañanita",
+                        "Verde",
+                        "3x2 los jueves"
+                ),
+                1,
+                15.7
+        ));
+        //Lista de seguidores para usuario seguido(userID = 2)
+        List<User> userTwoFollowers = new ArrayList<>();
+        userTwoFollowers.add(user);
+
+        User userFollowed = new User(2, "Diana", userTwoFollowers, new ArrayList<>(), userTwoPosts);
+
+        //La lista de seguidos del user principal (UserId = 1)
+        List<User> userOneFollowed = new ArrayList<>();
+        userOneFollowed.add(userFollowed);
+        user.setFollowed(userOneFollowed);
+
+        //Mappeo de datos
+        List<PostDTO> postDTOS = new ArrayList<>();
+        userFollowed.getPosts().forEach(
+                post -> {
+                    postDTOS.add(
+                            new PostDTO(
+                                    post.getUserId(),
+                                    post.getPostId(),
+                                    post.getLocalDate(),
+                                    post.getProduct(),
+                                    post.getCategory(),
+                                    post.getPrice()
+                            )
+                    );
+                }
+        );
+
+        PostBySellerDTO expected = new PostBySellerDTO();
+        expected.setUser_id(userId);
+        expected.setPosts(postDTOS);
 
         //Mock
         Mockito
                 .when(userRepository.findUserById(userId))
                 .thenReturn(Optional.of(user));
         //Act
-        PostBySellerDTO result = userService.listPostsBySeller(userId,order);
+        PostBySellerDTO result = userService.listPostsBySeller(userId, order);
         //Assert
         Assertions.assertEquals(expected, result);
+
+    }
+
+    @Test
+    @DisplayName("T-0005 - Verificar que el tipo de ordenamiento por fecha no exista")
+    void checkSortOrderDateAscNoOk() {
+
+        //Arrange -- Order no existente
+        int userId = 1;
+        String order = "fecha_asc";
+        User user = new User(userId, "Luz", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+
+        Mockito
+                .when(userRepository.findUserById(userId))
+                .thenReturn(Optional.of(user));
+
+        //Assert
+        assertThrows(BadRequestException.class, () -> userService.listPostsBySeller(userId, order));
 
     }
 }
