@@ -43,6 +43,7 @@ class UserServiceTest {
     User juansito;
     User lucho;
     User fabri;
+    User orne;
 
     @BeforeEach
     void setUp() {
@@ -78,11 +79,11 @@ class UserServiceTest {
     }
 
     @Test
-    @DisplayName("T003- Verificar que el tipo de ordenamiento alfabético exista (US-0008)-Funciona Correctamente")
+    @DisplayName("T003- Verificar que el tipo de ordenamiento alfabético exista (US-0008)-Permite continuar con normalidad, con seguidos")
     void getFollowedTest(){
         /*Los seguidores de Ramiro son Juansito, Lucho y Fabri*/
         /*Arrange*/
-        Mockito.when(userRepo.getUserByID(ramiro.getId())).thenReturn(Optional.ofNullable(ramiro));
+        Mockito.when(userRepo.getUserByID(ramiro.getId())).thenReturn(Optional.of(ramiro));
         /*Act*/
         UserFollowedListDTO listaObtenida = service.getFollowed(ramiro.getId(), "");
         /*Assert*/
@@ -93,11 +94,11 @@ class UserServiceTest {
     }
 
     @Test
-    @DisplayName("T003- Verificar que el tipo de ordenamiento alfabético exista (US-0008)-Funciona Correctamente")
+    @DisplayName("T003- Verificar que el tipo de ordenamiento alfabético exista (US-0008)-Permite continuar con normalidad con seguidores")
     void getFollowersTest(){
         /*Los seguidos por Ramiro son nahuel, Lucho y Fabri*/
         /*Arrange*/
-        Mockito.when(userRepo.getUserByID(ramiro.getId())).thenReturn(Optional.ofNullable(ramiro));
+        Mockito.when(userRepo.getUserByID(ramiro.getId())).thenReturn(Optional.of(ramiro));
         /*Act*/
         UserFollowersListDTO listaObtenida = service.getFollowers(ramiro.getId(), "");
         /*Assert*/
@@ -132,11 +133,38 @@ class UserServiceTest {
     }
 
     @Test
+    @DisplayName("T003- Verificar que el tipo de ordenamiento alfabético exista (US-0008)-Permite continuar con normalidad, sin seguidos")
+    void getEmptyFollowedTest(){
+        /*Orne no sigue a nadie*/
+        /*Arrange*/
+        Mockito.when(userRepo.getUserByID(orne.getId())).thenReturn(Optional.of(orne));
+        /*Act*/
+        UserFollowedListDTO listaObtenida = service.getFollowed(orne.getId(), "");
+        /*Assert*/
+        Assertions.assertTrue(listaObtenida.getFollowed().isEmpty());
+
+    }
+
+    @Test
+    @DisplayName("T003- Verificar que el tipo de ordenamiento alfabético exista (US-0008)-Permite continuar con normalidad sin seguidos")
+    void getEmptyFollowersTest(){
+        /*Nadie sigue a orne :(*/
+        /*Arrange*/
+        Mockito.when(userRepo.getUserByID(orne.getId())).thenReturn(Optional.of(orne));
+        /*Act*/
+        UserFollowersListDTO listaObtenida = service.getFollowers(orne.getId(), "");
+        /*Assert*/
+        Assertions.assertTrue(listaObtenida.getFollowers().isEmpty());
+
+    }
+
+
+    @Test
     @DisplayName("T004- Devuelve la lista ordenada según el criterio solicitado - FOLLOWED NAME ASC")
     void getFollowedTestByNameASC(){
         /* La lista de los seguidores de Ramiro quedaria Fabri, Juansito, Lucho*/
         /*Arrange*/
-        Mockito.when(userRepo.getUserByID(ramiro.getId())).thenReturn(Optional.ofNullable(ramiro));
+        Mockito.when(userRepo.getUserByID(ramiro.getId())).thenReturn(Optional.of(ramiro));
         /*Act*/
         UserFollowedListDTO listaObtenida = service.getFollowed(ramiro.getId(), "name_asc");
         /*Assert*/
@@ -154,7 +182,7 @@ class UserServiceTest {
     void getFollowedTestByNameDESC(){
         /* La lista de los seguidores de Ramiro quedaria Lucho, Juansito, Fabri*/
         /*Arrange*/
-        Mockito.when(userRepo.getUserByID(ramiro.getId())).thenReturn(Optional.ofNullable(ramiro));
+        Mockito.when(userRepo.getUserByID(ramiro.getId())).thenReturn(Optional.of(ramiro));
         /*Act*/
         UserFollowedListDTO listaObtenida = service.getFollowed(ramiro.getId(), "name_desc");
         /*Assertion*/
@@ -174,7 +202,7 @@ class UserServiceTest {
     void getFollowersTestByNameASC(){
         /*La lista  de los seguidos por Ramiro quedaria Fabri , Lucho, Nauhel */
         /*Arrange*/
-        Mockito.when(userRepo.getUserByID(ramiro.getId())).thenReturn(Optional.ofNullable(ramiro));
+        Mockito.when(userRepo.getUserByID(ramiro.getId())).thenReturn(Optional.of(ramiro));
         /*Act*/
         UserFollowersListDTO listaObtenida = service.getFollowers(ramiro.getId(), "name_asc");
         /*Assert*/
@@ -194,7 +222,7 @@ class UserServiceTest {
 
         /*La lista  de los seguidos por Ramiro quedaria Nauhel , Lucho , Fabri */
 
-        Mockito.when(userRepo.getUserByID(ramiro.getId())).thenReturn(Optional.ofNullable(ramiro));
+        Mockito.when(userRepo.getUserByID(ramiro.getId())).thenReturn(Optional.of(ramiro));
 
         UserFollowersListDTO listaObtenida = service.getFollowers(ramiro.getId(), "name_desc");
 
@@ -213,6 +241,7 @@ class UserServiceTest {
         juansito = new User(3, "juancito", new ArrayList<>(), new ArrayList<>());
         lucho = new User(4, "luchoDelCampo", new ArrayList<>(), new ArrayList<>());
         fabri = new User(5, "Fabri", new ArrayList<>(), new ArrayList<>());
+        orne = new User(6, "Orne", new ArrayList<>(), new ArrayList<>());
 
         List<User> followers = new ArrayList<>();
         List<User> followed = new ArrayList<>();
