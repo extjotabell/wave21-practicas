@@ -3,15 +3,13 @@ package com.bootcamp.grupo3.socialmeli.dto.request;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import jakarta.validation.constraints.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class ProductDTO {
 
@@ -42,4 +40,6 @@ public class ProductDTO {
     @Size(max = 80, message = "La longitud no puede superar los 80 caracteres.")
     @Pattern(regexp =  "[\\w\\s]+", message = "Las notas no pueden poseer caracteres especiales.")
     private String notes;
+
+
 }
