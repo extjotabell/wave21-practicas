@@ -45,7 +45,7 @@ public class UserService implements IUserService {
         user.getFollowed().add(userToFollow);
         userToFollow.getFollowers().add(user);
 
-        return new MessageDTO(user.getName() + " siguio a " + userToFollow.getName() + " correctamente!");
+        return new MessageDTO(user.getName() + " siguió a " + userToFollow.getName() + " correctamente!");
     }
 
     @Override
