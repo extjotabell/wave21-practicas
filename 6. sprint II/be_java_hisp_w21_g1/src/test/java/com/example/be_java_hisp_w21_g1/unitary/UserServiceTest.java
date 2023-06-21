@@ -454,4 +454,36 @@ public class UserServiceTest {
         assertThrows(BadRequestException.class, () -> userService.listPostsBySeller(userId, order));
 
     }
+
+    @Test
+    @DisplayName("T-0008 - happy Path and unhappy Path")
+    void listPostsBySeller(){
+        // arrange
+        Product product1 = new Product(1, "Producto1", "Type1", "Brand1", "Color1", "Notes1");
+        Post post1 = new Post(1, 1, LocalDate.now(), product1, 1, 25.50);
+        Post post2 = new Post(1, 1, LocalDate.now(), product1, 1, 25.50);
+        Post post3 = new Post(1, 1, LocalDate.now().minusDays(13), product1, 1, 25.50);
+        Post post4 = new Post(1, 1, LocalDate.now().minusDays(14), product1, 1, 25.50);
+        Post post5 = new Post(1, 1, LocalDate.now().minusDays(90), product1, 1, 25.50);
+        ArrayList<Post> posts = new ArrayList<>();
+        posts.add(post1);
+        posts.add(post2);
+        posts.add(post3);
+        posts.add(post4);
+        posts.add(post5);
+        User user2 = new User(1, "Follower", new ArrayList<>(), new ArrayList<>(), posts);
+        ArrayList<User> followerList = new ArrayList<>();
+        followerList.add(user2);
+        User user1 = new User(1, "Martin", new ArrayList<>(), followerList, posts);
+        List<PostDTO> expectedPosts = new ArrayList<>();
+        expectedPosts.add(new PostDTO(post1.getUserId(), post1.getPostId(), post1.getLocalDate(), post1.getProduct(), post1.getCategory(), post1.getPrice()));
+        expectedPosts.add(new PostDTO(post2.getUserId(), post2.getPostId(), post2.getLocalDate(), post2.getProduct(), post2.getCategory(), post2.getPrice()));
+        expectedPosts.add(new PostDTO(post3.getUserId(), post3.getPostId(), post3.getLocalDate(), post3.getProduct(), post3.getCategory(), post3.getPrice()));
+        PostBySellerDTO expected = new PostBySellerDTO(1, expectedPosts);
+        when(userRepository.findUserById(1)).thenReturn(Optional.of(user1));
+        // act
+        PostBySellerDTO recived = userService.listPostsBySeller(1, null);
+        // assert
+        Assertions.assertEquals(expected, recived);
+    }
 }
