@@ -39,7 +39,7 @@ public class ExceptionsController {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     protected ResponseEntity<ExceptionDTO> validationException(MethodArgumentNotValidException e) {
         return ResponseEntity.badRequest().body(
-                new ExceptionDTO("Se encontraron los siguientes errores: ",
+                new ExceptionDTO("The following errors were found: ",
                         e.getAllErrors()
                                 .stream()
                                 .map(DefaultMessageSourceResolvable::getDefaultMessage)
@@ -50,7 +50,7 @@ public class ExceptionsController {
     @ExceptionHandler(ConstraintViolationException.class)
     protected ResponseEntity<ExceptionDTO> validationException(ConstraintViolationException e) {
         return ResponseEntity.badRequest().body(
-                new ExceptionDTO("Se encontraron los siguientes errores: ",
+                new ExceptionDTO("The following errors were found: ",
                         e.getConstraintViolations()
                                 .stream()
                                 .map(ConstraintViolation::getMessage)
