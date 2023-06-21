@@ -8,10 +8,7 @@ import com.example.be_java_hisp_w21_g02.model.Product;
 import com.example.be_java_hisp_w21_g02.model.User;
 import com.example.be_java_hisp_w21_g02.repository.IUserRepository;
 import com.example.be_java_hisp_w21_g02.service.UsersServiceImpl;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -141,5 +138,54 @@ public class UserServiceTest {
 
         //Assert
         verify(_userRepository, atLeastOnce()).persistFollows(user, userToFollow);
+    }
+
+    @Test
+    @DisplayName("Unit Test US07 T02 - UnFollow non-existing user throws exception")
+    void unfollowUserTestUserToUnFollowDoesntExists() {
+        //Arrange
+        int nonExistentUserId = 3000;
+        when(_userRepository.getUser(1)).thenReturn(user);
+        when(_userRepository.getUser(nonExistentUserId)).thenReturn(null);
+
+        //Act & Assert
+        Assertions.assertThrows(UserNotFoundException.class , () -> _userService.unFollowUser(user.getId(), nonExistentUserId));
+    }
+
+    @Test
+    @DisplayName("Unit Test US07 T03 - UnFollow user that is not being followed throws exception")
+    void unfollowUserTestUserToUnFollowNotBeingFollowed(){
+        //Arrange
+        userToFollow.setPosts(List.of(new Post(2, 1, LocalDate.now().minusDays(1),3, 50D, new Product())));
+        when(_userRepository.getUser(user.getId())).thenReturn(user);
+        when(_userRepository.getUser(userToFollow.getId())).thenReturn(userToFollow);
+
+        //Assert
+        UserFollowingException userFollowingException =
+                Assertions.assertThrows(UserFollowingException.class , () -> _userService.unFollowUser(user.getId(), userToFollow.getId()));
+        Assertions.assertEquals("This user is not following the user you want to unfollow", userFollowingException.getMessage());
+    }
+
+    @Test
+    @DisplayName("Unit Test US07 T04 - unFollow user that is not a seller throws exception")
+    void unfollowUserTestUserToUnFollowIsNotASeller(){
+        //Arrange
+        when(_userRepository.getUser(user.getId())).thenReturn(user);
+        when(_userRepository.getUser(userToFollow.getId())).thenReturn(userToFollow);
+
+        //Act & Assert
+        Assertions.assertThrows(UserNotSellerException.class , () -> _userService.unFollowUser(user.getId(), userToFollow.getId()));
+    }
+
+    @Test
+    @DisplayName("Unit Test US07 T05 - user who unfollows does not exist throws exception")
+    void unfollowUserTestUserWhoUnFollowsNotExists(){
+        //Arrange
+        int nonExistentUserId = 3000;
+        when(_userRepository.getUser(userToFollow.getId())).thenReturn(userToFollow);
+        when(_userRepository.getUser(nonExistentUserId)).thenReturn(null);
+
+        //Act & Assert
+        Assertions.assertThrows(UserNotFoundException.class , () -> _userService.unFollowUser(nonExistentUserId, userToFollow.getId()));
     }
 }
