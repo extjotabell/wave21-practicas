@@ -1,16 +1,19 @@
 package com.example.be_java_hisp_w21_g1.DTO.Response;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.validation.annotation.Validated;
 
-import javax.validation.constraints.*;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Valid
 public class ProductDTO {
 
     @NotNull(message = "Product_id can't be null")
