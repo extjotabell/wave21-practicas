@@ -4,13 +4,15 @@ import com.example.be_java_hisp_w21_g1.DTO.Request.FollowPostDTO;
 import com.example.be_java_hisp_w21_g1.DTO.Request.PostProductDTO;
 import com.example.be_java_hisp_w21_g1.DTO.Response.*;
 import com.example.be_java_hisp_w21_g1.Service.UserService;
+import jakarta.validation.constraints.Positive;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
+
 
 @RestController
 @Validated
@@ -22,7 +24,13 @@ public class Controller {
     //Recibe FollowPostDTO
     //Retorna status code
     @PostMapping("/users/{userId}/follow/{userIdToFollow}")
-    public ResponseEntity<ResponseDTO> follow(@PathVariable int userId, @PathVariable int userIdToFollow){
+    public ResponseEntity<ResponseDTO> follow(
+            @PathVariable(value = "userId", required = true)
+            @NotEmpty(message = "El id no puede estar vacío.")
+            @Positive(message = "El id debe ser mayor a cero")
+            int userId,
+            @PathVariable int userIdToFollow
+    ){
         FollowPostDTO followPostDTO = new FollowPostDTO(userId, userIdToFollow);
         ResponseEntity<ResponseDTO> response;
         userService.follow(followPostDTO);
