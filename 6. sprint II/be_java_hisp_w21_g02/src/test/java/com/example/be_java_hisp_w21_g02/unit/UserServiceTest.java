@@ -1,5 +1,6 @@
 package com.example.be_java_hisp_w21_g02.unit;
 
+import com.example.be_java_hisp_w21_g02.dto.response.FollowersCountDTO;
 import com.example.be_java_hisp_w21_g02.exceptions.UserFollowingException;
 import com.example.be_java_hisp_w21_g02.exceptions.UserNotFoundException;
 import com.example.be_java_hisp_w21_g02.exceptions.UserNotSellerException;
@@ -8,7 +9,10 @@ import com.example.be_java_hisp_w21_g02.model.Product;
 import com.example.be_java_hisp_w21_g02.model.User;
 import com.example.be_java_hisp_w21_g02.repository.IUserRepository;
 import com.example.be_java_hisp_w21_g02.service.UsersServiceImpl;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -129,6 +133,7 @@ public class UserServiceTest {
     void unfollowUserTestUserToUnfollowExists(){
         //Arrange
         userToFollow.setPosts(List.of(new Post(2, 1, LocalDate.now().minusDays(1),3, 50D, new Product())));
+        
         when(_userRepository.getUser(1)).thenReturn(user);
         when(_userRepository.getUser(2)).thenReturn(userToFollow);
         _userService.followUser(user.getId(), userToFollow.getId());
@@ -144,6 +149,7 @@ public class UserServiceTest {
     @DisplayName("Unit Test US07 T02 - UnFollow non-existing user throws exception")
     void unfollowUserTestUserToUnFollowDoesntExists() {
         //Arrange
+
         int nonExistentUserId = 3000;
         when(_userRepository.getUser(1)).thenReturn(user);
         when(_userRepository.getUser(nonExistentUserId)).thenReturn(null);
@@ -187,5 +193,59 @@ public class UserServiceTest {
 
         //Act & Assert
         Assertions.assertThrows(UserNotFoundException.class , () -> _userService.unFollowUser(nonExistentUserId, userToFollow.getId()));
+    }
+
+    @Test
+    @DisplayName("Unit Test US02 T01 - user with no followers gets 0 followers")
+    void getFollowersCountTestWithNoFollowers(){
+        //Arrange
+        user.setPosts(List.of(new Post(2, 1, LocalDate.now().minusDays(1),3, 50D, new Product())));
+        when(_userRepository.getUser(user.getId())).thenReturn(user);
+        FollowersCountDTO expected = new FollowersCountDTO(user.getId(), user.getUsername(), 0);
+
+        //Act
+        FollowersCountDTO result = _userService.getFollowersCount(user.getId());
+
+        // Assert
+        Assertions.assertEquals(expected,result);
+    }
+
+    
+    @Test
+    @DisplayName("Unit Test US02 T02 - user with one follower gets 1 follower")
+    void getFollowersCountTestWithOneFollower(){
+        //Arrange
+        userToFollow.setPosts(List.of(new Post(2, 1, LocalDate.now().minusDays(1),3, 50D, new Product())));
+        when(_userRepository.getUser(user.getId())).thenReturn(user);
+        when(_userRepository.getUser(userToFollow.getId())).thenReturn(userToFollow);
+        _userService.followUser(user.getId(), userToFollow.getId());
+        FollowersCountDTO expected = new FollowersCountDTO(userToFollow.getId(), userToFollow.getUsername(), 1);
+
+        //Act
+        FollowersCountDTO result = _userService.getFollowersCount(userToFollow.getId());
+
+        //Assert
+        Assertions.assertEquals(result, expected);
+    }
+
+    @Test
+    @DisplayName("Unit Test US02 T03 - user is not a seller")
+    void getFollowersCountTestUserIsNotSeller(){
+        //Arrange
+        when(_userRepository.getUser(user.getId())).thenReturn(user);
+
+        //Act & Assert
+        Assertions.assertThrows(UserNotSellerException.class , () -> _userService.getFollowersCount(user.getId()));
+    }
+
+    @Test
+    @DisplayName("Unit Test US07 T04 - Non-existent user throws exception")
+    void getFollowersCountTestUserDoesntExists() {
+        //Arrange
+        int nonExistentUserId = 3000;
+        when(_userRepository.getUser(nonExistentUserId)).thenReturn(null);
+
+        //Act & Assert
+        Assertions.assertThrows(UserNotFoundException.class , () -> _userService.getFollowersCount(nonExistentUserId));
     }
 }
