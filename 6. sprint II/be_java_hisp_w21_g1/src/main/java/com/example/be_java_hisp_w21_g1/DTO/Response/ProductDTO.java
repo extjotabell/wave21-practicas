@@ -28,5 +28,8 @@ public class ProductDTO {
     @Pattern(regexp = "^[a-zA-Z0-9\\s]+$", message = "Brand name can't contain special characters")
     private String brand;
     private String color;
+
+    @Size(max = 80, message = "Notes can't be longer than 80 characters")
+    @Pattern(regexp = "^[a-zA-Z0-9\\s]*$", message = "Notes can't contain special characters")
     private String notes;
 }
