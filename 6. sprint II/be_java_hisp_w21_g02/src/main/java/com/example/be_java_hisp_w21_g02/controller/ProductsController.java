@@ -3,6 +3,8 @@ package com.example.be_java_hisp_w21_g02.controller;
 import com.example.be_java_hisp_w21_g02.dto.request.PostRequestDTO;
 import com.example.be_java_hisp_w21_g02.service.IProductsService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -27,9 +29,8 @@ public class ProductsController {
     @GetMapping("/followed/{userId}/list")
     public ResponseEntity<?> listFollowingPosts2Weeks(@PathVariable
                                                           @Positive(message = "User ID to follow must be greater than zero")
-                                                          //@NotNull(message = "User ID must not be empty")
-                                                          int userId,
-
+                                                          @NotEmpty(message = "User ID must not be empty")
+                                                          Integer userId,
                                                       @RequestParam(required = false)
                                                       String order){
         return _productsService.listFollowingPosts2Weeks(userId, order);

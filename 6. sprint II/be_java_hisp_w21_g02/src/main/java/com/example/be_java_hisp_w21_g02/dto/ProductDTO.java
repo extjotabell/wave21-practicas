@@ -1,10 +1,8 @@
 package com.example.be_java_hisp_w21_g02.dto;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.validation.annotation.Validated;
 
 @AllArgsConstructor
@@ -12,6 +10,7 @@ import org.springframework.validation.annotation.Validated;
 @Getter
 @Setter
 @Validated
+@EqualsAndHashCode
 public class ProductDTO {
 
     @Positive(message = "The ProductId must be greater than zero")

@@ -10,8 +10,11 @@ import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.MissingPathVariableException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+
+import java.util.Collections;
 import java.util.stream.Collectors;
 
 @ControllerAdvice
@@ -54,6 +57,15 @@ public class ExceptionConfig {
         return ResponseEntity.badRequest().body(
                 new ExceptionDTO("The following errors were found in the validations:",
                         e.getConstraintViolations().stream().map(ConstraintViolation::getMessage).collect(Collectors.toList())
+                )
+        );
+    }
+
+    @ExceptionHandler(MissingPathVariableException.class)
+    public ResponseEntity<ExceptionDTO> missingPathVariableException(MissingPathVariableException e){
+        return ResponseEntity.badRequest().body(
+                new ExceptionDTO("The following errors were found in the validations:",
+                        Collections.singletonList(e.getMessage())
                 )
         );
     }

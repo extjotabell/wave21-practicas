@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.apache.commons.collections4.CollectionUtils;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -21,9 +22,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.ResponseEntity;
 
 import java.time.LocalDate;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -37,26 +36,27 @@ public class ProductServiceTest {
     ProductsServiceImpl productsService;
 
     @Test
-    @DisplayName("Unit Test T08 - OK")
-    void listFollowingPosts2WeeksTestOk(){
+    @DisplayName("Unit Test T08 - Obtain a list of posts from users that the user follows in the last 2 weeks in descendent date order")
+    void listFollowingPosts2WeeksTestObtainedListIsOk() {
         // Arrange
         User user = new User(1, "Usuario1", Set.of(2, 3),
                 Collections.emptySet(), Collections.emptyList()
         );
-
+        Product product = new Product();
+        ProductDTO productDTO = new ProductDTO();
         List<User> list = List.of(
-                new User(2, "Usuario2", Collections.emptySet(),Collections.emptySet(),
-                        List.of(new Post(2, 1, LocalDate.now().minusDays(1), 3, 50D, new Product()),
-                                new Post(2, 2, LocalDate.now().minusDays(2), 3, 50D, new Product()))),
-                new User(3, "Usuario3", Collections.emptySet(),Collections.emptySet(),
-                        List.of(new Post(3, 3, LocalDate.now().minusDays(3), 3, 50D, new Product()),
-                                new Post(3, 4, LocalDate.now().minusDays(4), 3, 50D, new Product()))));
+                new User(2, "Usuario2", Collections.emptySet(), Collections.emptySet(),
+                        List.of(new Post(2, 1, LocalDate.now().minusDays(1), 3, 50D, product),
+                                new Post(2, 2, LocalDate.now().minusDays(2), 3, 50D, product))),
+                new User(3, "Usuario3", Collections.emptySet(), Collections.emptySet(),
+                        List.of(new Post(3, 3, LocalDate.now().minusDays(3), 3, 50D, product),
+                                new Post(3, 4, LocalDate.now().minusDays(4), 3, 50D, product))));
 
         List<PostDTO> postsDTO = List.of(
-                new PostDTO(2, 1, LocalDate.now().minusDays(1), new ProductDTO(), 50, 100D),
-                new PostDTO(2, 2, LocalDate.now().minusDays(2), new ProductDTO(), 50, 100D),
-                new PostDTO(3, 3, LocalDate.now().minusDays(3), new ProductDTO(), 50, 100D),
-                new PostDTO(3, 4, LocalDate.now().minusDays(4), new ProductDTO(), 50, 100D));
+                new PostDTO(2, 1, LocalDate.now().minusDays(1), productDTO, 3, 50D),
+                new PostDTO(2, 2, LocalDate.now().minusDays(2), productDTO, 3, 50D),
+                new PostDTO(3, 3, LocalDate.now().minusDays(3), productDTO, 3, 50D),
+                new PostDTO(3, 4, LocalDate.now().minusDays(4), productDTO, 3, 50D));
 
         ResponseEntity<UserPostResponseDTO> expected = ResponseEntity.ok(new UserPostResponseDTO(1, postsDTO));
 
@@ -65,15 +65,10 @@ public class ProductServiceTest {
         Mockito.when(userRepository.listFollowingPosts2Weeks(1)).thenReturn(list);
 
         // Act
-        ResponseEntity<UserPostResponseDTO> result =  (ResponseEntity<UserPostResponseDTO>) productsService.listFollowingPosts2Weeks(1, "date_desc");
+        ResponseEntity<UserPostResponseDTO> result = (ResponseEntity<UserPostResponseDTO>) productsService.listFollowingPosts2Weeks(1, "date_desc");
 
         // Assert
-        Assertions.assertEquals(expected.getStatusCode(), result.getStatusCode());
-
-        Assertions.assertEquals(expected.getBody().getPosts().get(0).getPostId(),result.getBody().getPosts().get(0).getPostId());
-        Assertions.assertEquals(expected.getBody().getPosts().get(1).getPostId(),result.getBody().getPosts().get(1).getPostId());
-        Assertions.assertEquals(expected.getBody().getPosts().get(2).getPostId(),result.getBody().getPosts().get(2).getPostId());
-        Assertions.assertEquals(expected.getBody().getPosts().get(3).getPostId(),result.getBody().getPosts().get(3).getPostId());
+        Assertions.assertEquals(expected.getBody(), result.getBody());
     }
 
     @Test
@@ -93,13 +88,11 @@ public class ProductServiceTest {
     void listFollowingPosts2WeeksTestUserNotExists() {
         // Arrange
         int userId = 2000000;
-
-        // Mock
-        Mockito.when(userRepository.getUser(userId)).thenThrow(UserNotFoundException.class);
+        String order = "date_desc";
 
         // Act & Assert
         assertThrows(UserNotFoundException.class, () -> {
-            userRepository.getUser(userId);
+            productsService.listFollowingPosts2Weeks(userId, order);
         });
     }
 }
