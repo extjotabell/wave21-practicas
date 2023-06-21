@@ -26,8 +26,8 @@ public class Controller {
     @PostMapping("/users/{userId}/follow/{userIdToFollow}")
     public ResponseEntity<ResponseDTO> follow(
             @PathVariable(value = "userId", required = true)
-            @NotEmpty(message = "El id no puede estar vacío.")
-            @Positive(message = "El id debe ser mayor a cero")
+            @NotEmpty(message = "user_id can't be empty")
+            @Positive(message = "user_id must be greater than zero ")
             int userId,
             @PathVariable int userIdToFollow
     ){

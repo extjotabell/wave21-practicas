@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
@@ -20,15 +21,19 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class PostProductDTO {
 
-  @NotEmpty(message = "El id no puede estar vacío.")
-  @Positive(message = "El id debe ser mayor a cero")
+  @NotEmpty(message = "user_id can't be empty")
+  @Positive(message = "user_id must be greater than zero")
   int user_id;
 
   @JsonFormat(pattern="dd-MM-yyyy")
   @NotNull(message = "The date cannot be null")
   LocalDate date;
 
-  @Valid ProductDTO product;
+  @Valid
+  ProductDTO product;
+
+  @Positive(message = "category can't be empty")
   int category;
+
   Double price;
 }
