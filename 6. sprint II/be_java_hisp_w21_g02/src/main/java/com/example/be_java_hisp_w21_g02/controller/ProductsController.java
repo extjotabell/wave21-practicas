@@ -1,15 +1,18 @@
 package com.example.be_java_hisp_w21_g02.controller;
 
 import com.example.be_java_hisp_w21_g02.dto.request.PostRequestDTO;
-import com.example.be_java_hisp_w21_g02.exceptions.OrderNotFoundException;
 import com.example.be_java_hisp_w21_g02.service.IProductsService;
-import com.example.be_java_hisp_w21_g02.utils.Constants;
-import org.springframework.http.HttpStatus;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/products")
+@Validated
 public class ProductsController {
 
     private final IProductsService _productsService;
@@ -19,23 +22,17 @@ public class ProductsController {
     }
 
     @PostMapping("/post")
-    public ResponseEntity<?> createPost(@RequestBody PostRequestDTO postRequestDTO){
+    public ResponseEntity<?> createPost(@RequestBody @Valid PostRequestDTO postRequestDTO){
         return _productsService.createPost(postRequestDTO);
     }
 
     @GetMapping("/followed/{userId}/list")
-    public ResponseEntity<?> listFollowingPosts2Weeks(@PathVariable int userId, @RequestParam(required = false) String order){
-        if (order != null && !Constants.isOrderConstant(order))
-            throw new OrderNotFoundException("The order type does not exist");
-
-        ResponseEntity<?> result = new ResponseEntity<>(HttpStatus.OK);
-
-        if (order != null)
-            result =  _productsService.listFollowingPosts2Weeks(userId, order);
-        else
-            result =  _productsService.listFollowingPosts2Weeks(userId);
-
-
-        return result;
+    public ResponseEntity<?> listFollowingPosts2Weeks(@PathVariable
+                                                          @Positive(message = "User ID to follow must be greater than zero")
+                                                          @NotEmpty(message = "User ID must not be empty")
+                                                          Integer userId,
+                                                      @RequestParam(required = false)
+                                                      String order){
+        return _productsService.listFollowingPosts2Weeks(userId, order);
     }
 }

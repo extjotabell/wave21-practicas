@@ -9,28 +9,23 @@ import com.example.be_java_hisp_w21_g02.model.User;
 import com.example.be_java_hisp_w21_g02.repository.IUserRepository;
 import com.example.be_java_hisp_w21_g02.utils.Constants;
 import com.example.be_java_hisp_w21_g02.utils.ExceptionChecker;
-import org.modelmapper.ModelMapper;
+import com.example.be_java_hisp_w21_g02.utils.Mapper;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
-
-
+import java.util.stream.Collectors;
 
 @Service
 public class UsersServiceImpl implements IUsersService{
 
-
     private final IUserRepository _usersRepository;
+    private Mapper _mapper;
 
-    private final ModelMapper _modelMapper;
-
-
-    public UsersServiceImpl(IUserRepository _usersRepository) {
-        this._usersRepository = _usersRepository;
-        this._modelMapper = new ModelMapper();
+    public UsersServiceImpl(IUserRepository usersRepository) {
+        this._usersRepository = usersRepository;
+        this._mapper = new Mapper();
     }
 
     public void followUser(int userId, int userIdToFollow){
@@ -59,78 +54,43 @@ public class UsersServiceImpl implements IUsersService{
         User persistedUser = _usersRepository.getUser(userId);
         ExceptionChecker.checkUserAndSellerException(persistedUser);
 
-        FollowersCountDTO result = _modelMapper.map(persistedUser, FollowersCountDTO.class);
+        FollowersCountDTO result = _mapper.mapUserToFollowersCountDTO(persistedUser);
         result.setFollowersCount(persistedUser.getFollowers().size());
 
         return result;
     }
 
-    public FollowersListDTO getFollowersList(int userId){
-        User persistedUser = _usersRepository.getUser(userId);
-        ExceptionChecker.checkUserAndSellerException(persistedUser);
-
-        return new FollowersListDTO(
-                persistedUser.getId(),
-                persistedUser.getUsername(),
-                getFollowDTO(persistedUser.getFollowers())
-        );
-    }
-
     public FollowersListDTO getFollowersList(int userId, String order){
+
+        order = order != null ? order : Constants.ORDER_DATE_DESC;
+        ExceptionChecker.checkOrderExistsException(order);
+
         User persistedUser = _usersRepository.getUser(userId);
         ExceptionChecker.checkUserAndSellerException(persistedUser);
-
         List<FollowerDTO> followersDTO = getFollowDTO(persistedUser.getFollowers());
-
         orderCollectionByOrderParam(followersDTO, order);
-
-        return new FollowersListDTO(
-                persistedUser.getId(),
-                persistedUser.getUsername(),
-                followersDTO
-        );
-    }
-
-    public FollowedListDTO getFollowedList(int userId){
-        User persistedUser = _usersRepository.getUser(userId);
-
-        if(persistedUser == null){
-            throw new UserNotFoundException("We couldn't find a user with the mentioned ID");
-        }
-
-        return new FollowedListDTO(
-                persistedUser.getId(),
-                persistedUser.getUsername(),
-                getFollowDTO(persistedUser.getFollowing())
-        );
+        return _mapper.mapUserToFollowersListDTO(persistedUser, followersDTO);
     }
 
     public FollowedListDTO getFollowedList(int userId, String order){
-        User persistedUser = _usersRepository.getUser(userId);
 
+        order = order != null ? order : Constants.ORDER_DATE_DESC;
+        ExceptionChecker.checkOrderExistsException(order);
+
+        User persistedUser = _usersRepository.getUser(userId);
         if(persistedUser == null){
             throw new UserNotFoundException("We couldn't find a user with the mentioned ID");
         }
-
         List<FollowerDTO> followedDTO = getFollowDTO(persistedUser.getFollowing());
-
         orderCollectionByOrderParam(followedDTO, order);
-
-        return new FollowedListDTO(
-                persistedUser.getId(),
-                persistedUser.getUsername(),
-                followedDTO
-        );
+        return _mapper.mapUserToFollowedListDTO(persistedUser, followedDTO);
     }
 
     //region Extra Methods
 
     private List<FollowerDTO> getFollowDTO(Set<Integer> usersIds){
-        List<User> followers = _usersRepository.getUsers(usersIds);
-        List<FollowerDTO> followersDTO = new ArrayList<>();
-        followers.forEach(follower -> followersDTO.add(new FollowerDTO(follower.getId(),follower.getUsername())));
-
-        return  followersDTO;
+        List<User> users = _usersRepository.getUsers(usersIds);
+        return users.stream().map(user -> _mapper.mapUserToFollowerDTO(user)).collect(Collectors.toList());
     }
 
     /**
@@ -140,9 +100,9 @@ public class UsersServiceImpl implements IUsersService{
      */
     private void orderCollectionByOrderParam(List<FollowerDTO> collection, String order) {
         if (order.equalsIgnoreCase(Constants.ORDER_NAME_ASC)) {
-            collection.sort(Comparator.comparing(FollowerDTO::getUserName));
+            collection.sort(Comparator.comparing(FollowerDTO::getUsername));
         } else if (order.equalsIgnoreCase(Constants.ORDER_NAME_DESC)) {
-            collection.sort(Comparator.comparing(FollowerDTO::getUserName).reversed());
+            collection.sort(Comparator.comparing(FollowerDTO::getUsername).reversed());
         }
     }
     //endregion
