@@ -12,6 +12,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class ExceptionChecker {
+
     public static void checkUserAndSellerException(User persistedUser) {
         checkUserException(persistedUser);
         if (persistedUser.getPosts().isEmpty()) {

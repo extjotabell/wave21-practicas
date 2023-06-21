@@ -36,7 +36,7 @@ public class ProductServiceTest {
     ProductsServiceImpl productsService;
 
     @Test
-    @DisplayName("Unit Test T08 - Obtain a list of posts from users that the user follows in the last 2 weeks in descendent date order")
+    @DisplayName("Unit Test US08 T01 - Obtain a list of posts from users that the user follows in the last 2 weeks in descendent date order")
     void listFollowingPosts2WeeksTestObtainedListIsOk() {
         // Arrange
         User user = new User(1, "Usuario1", Set.of(2, 3),
@@ -72,7 +72,7 @@ public class ProductServiceTest {
     }
 
     @Test
-    @DisplayName("Unit Test T08 - OrderNotExists")
+    @DisplayName("Unit Test US08 T02 - OrderNotExists")
     void listFollowingPosts2WeeksTestOrderNotExists() {
         // Arrange
         String order = "order_not_exists";
@@ -84,7 +84,7 @@ public class ProductServiceTest {
     }
 
     @Test
-    @DisplayName("Unit Test T08 - UserNotExists")
+    @DisplayName("Unit Test US08 T03 - UserNotExists")
     void listFollowingPosts2WeeksTestUserNotExists() {
         // Arrange
         int userId = 2000000;
