@@ -7,9 +7,13 @@ import com.example.be_java_hisp_w21_g1.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
+@Validated
 public class Controller {
     @Autowired
     UserService userService;
@@ -53,7 +57,7 @@ public class Controller {
     //Recibe PostProductDTO
     //Retorna status code
     @PostMapping("/products/post")
-    public ResponseEntity<?> createPost(@RequestBody PostProductDTO postProductDTO){
+    public ResponseEntity<?> createPost(@RequestBody @Valid PostProductDTO postProductDTO){
         userService.createPost(postProductDTO);
         return new ResponseEntity<>("Se ha creado el post!", HttpStatus.OK);
     }
