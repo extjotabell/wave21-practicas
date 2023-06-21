@@ -5,30 +5,25 @@ import com.bootcamp.grupo3.socialmeli.dto.request.ProductDTO;
 import com.bootcamp.grupo3.socialmeli.dto.response.UserPostListDTO;
 import com.bootcamp.grupo3.socialmeli.model.Post;
 import com.bootcamp.grupo3.socialmeli.model.Product;
-import com.bootcamp.grupo3.socialmeli.repository.PostRepository;
 import com.bootcamp.grupo3.socialmeli.repository.interfaces.IPostRepository;
 import com.bootcamp.grupo3.socialmeli.service.interfaces.IUserService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.util.Assert;
 
 import java.time.LocalDate;
-import java.time.temporal.TemporalAmount;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 
@@ -56,9 +51,10 @@ class PostServiceTest {
     Product producto6;
     List<Post> postList1;
     List<Post> postList2;
+
     @BeforeEach
     void setUp() {
-        followed = List.of(1,2);
+        followed = List.of(1, 2);
 
         producto1 = new Product(1, "PocoPhone", "Celular", "Xiaomi", "Negro", "alto Celu");
         producto3 = new Product(3, "Redmi 13", "Celular", "Xiaomi", "Negro", "alto Celu");
@@ -91,10 +87,14 @@ class PostServiceTest {
     }
 
     @Test
-    void createPost() {
+    @DisplayName("T-0005 / Verificar que el tipo de ordenamiento por fecha exista (US-0009) / Usuario no existe")
+    void getPostOfWeekOfInvalidUser() {
+        List<Post> result = postRepository.getPostsByUserInTwoWeeks(10);
+        Assertions.assertEquals(0, result.size());
     }
 
     @Test
+    @DisplayName("T-0005 / Verificar que el tipo de ordenamiento por fecha exista (US-0009) / Permite continuar con normalidad.")
     void getPostList() {
         List<PostDTO> expected = this.sortedList.stream().sorted(Comparator.comparing(PostDTO::getDate)).toList();
         when(userService.getFollowedByUser(0)).thenReturn(followed);
@@ -108,6 +108,7 @@ class PostServiceTest {
     }
 
     @Test
+    @DisplayName("T-0006 / Verificar el correcto ordenamiento ascendente y descendente por fecha. (US-0009) / Devuelve la lista ordenada")
     void getPostListReversedOrder() {
 
         List<PostDTO> expected = this.sortedList.stream().sorted(Comparator.comparing(PostDTO::getDate).reversed()).toList();
@@ -123,6 +124,7 @@ class PostServiceTest {
     }
 
     @Test
+    @DisplayName("T-0006 / Verificar el correcto ordenamiento ascendente y descendente por precio. (US-0009) / Ordenamiento ascendente")
     void getPostListOrderPrice() {
 
         List<PostDTO> expected = this.sortedList.stream().sorted(Comparator.comparing(PostDTO::getPrice)).toList();
@@ -138,6 +140,7 @@ class PostServiceTest {
     }
 
     @Test
+    @DisplayName("T-0006 / Verificar el correcto ordenamiento ascendente y descendente por precio. (US-0009) / Ordenamiento descendenete")
     void getPostListOrderPriceReversed() {
 
         List<PostDTO> expected = this.sortedList.stream().sorted(Comparator.comparing(PostDTO::getPrice).reversed()).toList();
@@ -150,11 +153,5 @@ class PostServiceTest {
 
         Assertions.assertEquals(expected.size(), postList.getPosts().size());
         Assertions.assertArrayEquals(expected.toArray(), postList.getPosts().toArray());
-    }
-
-    @Test
-    void getPostOfWeekOfInvalidUser() {
-        List<Post> result = postRepository.getPostsByUserInTwoWeeks(10);
-        Assertions.assertEquals(0, result.size());
     }
 }

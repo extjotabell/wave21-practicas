@@ -3,6 +3,7 @@ package com.bootcamp.grupo3.socialmeli.repository;
 import com.bootcamp.grupo3.socialmeli.model.Post;
 import com.bootcamp.grupo3.socialmeli.model.Product;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -19,6 +20,7 @@ public class PostRepositoryTest {
     PostRepository postRepository;
 
     @Test
+    @DisplayName("T-0008 / Verificar que la consulta de publicaciones realizadas en las últimas dos semanas de un determinado vendedor sean efectivamente de las últimas dos semanas. (US-0006) / Permite continuar con normalidad.")
     void getPostOfWeek() {
         LocalDate today = LocalDate.now();
         List<Post> expected = List.of(
