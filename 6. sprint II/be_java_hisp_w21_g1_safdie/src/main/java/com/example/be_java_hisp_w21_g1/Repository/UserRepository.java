@@ -42,7 +42,7 @@ public class UserRepository implements IUserRepository {
         posts.add(post4);
 
         User user1 = new User(1, "Pepe", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
-        User user2 = new User(2, "Pablo", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        User user2 = new User(2, "Pablo", new ArrayList<>(), new ArrayList<>(), posts);
         User user3 = new User(3, "Pedro", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
         User user4 = new User(4, "USUARIO NUEVO", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
 
