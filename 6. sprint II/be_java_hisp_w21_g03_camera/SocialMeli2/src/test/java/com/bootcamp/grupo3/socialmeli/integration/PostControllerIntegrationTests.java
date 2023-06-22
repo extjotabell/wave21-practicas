@@ -32,7 +32,7 @@ class PostControllerIntegrationTests {
             .writer();
 
     @Test
-    @DisplayName("Test integración - Agregar una nueva publicacion - OK")
+    @DisplayName("TI-1 - Agregar una nueva publicacion - OK")
     void PostNewPostOK() throws Exception {
         ProductDTO newProductDTO = new ProductDTO(1,
                 "Silla Gamer LX12",

@@ -19,7 +19,7 @@ class UserControllerIntegrationTests {
     MockMvc mockMvc;
 
     @Test
-    @DisplayName("Test integración - Seguir a un usuario no seguido - OK")
+    @DisplayName("TI-2 - Seguir a un usuario no seguido - OK")
     void followUserOk() throws Exception {
         String followerName = "mtato";
         String userToFollowName = "nauhel";
@@ -33,7 +33,7 @@ class UserControllerIntegrationTests {
     }
 
     @Test
-    @DisplayName("Test integración - Intentar seguirse a si mismo - Bad Request")
+    @DisplayName("TI-3 - Intentar seguirse a si mismo - Bad Request")
     void followSameUserBadRequest() throws Exception {
         String expectedResponseMessage = "No te puedes seguir a tí mismo!";
         var request = post("/users/{userId}/follow/{userIdToFollow}",1,1);
@@ -45,7 +45,7 @@ class UserControllerIntegrationTests {
     }
 
     @Test
-    @DisplayName("Test integración - Dejar de seguir a un usuario no seguido - Bad Request")
+    @DisplayName("TI-4 - Dejar de seguir a un usuario no seguido - Bad Request")
     void unfollowUserNotBeingFollowedBadRequest() throws Exception {
         String userToUnfollowName = "nauhel";
         String expectedResponseMessage = "El usuario " + userToUnfollowName + " no se encuentra en tu lista de seguidos.";
