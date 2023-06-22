@@ -4,12 +4,18 @@ import com.example.be_java_hisp_w21_g1.DTO.Request.FollowPostDTO;
 import com.example.be_java_hisp_w21_g1.DTO.Request.PostProductDTO;
 import com.example.be_java_hisp_w21_g1.DTO.Response.*;
 import com.example.be_java_hisp_w21_g1.Service.UserService;
+import jakarta.validation.Valid;
+
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@Validated
 public class Controller {
     @Autowired
     UserService userService;
@@ -18,7 +24,13 @@ public class Controller {
     //Recibe FollowPostDTO
     //Retorna status code
     @PostMapping("/users/{userId}/follow/{userIdToFollow}")
-    public ResponseEntity<ResponseDTO> follow(@PathVariable int userId, @PathVariable int userIdToFollow){
+    public ResponseEntity<ResponseDTO> follow(
+           @PathVariable(value = "userId", required = true)
+            @NotNull(message = "User_id can't be empty")
+            @Positive(message = "User_id can't be less than 0")
+                Integer userId,
+           @PathVariable Integer userIdToFollow
+    ){
         FollowPostDTO followPostDTO = new FollowPostDTO(userId, userIdToFollow);
         ResponseEntity<ResponseDTO> response;
         userService.follow(followPostDTO);
@@ -26,26 +38,42 @@ public class Controller {
     }
 
     //US 0002: Obtener el resultado de la cantidad de usuarios que siguen a un determinado vendedor
-    //Recibe UserIdDTO
+    //Recibe Integer
     //Retorna FollowersCountDTO
     @GetMapping("/users/{userId}/followers/count")
-    public ResponseEntity<FollowersCountDTO> countFollowers(@PathVariable int userId) {
+    public ResponseEntity<FollowersCountDTO> countFollowers(
+            @PathVariable(value = "userId", required = true)
+                @NotNull(message = "User_id can't be empty")
+                @Positive(message = "User_id can't be less than 0")
+                    Integer userId
+    ) {
         return new ResponseEntity<>(userService.getFollowersCount(userId), HttpStatus.OK);
     }
 
     //US 0003: Obtener un listado de todos los usuarios que siguen a un determinado vendedor (¿Quién me sigue?)
-    //Recibe UserIdDTO
+    //Recibe Integer
     //Retorna FollowerListDTO
     @GetMapping("/users/{userId}/followers/list")
-    public ResponseEntity<FollowerListDTO> listFollowers(@PathVariable int userId, @RequestParam(value = "order", required = false) String alf_order) {
+    public ResponseEntity<FollowerListDTO> listFollowers(
+            @PathVariable (value = "userId", required = true)
+                @NotNull(message = "User_id can't be empty")
+                @Positive(message = "User_id can't be less than 0")
+                    Integer userId,
+            @RequestParam(value = "order", required = false) String alf_order
+    ) {
         return new ResponseEntity<>(userService.getFollowersList(userId, alf_order), HttpStatus.OK);
     }
 
     //US 0004: Obtener un listado de todos los vendedores a los cuales sigue un determinado usuario (¿A quién sigo?)
-    //Recibe UserIdDTO
+    //Recibe Integer
     //Retorna FollowedListDTO
     @GetMapping("/users/{userId}/followed/list")
-    public ResponseEntity<FollowedListDTO> listFollowed(@PathVariable int userId, @RequestParam(value = "order", required = false) String alf_order) {
+    public ResponseEntity<FollowedListDTO> listFollowed(
+            @PathVariable (value = "userId", required = true)
+                @NotNull(message = "User_id can't be empty")
+                @Positive(message = "User_id can't be less than 0")
+                    Integer userId,
+            @RequestParam(value = "order", required = false) String alf_order) {
         return new ResponseEntity<>(userService.getFollowedList(userId, alf_order), HttpStatus.OK);
     }
 
@@ -53,18 +81,29 @@ public class Controller {
     //Recibe PostProductDTO
     //Retorna status code
     @PostMapping("/products/post")
-    public ResponseEntity<?> createPost(@RequestBody PostProductDTO postProductDTO){
+    public ResponseEntity<?> createPost(@RequestBody @Valid PostProductDTO postProductDTO){
         userService.createPost(postProductDTO);
         return new ResponseEntity<>("Se ha creado el post!", HttpStatus.OK);
     }
 
-    //US 0006: Obtener un listado de las publicaciones realizadas por los vendedores que un usuario
-    // sigue en las últimas dos semanas (para esto tener en cuenta ordenamiento por fecha,
-    // publicaciones más recientes primero).
-    //Recibe UserIdDTO
-    //Retorna PostBySeller
+
+
+    /**
+     * US 0006: Obtener un listado de las publicaciones realizadas por los vendedores que un usuario
+     *     sigue en las últimas dos semanas (para esto tener en cuenta ordenamiento por fecha,
+     *     publicaciones más recientes primero).
+     *
+     * @param userId Integer
+     * @param alf_order String
+     * @return ResponseEntity<PostBySellerDTO>
+     */
     @GetMapping("/products/followed/{user_id}/list")
-    public ResponseEntity<PostBySellerDTO> latestsPosts(@PathVariable("user_id") int userId, @RequestParam(value = "order", required = false) String alf_order){
+    public ResponseEntity<PostBySellerDTO> latestsPosts(
+            @PathVariable(value = "user_id", required = true)
+                @NotNull(message = "User_id can't be empty")
+                @Positive(message = "User_id can't be less than 0")
+                    Integer userId,
+            @RequestParam(value = "order", required = false) String alf_order){
         PostBySellerDTO latestPosts = userService.listPostsBySeller(userId, alf_order);
         return new ResponseEntity<>(latestPosts, HttpStatus.OK);
     }
@@ -74,7 +113,12 @@ public class Controller {
     //Recibe FollowPostDTO
     //Retorna status code
     @PostMapping("/users/{userId}/unfollow/{userIdToUnfollow}")
-    public ResponseEntity<?> unfollowUser(@PathVariable int userId, @PathVariable int userIdToUnfollow) {
+    public ResponseEntity<?> unfollowUser(
+            @PathVariable (value = "userId", required = true)
+                @NotNull(message = "User_id can't be empty")
+                @Positive(message = "User_id can't be less than 0")
+                    Integer userId,
+            @PathVariable int userIdToUnfollow) {
         FollowPostDTO followPostDTO = new FollowPostDTO(userId, userIdToUnfollow);
         ResponseEntity<?> response;
         if(userService.unFollow(followPostDTO))
@@ -114,7 +158,12 @@ public class Controller {
 
     //US 0012: OPCIONAL
     @GetMapping("/products/promo-post/list?user_id={userId}")
-    public ResponseEntity<?> productsInSaleBySeller(@PathVariable int userId) {
+    public ResponseEntity<?> productsInSaleBySeller(
+            @PathVariable (value = "userId", required = true)
+                @NotNull(message = "User_id can't be empty")
+                @Positive(message = "User_id can't be less than 0")
+                    Integer userId
+    ) {
         return null;
     }
 
