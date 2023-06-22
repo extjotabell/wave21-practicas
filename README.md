@@ -28,7 +28,7 @@ La aplicación "SocialMeli" es una plataforma innovadora que te permite seguir y
 - Se tomó como decisión de equipo permitir al usuario poder publicar un producto cuantas veces quisiera, sin considerar las validaciones de (fecha, productName, userId, etc...)
 
 ### Validaciones:
-- **Tabla de información**:
+- **Tabla de información**:    
 ![img_1.png](img_1.png)
 ![img_2.png](img_2.png)
 
@@ -36,10 +36,10 @@ La aplicación "SocialMeli" es una plataforma innovadora que te permite seguir y
 Se agregaron todas las validaciones en la carpeta Validations dentro del archivo json de postman (Sprint 2 Postman.json).
 
 
-### Resumen de las historias de usuario:
-- [x] Validar cuando un usuario no existe en las historias US 0005 y US 0006.
-- [x] Implementar DTO para el mensaje de respuesta de la historia US 0005
-- [x] Mejora de restricciones en los posts (en especial US 0005)
+### Resumen de mejoras sprint 1:
+- ✅ Validar cuando un usuario no existe en las historias US 0005 y US 0006.
+- ✅ Implementar DTO para el mensaje de respuesta de la historia US 0005
+- ✅ Mejora de restricciones en los posts (en especial US 0005)
 
 ### Descripción de los Tests Unitarios:
 ![img.png](img.png)
