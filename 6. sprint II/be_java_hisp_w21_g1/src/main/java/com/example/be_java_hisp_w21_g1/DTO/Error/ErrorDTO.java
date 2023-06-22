@@ -11,4 +11,5 @@ import lombok.Setter;
 @Setter
 public class ErrorDTO {
     String message;
+
 }
