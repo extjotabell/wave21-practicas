@@ -11,6 +11,7 @@ import com.sprint.be_java_hisp_w21_g04.exception.UserNotFoundException;
 import com.sprint.be_java_hisp_w21_g04.repository.post.PostRepositoryImpl;
 import com.sprint.be_java_hisp_w21_g04.repository.user.IUserRepository;
 import com.sprint.be_java_hisp_w21_g04.service.post.PostServiceImpl;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -41,6 +42,7 @@ public class PostServiceImplTest {
     PostServiceImpl postService;
 
     @Test
+    @DisplayName("T-0006 : Verificar el correcto ordenamiento ascendente por fecha. (US-0009)")
     public void testSortedPostsDateAsc(){
         //Arrange
         int userId = 1;
@@ -80,6 +82,7 @@ public class PostServiceImplTest {
         assertEquals(expectedResult, result);
     }
     @Test
+    @DisplayName("T-0006 : Verificar el correcto ordenamiento descendente por fecha. (US-0009)")
     public void testSortedPostsDateDes(){
         //Arrange
         int userId = 1;
@@ -119,6 +122,7 @@ public class PostServiceImplTest {
         assertEquals(expectedResult, result);
     }
     @Test
+    @DisplayName("Extra: Verificar que si retorne todas los post")
     public void testPostsGetAll(){
         //Arrange
         List<Post> mockResult = new ArrayList<>();
@@ -150,6 +154,7 @@ public class PostServiceImplTest {
     }
 
     @Test
+    @DisplayName("Verificar que el usuario exista")
     public void testUserNotFoundException(){
         //arrange
         when(userRepository.getById(anyInt())).thenReturn(null);
@@ -159,6 +164,7 @@ public class PostServiceImplTest {
     }
 
     @Test
+    @DisplayName("Verificar que los vendedores que sigue tengan publicaciones")
     public void testEmptySellerFollowedList(){
         //Arrange
         int userId = 1;
@@ -176,6 +182,9 @@ public class PostServiceImplTest {
     }
 
     @Test
+    @DisplayName("T-0008 : Verificar que la consulta de publicaciones " +
+            "realizadas en las últimas dos semanas de un determinado " +
+            "vendedor sean efectivamente de las últimas dos semanas. (US-0006)")
     public void testEmptySellerFollowedListWhenNoRecentPosts(){
         //Arrange
         int userId = 1;
@@ -192,6 +201,7 @@ public class PostServiceImplTest {
     }
 
     @Test
+    @DisplayName("T-0005: Verificar que el tipo de ordenamiento por fecha exista (US-0009)")
     public void testIllegalDataException(){
         //Arrange
         int userId = 1;
@@ -201,6 +211,7 @@ public class PostServiceImplTest {
         assertThrows(IllegalDataException.class, ()-> postService.sellerFollowedListPosts(userId, order));
     }
     @Test
+    @DisplayName("Verificar que no se lance ninguna excepción")
     public void testNoExceptions(){
         //Arrange
         int userId = 1;
