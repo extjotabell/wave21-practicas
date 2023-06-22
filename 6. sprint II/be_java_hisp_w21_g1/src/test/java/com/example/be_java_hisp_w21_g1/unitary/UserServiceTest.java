@@ -258,8 +258,8 @@ public class UserServiceTest {
 
         //ASSERT
         Assertions.assertNotNull(result);
-        Assertions.assertEquals(2, result.getFollowers().get(0).getUser_id());
-        Assertions.assertEquals(3, result.getFollowers().get(1).getUser_id());
+        Assertions.assertEquals("Andrea", result.getFollowers().get(0).getUser_name());
+        Assertions.assertEquals("Santiago", result.getFollowers().get(1).getUser_name());
 
     }
 
@@ -293,8 +293,8 @@ public class UserServiceTest {
 
         //ASSERT
         Assertions.assertNotNull(result);
-        Assertions.assertEquals(3, result.getFollowers().get(0).getUser_id());
-        Assertions.assertEquals(2, result.getFollowers().get(1).getUser_id());
+        Assertions.assertEquals("Santiago", result.getFollowers().get(0).getUser_name());
+        Assertions.assertEquals("Andrea", result.getFollowers().get(1).getUser_name());
 
     }
 
@@ -328,8 +328,8 @@ public class UserServiceTest {
 
         //ASSERT
         Assertions.assertNotNull(result);
-        Assertions.assertEquals(2, result.getFollowed().get(0).getUser_id());
-        Assertions.assertEquals(3, result.getFollowed().get(1).getUser_id());
+        Assertions.assertEquals("Andrea", result.getFollowed().get(0).getUser_name());
+        Assertions.assertEquals("Santiago", result.getFollowed().get(1).getUser_name());
 
     }
 
@@ -363,8 +363,8 @@ public class UserServiceTest {
 
         //ASSERT
         Assertions.assertNotNull(result);
-        Assertions.assertEquals(3, result.getFollowed().get(0).getUser_id());
-        Assertions.assertEquals(2, result.getFollowed().get(1).getUser_id());
+        Assertions.assertEquals("Santiago", result.getFollowed().get(0).getUser_name());
+        Assertions.assertEquals("Andrea", result.getFollowed().get(1).getUser_name());
 
     }
 

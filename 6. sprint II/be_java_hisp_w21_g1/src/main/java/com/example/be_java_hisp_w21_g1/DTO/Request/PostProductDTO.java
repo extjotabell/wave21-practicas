@@ -11,12 +11,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Range;
+import lombok.*;
+import org.springframework.validation.annotation.Validated;
 
 
 import java.time.LocalDate;
 
-@Setter
-@Getter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class PostProductDTO {
