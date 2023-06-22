@@ -13,6 +13,6 @@ import java.util.List;
 @ToString
 @EqualsAndHashCode
 public class SellerFollowedListPostResponseDto {
-    private int userId;
+    private Integer userId;
     private List<PostResponseDto> posts;
 }

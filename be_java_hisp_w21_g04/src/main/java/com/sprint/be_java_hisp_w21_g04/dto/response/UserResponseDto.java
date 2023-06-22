@@ -12,8 +12,6 @@ import lombok.*;
 @EqualsAndHashCode
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class UserResponseDto {
-    
-    private int userId;
+    private Integer userId;
     private String userName;
-
 }

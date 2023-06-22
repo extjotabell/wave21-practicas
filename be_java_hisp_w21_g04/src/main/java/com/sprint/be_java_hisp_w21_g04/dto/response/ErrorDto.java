@@ -11,5 +11,5 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ErrorDto {
     private String message;
-    private int status;
+    private Integer status;
 }

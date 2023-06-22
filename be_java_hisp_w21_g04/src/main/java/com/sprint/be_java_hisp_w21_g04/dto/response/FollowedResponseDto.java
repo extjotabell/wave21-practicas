@@ -14,9 +14,7 @@ import java.util.List;
 @EqualsAndHashCode
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class FollowedResponseDto {
-
-    private int userId;
+    private Integer userId;
     private String userName;
     private List<UserResponseDto> followed;
-
 }

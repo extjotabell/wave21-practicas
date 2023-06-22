@@ -5,12 +5,11 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.sprint.be_java_hisp_w21_g04.entity.Product;
-import jakarta.validation.constraints.DecimalMax;
+import jakarta.annotation.Nonnull;
+import jakarta.validation.constraints.*;
 import lombok.*;
 
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 
@@ -20,16 +19,16 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @ToString
 public class PostRequestDto {
-     @Positive(message = "El id del usuario debe ser mayor a cero.")
      @NotNull(message = "El id del usuario no puede estar vacío.")
-     private int userId;
+     @Positive(message = "El id del usuario debe ser mayor a cero.")
+     private Integer userId;
      @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
      @NotNull(message = "La fecha no puede estar vacía.")
      private LocalDate date;
      private @Valid Product product;
      @NotNull(message = "La categoria no puede estar vacía.")
-     private int category;
+     private Integer category;
      @NotNull(message = "El precio no puede estar vacío.")
      @DecimalMax(value = "10000000", message = "El precio no puede ser mayor a 10000000")
-     private double price;
+     private Double price;
 }

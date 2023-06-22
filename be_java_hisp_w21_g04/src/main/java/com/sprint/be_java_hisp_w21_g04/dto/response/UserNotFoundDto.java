@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UserNotFoundDto {
     private String message;
-    private int statusCode;
+    private Integer statusCode;
 }

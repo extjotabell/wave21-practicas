@@ -16,10 +16,10 @@ import java.time.LocalDate;
 @ToString
 @EqualsAndHashCode
 public class PostResponseDto {
-    private int userId;
+    private Integer userId;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private LocalDate date;
     private Product product;
-    private int category;
-    private double price;
+    private Integer category;
+    private Double price;
 }
