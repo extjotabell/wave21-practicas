@@ -17,7 +17,9 @@ La aplicación "SocialMeli" es una plataforma innovadora que te permite seguir y
 
 ### Diagrama del proyecto:
 <img width="663" alt="image" src="https://github.com/extjotabell/wave21-practicas/assets/133796182/93c7b932-3e8c-4eae-99fd-61a31cb18610">
+
 ---
+
 ## Sprint 2:
 
 ### Decisiones de equipo:
