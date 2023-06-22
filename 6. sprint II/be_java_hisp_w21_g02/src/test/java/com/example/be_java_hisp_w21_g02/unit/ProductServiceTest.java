@@ -91,14 +91,13 @@ public class ProductServiceTest {
     }
 
     @Test
-    @DisplayName("Unit Test US09 T-0005 T03 - NullOrder")
+    @DisplayName("Unit Test US09 T-0005-03 - NullOrder")
     void listFollowingPosts2WeeksTestNullOrder() {
         // Arrange
         String order = null;
         List<PostDTO> postsDTODesc =  postsDTO.stream().sorted(Comparator.comparing(PostDTO::getDate).reversed()).toList();
         ResponseEntity<UserPostResponseDTO> expected = ResponseEntity.ok(new UserPostResponseDTO(1, postsDTODesc));
 
-        // Mock
         Mockito.when(userRepository.getUser(1)).thenReturn(user);
         Mockito.when(userRepository.listFollowingPosts2Weeks(1)).thenReturn(userList);
 
@@ -110,13 +109,12 @@ public class ProductServiceTest {
     }
 
     @Test
-    @DisplayName("Unit Test US09 T-0006 T01 - Correct Order Desc (Date)")
+    @DisplayName("Unit Test US09 T-0006-01 - Correct Order Desc (Date)")
     void listFollowingPosts2WeeksTestCorrectOrderDesc(){
         // Arrange
         List<PostDTO> postsDTODesc =  postsDTO.stream().sorted(Comparator.comparing(PostDTO::getDate).reversed()).toList();
         ResponseEntity<UserPostResponseDTO> expected = ResponseEntity.ok(new UserPostResponseDTO(1, postsDTODesc));
 
-        // Mock
         Mockito.when(userRepository.getUser(1)).thenReturn(user);
         Mockito.when(userRepository.listFollowingPosts2Weeks(1)).thenReturn(userList);
 
@@ -128,13 +126,12 @@ public class ProductServiceTest {
     }
 
     @Test
-    @DisplayName("Unit Test US09 T-0006 T02 - Correct Order Asc (Date)")
+    @DisplayName("Unit Test US09 T-0006-02 - Correct Order Asc (Date)")
     void listFollowingPosts2WeeksTestCorrectOrderAsc(){
         // Arrange
         List<PostDTO> postsDTOAsc =  postsDTO.stream().sorted(Comparator.comparing(PostDTO::getDate)).toList();
         ResponseEntity<UserPostResponseDTO> expected = ResponseEntity.ok(new UserPostResponseDTO(1, postsDTOAsc));
 
-        // Mock
         Mockito.when(userRepository.getUser(1)).thenReturn(user);
         Mockito.when(userRepository.listFollowingPosts2Weeks(1)).thenReturn(userList);
 
@@ -146,12 +143,11 @@ public class ProductServiceTest {
     }
 
     @Test
-    @DisplayName("Unit Test US06 T-0008 T01 - Obtain a list of posts from users that the user follows in the last 2 weeks in descendent date order")
+    @DisplayName("Unit Test US06 T-0008-01 - Obtain a list of posts from users that the user follows in the last 2 weeks in descendent date order")
     void listFollowingPosts2WeeksTestObtainedListIsOk() {
         // Arrange
         ResponseEntity<UserPostResponseDTO> expected = ResponseEntity.ok(new UserPostResponseDTO(1, postsDTO));
 
-        // Mock
         Mockito.when(userRepository.getUser(1)).thenReturn(user);
         Mockito.when(userRepository.listFollowingPosts2Weeks(1)).thenReturn(userList);
 
@@ -163,7 +159,7 @@ public class ProductServiceTest {
     }
 
     @Test
-    @DisplayName("Unit Test US06 T-0008 T02 - UserNotExists")
+    @DisplayName("Unit Test US06 T-0008-02 - UserNotExists")
     void listFollowingPosts2WeeksTestUserNotExists() {
         // Arrange
         int userId = 2000000;
@@ -176,12 +172,11 @@ public class ProductServiceTest {
     }
 
     @Test
-    @DisplayName("Unit Test US06 T-0008 T03 - Post Not Exist")
+    @DisplayName("Unit Test US06 T-0008-03 - Post Not Exist")
     void listFollowingPosts2WeeksTestPostNotExists() {
         // Arrange
         ResponseEntity<UserPostResponseDTO> expected = new ResponseEntity<>(new UserPostResponseDTO(user.getId(), Collections.emptyList()), HttpStatus.OK);
-
-        // Mock
+        
         Mockito.when(userRepository.listFollowingPosts2Weeks(user.getId())).thenReturn(Collections.emptyList());
         Mockito.when(userRepository.getUser(1)).thenReturn(user);
 

@@ -12,7 +12,6 @@ import org.springframework.validation.annotation.Validated;
 @ToString
 @Validated
 @EqualsAndHashCode
-@ToString
 public class ProductDTO {
 
     @Positive(message = "The ProductId must be greater than zero")
