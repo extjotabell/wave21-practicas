@@ -14,6 +14,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+
+
+
 @RestController
 @Validated
 public class Controller {
@@ -85,6 +88,8 @@ public class Controller {
         userService.createPost(postProductDTO);
         return new ResponseEntity<>("Se ha creado el post!", HttpStatus.OK);
     }
+
+
 
     /**
      * US 0006: Obtener un listado de las publicaciones realizadas por los vendedores que un usuario
