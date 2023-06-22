@@ -8,6 +8,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@ToString
 @EqualsAndHashCode
 @ToString
 public class UserPostResponseDTO {
