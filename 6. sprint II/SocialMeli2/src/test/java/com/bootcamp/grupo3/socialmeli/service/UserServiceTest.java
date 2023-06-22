@@ -339,6 +339,18 @@ class UserServiceTest {
         assertEquals(expectedResult, actualResult);
     }
 
+    @Test
+    @DisplayName("T-0007 / Verificar que la cantidad de seguidores de un determinado usuario sea correcta/ Usuario invalido (US-0002)")
+    void getUserFollowersCountForInvalidUSer() {
+        //Arrange
+        int invalidID = 1000;
+        UserFollowerCountDTO expectedResult = new UserFollowerCountDTO(ramiro.getId(), ramiro.getName(), ramiro.getFollowers().size());
+        Mockito.when(userRepo.getUserByID(invalidID)).thenReturn(Optional.empty());
+
+        // ACt && Assert
+        assertThrows(UserNotFoundException.class, () -> service.getUserFollowersCount(invalidID));
+    }
+
     void init() {
         ramiro = new User(1, "Ramiro", new ArrayList<>(), new ArrayList<>());
         nauhel = new User(2, "nauhel", new ArrayList<>(), new ArrayList<>());
