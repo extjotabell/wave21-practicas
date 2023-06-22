@@ -29,7 +29,7 @@ public class ProductsController {
     @GetMapping("/followed/{userId}/list")
     public ResponseEntity<?> listFollowingPosts2Weeks(@PathVariable
                                                           @Positive(message = "User ID to follow must be greater than zero")
-                                                          Integer userId,
+                                                          int userId,
                                                       @RequestParam(required = false)
                                                       String order){
         return _productsService.listFollowingPosts2Weeks(userId, order);

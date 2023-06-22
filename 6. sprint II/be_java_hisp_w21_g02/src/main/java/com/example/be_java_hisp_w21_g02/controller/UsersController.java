@@ -23,13 +23,11 @@ public class UsersController {
     @PostMapping("/{userId}/follow/{userIdToFollow}")
     public ResponseEntity<?> followUser(@PathVariable(value = "userId")
                                             @Positive(message = "User ID must be greater than zero")
-
-                                            Integer userId,
+                                            int userId,
 
                                         @PathVariable("userIdToFollow")
                                         @Positive(message = "User ID to follow must be greater than zero")
-
-                                            Integer userIdToFollow){
+                                            int userIdToFollow){
 
         _userService.followUser(userId, userIdToFollow);
         return new ResponseEntity<>(HttpStatus.OK);
