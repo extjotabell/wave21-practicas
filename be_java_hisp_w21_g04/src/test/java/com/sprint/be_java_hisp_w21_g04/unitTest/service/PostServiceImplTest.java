@@ -58,11 +58,11 @@ public class PostServiceImplTest {
 
         List<PostResponseDto> expectedPosts = new ArrayList<>();
         Product product4 = new Product(1, "Camiseta", "T Shirt", "Nike", "Red", "");
-        expectedPosts.add(new PostResponseDto(userId, LocalDate.now().minusDays(10), product4, 10, 100));
+        expectedPosts.add(new PostResponseDto(userId, LocalDate.now().minusDays(10), product4, 10, 100.0));
         Product product5 = new Product(1, "Short", "Short", "Adidas", "Brown", "");
-        expectedPosts.add(new PostResponseDto(userId, LocalDate.now().minusDays(5), product5, 6, 160));
+        expectedPosts.add(new PostResponseDto(userId, LocalDate.now().minusDays(5), product5, 6, 160.0));
         Product product6 = new Product(1, "Camiseta", "T Shirt", "Adidas", "White", "");
-        expectedPosts.add(new PostResponseDto(1, LocalDate.now(), product6, 4, 120));
+        expectedPosts.add(new PostResponseDto(1, LocalDate.now(), product6, 4, 120.0));
         SellerFollowedListPostResponseDto expectedResult = new SellerFollowedListPostResponseDto(userId, expectedPosts);
 
         List<Integer> followers = Arrays.asList(1, 2, 3, 5);
@@ -98,11 +98,11 @@ public class PostServiceImplTest {
 
         List<PostResponseDto> expectedPosts = new ArrayList<>();
         Product product4 = new Product(1, "Camiseta", "T Shirt", "Nike", "Red", "");
-        expectedPosts.add(new PostResponseDto(userId, LocalDate.now(), product4, 10, 100));
+        expectedPosts.add(new PostResponseDto(userId, LocalDate.now(), product4, 10, 100.0));
         Product product5 = new Product(1, "Short", "Short", "Adidas", "Brown", "");
-        expectedPosts.add(new PostResponseDto(userId, LocalDate.now().minusDays(5), product5, 6, 160));
+        expectedPosts.add(new PostResponseDto(userId, LocalDate.now().minusDays(5), product5, 6, 160.0));
         Product product6 = new Product(1, "Camiseta", "T Shirt", "Adidas", "White", "");
-        expectedPosts.add(new PostResponseDto(1, LocalDate.now().minusDays(10), product6, 4, 120));
+        expectedPosts.add(new PostResponseDto(1, LocalDate.now().minusDays(10), product6, 4, 120.0));
         SellerFollowedListPostResponseDto expectedResult = new SellerFollowedListPostResponseDto(userId, expectedPosts);
 
         List<Integer> followers = Arrays.asList(1, 2, 3, 5);
@@ -135,11 +135,11 @@ public class PostServiceImplTest {
 
         List<PostResponseDto> expectedPosts = new ArrayList<>();
         Product product4 = new Product(1, "Camiseta", "T Shirt", "Nike", "Red", "");
-        expectedPosts.add(new PostResponseDto(1, LocalDate.now(), product4, 10, 100));
+        expectedPosts.add(new PostResponseDto(1, LocalDate.now(), product4, 10, 100.0));
         Product product5 = new Product(1, "Short", "Short", "Adidas", "Brown", "");
-        expectedPosts.add(new PostResponseDto(2, LocalDate.now().minusWeeks(3), product5, 6, 160));
+        expectedPosts.add(new PostResponseDto(2, LocalDate.now().minusWeeks(3), product5, 6, 160.0));
         Product product6 = new Product(1, "Camiseta", "T Shirt", "Adidas", "White", "");
-        expectedPosts.add(new PostResponseDto(3, LocalDate.now().minusDays(20), product6, 4, 120));
+        expectedPosts.add(new PostResponseDto(3, LocalDate.now().minusDays(20), product6, 4, 120.0));
 
 
         when(postRepository.getAll()).thenReturn(mockResult);
