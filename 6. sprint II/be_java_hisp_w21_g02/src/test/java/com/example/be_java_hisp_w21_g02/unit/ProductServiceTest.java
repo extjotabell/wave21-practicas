@@ -14,7 +14,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.apache.commons.collections4.CollectionUtils;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -22,7 +21,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.ResponseEntity;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -65,7 +66,7 @@ public class ProductServiceTest {
         Mockito.when(userRepository.listFollowingPosts2Weeks(1)).thenReturn(list);
 
         // Act
-        ResponseEntity<UserPostResponseDTO> result = (ResponseEntity<UserPostResponseDTO>) productsService.listFollowingPosts2Weeks(1, "date_desc");
+        ResponseEntity<?> result = productsService.listFollowingPosts2Weeks(1, "date_desc");
 
         // Assert
         Assertions.assertEquals(expected.getBody(), result.getBody());
@@ -78,9 +79,9 @@ public class ProductServiceTest {
         String order = "order_not_exists";
 
         // Act & Assert
-        assertThrows(OrderNotFoundException.class, () ->{
-            productsService.listFollowingPosts2Weeks(1, order);
-        });
+        assertThrows(OrderNotFoundException.class, () ->
+            productsService.listFollowingPosts2Weeks(1, order)
+        );
     }
 
     @Test
@@ -91,8 +92,8 @@ public class ProductServiceTest {
         String order = "date_desc";
 
         // Act & Assert
-        assertThrows(UserNotFoundException.class, () -> {
-            productsService.listFollowingPosts2Weeks(userId, order);
-        });
+        assertThrows(UserNotFoundException.class, () ->
+            productsService.listFollowingPosts2Weeks(userId, order)
+        );
     }
 }

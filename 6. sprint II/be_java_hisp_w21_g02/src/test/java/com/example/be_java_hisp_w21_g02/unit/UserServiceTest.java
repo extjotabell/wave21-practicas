@@ -133,7 +133,7 @@ public class UserServiceTest {
     void unfollowUserTestUserToUnfollowExists(){
         //Arrange
         userToFollow.setPosts(List.of(new Post(2, 1, LocalDate.now().minusDays(1),3, 50D, new Product())));
-        
+
         when(_userRepository.getUser(1)).thenReturn(user);
         when(_userRepository.getUser(2)).thenReturn(userToFollow);
         _userService.followUser(user.getId(), userToFollow.getId());
@@ -210,7 +210,7 @@ public class UserServiceTest {
         Assertions.assertEquals(expected,result);
     }
 
-    
+
     @Test
     @DisplayName("Unit Test US02 T02 - user with one follower gets 1 follower")
     void getFollowersCountTestWithOneFollower(){
