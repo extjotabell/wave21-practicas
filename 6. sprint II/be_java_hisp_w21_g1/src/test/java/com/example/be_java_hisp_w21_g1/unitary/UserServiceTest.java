@@ -373,7 +373,7 @@ public class UserServiceTest {
     void checkSortOrderDateAscOk() {
         //Arrange
         int userId = 1;
-        String order = "date_asc";
+        String order = "date_desc";
 
         User user = new User(userId, "Luz", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
 
@@ -393,6 +393,21 @@ public class UserServiceTest {
                 ),
                 1,
                 15.7
+        ));
+        userTwoPosts.add(new Post(
+                2,
+                2,
+                LocalDate.now().minusDays(2),
+                new Product(
+                        2,
+                        "Pan",
+                        "Perecedero",
+                        "-",
+                        "-",
+                        "25% off los martes"
+                ),
+                1,
+                10.2
         ));
         //Lista de seguidores para usuario seguido(userID = 2)
         List<User> userTwoFollowers = new ArrayList<>();
