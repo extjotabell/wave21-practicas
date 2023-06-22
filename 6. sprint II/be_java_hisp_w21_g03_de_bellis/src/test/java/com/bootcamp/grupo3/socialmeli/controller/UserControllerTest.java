@@ -36,6 +36,16 @@ class UserControllerTest {
   }
 
   @Test
+  @DisplayName("Error por seguirme a mi mismo")
+  void followMyself() throws Exception {
+
+    var request = MockMvcRequestBuilders.post("/users/3/follow/3");
+    mockMvc.perform(request)
+      .andExpect(status().is4xxClientError())
+      .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+  }
+
+  @Test
   @DisplayName("Sigo a un usuario dando ids inexistentes")
   void followInvalidUsers() throws Exception {
 
