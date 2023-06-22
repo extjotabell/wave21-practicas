@@ -19,16 +19,16 @@ public class UsersController {
     }
 
     // @Min(value = 1, message = "The id must be greater than zero")
-    //@Size(min = 1, message = "The id must be greater than zero")
+    // @Size(min = 1, message = "The id must be greater than zero")
     @PostMapping("/{userId}/follow/{userIdToFollow}")
     public ResponseEntity<?> followUser(@PathVariable(value = "userId")
                                             @Positive(message = "User ID must be greater than zero")
-                                            //@NotNull(message = "User ID must not be empty")
+
                                             Integer userId,
 
                                         @PathVariable("userIdToFollow")
                                         @Positive(message = "User ID to follow must be greater than zero")
-                                        //@NotNull(message = "User ID must not be empty")
+
                                             Integer userIdToFollow){
 
         _userService.followUser(userId, userIdToFollow);
