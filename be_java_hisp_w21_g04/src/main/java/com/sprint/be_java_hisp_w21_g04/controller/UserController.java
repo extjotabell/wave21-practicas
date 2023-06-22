@@ -21,21 +21,21 @@ public class UserController {
         this._userService = userService;
     }
     @PostMapping("/users/{userId}/follow/{userIdToFollow}")
-    public ResponseEntity<ResponseDto> userFollow(@PathVariable int userId, @PathVariable int userIdToFollow){
+    public ResponseEntity<ResponseDto> userFollow(@PathVariable Integer userId, @PathVariable Integer userIdToFollow){
         return ResponseEntity.ok(_userService.followUser(userId, userIdToFollow));
     }
     @GetMapping("/users/{userId}/followers/count")
-    public ResponseEntity<UserFollowersCountDto> userFollowersCountDto(@PathVariable int userId){
+    public ResponseEntity<UserFollowersCountDto> userFollowersCountDto(@PathVariable Integer userId){
         return ResponseEntity.status(200).body(_userService.getFollowersCount(userId));
     }
 
     @PostMapping("/users/{userId}/unfollow/{userIdToUnfollow}")
-    public ResponseEntity<ResponseDto> userUnfollow(@PathVariable int userId, @PathVariable int userIdToUnfollow){
+    public ResponseEntity<ResponseDto> userUnfollow(@PathVariable Integer userId, @PathVariable Integer userIdToUnfollow){
         return ResponseEntity.ok(_userService.unfollowUser(userId, userIdToUnfollow));
     }
 
     @GetMapping("/users/{userId}/followers/list")
-    public ResponseEntity<FollowersResponseDto> getFollowersById(@PathVariable ("userId") int userId,
+    public ResponseEntity<FollowersResponseDto> getFollowersById(@PathVariable ("userId") Integer userId,
                                                                  @RequestParam (value = "order",required = false) String order){
         if(order == null){
             return new ResponseEntity<>(_userService.getFollowersById(userId), HttpStatus.OK);
@@ -44,7 +44,7 @@ public class UserController {
     }
 
     @GetMapping("/users/{userId}/followed/list")
-    public ResponseEntity<FollowedResponseDto> getFollowedById(@PathVariable ("userId") int userId,
+    public ResponseEntity<FollowedResponseDto> getFollowedById(@PathVariable ("userId") Integer userId,
                                                                @RequestParam (value = "order",required = false) String order){
         if(order == null){
             return new ResponseEntity<>(_userService.getFollowedById(userId), HttpStatus.OK);
