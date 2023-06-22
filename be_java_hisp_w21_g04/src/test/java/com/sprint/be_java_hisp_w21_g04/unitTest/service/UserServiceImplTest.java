@@ -3,9 +3,7 @@ import com.sprint.be_java_hisp_w21_g04.dto.response.FollowedResponseDto;
 import com.sprint.be_java_hisp_w21_g04.dto.response.ResponseDto;
 import com.sprint.be_java_hisp_w21_g04.dto.response.UserResponseDto;
 import com.sprint.be_java_hisp_w21_g04.entity.User;
-import com.sprint.be_java_hisp_w21_g04.exception.UserAlreadyFollowedException;
-import com.sprint.be_java_hisp_w21_g04.exception.UserFollowNotAllowedException;
-import com.sprint.be_java_hisp_w21_g04.exception.UserNotFoundException;
+import com.sprint.be_java_hisp_w21_g04.exception.*;
 import com.sprint.be_java_hisp_w21_g04.repository.user.UserRepositoryImpl;
 import com.sprint.be_java_hisp_w21_g04.service.user.UserServiceImpl;
 import org.apache.coyote.Response;
@@ -86,5 +84,70 @@ public class UserServiceImplTest {
         // Act & Assert
         assertThrows(UserFollowNotAllowedException.class, () -> userService.followUser(userId, userIdToFollow));
         assertFalse(user.getFollowed().contains(userIdToFollow));
+    }
+
+    @Test
+    @DisplayName("T0002 - Caso ideal (US-0007)")
+    void unfollowUserPerfectCase() {
+        // Arrange
+        int userId = 1;
+        int userIdToUnfollow = 2;
+        List<Integer> followedUsers = new ArrayList<>(List.of(userIdToUnfollow));
+        List<Integer> followersUsers = new ArrayList<>(List.of(userId));
+        User user = new User(1,"DavidWilson",new ArrayList<>(), followedUsers);
+        User userToUnfollow = new User(2,"MikeJohnson", followersUsers,new ArrayList<>());
+        when(userRepository.findUserById(userId)).thenReturn(user);
+        when(userRepository.findUserById(userIdToUnfollow)).thenReturn(userToUnfollow);
+        // Act
+        ResponseDto responseDto = userService.unfollowUser(userId, userIdToUnfollow);
+        // Assert
+        assertNotNull(responseDto);
+        assertEquals("Has dejado de seguir a MikeJohnson", responseDto.getMessage());
+        assertFalse(user.getFollowed().contains(userIdToUnfollow));
+        assertFalse(userToUnfollow.getFollowers().contains(userId));
+    }
+
+    @Test
+    @DisplayName("T0002 - Caso cuando usuario a dejar de seguir no existe (US-0007)")
+    void UnfollowUserWhenUserNotExist() {
+        // Arrange
+        int userId = 1;
+        int userIdToUnfollow = 2;
+        User user = new User(1,"DavidWilson",new ArrayList<>(),new ArrayList<>());
+        when(userRepository.findUserById(userId)).thenReturn(user);
+        when(userRepository.findUserById(userIdToUnfollow)).thenReturn(null);
+        // Act & Assert
+        assertThrows(UserNotFoundException.class, () -> userService.unfollowUser(userId, userIdToUnfollow));
+        assertFalse(user.getFollowed().contains(userIdToUnfollow));
+    }
+
+    @Test
+    @DisplayName("T0002 - Caso cuando usuario1 no sigue a usuario2 (US-0007)")
+    void UnfollowUserWhenUserIsNotFollowing() {
+        // Arrange
+        int userId = 1;
+        int userIdToUnfollow = 2;
+        User user = new User(1,"DavidWilson",new ArrayList<>(), new ArrayList<>());
+        User userToUnfollow = new User(2,"MikeJohnson", new ArrayList<>(),new ArrayList<>());
+        when(userRepository.findUserById(userId)).thenReturn(user);
+        when(userRepository.findUserById(userIdToUnfollow)).thenReturn(userToUnfollow);
+        // Act & Assert
+        assertThrows(UserNotFollowedException.class, () -> userService.unfollowUser(userId, userIdToUnfollow));
+        assertTrue(user.getFollowed().isEmpty());
+        assertTrue(userToUnfollow.getFollowers().isEmpty());
+    }
+
+    @Test
+    @DisplayName("T0002 - Caso cuando no puedes dejar de seguirte a tí mismo. (US-0007)")
+    void UnfollowUserWhenUserUnfollowsItself() {
+        // Arrange
+        int userId = 1;
+        int userIdToUnfollow = 1;
+        User user = new User(1,"DavidWilson",new ArrayList<>(),new ArrayList<>());
+        when(userRepository.findUserById(userId)).thenReturn(user);
+        // Act & Assert
+        assertThrows(UserUnfollowNotAllowedException.class, () -> userService.unfollowUser(userId, userIdToUnfollow));
+        assertFalse(user.getFollowed().contains(userIdToUnfollow));
+        assertTrue(user.getFollowed().isEmpty());
     }
 }
