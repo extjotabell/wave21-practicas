@@ -29,9 +29,6 @@ import static jdk.internal.org.objectweb.asm.util.CheckClassAdapter.verify;
 @ExtendWith(MockitoExtension.class)
 public class UserServiceIntegrationTests {
 
-
-
-
     @Mock
     @Autowired
     IUserRepository userRepository;
@@ -76,25 +73,8 @@ public class UserServiceIntegrationTests {
     }
     // falta el camino triste
 
-    //public FollowerListDTO getFollowersList(int idUser, String order);
 
-    /*
-    *
-    "user_id": 1,
-    "user_name": "Pepe",
-    "followers": [
-        {
-            "user_id": 2,
-            "user_name": "Pablo"
-        },
-        {
-            "user_id": 3,
-            "user_name": "Pedro"
-        }
-    ]
-    *
-    *
-    * */
+
     @Test
     public void getFollowerList() { //lista sin ordenar
         //Arrange
