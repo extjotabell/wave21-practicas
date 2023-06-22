@@ -1,4 +1,4 @@
-package com.example.be_java_hisp_w21_g1.unitary;
+package com.example.be_java_hisp_w21_g1.unit;
 
 import com.example.be_java_hisp_w21_g1.DTO.Response.*;
 import com.example.be_java_hisp_w21_g1.DTO.Response.FollowUserDTO;
@@ -13,7 +13,6 @@ import com.example.be_java_hisp_w21_g1.Model.Product;
 
 
 import com.example.be_java_hisp_w21_g1.Service.UserService;
-import net.bytebuddy.dynamic.DynamicType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
