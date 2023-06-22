@@ -9,6 +9,7 @@ import org.springframework.validation.annotation.Validated;
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString
 @Validated
 @EqualsAndHashCode
 public class ProductDTO {

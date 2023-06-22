@@ -24,12 +24,12 @@ public class UsersController {
     public ResponseEntity<?> followUser(@PathVariable(value = "userId")
                                             @Positive(message = "User ID must be greater than zero")
                                             //@NotNull(message = "User ID must not be empty")
-                                            Integer userId,
+                                            int userId,
 
                                         @PathVariable("userIdToFollow")
                                         @Positive(message = "User ID to follow must be greater than zero")
                                         //@NotNull(message = "User ID must not be empty")
-                                            Integer userIdToFollow){
+                                            int userIdToFollow){
 
         _userService.followUser(userId, userIdToFollow);
         return new ResponseEntity<>(HttpStatus.OK);

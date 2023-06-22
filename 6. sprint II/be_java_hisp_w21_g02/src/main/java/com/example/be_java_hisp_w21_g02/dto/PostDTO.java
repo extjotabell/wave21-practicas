@@ -9,6 +9,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString
 @EqualsAndHashCode
 public class PostDTO {
     private Integer userId;
