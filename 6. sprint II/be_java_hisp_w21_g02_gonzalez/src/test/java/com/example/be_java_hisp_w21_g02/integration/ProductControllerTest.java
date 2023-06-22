@@ -50,6 +50,22 @@ public class ProductControllerTest {
         mockMvc.perform(request).andDo(print()).andExpect(statusExpected);
     }
 
+    @Test
+    @DisplayName("B. Incremental requirements - Individual development - NOK")
+    void createPostTestNOK() throws Exception {
+        PostRequestDTO postRequestDTO = getPostRequestDTO();
+        postRequestDTO.setPrice(10000001D);
+        String requestJson = writer.writeValueAsString(postRequestDTO);
+
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders.post("/products/post")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(requestJson);
+
+        ResultMatcher statusExpected = MockMvcResultMatchers.status().is4xxClientError();
+
+        mockMvc.perform(request).andDo(print()).andExpect(statusExpected);
+    }
+
     private PostRequestDTO getPostRequestDTO() {
         ProductDTO productDTO = new ProductDTO();
         productDTO.setProductId(100);
