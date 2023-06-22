@@ -1,5 +1,6 @@
 package com.example.be_java_hisp_w21_g02.unit;
 
+import com.example.be_java_hisp_w21_g02.dto.response.FollowedListDTO;
 import com.example.be_java_hisp_w21_g02.dto.response.FollowerDTO;
 import com.example.be_java_hisp_w21_g02.dto.response.FollowersCountDTO;
 import com.example.be_java_hisp_w21_g02.dto.response.FollowersListDTO;
@@ -42,12 +43,12 @@ public class UserServiceTest {
     private static User userToFollow;
 
     // Variables for Followers Lists
-    private User userFollowingSeller1;
-    private User userFollowingSeller2;
-    private User userFollowingSeller3;
-    private User userSeller;
-    private List<User> usersFollowersList;
-    private FollowersListDTO expected;
+    private User user1;
+    private User user2;
+    private User user3;
+    private User user4;
+    private FollowersListDTO expectedFollowersListDTO;
+    private FollowedListDTO expectedFollowedListDTO;
 
     @BeforeEach
     void setup() {
@@ -56,7 +57,7 @@ public class UserServiceTest {
     }
 
     @Test
-    @DisplayName("Unit Test US01 T01 - Follow existing user")
+    @DisplayName("Unit Test US01 T-0001 01 - Follow existing user")
     void followUserTestUserToFollowExists() {
         //Arrange
         userToFollow.setPosts(List.of(new Post(2, 1, LocalDate.now().minusDays(1), 3, 50D, new Product())));
@@ -74,7 +75,7 @@ public class UserServiceTest {
     }
 
     @Test
-    @DisplayName("Unit Test US01 T02 - Follow non-existing user throws exception")
+    @DisplayName("Unit Test US01 T-0001 02 - Follow non-existing user throws exception")
     void followUserTestUserToFollowDoesntExists() {
         //Arrange
         int nonExistentUserId = 3000;
@@ -86,7 +87,7 @@ public class UserServiceTest {
     }
 
     @Test
-    @DisplayName("Unit Test US01 T03 - Follow user that is already followed throws exception")
+    @DisplayName("Unit Test US01 T-0001 03 - Follow user that is already followed throws exception")
     void followUserTestUserToFollowAlreadyBeingFollowed() {
         //Arrange
         userToFollow.setPosts(List.of(new Post(2, 1, LocalDate.now().minusDays(1), 3, 50D, new Product())));
@@ -102,7 +103,7 @@ public class UserServiceTest {
     }
 
     @Test
-    @DisplayName("Unit Test US01 T04 - Follow user that is not a seller throws exception")
+    @DisplayName("Unit Test US01 T-0001 04 - Follow user that is not a seller throws exception")
     void followUserTestUserToFollowIsNotASeller() {
         //Arrange
         when(_userRepository.getUser(user.getId())).thenReturn(user);
@@ -113,7 +114,7 @@ public class UserServiceTest {
     }
 
     @Test
-    @DisplayName("Unit Test US01 T05 - Follow myself throws exception")
+    @DisplayName("Unit Test US01 T-0001 05 - Follow myself throws exception")
     void followUserTestUserToFollowMyself() {
         //Arrange
         userToFollow.setPosts(List.of(new Post(2, 1, LocalDate.now().minusDays(1), 3, 50D, new Product())));
@@ -128,7 +129,7 @@ public class UserServiceTest {
     }
 
     @Test
-    @DisplayName("Unit Test US01 T06 - user who follows does not exist throws exception")
+    @DisplayName("Unit Test US01 T-0001 06 - user who follows does not exist throws exception")
     void followUserTestUserWhoFollowsNotExists() {
         //Arrange
         int nonExistentUserId = 3000;
@@ -140,7 +141,7 @@ public class UserServiceTest {
     }
 
     @Test
-    @DisplayName("Unit Test US07 T01 - Unfollow existing user")
+    @DisplayName("Unit Test US07 T-0002 01 - Unfollow existing user")
     void unfollowUserTestUserToUnfollowExists() {
         //Arrange
         userToFollow.setPosts(List.of(new Post(2, 1, LocalDate.now().minusDays(1), 3, 50D, new Product())));
@@ -157,7 +158,7 @@ public class UserServiceTest {
     }
 
     @Test
-    @DisplayName("Unit Test US07 T02 - UnFollow non-existing user throws exception")
+    @DisplayName("Unit Test US07 T-0002 02 - UnFollow non-existing user throws exception")
     void unfollowUserTestUserToUnFollowDoesntExists() {
         //Arrange
 
@@ -170,7 +171,7 @@ public class UserServiceTest {
     }
 
     @Test
-    @DisplayName("Unit Test US07 T03 - UnFollow user that is not being followed throws exception")
+    @DisplayName("Unit Test US07 T-0002 03 - UnFollow user that is not being followed throws exception")
     void unfollowUserTestUserToUnFollowNotBeingFollowed() {
         //Arrange
         userToFollow.setPosts(List.of(new Post(2, 1, LocalDate.now().minusDays(1), 3, 50D, new Product())));
@@ -184,7 +185,7 @@ public class UserServiceTest {
     }
 
     @Test
-    @DisplayName("Unit Test US07 T04 - unFollow user that is not a seller throws exception")
+    @DisplayName("Unit Test US07 T-0002 04 - unFollow user that is not a seller throws exception")
     void unfollowUserTestUserToUnFollowIsNotASeller() {
         //Arrange
         when(_userRepository.getUser(user.getId())).thenReturn(user);
@@ -195,7 +196,7 @@ public class UserServiceTest {
     }
 
     @Test
-    @DisplayName("Unit Test US07 T05 - user who unfollows does not exist throws exception")
+    @DisplayName("Unit Test US07 T-0002 05 - user who unfollows does not exist throws exception")
     void unfollowUserTestUserWhoUnFollowsNotExists() {
         //Arrange
         int nonExistentUserId = 3000;
@@ -207,7 +208,7 @@ public class UserServiceTest {
     }
 
     @Test
-    @DisplayName("Unit Test US02 T01 - user with no followers gets 0 followers")
+    @DisplayName("Unit Test US02 T-0007 01 - user with no followers gets 0 followers")
     void getFollowersCountTestWithNoFollowers() {
         //Arrange
         user.setPosts(List.of(new Post(2, 1, LocalDate.now().minusDays(1), 3, 50D, new Product())));
@@ -223,7 +224,7 @@ public class UserServiceTest {
 
 
     @Test
-    @DisplayName("Unit Test US02 T02 - user with one follower gets 1 follower")
+    @DisplayName("Unit Test US02 T-0007 02 - user with one follower gets 1 follower")
     void getFollowersCountTestWithOneFollower() {
         //Arrange
         userToFollow.setPosts(List.of(new Post(2, 1, LocalDate.now().minusDays(1), 3, 50D, new Product())));
@@ -240,7 +241,7 @@ public class UserServiceTest {
     }
 
     @Test
-    @DisplayName("Unit Test US02 T03 - user is not a seller")
+    @DisplayName("Unit Test US02 T-0007 03 - user is not a seller")
     void getFollowersCountTestUserIsNotSeller() {
         //Arrange
         when(_userRepository.getUser(user.getId())).thenReturn(user);
@@ -250,7 +251,7 @@ public class UserServiceTest {
     }
 
     @Test
-    @DisplayName("Unit Test US07 T04 - Non-existent user throws exception")
+    @DisplayName("Unit Test US02 T-0007 04 - Non-existent user throws exception")
     void getFollowersCountTestUserDoesntExists() {
         //Arrange
         int nonExistentUserId = 3000;
@@ -262,7 +263,7 @@ public class UserServiceTest {
 
 
     @Test
-    @DisplayName("Unit Test US08 T-0003 T01 - Asking for ascending order in followers list does not throw exception")
+    @DisplayName("Unit Test US08 T-0003 01 - Asking for ascending order in followers list does not throw exception")
     void getFollowersListOrderAscendingExistsTest() {
         //Arrange
         user.setPosts(List.of(new Post(2, 1, LocalDate.now().minusDays(1), 3, 50D, new Product())));
@@ -273,7 +274,7 @@ public class UserServiceTest {
     }
 
     @Test
-    @DisplayName("Unit Test US08 T-0003 T02 - Asking for descending followers list order does not throw exception")
+    @DisplayName("Unit Test US08 T-0003 02 - Asking for descending followers list order does not throw exception")
     void getFollowersListOrderDescendingExistsTest() {
         //Arrange
         user.setPosts(List.of(new Post(2, 1, LocalDate.now().minusDays(1), 3, 50D, new Product())));
@@ -284,7 +285,7 @@ public class UserServiceTest {
     }
 
     @Test
-    @DisplayName("Unit Test US08 T-0003 T03 - Non-existent user in followers list throws exception")
+    @DisplayName("Unit Test US08 T-0003 03 - Non-existent user in followers list throws exception")
     void getFollowersListOrderTestUserDoesntExists() {
         //Arrange
         int nonExistentUserId = 3000;
@@ -295,7 +296,7 @@ public class UserServiceTest {
     }
 
     @Test
-    @DisplayName("Unit Test US08 T-0003 T04 - Asking for followers list without existent order")
+    @DisplayName("Unit Test US08 T-0003 04 - Asking for followers list without existent order")
     void getFollowersListOrderTestOrderDoesntExists() {
         //Arrange
         user.setPosts(List.of(new Post(2, 1, LocalDate.now().minusDays(1), 3, 50D, new Product())));
@@ -305,7 +306,7 @@ public class UserServiceTest {
     }
 
     @Test
-    @DisplayName("Unit Test US08 T-0003 T05 - Asking for ascending order in followed list does not throw exception")
+    @DisplayName("Unit Test US08 T-0003 05 - Asking for ascending order in followed list does not throw exception")
     void getFollowedListOrderAscendingExistsTest() {
         //Arrange
         user.setPosts(List.of(new Post(2, 1, LocalDate.now().minusDays(1), 3, 50D, new Product())));
@@ -316,7 +317,7 @@ public class UserServiceTest {
     }
 
     @Test
-    @DisplayName("Unit Test US08 T-0003 T06 - Asking for descending followed list order does not throw exception")
+    @DisplayName("Unit Test US08 T-0003 06 - Asking for descending followed list order does not throw exception")
     void getFollowedListOrderDescendingExistsTest() {
         //Arrange
         user.setPosts(List.of(new Post(2, 1, LocalDate.now().minusDays(1), 3, 50D, new Product())));
@@ -327,7 +328,7 @@ public class UserServiceTest {
     }
 
     @Test
-    @DisplayName("Unit Test US08 T-0003 T07 - Non-existent user in followed list throws exception")
+    @DisplayName("Unit Test US08 T-0003 07 - Non-existent user in followed list throws exception")
     void getFollowedListOrderTestUserDoesntExists() {
         //Arrange
         int nonExistentUserId = 3000;
@@ -338,7 +339,7 @@ public class UserServiceTest {
     }
 
     @Test
-    @DisplayName("Unit Test US08 T-0003 T08 - Asking for followed list without existent order")
+    @DisplayName("Unit Test US08 T-0003 08 - Asking for followed list without existent order")
     void getFollowedListOrderTestOrderDoesntExists() {
         //Arrange
         user.setPosts(List.of(new Post(2, 1, LocalDate.now().minusDays(1), 3, 50D, new Product())));
@@ -348,102 +349,138 @@ public class UserServiceTest {
     }
 
 
-
-
-    private void createScenarioForLists() {
+    private void createScenarioForLists(boolean isFollowedList) {
 
         // Creation of followers
-        userFollowingSeller1 = new User(2, "Charles", new HashSet<>(), new HashSet<>(), new ArrayList<>());
-        userFollowingSeller2 = new User(3, "Shawn", new HashSet<>(), new HashSet<>(), new ArrayList<>());
-        userFollowingSeller3 = new User(4, "Peter", new HashSet<>(), new HashSet<>(), new ArrayList<>());
+        user1 = new User(2, "Charles", new HashSet<>(), new HashSet<>(), new ArrayList<>());
+        user2 = new User(3, "Shawn", new HashSet<>(), new HashSet<>(), new ArrayList<>());
+        user3 = new User(4, "Peter", new HashSet<>(), new HashSet<>(), new ArrayList<>());
 
         // Creation of Seller User
-        userSeller = new User(5, "SellerUser",
+        user4 = new User(5, "SellerUser",
                 new HashSet<>(),
-                new HashSet<>(List.of(userFollowingSeller1.getId(), userFollowingSeller2.getId(), userFollowingSeller3.getId())),
-                List.of(
-                        new Post(2, 1, LocalDate.now().minusDays(1), 3, 50D, new Product()))
+                new HashSet<>(),
+                new ArrayList<>()
         );
 
-        // Creation of Followers List for thenReturn()
-        usersFollowersList = new ArrayList<>(List.of(userFollowingSeller1, userFollowingSeller2, userFollowingSeller3));
+        List<User> userList;
+        if(isFollowedList){
+            user1.setPosts(
+                    List.of(new Post(user1.getId(), 1, LocalDate.now().minusDays(1), 3, 50D, new Product())
+                    ));
+            user2.setPosts(
+                    List.of(new Post(user2.getId(), 1, LocalDate.now().minusDays(1), 3, 50D, new Product())
+                    ));
+            user3.setPosts(
+                    List.of(new Post(user3.getId(), 1, LocalDate.now().minusDays(1), 3, 50D, new Product())
+                    ));
+            user4.setPosts(new ArrayList<>());
 
-        // Creation of Expected FollowersListDTO for Asserts
-        expected = new FollowersListDTO(userSeller.getId(), userSeller.getUsername(), new ArrayList<>(
-                List.of(
-                        new FollowerDTO(userFollowingSeller1.getId(), userFollowingSeller1.getUsername()),
-                        new FollowerDTO(userFollowingSeller2.getId(), userFollowingSeller2.getUsername()),
-                        new FollowerDTO(userFollowingSeller3.getId(), userFollowingSeller3.getUsername())
-                )
-        ));
+            userList = new ArrayList<>(List.of(user1, user2, user3));
+            when(_userRepository.getUsers(Set.of(user1.getId(), user2.getId(), user3.getId())))
+                    .thenReturn(userList);
+            expectedFollowedListDTO = new FollowedListDTO(user4.getId(), user4.getUsername(), new ArrayList<>(
+                    List.of(
+                            new FollowerDTO(user1.getId(), user1.getUsername()),
+                            new FollowerDTO(user2.getId(), user2.getUsername()),
+                            new FollowerDTO(user3.getId(), user3.getUsername())
+                    )
+            ));
+        }
+        else{
+            user4.setPosts(List.of(new Post(5, 1, LocalDate.now().minusDays(1), 3, 50D, new Product())));
+
+            userList = new ArrayList<>(List.of(user1, user2, user3));
+            when(_userRepository.getUsers(Set.of(user1.getId(), user2.getId(), user3.getId())))
+                    .thenReturn(userList);
+            expectedFollowersListDTO = new FollowersListDTO(user4.getId(), user4.getUsername(), new ArrayList<>(
+                    List.of(
+                            new FollowerDTO(user1.getId(), user1.getUsername()),
+                            new FollowerDTO(user2.getId(), user2.getUsername()),
+                            new FollowerDTO(user3.getId(), user3.getUsername())
+                    )
+            ));
+        }
+
+        when(_userRepository.getUser(user1.getId())).thenReturn(user1);
+        when(_userRepository.getUser(user2.getId())).thenReturn(user2);
+        when(_userRepository.getUser(user3.getId())).thenReturn(user3);
+        when(_userRepository.getUser(user4.getId())).thenReturn(user4);
+
+
+
     }
 
     @Test
-    @DisplayName("Unit Test US08 T-0004 T01 - Asking for followers list with ascendant order")
+    @DisplayName("Unit Test US08 T-0004 01 - Asking for followers list with ascendant order")
     void getFollowersListOrderAscendantTest() {
         //Arrange
-        //  Creation of Scenario
-        createScenarioForLists();
+        createScenarioForLists(false);
 
-        //  Mocking repositories results
-        when(_userRepository.getUser(2)).thenReturn(userFollowingSeller1);
-        when(_userRepository.getUser(3)).thenReturn(userFollowingSeller2);
-        when(_userRepository.getUser(4)).thenReturn(userFollowingSeller3);
-        when(_userRepository.getUser(5)).thenReturn(userSeller);
-
-        //  Users follows the Seller
-        _userService.followUser(userFollowingSeller1.getId(), userSeller.getId());
-        _userService.followUser(userFollowingSeller2.getId(), userSeller.getId());
-        _userService.followUser(userFollowingSeller3.getId(), userSeller.getId());
-
-        // Mocking get users for getFollowersList()
-        when(_userRepository.getUsers(Set.of(userFollowingSeller1.getId(), userFollowingSeller2.getId(), userFollowingSeller3.getId())))
-                .thenReturn(usersFollowersList);
+        _userService.followUser(user1.getId(), user4.getId());
+        _userService.followUser(user2.getId(), user4.getId());
+        _userService.followUser(user3.getId(), user4.getId());
 
         // Act
-        expected.getFollowers().sort(Comparator.comparing(FollowerDTO::getUsername));
+        expectedFollowersListDTO.getFollowers().sort(Comparator.comparing(FollowerDTO::getUsername));
 
-        FollowersListDTO result = _userService.getFollowersList(userSeller.getId(), Constants.ORDER_NAME_ASC);
+        FollowersListDTO result = _userService.getFollowersList(user4.getId(), Constants.ORDER_NAME_ASC);
 
         //Assert
-        Assertions.assertEquals(expected, result);
+        Assertions.assertEquals(expectedFollowersListDTO, result);
     }
 
     @Test
-    @DisplayName("Unit Test US08 T-0004 T02 - Asking for followers list with descendant order")
+    @DisplayName("Unit Test US08 T-0004 02 - Asking for followers list with descendant order")
     void getFollowersListOrderDescendantTest() {
         //Arrange
-        //  Creation of Scenario
-        createScenarioForLists();
+        createScenarioForLists(false);
 
-        //  Mocking repositories results
-        when(_userRepository.getUser(2)).thenReturn(userFollowingSeller1);
-        when(_userRepository.getUser(3)).thenReturn(userFollowingSeller2);
-        when(_userRepository.getUser(4)).thenReturn(userFollowingSeller3);
-        when(_userRepository.getUser(5)).thenReturn(userSeller);
-
-        //  Users follows the Seller
-        _userService.followUser(userFollowingSeller1.getId(), userSeller.getId());
-        _userService.followUser(userFollowingSeller2.getId(), userSeller.getId());
-        _userService.followUser(userFollowingSeller3.getId(), userSeller.getId());
-
-        // Mocking get users for getFollowersList()
-        when(_userRepository.getUsers(Set.of(userFollowingSeller1.getId(), userFollowingSeller2.getId(), userFollowingSeller3.getId())))
-                .thenReturn(usersFollowersList);
+        _userService.followUser(user1.getId(), user4.getId());
+        _userService.followUser(user2.getId(), user4.getId());
+        _userService.followUser(user3.getId(), user4.getId());
 
         // Act
-        expected.getFollowers().sort(Comparator.comparing(FollowerDTO::getUsername).reversed());
+        expectedFollowersListDTO.getFollowers().sort(Comparator.comparing(FollowerDTO::getUsername).reversed());
 
-        FollowersListDTO result = _userService.getFollowersList(userSeller.getId(), Constants.ORDER_NAME_DESC);
+        FollowersListDTO result = _userService.getFollowersList(user4.getId(), Constants.ORDER_NAME_DESC);
 
         //Assert
-        Assertions.assertEquals(expected, result);
+        Assertions.assertEquals(expectedFollowersListDTO, result);
     }
 
+    @Test
+    @DisplayName("Unit Test US08 T-0004 03 - Asking for followed list with ascendant order")
+    void getFollowedListOrderAscendantTest() {
+        //Arrange
+        createScenarioForLists(true);
+        _userService.followUser(user4.getId(), user1.getId());
+        _userService.followUser(user4.getId(), user2.getId());
+        _userService.followUser(user4.getId(), user3.getId());
+        // Act
+        expectedFollowedListDTO.getFollowed().sort(Comparator.comparing(FollowerDTO::getUsername));
 
-    /*
-        1) El listado salga todo OK ascendente - OK
-        2) El listado salga todo Ok descendente
-     */
+        FollowedListDTO result = _userService.getFollowedList(user4.getId(), Constants.ORDER_NAME_ASC);
+
+        //Assert
+        Assertions.assertEquals(expectedFollowedListDTO, result);
+    }
+
+    @Test
+    @DisplayName("Unit Test US08 T-0004 04 - Asking for followed list with descendant order")
+    void getFollowedListOrderDescendantTest() {
+        //Arrange
+        createScenarioForLists(true);
+        _userService.followUser(user4.getId(), user1.getId());
+        _userService.followUser(user4.getId(), user2.getId());
+        _userService.followUser(user4.getId(), user3.getId());
+        // Act
+        expectedFollowedListDTO.getFollowed().sort(Comparator.comparing(FollowerDTO::getUsername).reversed());
+
+        FollowedListDTO result = _userService.getFollowedList(user4.getId(), Constants.ORDER_NAME_DESC);
+
+        //Assert
+        Assertions.assertEquals(expectedFollowedListDTO, result);
+    }
 
 }

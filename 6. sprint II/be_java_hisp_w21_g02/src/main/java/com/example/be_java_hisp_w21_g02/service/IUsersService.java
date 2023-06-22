@@ -24,12 +24,7 @@ public interface IUsersService {
      * @return A DTO with the number of followers of the user with id userId, it's name and id
      */
     FollowersCountDTO getFollowersCount(int userId);
-
-    /**
-     * @param userId the id of the user that wants to know the number of followers
-     * @return A DTO with the username, id and a list of followers which contains the name and id of each follower
-     */
-//    FollowersListDTO getFollowersList(int userId);
+    
 
     /**
      * @param userId the id of the user that wants to know its list of followers
