@@ -21,6 +21,9 @@ public class ProductDTO {
     @Pattern(regexp = "^[a-zA-Z0-9\\s]+$", message = "Product name can't contain special characters or be empty")
     private String product_name;
 
+    @NotNull (message = "Type can't be null")
+    @Size(max = 15, message = "Product name can't be longer than 15 characters")
+    @Pattern(regexp = "^[a-zA-Z0-9\\s]+$", message = "Type can't contain special characters or be empty")
     private String type;
 
     @NotNull (message = "Brand name can't be empty")

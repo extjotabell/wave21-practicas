@@ -471,6 +471,93 @@ public class UserServiceTest {
     }
 
     @Test
+    @DisplayName("T-0006 Verificar el correcto ordenamiento descendente por fecha.")
+    void listPostsBySellerDesc(){
+        Product mockedProduct = new Product(1, "Producto1", "Type1", "Brand1", "Color1", "Notes1");
+
+        Post mockedPost1 = new Post(1, 1, LocalDate.now().minusDays(6), mockedProduct, 1, 25.50);
+        Post mockedPost2 = new Post(1, 2, LocalDate.now().minusDays(4), mockedProduct, 1, 15.90);
+        Post mockedPost3 = new Post(1, 3, LocalDate.now().minusDays(5), mockedProduct, 1, 190.00);
+        Post mockedPost4 = new Post(1, 4, LocalDate.now().minusDays(3), mockedProduct, 1, 90.90);
+        List<Post> mockedPosts = new ArrayList<>();
+        mockedPosts.add(mockedPost1);
+        mockedPosts.add(mockedPost2);
+        mockedPosts.add(mockedPost3);
+        mockedPosts.add(mockedPost4);
+
+        User mockedSeller = new User(1, "Pablo", new ArrayList<>(), new ArrayList<>(), mockedPosts);
+        List<User> mockedSellers = new ArrayList<>();
+        mockedSellers.add(mockedSeller);
+
+        Optional<User> mockedUser = Optional.of(new User(2, "Pepe", new ArrayList<>(), mockedSellers, new ArrayList<>()));
+        Post[] aux = new Post[mockedPosts.size()];
+        aux = mockedPosts.toArray(aux);
+        List<PostDTO> expectedPostDTOs = new ArrayList<>();
+
+        PostDTO mockedPostDTO4 = new PostDTO(aux[3].getUserId(),aux[3].getPostId(),aux[3].getLocalDate(),aux[3].getProduct(),aux[3].getCategory(),aux[3].getPrice());
+        PostDTO mockedPostDTO2 = new PostDTO(aux[1].getUserId(),aux[1].getPostId(),aux[1].getLocalDate(),aux[1].getProduct(),aux[1].getCategory(),aux[1].getPrice());
+        PostDTO mockedPostDTO3 = new PostDTO(aux[2].getUserId(),aux[2].getPostId(),aux[2].getLocalDate(),aux[2].getProduct(),aux[2].getCategory(),aux[2].getPrice());
+        PostDTO mockedPostDTO1 = new PostDTO(aux[0].getUserId(),aux[0].getPostId(),aux[0].getLocalDate(),aux[0].getProduct(),aux[0].getCategory(),aux[0].getPrice());
+        expectedPostDTOs.add(mockedPostDTO4);
+        expectedPostDTOs.add(mockedPostDTO2);
+        expectedPostDTOs.add(mockedPostDTO3);
+        expectedPostDTOs.add(mockedPostDTO1);
+
+        PostBySellerDTO expected = new PostBySellerDTO(2,expectedPostDTOs);
+        when(userRepository.findUserById(2)).thenReturn(mockedUser);
+        PostBySellerDTO result = userService.listPostsBySeller(2,"date_desc");
+        Assertions.assertEquals(expected,result);
+    }
+    @Test
+    @DisplayName("T-0006 Verificar el correcto ordenamiento ascendente por fecha.")
+    void listPostsBySellerAsc(){
+        Product mockedProduct = new Product(1, "Producto1", "Type1", "Brand1", "Color1", "Notes1");
+
+        Post mockedPost1 = new Post(1, 1, LocalDate.now().minusDays(6), mockedProduct, 1, 25.50);
+        Post mockedPost2 = new Post(1, 2, LocalDate.now().minusDays(4), mockedProduct, 1, 15.90);
+        Post mockedPost3 = new Post(1, 3, LocalDate.now().minusDays(5), mockedProduct, 1, 190.00);
+        Post mockedPost4 = new Post(1, 4, LocalDate.now().minusDays(3), mockedProduct, 1, 90.90);
+        List<Post> mockedPosts = new ArrayList<>();
+        mockedPosts.add(mockedPost1);
+        mockedPosts.add(mockedPost2);
+        mockedPosts.add(mockedPost3);
+        mockedPosts.add(mockedPost4);
+
+        User mockedSeller = new User(1, "Pablo", new ArrayList<>(), new ArrayList<>(), mockedPosts);
+        List<User> mockedSellers = new ArrayList<>();
+        mockedSellers.add(mockedSeller);
+
+        Optional<User> mockedUser = Optional.of(new User(2, "Pepe", new ArrayList<>(), mockedSellers, new ArrayList<>()));
+        Post[] aux = new Post[mockedPosts.size()];
+        aux = mockedPosts.toArray(aux);
+        List<PostDTO> expectedPostDTOs = new ArrayList<>();
+
+        PostDTO mockedPostDTO4 = new PostDTO(aux[3].getUserId(),aux[3].getPostId(),aux[3].getLocalDate(),aux[3].getProduct(),aux[3].getCategory(),aux[3].getPrice());
+        PostDTO mockedPostDTO2 = new PostDTO(aux[1].getUserId(),aux[1].getPostId(),aux[1].getLocalDate(),aux[1].getProduct(),aux[1].getCategory(),aux[1].getPrice());
+        PostDTO mockedPostDTO3 = new PostDTO(aux[2].getUserId(),aux[2].getPostId(),aux[2].getLocalDate(),aux[2].getProduct(),aux[2].getCategory(),aux[2].getPrice());
+        PostDTO mockedPostDTO1 = new PostDTO(aux[0].getUserId(),aux[0].getPostId(),aux[0].getLocalDate(),aux[0].getProduct(),aux[0].getCategory(),aux[0].getPrice());
+        expectedPostDTOs.add(mockedPostDTO1);
+        expectedPostDTOs.add(mockedPostDTO3);
+        expectedPostDTOs.add(mockedPostDTO2);
+        expectedPostDTOs.add(mockedPostDTO4);
+
+        PostBySellerDTO expected = new PostBySellerDTO(2,expectedPostDTOs);
+        when(userRepository.findUserById(2)).thenReturn(mockedUser);
+        PostBySellerDTO result = userService.listPostsBySeller(2,"date_asc");
+        Assertions.assertEquals(expected,result);
+    }
+    @Test
+    @DisplayName("T-0006 Verificar el correcto ordenamientodescendente por fecha - Bad Path.")
+    void listPostsBySellerBad(){
+        Optional<User> mockedUser = Optional.empty();
+        when(userRepository.findUserById(1)).thenReturn(mockedUser);
+
+        Assertions.assertThrows(BadRequestException.class, ()-> {
+            userService.listPostsBySeller(1,"date_desc");
+        });
+    }
+
+    @Test
     @DisplayName("T-0008 - happy Path and unhappy Path")
     void listPostsBySeller(){
         // arrange
