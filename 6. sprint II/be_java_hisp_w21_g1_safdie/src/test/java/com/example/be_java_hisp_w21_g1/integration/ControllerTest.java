@@ -103,4 +103,14 @@ public class ControllerTest {
                 .andExpect(jsonPath("$.allErrors[0]").value("User_id can't be less than 0"));
     }
 
+    @Test
+    @DisplayName("Verificar que tire error al pasar un id que no existe")
+    void followersCountNonExistentUser() throws Exception {
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/users/100/followers/count"))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(MockMvcResultMatchers.status().isNotFound())
+                .andExpect(jsonPath("$.message").value("No se encontro el usuario con el ID100"));
+    }
+
 }
