@@ -86,8 +86,6 @@ public class Controller {
         return new ResponseEntity<>("Se ha creado el post!", HttpStatus.OK);
     }
 
-
-
     /**
      * US 0006: Obtener un listado de las publicaciones realizadas por los vendedores que un usuario
      *     sigue en las últimas dos semanas (para esto tener en cuenta ordenamiento por fecha,
