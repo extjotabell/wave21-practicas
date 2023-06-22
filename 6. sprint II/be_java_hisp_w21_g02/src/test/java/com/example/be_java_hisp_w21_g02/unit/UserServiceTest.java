@@ -1,6 +1,7 @@
 package com.example.be_java_hisp_w21_g02.unit;
 
 import com.example.be_java_hisp_w21_g02.dto.response.FollowersCountDTO;
+import com.example.be_java_hisp_w21_g02.exceptions.OrderNotFoundException;
 import com.example.be_java_hisp_w21_g02.exceptions.UserFollowingException;
 import com.example.be_java_hisp_w21_g02.exceptions.UserNotFoundException;
 import com.example.be_java_hisp_w21_g02.exceptions.UserNotSellerException;
@@ -9,6 +10,7 @@ import com.example.be_java_hisp_w21_g02.model.Product;
 import com.example.be_java_hisp_w21_g02.model.User;
 import com.example.be_java_hisp_w21_g02.repository.IUserRepository;
 import com.example.be_java_hisp_w21_g02.service.UsersServiceImpl;
+import com.example.be_java_hisp_w21_g02.utils.Constants;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -248,4 +250,92 @@ public class UserServiceTest {
         //Act & Assert
         Assertions.assertThrows(UserNotFoundException.class , () -> _userService.getFollowersCount(nonExistentUserId));
     }
+
+
+    @Test
+    @DisplayName("Unit Test US08 T01 - Asking for ascending order in followers list does not throw exception")
+    void getFollowersListOrderAscendingExistsTest() {
+        //Arrange
+        user.setPosts(List.of(new Post(2, 1, LocalDate.now().minusDays(1),3, 50D, new Product())));
+        when(_userRepository.getUser(user.getId())).thenReturn(user);
+
+        //Act & Assert
+        Assertions.assertDoesNotThrow(() -> _userService.getFollowersList(user.getId(), Constants.ORDER_NAME_ASC));
+    }
+
+    @Test
+    @DisplayName("Unit Test US08 T02 - Asking for descending followers list order does not throw exception")
+    void getFollowersListOrderDescendingExistsTest() {
+        //Arrange
+        user.setPosts(List.of(new Post(2, 1, LocalDate.now().minusDays(1),3, 50D, new Product())));
+        when(_userRepository.getUser(user.getId())).thenReturn(user);
+
+        //Act & Assert
+        Assertions.assertDoesNotThrow(() -> _userService.getFollowersList(user.getId(), Constants.ORDER_NAME_DESC));
+    }
+    @Test
+    @DisplayName("Unit Test US08 T03 - Non-existent user in followers list throws exception")
+    void getFollowersListOrderTestUserDoesntExists() {
+        //Arrange
+        int nonExistentUserId = 3000;
+        when(_userRepository.getUser(nonExistentUserId)).thenReturn(null);
+
+        //Act & Assert
+        Assertions.assertThrows(UserNotFoundException.class , () -> _userService.getFollowersList(nonExistentUserId, Constants.ORDER_NAME_ASC));
+    }
+
+
+    @DisplayName("Unit Test US08 T04 - Asking for followers list without existent order")
+    void getFollowersListOrderTestOrderDoesntExists() {
+        //Arrange
+        user.setPosts(List.of(new Post(2, 1, LocalDate.now().minusDays(1),3, 50D, new Product())));
+        when(_userRepository.getUser(user.getId())).thenReturn(user);
+
+        //Act & Assert
+        Assertions.assertThrows(OrderNotFoundException.class , () -> _userService.getFollowersList(user.getId(), "wrong_order"));
+    }
+
+    @Test
+    @DisplayName("Unit Test US08 T05 - Asking for ascending order in followed list does not throw exception")
+    void getFollowedListOrderAscendingExistsTest() {
+        //Arrange
+        user.setPosts(List.of(new Post(2, 1, LocalDate.now().minusDays(1),3, 50D, new Product())));
+        when(_userRepository.getUser(user.getId())).thenReturn(user);
+
+        //Act & Assert
+        Assertions.assertDoesNotThrow(() -> _userService.getFollowedList(user.getId(), Constants.ORDER_NAME_ASC));
+    }
+
+    @Test
+    @DisplayName("Unit Test US08 T06 - Asking for descending followed list order does not throw exception")
+    void getFollowedListOrderDescendingExistsTest() {
+        //Arrange
+        user.setPosts(List.of(new Post(2, 1, LocalDate.now().minusDays(1),3, 50D, new Product())));
+        when(_userRepository.getUser(user.getId())).thenReturn(user);
+
+        //Act & Assert
+        Assertions.assertDoesNotThrow(() -> _userService.getFollowedList(user.getId(), Constants.ORDER_NAME_DESC));
+    }
+    @Test
+    @DisplayName("Unit Test US08 T07 - Non-existent user in followed list throws exception")
+    void getFollowedListOrderTestUserDoesntExists() {
+        //Arrange
+        int nonExistentUserId = 3000;
+        when(_userRepository.getUser(nonExistentUserId)).thenReturn(null);
+
+        //Act & Assert
+        Assertions.assertThrows(UserNotFoundException.class , () -> _userService.getFollowedList(nonExistentUserId, Constants.ORDER_NAME_ASC));
+    }
+
+
+    @DisplayName("Unit Test US08 T08 - Asking for followed list without existent order")
+    void getFollowedListOrderTestOrderDoesntExists() {
+        //Arrange
+        user.setPosts(List.of(new Post(2, 1, LocalDate.now().minusDays(1),3, 50D, new Product())));
+        when(_userRepository.getUser(user.getId())).thenReturn(user);
+
+        //Act & Assert
+        Assertions.assertThrows(OrderNotFoundException.class , () -> _userService.getFollowedList(user.getId(), "wrong_order"));
+    }
+
 }
