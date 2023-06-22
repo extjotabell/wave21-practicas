@@ -37,7 +37,7 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 @SpringBootTest
-public class UserServiceTest {
+class UserServiceTest {
     @Autowired
     @Mock
     IUserRepository userRepository;
@@ -145,7 +145,7 @@ public class UserServiceTest {
 
     @Test
     @DisplayName("US-0003 - Verificar que el criterio de ordenación exista, caso exitoso")
-    public void orderListOk() {
+    void orderListOk() {
         //Arrange
         String orderCriteria = "name_asc";
 
@@ -173,7 +173,7 @@ public class UserServiceTest {
 
     @Test
     @DisplayName("US-0003 - US-0003 - Verificar que el criterio de ordenación exista, caso no exitoso")
-    public void orderListThrowsException() {
+    void orderListThrowsException() {
         //Arrange
         String orderCriteria = "name_ascending";
 

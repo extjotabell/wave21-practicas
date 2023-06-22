@@ -25,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class ControllerTest {
+class ControllerTest {
 
     @Autowired
     MockMvc mockMvc;
@@ -36,7 +36,7 @@ public class ControllerTest {
             .writer();
     @Test
     @DisplayName("Devuelve DTO con la cantidad de seguidores. (Caso exitoso)")
-    public void countFollowersOk() throws Exception {
+    void countFollowersOk() throws Exception {
         //ARRANGE
         Integer userId = 1;
         FollowersCountDTO expected = new FollowersCountDTO(userId, "Pepe", 2);
@@ -58,7 +58,7 @@ public class ControllerTest {
 
     @Test
     @DisplayName("Devuelve DTO con la cantidad de seguidores incorrecta. (Caso no exitoso)")
-    public void countFollowersNoOk() throws Exception {
+    void countFollowersNoOk() throws Exception {
         //ARRANGE
         Integer userId = 1;
         FollowersCountDTO expected = new FollowersCountDTO(userId, "Pepe", 5);
@@ -80,7 +80,7 @@ public class ControllerTest {
 
     @Test
     @DisplayName("Devuelve una excepcion cuando no se encuentra el usuario. (Caso no exitoso)")
-    public void countFollowersException() throws Exception {
+    void countFollowersException() throws Exception {
         //ARRANGE
         Integer userId = 12222;
         ErrorDTO errorDTO = new ErrorDTO("No se encontro el usuario con el ID" + userId);

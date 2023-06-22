@@ -1,16 +1,12 @@
 package com.example.be_java_hisp_w21_g1.DTO.Error;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
+@Data
 public class ExceptionDTO {
-    String message;
-    List<String> allErrors;
+    private String message;
+    private List<String> allErrors;
 }

@@ -24,19 +24,19 @@ public class PostProductDTO {
 
   @NotNull(message = "User_id can't be empty")
   @Positive(message = "User_id can't be less than 0")
-  Integer user_id;
+  private Integer user_id;
 
   @JsonFormat(pattern="dd-MM-yyyy")
   @NotNull(message = "The date cannot be null")
-  LocalDate date;
+  private LocalDate date;
 
   @Valid
-  ProductDTO product;
+  private ProductDTO product;
 
   @NotNull(message = "Category can't be empty")
-  Integer category;
+  private Integer category;
 
   @NotNull(message = "Price cannot be null")
   @Range(max = 10000000, message = "Price cannot be higher than 10.000.000")
-  Double price;
+  private Double price;
 }
