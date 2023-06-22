@@ -723,7 +723,7 @@
 					"response": []
 				},
 				{
-					"name": "All exceptions",
+					"name": "All exceptions for post",
 					"request": {
 						"method": "POST",
 						"header": [],
