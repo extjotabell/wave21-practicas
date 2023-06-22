@@ -67,7 +67,7 @@ public class ProductServiceTest {
     }
 
     @Test
-    @DisplayName("Unit Test US09 T-0005 T01 - OrderNotExists")
+    @DisplayName("Unit Test US09 T-0005 01 - OrderNotExists")
     void listFollowingPosts2WeeksTestOrderNotExists() {
         // Arrange
         String order = "order_not_exists";
@@ -79,7 +79,7 @@ public class ProductServiceTest {
     }
 
     @Test
-    @DisplayName("Unit Test US09 T-0005 T02 - EmptyOrder")
+    @DisplayName("Unit Test US09 T-0005 02 - EmptyOrder")
     void listFollowingPosts2WeeksTestEmptyOrder() {
         // Arrange
         String order = "";
@@ -91,7 +91,7 @@ public class ProductServiceTest {
     }
 
     @Test
-    @DisplayName("Unit Test US09 T-0005-03 - NullOrder")
+    @DisplayName("Unit Test US09 T-0005 03 - NullOrder")
     void listFollowingPosts2WeeksTestNullOrder() {
         // Arrange
         String order = null;
@@ -109,7 +109,7 @@ public class ProductServiceTest {
     }
 
     @Test
-    @DisplayName("Unit Test US09 T-0006-01 - Correct Order Desc (Date)")
+    @DisplayName("Unit Test US09 T-0006 01 - Correct Order Desc (Date)")
     void listFollowingPosts2WeeksTestCorrectOrderDesc(){
         // Arrange
         List<PostDTO> postsDTODesc =  postsDTO.stream().sorted(Comparator.comparing(PostDTO::getDate).reversed()).toList();
@@ -126,7 +126,7 @@ public class ProductServiceTest {
     }
 
     @Test
-    @DisplayName("Unit Test US09 T-0006-02 - Correct Order Asc (Date)")
+    @DisplayName("Unit Test US09 T-0006 02 - Correct Order Asc (Date)")
     void listFollowingPosts2WeeksTestCorrectOrderAsc(){
         // Arrange
         List<PostDTO> postsDTOAsc =  postsDTO.stream().sorted(Comparator.comparing(PostDTO::getDate)).toList();
@@ -143,7 +143,7 @@ public class ProductServiceTest {
     }
 
     @Test
-    @DisplayName("Unit Test US06 T-0008-01 - Obtain a list of posts from users that the user follows in the last 2 weeks in descendent date order")
+    @DisplayName("Unit Test US06 T-0008 01 - Obtain a list of posts from users that the user follows in the last 2 weeks in descendent date order")
     void listFollowingPosts2WeeksTestObtainedListIsOk() {
         // Arrange
         ResponseEntity<UserPostResponseDTO> expected = ResponseEntity.ok(new UserPostResponseDTO(1, postsDTO));
@@ -159,7 +159,7 @@ public class ProductServiceTest {
     }
 
     @Test
-    @DisplayName("Unit Test US06 T-0008-02 - UserNotExists")
+    @DisplayName("Unit Test US06 T-0008 02 - UserNotExists")
     void listFollowingPosts2WeeksTestUserNotExists() {
         // Arrange
         int userId = 2000000;
@@ -172,7 +172,7 @@ public class ProductServiceTest {
     }
 
     @Test
-    @DisplayName("Unit Test US06 T-0008-03 - Post Not Exist")
+    @DisplayName("Unit Test US06 T-0008 03 - Post Not Exist")
     void listFollowingPosts2WeeksTestPostNotExists() {
         // Arrange
         ResponseEntity<UserPostResponseDTO> expected = new ResponseEntity<>(new UserPostResponseDTO(user.getId(), Collections.emptyList()), HttpStatus.OK);
