@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="6723a5d8-7066-4bf4-b4d6-0a538fd49c29" name="Changes" comment="Agregando displayName a los test en PostServiceImplTest" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/.." value="be_java_hisp_w21_g4" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="Use Maven wrapper" />
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="2RIkHCwmdUbUqygq415FeZJA4Hm" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "HelmerHdez",
+    "last_opened_file_path": "/Users/hehernandez/Desktop/workplace/java/wave21-practicas/be_java_hisp_w21_g04"
+  }
+}]]></component>
+  <component name="RunManager" selected="JUnit.com.sprint.be_java_hisp_w21_g04.unitTest.service in be_java_hisp_w21_g04">
+    <configuration name="PostServiceImplTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="be_java_hisp_w21_g04" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.sprint.be_java_hisp_w21_g04.unitTest.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.sprint.be_java_hisp_w21_g04.unitTest.service" />
+      <option name="MAIN_CLASS_NAME" value="com.sprint.be_java_hisp_w21_g04.unitTest.service.PostServiceImplTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PostServiceImplTest.testIllegalDataException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="be_java_hisp_w21_g04" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.sprint.be_java_hisp_w21_g04.unitTest.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.sprint.be_java_hisp_w21_g04.unitTest.service" />
+      <option name="MAIN_CLASS_NAME" value="com.sprint.be_java_hisp_w21_g04.unitTest.service.PostServiceImplTest" />
+      <option name="METHOD_NAME" value="testIllegalDataException" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PostServiceImplTest.testNoExceptions" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="be_java_hisp_w21_g04" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.sprint.be_java_hisp_w21_g04.unitTest.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.sprint.be_java_hisp_w21_g04.unitTest.service" />
+      <option name="MAIN_CLASS_NAME" value="com.sprint.be_java_hisp_w21_g04.unitTest.service.PostServiceImplTest" />
+      <option name="METHOD_NAME" value="testNoExceptions" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PostServiceImplTest.testNoIllegalDataException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="be_java_hisp_w21_g04" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.sprint.be_java_hisp_w21_g04.unitTest.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.sprint.be_java_hisp_w21_g04.unitTest.service" />
+      <option name="MAIN_CLASS_NAME" value="com.sprint.be_java_hisp_w21_g04.unitTest.service.PostServiceImplTest" />
+      <option name="METHOD_NAME" value="testNoIllegalDataException" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="com.sprint.be_java_hisp_w21_g04.unitTest.service in be_java_hisp_w21_g04" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="be_java_hisp_w21_g04" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.sprint.be_java_hisp_w21_g04.unitTest.service.*" />
+          <option name="ENABLED" value="false" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.sprint.be_java_hisp_w21_g04.unitTest.service" />
+      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.com.sprint.be_java_hisp_w21_g04.unitTest.service in be_java_hisp_w21_g04" />
+        <item itemvalue="JUnit.PostServiceImplTest" />
+        <item itemvalue="JUnit.PostServiceImplTest.testNoExceptions" />
+        <item itemvalue="JUnit.PostServiceImplTest.testNoIllegalDataException" />
+        <item itemvalue="JUnit.PostServiceImplTest.testIllegalDataException" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6723a5d8-7066-4bf4-b4d6-0a538fd49c29" name="Changes" comment="" />
+      <created>1686944895386</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1686944895386</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Desarrollando test para el metodo sellerFollowedListPosts orden por fecha ascendente del servicio PostServiceImpl">
+      <created>1686950181080</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1686950181080</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Desarrollando test para el metodo sellerFollowedListPosts orden por fecha descendente del servicio PostServiceImpl">
+      <created>1687441736676</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1687441736676</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Corrigiendo error de ordenamiento invalido en el serivicio de PostServiceImpl.">
+      <created>1687451004960</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1687451004960</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Desarrollando test de excepciones para el metodo SellerFollowedListPostResponseDto en el servicio de PostServiceImpl">
+      <created>1687451112083</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1687451112083</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Agregando displayName a los test en PostServiceImplTest">
+      <created>1687452563649</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1687452563649</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Desarrollando test para el metodo sellerFollowedListPosts orden por fecha ascendente del servicio PostServiceImpl" />
+    <MESSAGE value="Desarrollando test para el metodo sellerFollowedListPosts orden por fecha descendente del servicio PostServiceImpl" />
+    <MESSAGE value="Corrigiendo error de ordenamiento invalido en el serivicio de PostServiceImpl." />
+    <MESSAGE value="Desarrollando test de excepciones para el metodo SellerFollowedListPostResponseDto en el servicio de PostServiceImpl" />
+    <MESSAGE value="Agregando displayName a los test en PostServiceImplTest" />
+    <option name="LAST_COMMIT_MESSAGE" value="Agregando displayName a los test en PostServiceImplTest" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/be_java_hisp_w21_g04$All_in_be_java_hisp_w21_g04.ic" NAME="All in be_java_hisp_w21_g04 Coverage Results" MODIFIED="1687443964268" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/be_java_hisp_w21_g04$com_sprint_be_java_hisp_w21_g04_unitTest_service_in_be_java_hisp_w21_g04.ic" NAME="com.sprint.be_java_hisp_w21_g04.unitTest.service in be_java_hisp_w21_g04 Coverage Results" MODIFIED="1687470621527" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+  </component>
+</project>
