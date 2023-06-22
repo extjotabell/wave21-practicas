@@ -41,7 +41,7 @@ public class Controller {
     }
 
     //US 0002: Obtener el resultado de la cantidad de usuarios que siguen a un determinado vendedor
-    //Recibe UserIdDTO
+    //Recibe Integer
     //Retorna FollowersCountDTO
     @GetMapping("/users/{userId}/followers/count")
     public ResponseEntity<FollowersCountDTO> countFollowers(
@@ -54,7 +54,7 @@ public class Controller {
     }
 
     //US 0003: Obtener un listado de todos los usuarios que siguen a un determinado vendedor (¿Quién me sigue?)
-    //Recibe UserIdDTO
+    //Recibe Integer
     //Retorna FollowerListDTO
     @GetMapping("/users/{userId}/followers/list")
     public ResponseEntity<FollowerListDTO> listFollowers(
@@ -68,7 +68,7 @@ public class Controller {
     }
 
     //US 0004: Obtener un listado de todos los vendedores a los cuales sigue un determinado usuario (¿A quién sigo?)
-    //Recibe UserIdDTO
+    //Recibe Integer
     //Retorna FollowedListDTO
     @GetMapping("/users/{userId}/followed/list")
     public ResponseEntity<FollowedListDTO> listFollowed(
@@ -89,11 +89,17 @@ public class Controller {
         return new ResponseEntity<>("Se ha creado el post!", HttpStatus.OK);
     }
 
-    //US 0006: Obtener un listado de las publicaciones realizadas por los vendedores que un usuario
-    // sigue en las últimas dos semanas (para esto tener en cuenta ordenamiento por fecha,
-    // publicaciones más recientes primero).
-    //Recibe UserIdDTO
-    //Retorna PostBySeller
+
+
+    /**
+     * US 0006: Obtener un listado de las publicaciones realizadas por los vendedores que un usuario
+     *     sigue en las últimas dos semanas (para esto tener en cuenta ordenamiento por fecha,
+     *     publicaciones más recientes primero).
+     *
+     * @param userId Integer
+     * @param alf_order String
+     * @return ResponseEntity<PostBySellerDTO>
+     */
     @GetMapping("/products/followed/{user_id}/list")
     public ResponseEntity<PostBySellerDTO> latestsPosts(
             @PathVariable(value = "user_id", required = true)

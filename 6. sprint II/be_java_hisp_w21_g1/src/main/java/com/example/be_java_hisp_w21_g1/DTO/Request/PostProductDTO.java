@@ -19,7 +19,6 @@ import java.time.LocalDate;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Valid
 public class PostProductDTO {
 
   @NotNull(message = "User_id can't be empty")

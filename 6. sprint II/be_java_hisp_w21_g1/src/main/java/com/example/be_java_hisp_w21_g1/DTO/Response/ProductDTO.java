@@ -10,12 +10,11 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Valid
 public class ProductDTO {
 
     @NotNull(message = "Product_id can't be null")
     @PositiveOrZero( message = "Product_id can't be less than 0")
-    private int product_id;
+    private Integer product_id;
 
     @NotNull (message = "Product name can't be null")
     @Size(max = 40, message = "Product name can't be longer than 40 characters")
@@ -29,6 +28,9 @@ public class ProductDTO {
     @Pattern(regexp = "^[a-zA-Z0-9\\s]+$", message = "Brand name can't contain special characters")
     private String brand;
 
+    @NotNull(message = "Color can't be null")
+    @Size(max = 15, message = "Color can't be longer than 15 characters")
+    @Pattern(regexp = "^[a-zA-Z0-9\\s]+$", message = "Color can't contain special characters")
     private String color;
 
     @Size(max = 80, message = "Notes can't be longer than 80 characters")

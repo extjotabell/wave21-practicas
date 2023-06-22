@@ -128,7 +128,7 @@ public class UserServiceTest {
     }
 
     @Test
-    @DisplayName("T-0002.2 - Verificar que haya una relacion al dejar de seguir")
+    @DisplayName("T-0002.2 - Verificar que no haya una relacion al dejar de seguir")
     void unfollowNonFollower() {
         // arrange
         FollowPostDTO followPostDTO = new FollowPostDTO(1, 2);
@@ -490,10 +490,12 @@ public class UserServiceTest {
         ArrayList<User> followerList = new ArrayList<>();
         followerList.add(user2);
         User user1 = new User(1, "Martin", new ArrayList<>(), followerList, posts);
+
         List<PostDTO> expectedPosts = new ArrayList<>();
         expectedPosts.add(new PostDTO(post1.getUserId(), post1.getPostId(), post1.getLocalDate(), post1.getProduct(), post1.getCategory(), post1.getPrice()));
         expectedPosts.add(new PostDTO(post2.getUserId(), post2.getPostId(), post2.getLocalDate(), post2.getProduct(), post2.getCategory(), post2.getPrice()));
         expectedPosts.add(new PostDTO(post3.getUserId(), post3.getPostId(), post3.getLocalDate(), post3.getProduct(), post3.getCategory(), post3.getPrice()));
+
         PostBySellerDTO expected = new PostBySellerDTO(1, expectedPosts);
         when(userRepository.findUserById(1)).thenReturn(Optional.of(user1));
         // act
