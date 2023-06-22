@@ -46,7 +46,7 @@ La aplicación "SocialMeli" es una plataforma innovadora que te permite seguir y
 
   Lo que ocurrió fue que Charlie quería realizar un SQUASH para juntar todos los commits (16) del subequipo 2 para que estos tuvieran 1 tipo de mensaje (formato). Lamentablemente esto no ocurrió como se esperaba y se perdió visibilidad (historial) de los commits del subequipo 2. A continuación se muestra el historial de commits perdidos en acción:
 
-```json
+```
 commit b136e61d72b08fcf23e2da5d134121e7f7654d41 (HEAD -> be_java_hisp_w21_g4_2, origin/be_java_hisp_w21_g4_2)
 Author: laurasanabriameli <laura.sanabria@mercadolibre.com.co>
 Date:   Thu Jun 22 11:38:31 2023 -0500
