@@ -35,6 +35,7 @@ public class ProductControllerTest {
             .registerModule(new JavaTimeModule())
             .writer();
 
+    // INDIVIDUAL PART
     @Test
     @DisplayName("B. Incremental requirements - Individual development - OK")
     void createPostTestOK() throws Exception {
@@ -84,4 +85,7 @@ public class ProductControllerTest {
 
         return postRequestDTO;
     }
+
+    // BONUS
+
 }
