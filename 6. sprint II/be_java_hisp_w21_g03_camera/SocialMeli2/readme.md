@@ -121,3 +121,13 @@ Responsabilidad: Grupal
 | T-0007 | Verificar que la cantidad de seguidores de un determinado usuario sea correcta. (US-0002)                                                                            | Devuelve el cálculo correcto del total de la cantidad de seguidores que posee un usuario.<br>Notifica la no existencia del usuario al querer obtener cantidad de seguidores mediante una excepción.                                                                                                    | Mercedes Sabaj<br>Fabrizzio Camera     |
 | T-0008 | Verificar que la consulta de publicaciones realizadas en las últimas dos semanas de un determinado vendedor sean efectivamente de las últimas dos semanas. (US-0006) | Devuelve únicamente los datos de las publicaciones que tengan fecha de publicación dentro de las últimas dos semanas a partir del día de la fecha.<br>(Test de Repositorio)                                                                                                                            | Gabriel Antonietti<br>Nahuel De Bellis |
 
+### Test de integración
+
+Se realizaron los test de integración presentados en la siguiente tabla para lograr una cobertura del 80%(103/128) de los métodos y del 84%(181/214) de las lineas.
+
+|      | Test realizado                          | Estado Esperado |
+|------|-----------------------------------------|-----------------|
+| TI-1 | Agregar una nueva publicacion           | OK              |
+| TI-2 | Seguir a un usuario no seguido          | OK              |
+| TI-3 | Intentar seguirse a si mismo            | Bad Request     |
+| TI-4 | Dejar de seguir a un usuario no seguido | Bad Request     |
