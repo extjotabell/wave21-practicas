@@ -6,6 +6,7 @@ import com.sprint.be_java_hisp_w21_g04.dto.response.SellerFollowedListPostRespon
 import com.sprint.be_java_hisp_w21_g04.entity.Post;
 import com.sprint.be_java_hisp_w21_g04.entity.User;
 import com.sprint.be_java_hisp_w21_g04.exception.EmptySellerFollowedList;
+import com.sprint.be_java_hisp_w21_g04.exception.IllegalDataException;
 import com.sprint.be_java_hisp_w21_g04.exception.UserNotFoundException;
 import com.sprint.be_java_hisp_w21_g04.repository.post.IPostRepository;
 import com.sprint.be_java_hisp_w21_g04.repository.user.IUserRepository;
@@ -40,7 +41,9 @@ public class PostServiceImpl implements IPostService{
     }
     
     public SellerFollowedListPostResponseDto sellerFollowedListPosts(int userId, String order) {
-
+        if (!(order.equals("date_asc") || order.equals("date_desc"))) {
+            throw new IllegalDataException("Ordenamiento invalido");
+        }
         User user = this._userRepository.getById(userId);
         if(user==null) throw new UserNotFoundException("El usuario no existe");
         LocalDate twoWeeksAgo = LocalDate.now().minusWeeks(2);
