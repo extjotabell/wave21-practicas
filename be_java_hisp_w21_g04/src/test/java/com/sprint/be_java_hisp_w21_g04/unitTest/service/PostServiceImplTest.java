@@ -42,17 +42,54 @@ public class PostServiceImplTest {
 
         List<Post> mockResult = new ArrayList<>();
         Product product1 = new Product(1, "Camiseta", "T Shirt", "Nike", "Red", "");
-        mockResult.add(new Post(userId, LocalDate.of(2023, 6, 5), product1, 10, 100, true, 10));
+        mockResult.add(new Post(userId, LocalDate.of(2023, 6, 15), product1, 10, 100, true, 10));
         Product product2 = new Product(1, "Short", "Short", "Adidas", "Brown", "");
-        mockResult.add(new Post(userId, LocalDate.of(2023, 6, 10), product2, 6, 160, true, 10));
+        mockResult.add(new Post(userId, LocalDate.of(2023, 6, 18), product2, 6, 160, true, 10));
+        Product product3 = new Product(1, "Camiseta", "T Shirt", "Adidas", "White", "");
+        mockResult.add(new Post(1, LocalDate.of(2023, 6, 20), product3, 4, 120, true, 10));
+
+        List<PostResponseDto> expectedPosts = new ArrayList<>();
+        Product product4 = new Product(1, "Camiseta", "T Shirt", "Nike", "Red", "");
+        expectedPosts.add(new PostResponseDto(userId, LocalDate.of(2023, 6, 15), product4, 10, 100));
+        Product product5 = new Product(1, "Short", "Short", "Adidas", "Brown", "");
+        expectedPosts.add(new PostResponseDto(userId, LocalDate.of(2023, 6, 18), product5, 6, 160));
+        Product product6 = new Product(1, "Camiseta", "T Shirt", "Adidas", "White", "");
+        expectedPosts.add(new PostResponseDto(1, LocalDate.of(2023, 6, 20), product6, 4, 120));
+        SellerFollowedListPostResponseDto expectedResult = new SellerFollowedListPostResponseDto(userId, expectedPosts);
+
+        List<Integer> followers = Arrays.asList(1, 2, 3, 5);
+        List<Integer> followed = Arrays.asList(1, 2, 3, 5);
+        User user = new User(1, "Pedro", followers, followed);
+
+        when(userRepository.getById(userId)).thenReturn(user);
+        when(postRepository.getSellerFollowed(userId)).thenReturn(mockResult);
+
+
+        //Act
+        SellerFollowedListPostResponseDto result = postService.sellerFollowedListPosts(userId, order);
+
+        //Assert
+        assertEquals(expectedResult, result);
+    }
+    @Test
+    public void testSortedPostsDateDes(){
+        //Arrange
+        int userId = 1;
+        String order = "date_desc";
+
+        List<Post> mockResult = new ArrayList<>();
+        Product product1 = new Product(1, "Camiseta", "T Shirt", "Nike", "Red", "");
+        mockResult.add(new Post(userId, LocalDate.of(2023, 6, 20), product1, 10, 100, true, 10));
+        Product product2 = new Product(1, "Short", "Short", "Adidas", "Brown", "");
+        mockResult.add(new Post(userId, LocalDate.of(2023, 6, 18), product2, 6, 160, true, 10));
         Product product3 = new Product(1, "Camiseta", "T Shirt", "Adidas", "White", "");
         mockResult.add(new Post(1, LocalDate.of(2023, 6, 15), product3, 4, 120, true, 10));
 
         List<PostResponseDto> expectedPosts = new ArrayList<>();
         Product product4 = new Product(1, "Camiseta", "T Shirt", "Nike", "Red", "");
-        expectedPosts.add(new PostResponseDto(userId, LocalDate.of(2023, 6, 5), product4, 10, 100));
+        expectedPosts.add(new PostResponseDto(userId, LocalDate.of(2023, 6, 20), product4, 10, 100));
         Product product5 = new Product(1, "Short", "Short", "Adidas", "Brown", "");
-        expectedPosts.add(new PostResponseDto(userId, LocalDate.of(2023, 6, 10), product5, 6, 160));
+        expectedPosts.add(new PostResponseDto(userId, LocalDate.of(2023, 6, 18), product5, 6, 160));
         Product product6 = new Product(1, "Camiseta", "T Shirt", "Adidas", "White", "");
         expectedPosts.add(new PostResponseDto(1, LocalDate.of(2023, 6, 15), product6, 4, 120));
         SellerFollowedListPostResponseDto expectedResult = new SellerFollowedListPostResponseDto(userId, expectedPosts);
@@ -61,8 +98,9 @@ public class PostServiceImplTest {
         List<Integer> followed = Arrays.asList(1, 2, 3, 5);
         User user = new User(1, "Pedro", followers, followed);
 
-        when(postRepository.getSellerFollowed(userId)).thenReturn(mockResult);
         when(userRepository.getById(userId)).thenReturn(user);
+        when(postRepository.getSellerFollowed(userId)).thenReturn(mockResult);
+
 
         //Act
         SellerFollowedListPostResponseDto result = postService.sellerFollowedListPosts(userId, order);
