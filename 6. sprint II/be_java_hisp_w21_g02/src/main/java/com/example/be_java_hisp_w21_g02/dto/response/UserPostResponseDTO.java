@@ -10,6 +10,7 @@ import java.util.List;
 @Getter
 @ToString
 @EqualsAndHashCode
+@ToString
 public class UserPostResponseDTO {
     private int userId;
     private List<PostDTO> posts;
