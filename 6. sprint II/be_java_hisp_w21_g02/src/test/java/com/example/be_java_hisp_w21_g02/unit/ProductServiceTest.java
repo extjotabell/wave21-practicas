@@ -39,8 +39,6 @@ public class ProductServiceTest {
     ProductsServiceImpl productsService;
 
     private static User user;
-    private static Product product;
-    private static ProductDTO productDTO;
     private static List<User> userList = new ArrayList<>();
     private static List<PostDTO> postsDTO = new ArrayList<>();
 
@@ -49,8 +47,8 @@ public class ProductServiceTest {
         user = new User(1, "Usuario1", Set.of(2, 3),
                 Collections.emptySet(), Collections.emptyList()
         );
-        product = new Product();
-        productDTO = new ProductDTO();
+        Product product = new Product();
+        ProductDTO productDTO = new ProductDTO();
         userList = List.of(
                 new User(2, "Usuario2", Collections.emptySet(), Collections.emptySet(),
                         List.of(new Post(2, 1, LocalDate.now().minusDays(1), 3, 50D, product),
@@ -94,7 +92,6 @@ public class ProductServiceTest {
     @DisplayName("Unit Test US09 T-0005 03 - NullOrder")
     void listFollowingPosts2WeeksTestNullOrder() {
         // Arrange
-        String order = null;
         List<PostDTO> postsDTODesc =  postsDTO.stream().sorted(Comparator.comparing(PostDTO::getDate).reversed()).toList();
         ResponseEntity<UserPostResponseDTO> expected = ResponseEntity.ok(new UserPostResponseDTO(1, postsDTODesc));
 
@@ -102,7 +99,7 @@ public class ProductServiceTest {
         Mockito.when(userRepository.listFollowingPosts2Weeks(1)).thenReturn(userList);
 
         // Act
-        ResponseEntity<?> result = productsService.listFollowingPosts2Weeks(1, order);
+        ResponseEntity<?> result = productsService.listFollowingPosts2Weeks(1, null);
 
         // Assert
         Assertions.assertEquals(expected.getBody(), result.getBody());
