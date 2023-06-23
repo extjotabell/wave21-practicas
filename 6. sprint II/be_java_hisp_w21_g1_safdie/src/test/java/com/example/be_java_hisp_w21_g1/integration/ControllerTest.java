@@ -1,6 +1,8 @@
 package com.example.be_java_hisp_w21_g1.integration;
 
 import com.example.be_java_hisp_w21_g1.DTO.Request.PostProductDTO;
+import com.example.be_java_hisp_w21_g1.DTO.Response.FollowUserDTO;
+import com.example.be_java_hisp_w21_g1.DTO.Response.FollowedListDTO;
 import com.example.be_java_hisp_w21_g1.DTO.Response.ProductDTO;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -147,8 +149,8 @@ public class ControllerTest {
 
 
         this.mockMvc.perform(MockMvcRequestBuilders.post("/products/post")
-                .contentType("application/json")
-                .content(writer.writeValueAsString(post)))
+                        .contentType("application/json")
+                        .content(writer.writeValueAsString(post)))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(content().contentType("text/plain;charset=UTF-8"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -157,7 +159,7 @@ public class ControllerTest {
 
     @Test
     @DisplayName("Verificar que solo acepta daros validos")
-    void createPostTestUnhappy() throws Exception{
+    void createPostTestUnhappy() throws Exception {
         String[] expectedStrings = {"Price cannot be higher than 10.000.000",
                 "Color can't contain special characters", "Category can't be empty",
                 "The date cannot be null", "Product_id can't be less than 0",
@@ -189,5 +191,71 @@ public class ControllerTest {
 
         Assertions.assertTrue(errorList.containsAll(Arrays.asList(expectedStrings)));
 
+    }
+
+    // FOLLOWED LIST
+
+    @Test
+    @DisplayName("Verificar la lista de followers")
+    void followedListTestHappy() throws Exception {
+        int userId = 1;
+        FollowedListDTO expectedFolloweds = new FollowedListDTO(1, "Pepe", Arrays.asList(new FollowUserDTO(2, "Pablo"), new FollowUserDTO(3, "Pedro")));
+
+
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/users/{userID}/followers/list", userId))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(jsonPath("$.user_id").value(expectedFolloweds.getUser_id()))
+                .andExpect(jsonPath("$.user_name").value(expectedFolloweds.getUser_name()))
+                .andExpect(jsonPath("$.followers").isArray())
+                .andExpect(jsonPath("$.followers[0].user_id").value(expectedFolloweds.getFollowed().get(0).getUser_id()))
+                .andExpect(jsonPath("$.followers[0].user_name").value(expectedFolloweds.getFollowed().get(0).getUser_name()))
+                .andExpect(jsonPath("$.followers[1].user_id").value(expectedFolloweds.getFollowed().get(1).getUser_id()))
+                .andExpect(jsonPath("$.followers[1].user_name").value(expectedFolloweds.getFollowed().get(1).getUser_name()));
+        ;
+    }
+
+    @Test
+    @DisplayName("Verificar la lista de followers con ordenamiento descendente")
+    void followedListTestHappyDesc() throws Exception {
+        int userId = 1;
+        FollowedListDTO expectedFolloweds = new FollowedListDTO(1, "Pepe", Arrays.asList(new FollowUserDTO(3, "Pedro"), new FollowUserDTO(2, "Pablo")));
+
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/users/{userID}/followers/list?order=name_desc", userId))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(jsonPath("$.user_id").value(expectedFolloweds.getUser_id()))
+                .andExpect(jsonPath("$.user_name").value(expectedFolloweds.getUser_name()))
+                .andExpect(jsonPath("$.followers").isArray())
+                .andExpect(jsonPath("$.followers[0].user_id").value(expectedFolloweds.getFollowed().get(0).getUser_id()))
+                .andExpect(jsonPath("$.followers[0].user_name").value(expectedFolloweds.getFollowed().get(0).getUser_name()))
+                .andExpect(jsonPath("$.followers[1].user_id").value(expectedFolloweds.getFollowed().get(1).getUser_id()))
+                .andExpect(jsonPath("$.followers[1].user_name").value(expectedFolloweds.getFollowed().get(1).getUser_name()));
+    }
+
+    // DEJAR DE SEGUIR A UN USUARIO
+
+    @Test
+    @DisplayName("Verificar que se deja de seguir a un usuario")
+    void unfollowUserTestHappy() throws Exception {
+        int userId = 1;
+        int followedId = 2;
+
+        this.mockMvc.perform(MockMvcRequestBuilders.post("/users/{userID}/unfollow/{followedID}", userId, followedId))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
+    @Test
+    @DisplayName("Verificar que devuelve un error al intentar dejar de seguir a un usuario que no se sigue")
+    void unfollowUserTestUnhappy() throws Exception {
+        int userId = 1;
+        int followedId = 3;
+
+        this.mockMvc.perform(MockMvcRequestBuilders.post("/users/{userID}/unfollow/{followedID}", userId, followedId))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isBadRequest());
     }
 }
