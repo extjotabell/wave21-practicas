@@ -159,7 +159,7 @@ public class UserServiceTest {
         List<FollowUserDTO> followed = Arrays.asList(pepitoDTO, jaimeDTO);
 
         //Expected
-        List<FollowUserDTO> orderedList = followed.stream().sorted(Comparator.comparing(FollowUserDTO::getUser_name)).toList();
+        List<FollowUserDTO> orderedList = Arrays.asList(jaimeDTO, pepitoDTO);
         FollowedListDTO expected = new FollowedListDTO(1, "Miguel", orderedList);
 
         //Act
