@@ -10,7 +10,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-@ToString
 @EqualsAndHashCode
 public class SellerFollowedListPostResponseDto {
     private Integer userId;

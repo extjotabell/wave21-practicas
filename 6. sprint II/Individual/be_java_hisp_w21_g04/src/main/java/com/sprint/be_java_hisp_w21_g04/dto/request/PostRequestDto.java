@@ -17,7 +17,6 @@ import java.time.LocalDate;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 public class PostRequestDto {
      @NotNull(message = "El id del usuario no puede estar vacío.")
      @Positive(message = "El id del usuario debe ser mayor a cero.")
