@@ -1,7 +1,7 @@
 [
   {
     "user_id": 1,
-    "date": "05-06-2023",
+    "date": "22-06-2023",
     "product": {
       "product_id": 1,
       "product_name": "Camiseta",
@@ -17,7 +17,7 @@
   },
   {
     "user_id": 1,
-    "date": "05-06-2023",
+    "date": "21-06-2023",
     "product": {
       "product_id": 2,
       "product_name": "Pantalon vaquero",
