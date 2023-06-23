@@ -101,4 +101,15 @@ public class UserControllerTest {
                 .andReturn();
     }
 
+    @Test
+    public void testUserFollowersCountDtoWithFollowers() throws Exception {
+        mockMvc.perform(get("/users/{userId}/followers/count",1)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").exists())
+                .andExpect(result -> result.getResponse().getContentType().equals("application/json"))
+                .andReturn();
+    }
+
 }
