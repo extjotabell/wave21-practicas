@@ -1,22 +1,15 @@
 package com.sprint.be_java_hisp_w21_g04.integrationTest.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.sprint.be_java_hisp_w21_g04.dto.response.FollowedResponseDto;
-import com.sprint.be_java_hisp_w21_g04.dto.response.UserResponseDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import com.fasterxml.jackson.databind.ObjectWriter;
-import java.util.Arrays;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import com.fasterxml.jackson.databind.util.StdDateFormat;
@@ -40,6 +33,32 @@ public class UserControllerTest {
                 .setDateFormat(new StdDateFormat().withColonInTimeZone(true))
                 .registerModule(new JSR310Module())
                 .writer();
+    }
+
+    @Test
+    public void testGetFollowedByIdWithFollowedThrowsException() throws Exception {
+        mockMvc.perform(get("/users/{userId}/followed/list",1)
+                        .param("order", "name_asc")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$").exists())
+                .andExpect(jsonPath("$.message").value("El usuario no sigue a ningún vendedor"))
+                .andExpect(result -> result.getResponse().getContentType().equals("application/json"))
+                .andReturn();
+    }
+
+    @Test
+    public void testGetFollowersByIdWithFollowersThrowsException() throws Exception {
+        mockMvc.perform(get("/users/{userId}/followers/list",1)
+                        .param("order", "name_asc")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$").exists())
+                .andExpect(jsonPath("$.message").value("No se encontraron seguidores para el vendedor"))
+                .andExpect(result -> result.getResponse().getContentType().equals("application/json"))
+                .andReturn();
     }
 
 }
