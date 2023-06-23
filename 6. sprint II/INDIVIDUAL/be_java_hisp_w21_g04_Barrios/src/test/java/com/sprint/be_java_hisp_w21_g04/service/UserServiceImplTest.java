@@ -1,10 +1,9 @@
-package com.sprint.be_java_hisp_w21_g04.unitTest.service;
+package com.sprint.be_java_hisp_w21_g04.service;
 import com.sprint.be_java_hisp_w21_g04.dto.response.*;
 import com.sprint.be_java_hisp_w21_g04.entity.User;
 import com.sprint.be_java_hisp_w21_g04.exception.*;
 import com.sprint.be_java_hisp_w21_g04.repository.user.UserRepositoryImpl;
 import com.sprint.be_java_hisp_w21_g04.service.user.UserServiceImpl;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

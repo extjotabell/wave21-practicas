@@ -2,10 +2,8 @@ package com.sprint.be_java_hisp_w21_g04.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
-import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.sprint.be_java_hisp_w21_g04.entity.Product;
-import jakarta.annotation.Nonnull;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
@@ -19,6 +17,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @ToString
 public class PostRequestDto {
+
      @NotNull(message = "El id del usuario no puede estar vacío.")
      @Positive(message = "El id del usuario debe ser mayor a cero.")
      private Integer userId;

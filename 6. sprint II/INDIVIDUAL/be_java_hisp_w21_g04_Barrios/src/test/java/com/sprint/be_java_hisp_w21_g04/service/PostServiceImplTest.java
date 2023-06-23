@@ -1,4 +1,4 @@
-package com.sprint.be_java_hisp_w21_g04.unitTest.service;
+package com.sprint.be_java_hisp_w21_g04.service;
 
 import com.sprint.be_java_hisp_w21_g04.dto.response.PostResponseDto;
 import com.sprint.be_java_hisp_w21_g04.dto.response.SellerFollowedListPostResponseDto;
@@ -43,7 +43,7 @@ public class PostServiceImplTest {
 
     @Test
     @DisplayName("T-0006 : Verificar el correcto ordenamiento ascendente por fecha. (US-0009)")
-    public void testSortedPostsDateAsc(){
+    public void testSortedPostsDateAsc() {
         //Arrange
         int userId = 1;
         String order = "date_asc";
@@ -81,9 +81,10 @@ public class PostServiceImplTest {
         assertTrue(result.getPosts().get(0).getDate().isBefore(result.getPosts().get(1).getDate()));
         assertEquals(expectedResult, result);
     }
+
     @Test
     @DisplayName("T-0006 : Verificar el correcto ordenamiento descendente por fecha. (US-0009)")
-    public void testSortedPostsDateDes(){
+    public void testSortedPostsDateDes() {
         //Arrange
         int userId = 1;
         String order = "date_desc";
@@ -121,9 +122,10 @@ public class PostServiceImplTest {
         assertTrue(result.getPosts().get(0).getDate().isAfter(result.getPosts().get(1).getDate()));
         assertEquals(expectedResult, result);
     }
+
     @Test
     @DisplayName("Extra: Verificar que si retorne todas los post")
-    public void testPostsGetAll(){
+    public void testPostsGetAll() {
         //Arrange
         List<Post> mockResult = new ArrayList<>();
         Product product1 = new Product(1, "Camiseta", "T Shirt", "Nike", "Red", "");
@@ -155,17 +157,17 @@ public class PostServiceImplTest {
 
     @Test
     @DisplayName("Verificar que el usuario exista")
-    public void testUserNotFoundException(){
+    public void testUserNotFoundException() {
         //arrange
         when(userRepository.getById(anyInt())).thenReturn(null);
 
         //Act and assert
-        assertThrows(UserNotFoundException.class, ()-> postService.sellerFollowedListPosts(1, "date_asc"));
+        assertThrows(UserNotFoundException.class, () -> postService.sellerFollowedListPosts(1, "date_asc"));
     }
 
     @Test
     @DisplayName("Verificar que los vendedores que sigue tengan publicaciones")
-    public void testEmptySellerFollowedList(){
+    public void testEmptySellerFollowedList() {
         //Arrange
         int userId = 1;
         String order = "date_desc";
@@ -185,7 +187,7 @@ public class PostServiceImplTest {
     @DisplayName("T-0008 : Verificar que la consulta de publicaciones " +
             "realizadas en las últimas dos semanas de un determinado " +
             "vendedor sean efectivamente de las últimas dos semanas. (US-0006)")
-    public void testEmptySellerFollowedListWhenNoRecentPosts(){
+    public void testEmptySellerFollowedListWhenNoRecentPosts() {
         //Arrange
         int userId = 1;
         String order = "date_desc";
@@ -202,17 +204,18 @@ public class PostServiceImplTest {
 
     @Test
     @DisplayName("T-0005: Verificar que el tipo de ordenamiento por fecha exista (US-0009)")
-    public void testIllegalDataException(){
+    public void testIllegalDataException() {
         //Arrange
         int userId = 1;
         String order = "XXXXXXX";
 
         //Act and Assert
-        assertThrows(IllegalDataException.class, ()-> postService.sellerFollowedListPosts(userId, order));
+        assertThrows(IllegalDataException.class, () -> postService.sellerFollowedListPosts(userId, order));
     }
+
     @Test
-    @DisplayName("Verificar que no se lance ninguna excepción")
-    public void testNoExceptions(){
+    @DisplayName("T-0005: Verificar que no se lance ninguna excepción")
+    public void testNoExceptions() {
         //Arrange
         int userId = 1;
         String order = "date_desc";
@@ -224,7 +227,7 @@ public class PostServiceImplTest {
         when(postRepository.getSellerFollowed(anyInt())).thenReturn(List.of(oldPost));
 
         //Act and Assert
-        assertDoesNotThrow(()-> postService.sellerFollowedListPosts(userId, order));
+        assertDoesNotThrow(() -> postService.sellerFollowedListPosts(userId, order));
     }
 
 }
