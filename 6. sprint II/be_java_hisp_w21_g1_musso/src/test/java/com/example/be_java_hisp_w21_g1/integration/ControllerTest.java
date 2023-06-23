@@ -125,6 +125,7 @@ public class ControllerTest {
                         .content(postJson))
                 .andDo(print())
                 .andExpect(content().contentType("text/plain;charset=UTF-8"))
+                .andExpect(content().string("Se ha creado el post!"))
                 .andExpect(status().isOk())
                 .andReturn();
     }
