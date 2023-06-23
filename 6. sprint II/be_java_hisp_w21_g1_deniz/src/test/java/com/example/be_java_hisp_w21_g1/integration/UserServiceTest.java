@@ -2,9 +2,12 @@ package com.example.be_java_hisp_w21_g1.integration;
 
 import com.example.be_java_hisp_w21_g1.DTO.Response.FollowUserDTO;
 import com.example.be_java_hisp_w21_g1.DTO.Response.FollowerListDTO;
+import com.example.be_java_hisp_w21_g1.Exception.BadRequestException;
+import com.example.be_java_hisp_w21_g1.Exception.NotFoundException;
 import com.example.be_java_hisp_w21_g1.Model.User;
 import com.example.be_java_hisp_w21_g1.Repository.IUserRepository;
 import com.example.be_java_hisp_w21_g1.Service.UserService;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -50,5 +53,20 @@ public class UserServiceTest {
         FollowerListDTO result = userService.getFollowersList(1,null);
         //Assert
         assertEquals(expected,result);
+    }
+
+    @Test
+    @DisplayName("Obtener la lista de seguidores - Camino triste")
+    void getFollowersListNoOk(){
+        //Arrange
+        Optional<User> userMock = Optional.empty();
+
+        //Mock
+        when(userRepository.findUserById(1)).thenReturn(userMock);
+
+        //Assert
+        Assertions.assertThrows(NotFoundException.class, ()-> {
+            userService.getFollowedList(1,null);
+        });
     }
 }
