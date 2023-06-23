@@ -35,7 +35,6 @@ public class Controller {
            @PathVariable Integer userIdToFollow
     ){
         FollowPostDTO followPostDTO = new FollowPostDTO(userId, userIdToFollow);
-        ResponseEntity<ResponseDTO> response;
         userService.follow(followPostDTO);
         return new ResponseEntity<>(new ResponseDTO("Accion realizada con exito.", 200),HttpStatus.OK);
     }
