@@ -50,11 +50,11 @@ public class PostServiceImplTest {
 
         List<Post> mockResult = new ArrayList<>();
         Product product1 = new Product(1, "Camiseta", "T Shirt", "Nike", "Red", "");
-        mockResult.add(new Post(userId, LocalDate.now().minusDays(10), product1, 10, 100, true, 10));
+        mockResult.add(new Post(userId, LocalDate.now().minusDays(10), product1, 10, 100.0, true, 10.0));
         Product product2 = new Product(1, "Short", "Short", "Adidas", "Brown", "");
-        mockResult.add(new Post(userId, LocalDate.now().minusDays(5), product2, 6, 160, true, 10));
+        mockResult.add(new Post(userId, LocalDate.now().minusDays(5), product2, 6, 160.0, true, 10.0));
         Product product3 = new Product(1, "Camiseta", "T Shirt", "Adidas", "White", "");
-        mockResult.add(new Post(1, LocalDate.now(), product3, 4, 120, true, 10));
+        mockResult.add(new Post(1, LocalDate.now(), product3, 4, 120.0, true, 10.0));
 
         List<PostResponseDto> expectedPosts = new ArrayList<>();
         Product product4 = new Product(1, "Camiseta", "T Shirt", "Nike", "Red", "");
@@ -90,11 +90,11 @@ public class PostServiceImplTest {
 
         List<Post> mockResult = new ArrayList<>();
         Product product1 = new Product(1, "Camiseta", "T Shirt", "Nike", "Red", "");
-        mockResult.add(new Post(userId, LocalDate.now(), product1, 10, 100, true, 10));
+        mockResult.add(new Post(userId, LocalDate.now(), product1, 10, 100.0, true, 10.0));
         Product product2 = new Product(1, "Short", "Short", "Adidas", "Brown", "");
-        mockResult.add(new Post(userId, LocalDate.now().minusDays(5), product2, 6, 160, true, 10));
+        mockResult.add(new Post(userId, LocalDate.now().minusDays(5), product2, 6, 160.0, true, 10.0));
         Product product3 = new Product(1, "Camiseta", "T Shirt", "Adidas", "White", "");
-        mockResult.add(new Post(1, LocalDate.now().minusDays(10), product3, 4, 120, true, 10));
+        mockResult.add(new Post(1, LocalDate.now().minusDays(10), product3, 4, 120.0, true, 10.0));
 
         List<PostResponseDto> expectedPosts = new ArrayList<>();
         Product product4 = new Product(1, "Camiseta", "T Shirt", "Nike", "Red", "");
@@ -127,11 +127,11 @@ public class PostServiceImplTest {
         //Arrange
         List<Post> mockResult = new ArrayList<>();
         Product product1 = new Product(1, "Camiseta", "T Shirt", "Nike", "Red", "");
-        mockResult.add(new Post(1, LocalDate.now(), product1, 10, 100, true, 10));
+        mockResult.add(new Post(1, LocalDate.now(), product1, 10, 100.0, true, 10.0));
         Product product2 = new Product(1, "Short", "Short", "Adidas", "Brown", "");
-        mockResult.add(new Post(2, LocalDate.now().minusWeeks(3), product2, 6, 160, true, 10));
+        mockResult.add(new Post(2, LocalDate.now().minusWeeks(3), product2, 6, 160.0, true, 10.0));
         Product product3 = new Product(1, "Camiseta", "T Shirt", "Adidas", "White", "");
-        mockResult.add(new Post(3, LocalDate.now().minusDays(20), product3, 4, 120, true, 10));
+        mockResult.add(new Post(3, LocalDate.now().minusDays(20), product3, 4, 120.0, true, 10.0));
 
         List<PostResponseDto> expectedPosts = new ArrayList<>();
         Product product4 = new Product(1, "Camiseta", "T Shirt", "Nike", "Red", "");
