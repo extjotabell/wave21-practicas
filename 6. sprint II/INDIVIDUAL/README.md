@@ -44,6 +44,41 @@ Se agregaron todas las validaciones en la carpeta Validations dentro del archivo
 ### Descripción de los Tests Unitarios:
 ![img.png](img.png)
 
+### Descripción de los Tests de Integración (Desarrollo INDIVIDUAL):
+
+Se realizan pruebas de integración obteniendo listado de seguidores y Seguidos por ID en el User Controller
+
+  - T-0001: Prueba de integracion obteniendo listado de seguidores por ID con el parametro de ordenamiento camino OK
+  - T-0001: Prueba de integracion obteniendo listado de seguidores por ID sin el parametro de ordenamiento camino OK
+  - T-0001: Prueba de integracion generando la excepcion 404 Not Found al no encontrar resultados de seguidores
+  - T-0001: Prueba de integracion generando la excepcion 400 Bad Request al no encontrar resultados de seguidores
+  - T-0002: Prueba de integracion obteniendo listado de seguidos por ID con el parametro de ordenamiento camino Ok
+  - T-0002: Prueba de integracion obteniendo listado de seguidos por ID sin el parametro de ordenamiento camino Ok
+  - T-0002: Prueba de integracion generando la excepcion 404 Not Found al no encontrar resultados de seguidos
+  - T-0002: Prueba de integracion generando la excepcion 404 Bad Request al no encontrar resultados de seguidos
+
+### Descripción de los Tests de Integración Bonus (Desarrollo INDIVIDUAL EXTRA):
+
+Se realizan pruebas de integración  con el fin de lograr un coverage mayor o igual al 75% en el User y Post Controller 
+
+  **User Controller**:
+  
+  - T-0003: Prueba de integracion siguiendo a un vendedor, solo si el usuario y el vendedor existen
+  - T-0003: Prueba de integracion generando la excepcion 404 Not Found al no encontrar usuario
+  - T-0003: Prueba de integracion generando la excepcion 404 Bad Request al seguirse a si mismo
+  - T-0004: Prueba de integracion de la cantidad de usuarios que siguen a un vendedor
+  - T-0005: Prueba de integracion que permite a un usuario dejar de seguir a un vendedor
+  - T-0005: Prueba de integracion generando la excepcion 404 Bad Request al intentar dejar de seguirse a si mismo
+  - T-0006: Prueba de integracion generando la excepcion 400 Bad Request cuando no se estan siguiendo
+
+  **Post Controller**:
+  
+  - T-0001: Prueba de integracion agregando post para un usuario camino OK
+  - T-0002: Prueba de integracion lista de publicaciones de un vendedor seguido camino OK
+  - T-0003: Prueba de integracion listado de todos los post camino OK
+  - T-0004: Prueba de integracion validando un post para un usuario con la fecha no puede estar vacia
+  - T-0005: Prueba de integracion generando la excepcion los vendedores que sigues no tienen publicaciones
+
 ### Agradecimientos:
 - Gracias a nuestra Scrum Master, JOY por toda la paciencia.
 - Gracias Tincho por la ayuda y apoyo en la resolución de los problemas o dudas.
