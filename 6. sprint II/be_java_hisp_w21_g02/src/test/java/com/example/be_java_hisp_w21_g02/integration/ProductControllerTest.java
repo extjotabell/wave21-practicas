@@ -2,6 +2,8 @@ package com.example.be_java_hisp_w21_g02.integration;
 
 import com.example.be_java_hisp_w21_g02.dto.ProductDTO;
 import com.example.be_java_hisp_w21_g02.dto.request.PostRequestDTO;
+import com.example.be_java_hisp_w21_g02.dto.response.FollowedListDTO;
+import com.example.be_java_hisp_w21_g02.dto.response.UserPostResponseDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
@@ -15,11 +17,13 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultMatcher;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.math.BigInteger;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
@@ -49,7 +53,7 @@ public class ProductControllerTest {
     }
 
     @Test
-    @DisplayName("Integration Test US05 T-0009 01 - Creation of Post is Ok")
+    @DisplayName("Integration Test US05 01 - Creation of Post is Ok")
     void createProductOk() throws Exception {
         // Arrange
         String payload = writer.writeValueAsString(postRequest);
@@ -63,7 +67,7 @@ public class ProductControllerTest {
     }
 
     @Test
-    @DisplayName("Integration Test US05 T-0009 02 - Creation of Post fails with the Post's Date")
+    @DisplayName("Integration Test US05 02 - Creation of Post fails with the Post's Date")
     void createProductFailsPostDate() throws Exception {
         // Arrange
         postRequest.setDate(LocalDate.now().plusDays(5));
@@ -80,7 +84,7 @@ public class ProductControllerTest {
     }
 
     @Test
-    @DisplayName("Integration Test US05 T-0009 03 - Creation of Post fails with the Post's Price")
+    @DisplayName("Integration Test US05 03 - Creation of Post fails with the Post's Price")
     void createProductFailsPostPrice() throws Exception {
         // Arrange
         postRequest.setPrice(null);
@@ -97,7 +101,7 @@ public class ProductControllerTest {
     }
 
     @Test
-    @DisplayName("Integration Test US05 T-0009 04 - Creation of Post fails with the Post's Product")
+    @DisplayName("Integration Test US05 04 - Creation of Post fails with the Post's Product")
     void createProductFailsPostProduct() throws Exception {
         // Arrange
         postRequest.getProduct().setType("!nv@l!dN@m#");
@@ -111,5 +115,21 @@ public class ProductControllerTest {
                 .andExpect(status().isBadRequest())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.jsonPath("description").value("The type field cannot have special characters"));
+    }
+
+    @Test
+    @DisplayName("Integration Test US06 01 - Cannot get posts list")
+    void getPostListUserNotExists() throws Exception {
+        // Arrange
+        int userId = 1;
+
+        UserPostResponseDTO expectedResult = new UserPostResponseDTO(1, new ArrayList<>());
+        String expectedJson = writer.writeValueAsString(expectedResult);
+        ResultMatcher expected = content().json(expectedJson);
+        // Act & Assert
+        mockMvc.perform(get("/products/followed/{userId}/list", userId))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(expected);
     }
 }
