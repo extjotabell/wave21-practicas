@@ -1,21 +1,16 @@
 package com.sprint.be_java_hisp_w21_g04.integrationTest.controller;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import com.fasterxml.jackson.databind.ObjectWriter;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import com.fasterxml.jackson.databind.util.StdDateFormat;
-import com.fasterxml.jackson.datatype.jsr310.JSR310Module;
-import org.junit.jupiter.api.BeforeEach;
 
 
 @SpringBootTest
@@ -25,18 +20,8 @@ public class UserControllerTest {
     @Autowired
     MockMvc mockMvc;
 
-    ObjectWriter writer;
-
-    @BeforeEach
-    void setUp() {
-        writer=new ObjectMapper()
-                .configure(SerializationFeature.WRAP_ROOT_VALUE,false)
-                .setDateFormat(new StdDateFormat().withColonInTimeZone(true))
-                .registerModule(new JSR310Module())
-                .writer();
-    }
-
     @Test
+    @DisplayName("Test que espera excepción al obtener los seguidos de un usuario que no sigue a nadie")
     public void testGetFollowedByIdWithFollowedThrowsException() throws Exception {
         mockMvc.perform(get("/users/{userId}/followed/list",1)
                         .param("order", "name_asc")
@@ -50,6 +35,7 @@ public class UserControllerTest {
     }
 
     @Test
+    @DisplayName("Test de caso exitoso al obtener los seguidos de un usuario")
     public void testGetFollowedByIdWithFollowedOk() throws Exception {
         mockMvc.perform(get("/users/{userId}/followed/list",4)
                         .param("order", "name_asc")
@@ -62,6 +48,7 @@ public class UserControllerTest {
     }
 
     @Test
+    @DisplayName("Test que espera excepción al obtener los seguidores de un usuario que no tiene seguidores")
     public void testGetFollowersByIdWithFollowersThrowsException() throws Exception {
         mockMvc.perform(get("/users/{userId}/followers/list",1)
                         .param("order", "name_asc")
@@ -75,6 +62,7 @@ public class UserControllerTest {
     }
 
     @Test
+    @DisplayName("Test que espera excepción al obtener los seguidos de un usuario cuando el ordenamiento es inválido")
     public void testGetFollowedByIdWithInvalidSortThrowsException() throws Exception {
         mockMvc.perform(get("/users/{userId}/followed/list",1)
                         .param("order", "name_")
@@ -88,6 +76,7 @@ public class UserControllerTest {
     }
 
     @Test
+    @DisplayName("Test que espera excepción al obtener los seguidores de un usuario cuando el ordenamiento es inválido")
     public void testGetFollowersByIdWithInvalidSortThrowsException() throws Exception {
         mockMvc.perform(get("/users/{userId}/followers/list",1)
                         .param("order", "name_")
@@ -102,6 +91,7 @@ public class UserControllerTest {
 
 
     @Test
+    @DisplayName("Test que espera excepción al intentar dejar de seguir a un usuario que no se sigue")
     public void testUserUnfollowThrowsException() throws Exception {
         mockMvc.perform(post("/users/{userId}/unfollow/{userIdToUnfollow}",1,2)
                         .contentType(MediaType.APPLICATION_JSON))
@@ -114,20 +104,21 @@ public class UserControllerTest {
     }
 
     @Test
+    @DisplayName("Test de caso exitoso al obtener la cantidad de seguidores de un usuario")
     public void testUserFollowersCountWithFollowers() throws Exception {
-        mockMvc.perform(get("/users/{userId}/followers/count",1)
+        mockMvc.perform(get("/users/{userId}/followers/count",5)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").exists())
-                .andExpect(jsonPath("$.user_id").value(1))
-                .andExpect(jsonPath("$.user_name").value("JohnDoe"))
-                .andExpect(jsonPath("$.followers_count").value(0))
+                .andExpect(jsonPath("$.user_id").value(5))
+                .andExpect(jsonPath("$.followers_count").value(1))
                 .andExpect(result -> result.getResponse().getContentType().equals("application/json"))
                 .andReturn();
     }
 
     @Test
+    @DisplayName("Test que espera una excepción cuando un usuario se intenta seguir a sí mismo")
     public void testUserFollowThrowsException() throws Exception {
         mockMvc.perform(post("/users/{userId}/follow/{userIdToFollow}",1,1)
                         .contentType(MediaType.APPLICATION_JSON))

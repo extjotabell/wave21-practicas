@@ -8,6 +8,7 @@ import com.fasterxml.jackson.datatype.jsr310.JSR310Module;
 import com.sprint.be_java_hisp_w21_g04.dto.request.PostRequestDto;
 import com.sprint.be_java_hisp_w21_g04.entity.Product;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -30,8 +31,6 @@ public class PostControllerTest {
 
     ObjectWriter writer;
 
-    PostRequestDto postRequestDto;
-
     @BeforeEach
     void setUp() {
         writer=new ObjectMapper()
@@ -39,15 +38,15 @@ public class PostControllerTest {
                 .setDateFormat(new StdDateFormat().withColonInTimeZone(true))
                 .registerModule(new JSR310Module())
                 .writer();
-        postRequestDto=getPostResponseDTO();
     }
 
     @Test
+    @DisplayName("Test de caso exitoso al agregar un post")
     public void testPostOk() throws Exception {
 
         mockMvc.perform(post("/products/post")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(writer.writeValueAsString(postRequestDto))
+                        .content(writer.writeValueAsString(getPostResponseDTO()))
                 )
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -59,6 +58,7 @@ public class PostControllerTest {
     }
 
     @Test
+    @DisplayName("Test que espera una excepción al agregar un post con un dato inválido, en este caso el color")
     public void testPostOkThrowExceptionByInvalidColor() throws Exception {
 
         mockMvc.perform(post("/products/post")
@@ -75,7 +75,8 @@ public class PostControllerTest {
     }
 
     @Test
-    public void testSellerFollowedListPosts() throws Exception{
+    @DisplayName("Test de caso exitoso al obtener todos los posts de los seguidos por un usuario")
+    public void testSellerFollowedListPostsOk() throws Exception{
         mockMvc.perform(get("/products/followed/{userId}/list", 5)
                         .contentType(MediaType.APPLICATION_JSON)
                         .param("order", "date_asc")
@@ -87,6 +88,10 @@ public class PostControllerTest {
                 .andReturn();
     }
 
+    /**
+     * Este método crea un post para ser usado en los tests
+     * @return Retorna un objeto PostRequestDto con los datos del post
+     */
     private PostRequestDto getPostResponseDTO() {
         return new PostRequestDto(
                 1,
@@ -97,6 +102,10 @@ public class PostControllerTest {
         );
     }
 
+    /**
+     * Este método crea un post con un caracter especial en el color para ser usado en los tests
+     * @return Retorna un objeto PostRequestDto con los datos del post
+     */
     private PostRequestDto getPostResponseDTOError() {
         return new PostRequestDto(
                 1,
