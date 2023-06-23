@@ -175,6 +175,41 @@ public class UserControllerTest {
 
     }
 
+    @Test
+    @DisplayName("T-0002: Prueba de integracion generando la excepcion 404 Not Found al no encontrar resultados de seguidos")
+    void userFollowTestNotFount() throws Exception {
+
+        //Arrange
+        int userId = 4;
+        int userIdToFollow = 20;
+
+        //Act & Assert
+        _mockMvc.perform(post("/users/{userId}/follow/{userIdToFollow}", userId, userIdToFollow))
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.message").value("Usuario no encontrado."))
+                .andExpect(content().contentType("application/json"))
+                .andReturn();
+
+    }
+
+    @Test
+    @DisplayName("T-0003: Prueba de integracion generando la excepcion 404 Bad Request al seguirse a si mismo")
+    void userFollowTestBadRequest() throws Exception {
+
+        //Arrange
+        int userId = 4;
+        int userIdToFollow = 4;
+
+        //Act & Assert
+        _mockMvc.perform(post("/users/{userId}/follow/{userIdToFollow}", userId, userIdToFollow))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.message").value("No puedes seguirte a ti mismo."))
+                .andExpect(content().contentType("application/json"))
+                .andReturn();
+
+
+    }
+
 
     @Test
     @DisplayName("T-0004: Prueba de integracion de la cantidad de usuarios que siguen a un vendedor")
@@ -195,7 +230,7 @@ public class UserControllerTest {
 
     @Test
     @DisplayName("T-0005: Prueba de integracion que permite a un usuario dejar de seguir a un vendedor")
-    void userUnfollow () throws Exception{
+    void userUnfollowTest () throws Exception{
 
         //Arrange
         int userId = 4;
@@ -214,7 +249,39 @@ public class UserControllerTest {
 
     }
 
+    @Test
+    @DisplayName("T-0005: Prueba de integracion generando la excepcion 404 Bad Request al intentar dejar de seguirse a si mismo")
+    void userUnfollowTestBadRequest() throws Exception {
 
+        //Arrange
+        int userId = 4;
+        int userIdToUnfollow = 4;
+
+        //Act & Assert
+        _mockMvc.perform(post("/users/{userId}/unfollow/{userIdToUnfollow}", userId, userIdToUnfollow))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.message").value("No puedes dejar de seguirte a ti mismo."))
+                .andExpect(content().contentType("application/json"))
+                .andReturn();
+
+    }
+
+    @Test
+    @DisplayName("T-0006: Prueba de integracion generando la excepcion 400 Bad Request cuando no se estan siguiendo")
+    void userUnfollowTestBadRequest2() throws Exception {
+
+        //Arrange
+        int userId = 4;
+        int userIdToUnfollow = 7;
+
+        //Act & Assert
+        _mockMvc.perform(post("/users/{userId}/unfollow/{userIdToUnfollow}", userId, userIdToUnfollow))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.message").value("No se están siguiendo."))
+                .andExpect(content().contentType("application/json"))
+                .andReturn();
+
+    }
 
 
 

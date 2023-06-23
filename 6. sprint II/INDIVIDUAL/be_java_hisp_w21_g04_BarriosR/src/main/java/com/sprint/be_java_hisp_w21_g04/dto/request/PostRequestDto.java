@@ -17,7 +17,6 @@ import java.time.LocalDate;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class PostRequestDto {
 

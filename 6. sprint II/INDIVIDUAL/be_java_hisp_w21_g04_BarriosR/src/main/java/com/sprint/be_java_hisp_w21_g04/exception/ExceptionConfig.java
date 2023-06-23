@@ -73,11 +73,6 @@ public class ExceptionConfig {
         ErrorDto error = new ErrorDto(e.getMessage(), 400);
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
-    @ExceptionHandler(PostAlreadyExist.class)
-    public ResponseEntity<?> postAreadyExist(Exception e){
-        ErrorDto error = new ErrorDto(e.getMessage(), 400);
-        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
-    }
 
     // AMBOS METODOS SIRVEN PARA CONVERTIR LOS MENSAJES DE LAS VALIDACIONES EN UN ARRAY DE MENSAJES ENTENDIBLES.
 
