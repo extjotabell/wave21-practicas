@@ -1,6 +1,7 @@
 package com.bootcamp.grupo3.socialmeli.repository;
 
 import com.bootcamp.grupo3.socialmeli.model.Post;
+import com.bootcamp.grupo3.socialmeli.model.Product;
 import com.bootcamp.grupo3.socialmeli.repository.interfaces.IPostRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,7 +15,8 @@ public class PostRepository implements IPostRepository {
     private int nextId;
 
     public PostRepository() {
-        this.nextId = 0;
+        this.nextId = 1;
+        posts.add(new Post(1, 1, LocalDate.now(), new Product(1, "PocoPhone", "Celular", "Xiaomi", "Negro", "alto Celu"), 100, 2500D));
     }
 
     @Override
@@ -32,8 +34,8 @@ public class PostRepository implements IPostRepository {
         LocalDate pastTwoWeek = LocalDate.now().minusWeeks(2);
 
         return posts.stream()
-          .filter(p -> p.getUserId() == userId)
-          .filter(post -> post.getDate().isAfter(pastTwoWeek))
-          .toList();
+                .filter(p -> p.getUserId() == userId)
+                .filter(post -> post.getDate().isAfter(pastTwoWeek))
+                .toList();
     }
 }

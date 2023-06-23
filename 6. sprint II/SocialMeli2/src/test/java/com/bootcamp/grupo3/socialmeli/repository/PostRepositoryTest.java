@@ -24,17 +24,17 @@ public class PostRepositoryTest {
     void getPostOfWeek() {
         LocalDate today = LocalDate.now();
         List<Post> expected = List.of(
-                new Post(5, 2, today, new Product(), 100, 500d),
-                new Post(6, 2, today.minusDays(3), new Product(), 100, 500d)
+                new Post(6, 2, today, new Product(), 100, 500d),
+                new Post(7, 2, today.minusDays(3), new Product(), 100, 500d)
         );
 
         List<Post> posts = List.of(
-                new Post(1, 1, today.minusYears(1), new Product(), 100, 500d),
-                new Post(2, 1, today.minusDays(20), new Product(), 100, 500d),
-                new Post(3, 1, today.minusMonths(2), new Product(), 100, 500d),
-                new Post(4, 1, today.minusMonths(3), new Product(), 100, 500d),
-                new Post(5, 2, today, new Product(), 100, 500d),
-                new Post(6, 2, today.minusDays(3), new Product(), 100, 500d)
+                new Post(2, 1, today.minusYears(1), new Product(), 100, 500d),
+                new Post(3, 1, today.minusDays(20), new Product(), 100, 500d),
+                new Post(4, 1, today.minusMonths(2), new Product(), 100, 500d),
+                new Post(5, 1, today.minusMonths(3), new Product(), 100, 500d),
+                new Post(6, 2, today, new Product(), 100, 500d),
+                new Post(7, 2, today.minusDays(3), new Product(), 100, 500d)
         );
 
         posts.forEach(p -> postRepository.createPost(p));

@@ -10,6 +10,7 @@ import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+
 import java.util.stream.Collectors;
 
 
@@ -31,18 +32,18 @@ public class ExceptionConfig {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<?> capturandoValidaciones(MethodArgumentNotValidException e) {
+    public ResponseEntity<?> validationException(MethodArgumentNotValidException e) {
         return ResponseEntity.badRequest().body(
                 new ErrorDTO(
-                    "Se encontraron los siguientes errores en las validaciones: ",
-                    e.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).toList()
+                        "Se encontraron los siguientes errores en las validaciones: ",
+                        e.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).toList()
                 )
         );
     }
 
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
-    public ResponseEntity<?> capturandoValidaciones(HttpMessageNotReadableException e) {
+    public ResponseEntity<?> validationException(HttpMessageNotReadableException e) {
         MessageDTO errorDto = new MessageDTO(e.getMessage());
         return ResponseEntity.badRequest().body(errorDto);
     }
