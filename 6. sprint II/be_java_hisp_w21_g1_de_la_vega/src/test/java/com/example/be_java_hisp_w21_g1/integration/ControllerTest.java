@@ -42,7 +42,7 @@ class ControllerTest {
     void countFollowersOk() throws Exception {
         //ARRANGE
         Integer userId = 1;
-        FollowersCountDTO expected = new FollowersCountDTO(userId, "Pepe", 2);
+        FollowersCountDTO expected = new FollowersCountDTO(userId, "Pepe", 3);
 
         //REQUEST
         MockHttpServletRequestBuilder request = MockMvcRequestBuilders.get("/users/{userId}/followers/count", userId);
