@@ -18,7 +18,6 @@ import java.time.LocalDate;
 @Setter
 @ToString
 @Validated
-@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class PostRequestDTO {
     @NotNull(message = "User ID is required")
     @Positive(message = "User ID must be greater than zero")

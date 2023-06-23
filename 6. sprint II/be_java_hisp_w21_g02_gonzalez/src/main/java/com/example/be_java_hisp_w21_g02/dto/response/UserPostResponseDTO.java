@@ -12,7 +12,6 @@ import java.util.List;
 @Getter
 @ToString
 @EqualsAndHashCode
-@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class UserPostResponseDTO {
     private int userId;
     private List<PostDTO> posts;

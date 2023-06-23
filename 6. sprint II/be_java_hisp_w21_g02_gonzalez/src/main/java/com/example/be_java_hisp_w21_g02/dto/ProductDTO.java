@@ -14,7 +14,6 @@ import org.springframework.validation.annotation.Validated;
 @ToString
 @Validated
 @EqualsAndHashCode
-@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class ProductDTO {
 
     @Positive(message = "The ProductId must be greater than zero")

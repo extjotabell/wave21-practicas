@@ -4,9 +4,10 @@ import com.example.be_java_hisp_w21_g02.dto.PostDTO;
 import com.example.be_java_hisp_w21_g02.dto.ProductDTO;
 import com.example.be_java_hisp_w21_g02.dto.request.PostRequestDTO;
 import com.example.be_java_hisp_w21_g02.dto.response.UserPostResponseDTO;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -22,6 +23,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.math.BigInteger;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +40,10 @@ public class ProductControllerTest {
     MockMvc mockMvc;
 
     ObjectWriter writer =  new ObjectMapper()
+            .configure(SerializationFeature.WRAP_ROOT_VALUE,false)
+            .registerModule(new JavaTimeModule())
+            .setDateFormat(new SimpleDateFormat("dd-MM-yyyy"))
+            .setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE)
             .registerModule(new JavaTimeModule())
             .writer();
 
