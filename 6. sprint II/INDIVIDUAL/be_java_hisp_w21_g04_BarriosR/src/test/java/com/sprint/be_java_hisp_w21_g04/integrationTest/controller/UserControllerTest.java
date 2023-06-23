@@ -176,7 +176,7 @@ public class UserControllerTest {
     }
 
     @Test
-    @DisplayName("T-0002: Prueba de integracion generando la excepcion 404 Not Found al no encontrar resultados de seguidos")
+    @DisplayName("T-0003: Prueba de integracion generando la excepcion 404 Not Found al no encontrar resultados de seguidos")
     void userFollowTestNotFount() throws Exception {
 
         //Arrange
