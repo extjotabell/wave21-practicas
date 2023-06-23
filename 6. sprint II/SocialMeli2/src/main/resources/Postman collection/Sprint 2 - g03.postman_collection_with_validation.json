@@ -322,90 +322,6 @@
 						}
 					},
 					"response": []
-				},
-				{
-					"name": "Agregar Un POST con user_id = -3, fecha vacia, categoria vacia",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"user_id\": -3,\n    \"date\": \"\",\n    \"product\":{\n        \"product_id\": 123,\n        \"product_name\": \"Silla Gamer\",\n        \"type\": \"Silla\",\n        \"brand\": \"Asus\",\n        \"color\": \"Negro y Verde\",\n        \"notes\": \"Silla en impecables condiciones poco uso\"\n    },\n    \"price\": 250.50\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:8080/products/post",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"products",
-								"post"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Agregar Un POST con categoria vacia",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"user_id\": 3,\n    \"date\": \"\",\n    \"product\":{\n        \"product_id\": 123,\n        \"product_name\": \"Silla Gamer\",\n        \"type\": \"Silla\",\n        \"brand\": \"Asus\",\n        \"color\": \"Negro y Verde\",\n        \"notes\": \"Silla en impecables condiciones poco uso\"\n    },\n    \"category\": 100,\n    \"price\": 250.50\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:8080/products/post",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"products",
-								"post"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Agregar Un POST con fecha vacia",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"user_id\": -3,\n    \"date\": \"05-06-2023\",\n    \"product\":{\n        \"product_id\": 123,\n        \"product_name\": \"Silla Gamer\",\n        \"type\": \"Silla\",\n        \"brand\": \"Asus\",\n        \"color\": \"Negro y Verde\",\n        \"notes\": \"Silla en impecables condiciones poco uso\"\n    },\n    \"category\": 100,\n    \"price\": 250.50\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:8080/products/post",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"products",
-								"post"
-							]
-						}
-					},
-					"response": []
 				}
 			]
 		},
@@ -743,6 +659,380 @@
 									"key": "order",
 									"value": "price_desc"
 								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Validaciones",
+			"item": [
+				{
+					"name": "Agregar Un POST con user_id = -3, fecha vacia, categoria vacia",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": -3,\n    \"date\": \"\",\n    \"product\":{\n        \"product_id\": 123,\n        \"product_name\": \"Silla Gamer\",\n        \"type\": \"Silla\",\n        \"brand\": \"Asus\",\n        \"color\": \"Negro y Verde\",\n        \"notes\": \"Silla en impecables condiciones poco uso\"\n    },\n    \"price\": 250.50\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/products/post",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Agregar Un POST con fecha vacia",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": 3,\n    \"date\": \"\",\n    \"product\":{\n        \"product_id\": 123,\n        \"product_name\": \"Silla Gamer\",\n        \"type\": \"Silla\",\n        \"brand\": \"Asus\",\n        \"color\": \"Negro y Verde\",\n        \"notes\": \"Silla en impecables condiciones poco uso\"\n    },\n    \"category\": 100,\n    \"price\": 250.50\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/products/post",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Agregar Un POST con  categoria vacia",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": 3,\n    \"date\": \"05-06-2023\",\n    \"product\":{\n        \"product_id\": 123,\n        \"product_name\": \"Silla Gamer\",\n        \"type\": \"Silla\",\n        \"brand\": \"Asus\",\n        \"color\": \"Negro y Verde\",\n        \"notes\": \"Silla en impecables condiciones poco uso\"\n    },\n\n    \"price\": 250.50\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/products/post",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Agregar Un POST con precio mayor a 10 M",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": 3,\n    \"date\": \"05-06-2023\",\n    \"product\":{\n        \"product_id\": 123,\n        \"product_name\": \"Silla Gamer\",\n        \"type\": \"Silla\",\n        \"brand\": \"Asus\",\n        \"color\": \"Negro y Verde\",\n        \"notes\": \"Silla en impecables condiciones poco uso\"\n    },\n    \"category\": 100,\n    \"price\": 250000000000.50\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/products/post",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Agregar Un POST con caracteres especiales en color del producto",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": -3,\n    \"date\": \"05-06-2023\",\n    \"product\":{\n        \"product_id\": 123,\n        \"product_name\": \"Silla Gamer\",\n        \"type\": \"Silla\",\n        \"brand\": \"Asus\",\n        \"color\": \"Negro y Verde\",\n        \"notes\": \"Silla en impecables condiciones poco uso\"\n    },\n    \"category\": 100,\n    \"price\": 250.50\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/products/post",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Agregar Un POST con longitud de color del producto mayor a 15 caracteres",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": -3,\n    \"date\": \"05-06-2023\",\n    \"product\":{\n        \"product_id\": 123,\n        \"product_name\": \"Silla Gamer\",\n        \"type\": \"Silla\",\n        \"brand\": \"Asus\",\n        \"color\": \"Negro y Verde\",\n        \"notes\": \"Silla en impecables condiciones poco uso\"\n    },\n    \"category\": 100,\n    \"price\": 250.50\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/products/post",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Agregar Un POST sin producto",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": -3,\n    \"date\": \"05-06-2023\",\n    \"product\":{\n        \"product_id\": 123,\n        \"product_name\": \"Silla Gamer\",\n        \"type\": \"Silla\",\n        \"brand\": \"Asus\",\n        \"color\": \"Negro y Verde\",\n        \"notes\": \"Silla en impecables condiciones poco uso\"\n    },\n    \"category\": 100,\n    \"price\": 250.50\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/products/post",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"post"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Validaciones Copy",
+			"item": [
+				{
+					"name": "Agregar Un POST con user_id = -3, fecha vacia, categoria vacia",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": -3,\n    \"date\": \"\",\n    \"product\":{\n        \"product_id\": 123,\n        \"product_name\": \"Silla Gamer\",\n        \"type\": \"Silla\",\n        \"brand\": \"Asus\",\n        \"color\": \"Negro y Verde\",\n        \"notes\": \"Silla en impecables condiciones poco uso\"\n    },\n    \"price\": 250.50\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/products/post",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Agregar Un POST con fecha vacia",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": 3,\n    \"date\": \"\",\n    \"product\":{\n        \"product_id\": 123,\n        \"product_name\": \"Silla Gamer\",\n        \"type\": \"Silla\",\n        \"brand\": \"Asus\",\n        \"color\": \"Negro y Verde\",\n        \"notes\": \"Silla en impecables condiciones poco uso\"\n    },\n    \"category\": 100,\n    \"price\": 250.50\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/products/post",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Agregar Un POST con  categoria vacia",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": 3,\n    \"date\": \"05-06-2023\",\n    \"product\":{\n        \"product_id\": 123,\n        \"product_name\": \"Silla Gamer\",\n        \"type\": \"Silla\",\n        \"brand\": \"Asus\",\n        \"color\": \"Negro y Verde\",\n        \"notes\": \"Silla en impecables condiciones poco uso\"\n    },\n\n    \"price\": 250.50\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/products/post",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Agregar Un POST con precio mayor a 10 M",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": -3,\n    \"date\": \"05-06-2023\",\n    \"product\":{\n        \"product_id\": 123,\n        \"product_name\": \"Silla Gamer\",\n        \"type\": \"Silla\",\n        \"brand\": \"Asus\",\n        \"color\": \"Negro y Verde\",\n        \"notes\": \"Silla en impecables condiciones poco uso\"\n    },\n    \"category\": 100,\n    \"price\": 250.50\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/products/post",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Agregar Un POST con caracteres especiales en color del producto",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": -3,\n    \"date\": \"05-06-2023\",\n    \"product\":{\n        \"product_id\": 123,\n        \"product_name\": \"Silla Gamer\",\n        \"type\": \"Silla\",\n        \"brand\": \"Asus\",\n        \"color\": \"Negro y Verde\",\n        \"notes\": \"Silla en impecables condiciones poco uso\"\n    },\n    \"category\": 100,\n    \"price\": 250.50\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/products/post",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Agregar Un POST con longitud de color del producto mayor a 15 caracteres",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": -3,\n    \"date\": \"05-06-2023\",\n    \"product\":{\n        \"product_id\": 123,\n        \"product_name\": \"Silla Gamer\",\n        \"type\": \"Silla\",\n        \"brand\": \"Asus\",\n        \"color\": \"Negro y Verde\",\n        \"notes\": \"Silla en impecables condiciones poco uso\"\n    },\n    \"category\": 100,\n    \"price\": 250.50\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/products/post",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"post"
 							]
 						}
 					},

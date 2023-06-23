@@ -1,4 +1,5 @@
 package com.meli.obtenerdiploma.service;
+import com.meli.obtenerdiploma.exception.StudentNotFoundException;
 import com.meli.obtenerdiploma.model.StudentDTO;
 import com.meli.obtenerdiploma.model.SubjectDTO;
 import com.meli.obtenerdiploma.repository.IStudentDAO;
@@ -7,6 +8,7 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -49,6 +51,7 @@ public class StudentServiceTest {
         Assertions.assertEquals(student, studentDAO.findById(id));
 
     }
+
 
     @Test
     @DisplayName("Consultar todos los estudiantes estudiantes")

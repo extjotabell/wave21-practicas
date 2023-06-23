@@ -91,7 +91,7 @@ class UserServiceTest {
     }
 
     @Test
-    @DisplayName("T-0001 / Verificar que el usuario a seguir exista. (US-0001) / Ususario a seguir no existe")
+    @DisplayName("T-0001 / Verificar que el usuario a seguir exista. (US-0001) / Usuario a seguir no existe")
     void follow_userToFollowDoesntExist_ThrowExTest() {
         //Arrange
         User user = new User(1, "Juan", new ArrayList<>(), new ArrayList<>());
@@ -337,6 +337,18 @@ class UserServiceTest {
 
         //Assert
         assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    @DisplayName("T-0007 / Verificar que la cantidad de seguidores de un determinado usuario sea correcta/ Usuario invalido (US-0002)")
+    void getUserFollowersCountForInvalidUSer() {
+        //Arrange
+        int invalidID = 1000;
+        UserFollowerCountDTO expectedResult = new UserFollowerCountDTO(ramiro.getId(), ramiro.getName(), ramiro.getFollowers().size());
+        Mockito.when(userRepo.getUserByID(invalidID)).thenReturn(Optional.empty());
+
+        // ACt && Assert
+        assertThrows(UserNotFoundException.class, () -> service.getUserFollowersCount(invalidID));
     }
 
     void init() {
