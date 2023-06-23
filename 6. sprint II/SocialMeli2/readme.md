@@ -121,3 +121,16 @@ Responsabilidad: Grupal
 | T-0007 | Verificar que la cantidad de seguidores de un determinado usuario sea correcta. (US-0002)                                                                            | Devuelve el cálculo correcto del total de la cantidad de seguidores que posee un usuario.<br>Notifica la no existencia del usuario al querer obtener cantidad de seguidores mediante una excepción.                                                                                                    | Mercedes Sabaj<br>Fabrizzio Camera     |
 | T-0008 | Verificar que la consulta de publicaciones realizadas en las últimas dos semanas de un determinado vendedor sean efectivamente de las últimas dos semanas. (US-0006) | Devuelve únicamente los datos de las publicaciones que tengan fecha de publicación dentro de las últimas dos semanas a partir del día de la fecha.<br>(Test de Repositorio)                                                                                                                            | Gabriel Antonietti<br>Nahuel De Bellis |
 
+### Test de Integración
+
+Responsable: Matias Tato
+
+|        | Situaciones de entrada                                                         | Test Realizados                                                                                               |
+|--------|--------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------|
+| T-0009 | Verifica que se pueda crear un post correctamente                              | Permite continuar con normalidad<br>Usuario no existe<br>Post invalido<br>Post invalido (nulls)               |
+| T-0010 | Verifica la lista de post de usuarios seguidos                                 | Permite continuar con normalidad                                                                              |
+| T-0011 | Verifica que se pueda seguir a un usuario correctamente correctamente          | Permite continuar con normalidad<br>El usuario ya esta en la lista de seguidos<br>No se puede dar auto follow |
+| T-0012 | Verifica que se pueda dejar de seguir a un usuario correctamente correctamente | Permite continuar con normalidad                                                                              |
+| T-0013 | Verifica que la lista de seguidores sea correcta                               | Permite continuar con normalidad                                                                              |
+| T-0014 | Verifica que la lista de seguidos sea correcta                                 | Permite continuar con normalidad                                                                              |
+| T-0015 | Verifica que la cantidad de seguidores sea correcta                            | Permite continuar con normalidad                                                                              |
