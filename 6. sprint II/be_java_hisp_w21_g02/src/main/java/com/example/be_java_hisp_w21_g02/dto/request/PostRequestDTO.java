@@ -21,9 +21,6 @@ public class PostRequestDTO {
     @Positive(message = "User ID must be greater than zero")
     private Integer userId;
 
-    @NotNull(message = "Date is required")
-    @PastOrPresent(message = "Invalid date, It should be as Past or present date")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private LocalDate date;
 
     private @Valid ProductDTO product;

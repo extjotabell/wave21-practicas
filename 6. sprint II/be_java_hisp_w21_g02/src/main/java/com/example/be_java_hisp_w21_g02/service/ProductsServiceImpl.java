@@ -37,7 +37,7 @@ public class ProductsServiceImpl implements IProductsService{
         User user = _userRepository.getUser(post.getUserId());
         ExceptionChecker.checkUserException(user);
 
-        ExceptionChecker.checkBadRequestException(postRequestDTO);
+        //ExceptionChecker.checkBadRequestException(postRequestDTO);
         _userRepository.createPost(post);
 
         return new ResponseEntity<>(HttpStatus.OK);
@@ -45,7 +45,6 @@ public class ProductsServiceImpl implements IProductsService{
 
     @Override
     public ResponseEntity<?> listFollowingPosts2Weeks(int userId, String order) {
-
         order = order != null ? order : Constants.ORDER_DATE_DESC;
 
         ExceptionChecker.checkOrderExistsException(order);
