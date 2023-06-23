@@ -21,8 +21,20 @@ La aplicación "SocialMeli" es una plataforma innovadora que te permite seguir y
 
 ---
 
+## Sprint 2 parte individual:
 
-## Sprint 2:
+Se agregaron dos test de integracion
+
+- UserControllerTest
+- PostControllerTest
+
+### Resultados de coverage
+
+Apartir de los resultados pude completar el bonus extra de superar el 75% de cobertura de codigo
+
+![img_3.png](img_3.png)
+
+## Sprint 2 parte grupal:
 
 ### Decisiones de equipo:
 - Se tomó como decisión de equipo permitir al usuario poder publicar un producto cuantas veces quisiera, sin considerar las validaciones de (fecha, productName, userId, etc...)
