@@ -130,7 +130,7 @@ public class Controller {
         return response;
     }
 
-
+/*
     //US 0010: Llevar a cabo la publicación de un nuevo producto en promoción
     @PostMapping("/products/promo-post")
     public ResponseEntity<?> newProductInSale() {
@@ -154,5 +154,5 @@ public class Controller {
     ) {
         return null;
     }
-
+*/
 }
