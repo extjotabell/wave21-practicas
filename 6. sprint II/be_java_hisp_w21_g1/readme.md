@@ -51,6 +51,16 @@ Esta API permite crear publicaciones relacionados a usuarios que pueden publicar
 - US 0006 - GET - "/products/followed/{user_id}/list"
 - US 0009 - GET - "/products/followed/{userId}/list?order=date_asc"
 
+# Responsables de tests unitarios
+
+- Dominguez, Gaston - T-0001. -- Validacion: user_id y category
+- Safdie, Ezequiel - T-0002 -- Validacion:notes
+- Musso, Antonella - T-0003 -- Validacion: date
+- De la Vega, Demian - T-0004 -- Validacion: product_id
+- Deniz, Luz - T-0005 -- Validacion: product_name
+- Lecaros, Francisco - T-0006 -- Validacion: type
+- Magnelli, Mercedes - T-0007 -- Validacion: brand y price
+- Bistolfi, Martín - T-0008 -- Validacion: color
 
 ## Agradecimientos
 1. A Messi 
