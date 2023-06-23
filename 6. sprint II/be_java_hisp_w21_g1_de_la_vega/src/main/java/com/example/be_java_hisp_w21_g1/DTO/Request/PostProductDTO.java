@@ -3,7 +3,9 @@ package com.example.be_java_hisp_w21_g1.DTO.Request;
 import com.example.be_java_hisp_w21_g1.DTO.Response.ProductDTO;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
 
 import lombok.AllArgsConstructor;
@@ -28,6 +30,7 @@ public class PostProductDTO {
 
   @JsonFormat(pattern="dd-MM-yyyy")
   @NotNull(message = "The date cannot be null")
+  @Pattern(regexp = "dd-MM-yyyy", message = "Que haces flaco?")
   private LocalDate date;
 
   @Valid

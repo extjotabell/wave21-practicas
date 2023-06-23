@@ -46,7 +46,6 @@ public class UserRepository implements IUserRepository {
         User user3 = new User(3, "Pedro", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
         User user4 = new User(4, "USUARIO NUEVO", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
 
-
         this.users.add(user1);
         this.users.add(user2);
         this.users.add(user3);
@@ -60,6 +59,7 @@ public class UserRepository implements IUserRepository {
         followed1.add(user2);
         followed1.add(user4);
         user1.setFollowed(followed1);
+        user1.setPosts(posts);
 
     }
 
