@@ -59,11 +59,37 @@ public class PostControllerTest {
 
     }
 
+    @Test
+    public void testPostOkThrowExceptionByInvalidColor() throws Exception {
+
+        mockMvc.perform(post("/products/post")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(writer.writeValueAsString(getPostResponseDTOError()))
+                )
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$").exists())
+                .andExpect(jsonPath("$.messages").value("El color del producto no puede poseer caracteres especiales."))
+                .andExpect(result -> result.getResponse().getContentType().equals("application/json"))
+                .andReturn();
+
+    }
+
     private PostRequestDto getPostResponseDTO() {
         return new PostRequestDto(
                 1,
                 LocalDate.of(2023, 06, 16),
                 new Product(2,"Silla Gamer","Gamer","Racer","Red and Black","Special Edition"),
+                100,
+                1400.00
+        );
+    }
+
+    private PostRequestDto getPostResponseDTOError() {
+        return new PostRequestDto(
+                1,
+                LocalDate.of(2023, 06, 16),
+                new Product(2,"Silla Gamer","Gamer","Racer","Red & Black","Special Edition"),
                 100,
                 1400.00
         );
