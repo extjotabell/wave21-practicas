@@ -14,9 +14,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-
 import java.time.LocalDate;
-
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -73,6 +72,19 @@ public class PostControllerTest {
                 .andExpect(result -> result.getResponse().getContentType().equals("application/json"))
                 .andReturn();
 
+    }
+
+    @Test
+    public void testSellerFollowedListPosts() throws Exception{
+        mockMvc.perform(get("/products/followed/{userId}/list", 5)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .param("order", "date_asc")
+                )
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").exists())
+                .andExpect(result -> result.getResponse().getContentType().equals("application/json"))
+                .andReturn();
     }
 
     private PostRequestDto getPostResponseDTO() {
