@@ -1,6 +1,8 @@
 package com.example.be_java_hisp_w21_g1.integration;
 
+import com.example.be_java_hisp_w21_g1.DTO.Error.ErrorDTO;
 import com.example.be_java_hisp_w21_g1.DTO.Response.FollowersCountDTO;
+import com.example.be_java_hisp_w21_g1.Exception.NotFoundException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
@@ -29,7 +31,7 @@ public class ControllerTest {
             .registerModule(new JavaTimeModule())
             .writer();
     @Test
-    void countFollowersTest() throws Exception {
+    void countFollowersTestHappyPath() throws Exception {
 
         FollowersCountDTO expected = new FollowersCountDTO(1,"Pepe",2);
 
@@ -42,5 +44,27 @@ public class ControllerTest {
                 .andExpect(contentTypeExpected)
                 .andExpect(contentExpected)
                 .andDo(MockMvcResultHandlers.print());
+    }
+
+    @Test
+    void countFollowersTestSadPath() throws Exception {
+
+
+        ErrorDTO expected = new ErrorDTO("No se encontro el usuario con el ID" + 34);
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders.get("/users/34/followers/count");
+        ResultMatcher statusExpected = MockMvcResultMatchers.status().isNotFound();
+        ResultMatcher contentExpected = MockMvcResultMatchers.content().json(writer.writeValueAsString(expected));
+        ResultMatcher contenTypeExpected = MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON);
+
+        mockMvc.perform(request)
+                .andExpect(statusExpected)
+                .andExpect(contenTypeExpected)
+                .andExpect(contentExpected)
+                .andDo(MockMvcResultHandlers.print());
+    }
+
+    @Test
+    void createPostTest(){
+        
     }
 }
