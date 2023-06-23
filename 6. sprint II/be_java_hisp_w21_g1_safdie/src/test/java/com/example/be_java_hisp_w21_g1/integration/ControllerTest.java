@@ -49,7 +49,10 @@ public class ControllerTest {
     @Test
     @DisplayName("Verificar que se pueda seguir a un usuario")
     void followTestHappy() throws Exception {
-        this.mockMvc.perform(MockMvcRequestBuilders.post("/users/1/follow/2"))
+        int userId = 1;
+        int userIdToFollow = 2;
+
+        this.mockMvc.perform(MockMvcRequestBuilders.post("/users/{userId}/follow/{userIdToFollow}", userId, userIdToFollow))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(content().contentType("application/json"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -60,7 +63,10 @@ public class ControllerTest {
     @Test
     @DisplayName("Verificar que solo se pueda seguir a un usuario vendedor")
     void followNonSeller() throws Exception {
-        this.mockMvc.perform(MockMvcRequestBuilders.post("/users/1/follow/3"))
+        int userId = 1;
+        int userIdToFollow = 3;
+
+        this.mockMvc.perform(MockMvcRequestBuilders.post("/users/{userID}/follow/{userIdToFollow}", userId, userIdToFollow))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(content().contentType("application/json"))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
@@ -70,7 +76,10 @@ public class ControllerTest {
     @Test
     @DisplayName("Verificar que tira error al pasar un usuario que no existe")
     void followNonExistentUser() throws Exception {
-        this.mockMvc.perform(MockMvcRequestBuilders.post("/users/1/follow/100"))
+        int userId = 100;
+        int userIdToFollow = 3;
+
+        this.mockMvc.perform(MockMvcRequestBuilders.post("/users/{userID}/follow/{userIdToFollow}", userId, userIdToFollow))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(content().contentType("application/json"))
                 .andExpect(MockMvcResultMatchers.status().isNotFound())
@@ -80,7 +89,10 @@ public class ControllerTest {
     @Test
     @DisplayName("Verificar que tire error al pasar un id invalido")
     void followInvalidId() throws Exception {
-        this.mockMvc.perform(MockMvcRequestBuilders.post("/users/0/follow/3"))
+        int userId = 0;
+        int userIdToFollow = 3;
+
+        this.mockMvc.perform(MockMvcRequestBuilders.post("/users/{userId}/follow/{userIdToFollow}", userId, userIdToFollow))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(content().contentType("application/json"))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
@@ -92,10 +104,10 @@ public class ControllerTest {
     @Test
     @DisplayName("Verificar que se pueda obtener la cantidad de seguidores de un usuario")
     void followersCountTestHappy() throws Exception {
-        int id = 1;
+        int userId = 1;
         String expected = "{\"user_id\":1,\"user_name\":Pepe,\"followers_count\":2}";
 
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/users/" + id + "/followers/count"))
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/users/{userID}/followers/count", userId))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(content().contentType("application/json"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -105,7 +117,9 @@ public class ControllerTest {
     @Test
     @DisplayName("Verificar que tire error al pasar un id invalido")
     void followersCountInvalidId() throws Exception {
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/users/0/followers/count"))
+        int userId = 0;
+
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/users/{userId}/followers/count", userId))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(content().contentType("application/json"))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
