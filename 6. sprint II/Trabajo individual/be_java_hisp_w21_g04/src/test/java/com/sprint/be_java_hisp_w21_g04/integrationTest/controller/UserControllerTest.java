@@ -102,12 +102,24 @@ public class UserControllerTest {
     }
 
     @Test
-    public void testUserFollowersCountDtoWithFollowers() throws Exception {
+    public void testUserFollowersCountWithFollowers() throws Exception {
         mockMvc.perform(get("/users/{userId}/followers/count",1)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").exists())
+                .andExpect(result -> result.getResponse().getContentType().equals("application/json"))
+                .andReturn();
+    }
+
+    @Test
+    public void testUserFollowThrowsException() throws Exception {
+        mockMvc.perform(post("/users/{userId}/follow/{userIdToFollow}",1,1)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$").exists())
+                .andExpect(jsonPath("$.message").value("No puedes seguirte a ti mismo."))
                 .andExpect(result -> result.getResponse().getContentType().equals("application/json"))
                 .andReturn();
     }
