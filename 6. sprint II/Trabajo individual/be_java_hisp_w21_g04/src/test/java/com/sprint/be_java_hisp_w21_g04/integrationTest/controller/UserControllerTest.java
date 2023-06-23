@@ -108,6 +108,9 @@ public class UserControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").exists())
+                .andExpect(jsonPath("$.user_id").value(1))
+                .andExpect(jsonPath("$.user_name").value("JohnDoe"))
+                .andExpect(jsonPath("$.followers_count").value(0))
                 .andExpect(result -> result.getResponse().getContentType().equals("application/json"))
                 .andReturn();
     }
