@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -57,6 +58,32 @@ public class UserControllerTest {
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$").exists())
                 .andExpect(jsonPath("$.message").value("No se encontraron seguidores para el vendedor"))
+                .andExpect(result -> result.getResponse().getContentType().equals("application/json"))
+                .andReturn();
+    }
+
+    @Test
+    public void testGetFollowedByIdWithInvalidSortThrowsException() throws Exception {
+        mockMvc.perform(get("/users/{userId}/followed/list",1)
+                        .param("order", "name_")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$").exists())
+                .andExpect(jsonPath("$.message").value("Ordenamiento invalido"))
+                .andExpect(result -> result.getResponse().getContentType().equals("application/json"))
+                .andReturn();
+    }
+
+    @Test
+    public void testGetFollowersByIdWithInvalidSortThrowsException() throws Exception {
+        mockMvc.perform(get("/users/{userId}/followers/list",1)
+                        .param("order", "name_")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$").exists())
+                .andExpect(jsonPath("$.message").value("Ordenamiento invalido"))
                 .andExpect(result -> result.getResponse().getContentType().equals("application/json"))
                 .andReturn();
     }
