@@ -27,7 +27,7 @@ public class UserControllerTest {
     MockMvc mockMvc;
 
     @Test
-    @DisplayName("Test 001 - Endpoint de seguir a un usuario: Usuario seguido correctamente.")
+    @DisplayName("Test 001 - Follow User: Usuario seguido correctamente.")
     void userFollow() throws Exception {
         MvcResult result = mockMvc.perform(post("/users/{userId}/follow/{userIdToFollow}", 3, 7))
                 .andExpect(status().isOk())
@@ -37,7 +37,7 @@ public class UserControllerTest {
     }
 
     @Test
-    @DisplayName("Test 001 - Endpoint de seguir a un usuario: Usuario ya seguido.")
+    @DisplayName("Test 002 - Follow User: Usuario ya seguido.")
     void userAlreadyFollowed() throws Exception {
         ErrorDto errorDTO = new ErrorDto("Ya se están siguiendo.", 400);
 
@@ -48,17 +48,13 @@ public class UserControllerTest {
         String errorExpected = writer.writeValueAsString(errorDTO);
         MvcResult result = mockMvc.perform(post("/users/{userId}/follow/{userIdToFollow}", 4, 3))
                 .andExpect(status().isBadRequest())
-                .andDo(mvcResult -> {
-                    System.out.println(mvcResult.getResponse().getContentAsString());
-                })
                 .andReturn();
 
         assertEquals(errorExpected, result.getResponse().getContentAsString(StandardCharsets.UTF_8));
-        System.out.println(result.getResponse().getContentAsString());
     }
 
     @Test
-    @DisplayName("Test 001 - Endpoint de seguir a un usuario: Usuario no encontrado.")
+    @DisplayName("Test 003 - Follow User: Usuario no encontrado.")
     void userNotFound() throws Exception {
         UserNotFoundDto errorDTO = new UserNotFoundDto("Usuario no encontrado.", 404);
 
@@ -69,17 +65,13 @@ public class UserControllerTest {
         String errorExpected = writer.writeValueAsString(errorDTO);
         MvcResult result = mockMvc.perform(post("/users/{userId}/follow/{userIdToFollow}", 4, 555))
                 .andExpect(status().isNotFound())
-                .andDo(mvcResult -> {
-                    System.out.println(mvcResult.getResponse().getContentAsString());
-                })
                 .andReturn();
 
         assertEquals(errorExpected, result.getResponse().getContentAsString(StandardCharsets.UTF_8));
-        System.out.println(result.getResponse().getContentAsString());
     }
 
     @Test
-    @DisplayName("Test 001 - Endpoint de seguir a un usuario: No puedes seguirte a tí mismo")
+    @DisplayName("Test 004 - Follow User: No puedes seguirte a tí mismo.")
     void userCantSelfFollow() throws Exception {
         ErrorDto errorDTO = new ErrorDto("No puedes seguirte a ti mismo.", 400);
 
@@ -90,27 +82,21 @@ public class UserControllerTest {
         String errorExpected = writer.writeValueAsString(errorDTO);
         MvcResult result = mockMvc.perform(post("/users/{userId}/follow/{userIdToFollow}", 4, 4))
                 .andExpect(status().isBadRequest())
-                .andDo(mvcResult -> {
-                    System.out.println(mvcResult.getResponse().getContentAsString());
-                })
                 .andReturn();
 
         assertEquals(errorExpected, result.getResponse().getContentAsString(StandardCharsets.UTF_8));
-        System.out.println(result.getResponse().getContentAsString());
     }
 
     @Test
-    @DisplayName("Test 002 - Endpoint de dejar de seguir usuario.")
+    @DisplayName("Test 005 - Unollow User: Usuario dejado de seguir correctamente.")
     void userUnfollow() throws Exception {
         MvcResult result = mockMvc.perform(post("/users/{userId}/unfollow/{userIdToFollow}", 4, 5))
                 .andExpect(status().isOk())
                 .andReturn();
-
-        System.out.println(result.getResponse().getContentAsString());
     }
 
     @Test
-    @DisplayName("Test 002 - Endpoint de dejar de seguir a un usuario: Usuario no seguido.")
+    @DisplayName("Test 006 - Unfollow User: Usuario no encontrado.")
     void userUnfollowNotFound() throws Exception {
         UserNotFoundDto errorDTO = new UserNotFoundDto("Usuario no encontrado.", 404);
 
@@ -121,17 +107,13 @@ public class UserControllerTest {
         String errorExpected = writer.writeValueAsString(errorDTO);
         MvcResult result = mockMvc.perform(post("/users/{userId}/unfollow/{userIdToFollow}", 4, 6666))
                 .andExpect(status().isNotFound())
-                .andDo(mvcResult -> {
-                    System.out.println(mvcResult.getResponse().getContentAsString());
-                })
                 .andReturn();
 
         assertEquals(errorExpected, result.getResponse().getContentAsString(StandardCharsets.UTF_8));
-        System.out.println(result.getResponse().getContentAsString());
     }
 
     @Test
-    @DisplayName("Test 002 - Endpoint de dejar de seguir a un usuario: No puedes dejar de seguirte a ti mismo.")
+    @DisplayName("Test 007 - Unfollow User: No puedes dejar de seguirte a ti mismo.")
     void userUnfollowNotAllowed() throws Exception {
         ErrorDto errorDTO = new ErrorDto("No puedes dejar de seguirte a ti mismo.", 400);
 
@@ -142,17 +124,13 @@ public class UserControllerTest {
         String errorExpected = writer.writeValueAsString(errorDTO);
         MvcResult result = mockMvc.perform(post("/users/{userId}/unfollow/{userIdToFollow}", 4, 4))
                 .andExpect(status().isBadRequest())
-                .andDo(mvcResult -> {
-                    System.out.println(mvcResult.getResponse().getContentAsString());
-                })
                 .andReturn();
 
         assertEquals(errorExpected, result.getResponse().getContentAsString(StandardCharsets.UTF_8));
-        System.out.println(result.getResponse().getContentAsString());
     }
 
     @Test
-    @DisplayName("Test 002 - Endpoint de dejar de seguir a un usuario: No puedes dejar de seguir a alguien que no sigues.")
+    @DisplayName("Test 008 - Unfollow User: No puedes dejar de seguir a alguien que no sigues.")
     void userUnfollowNotFollowing() throws Exception {
         ErrorDto errorDTO = new ErrorDto("No se están siguiendo.", 400);
 
@@ -163,27 +141,21 @@ public class UserControllerTest {
         String errorExpected = writer.writeValueAsString(errorDTO);
         MvcResult result = mockMvc.perform(post("/users/{userId}/unfollow/{userIdToFollow}", 1, 4))
                 .andExpect(status().isBadRequest())
-                .andDo(mvcResult -> {
-                    System.out.println(mvcResult.getResponse().getContentAsString());
-                })
                 .andReturn();
 
         assertEquals(errorExpected, result.getResponse().getContentAsString(StandardCharsets.UTF_8));
-        System.out.println(result.getResponse().getContentAsString());
     }
 
     @Test
-    @DisplayName("Test 003 - userFollowersCountDto")
+    @DisplayName("Test 009 - userFollowersCountDto: Contar seguidores correctamente.")
     void userFollowersCount() throws Exception {
         MvcResult result = mockMvc.perform(get("/users/{userId}/followers/count", 1))
                 .andExpect(status().isOk())
                 .andReturn();
-
-        System.out.println(result.getResponse().getContentAsString());
     }
 
     @Test
-    @DisplayName("Test 003 - userFollowersCountDto: Usuario no encontrado.")
+    @DisplayName("Test 010 - userFollowersCountDto: Usuario no encontrado.")
     void userFollowersCountUserNotFound() throws Exception {
         UserNotFoundDto errorDTO = new UserNotFoundDto("Usuario no encontrado.", 404);
 
@@ -194,27 +166,22 @@ public class UserControllerTest {
         String errorExpected = writer.writeValueAsString(errorDTO);
         MvcResult result = mockMvc.perform(get("/users/{userId}/followers/count", 500))
                 .andExpect(status().isNotFound())
-                .andDo(mvcResult -> {
-                    System.out.println(mvcResult.getResponse().getContentAsString());
-                })
                 .andReturn();
 
         assertEquals(errorExpected, result.getResponse().getContentAsString(StandardCharsets.UTF_8));
-        System.out.println(result.getResponse().getContentAsString());
     }
 
     @Test
-    @DisplayName("Test 003 - getFollowersById")
+    @DisplayName("Test 011 - getFollowersById: getFollowersById correctamente.")
     void userFollowersById() throws Exception {
+        //  Agregar DTO de comparación..
         MvcResult result = mockMvc.perform(get("/users/{userId}/followers/list", 3))
                 .andExpect(status().isOk())
                 .andReturn();
-
-        System.out.println(result.getResponse().getContentAsString());
     }
 
     @Test
-    @DisplayName("Test 003 - userFollowersCountDto: getFollowersById no se encontraron seguidores para el vendedor")
+    @DisplayName("Test 012 - getFollowersById: No se encontraron seguidores para el vendedor.")
     void userFollowersByIdWithoutFollowers() throws Exception {
         ErrorDto errorDTO = new ErrorDto("No se encontraron seguidores para el vendedor", 404);
 
@@ -225,47 +192,37 @@ public class UserControllerTest {
         String errorExpected = writer.writeValueAsString(errorDTO);
         MvcResult result = mockMvc.perform(get("/users/{userId}/followers/list", 1))
                 .andExpect(status().isNotFound())
-                .andDo(mvcResult -> {
-                    System.out.println(mvcResult.getResponse().getContentAsString());
-                })
                 .andReturn();
 
         assertEquals(errorExpected, result.getResponse().getContentAsString(StandardCharsets.UTF_8));
-        System.out.println(result.getResponse().getContentAsString());
     }
 
     @Test
-    @DisplayName("Test 003 - getFollowersById with order")
+    @DisplayName("Test 013 - getFollowersById: Ordered ascending.")
     void userFollowersByIdWithOrderAsc() throws Exception {
         MvcResult result = mockMvc.perform(get("/users/{userId}/followers/list", 3).param("order", "name_asc"))
                 .andExpect(status().isOk())
                 .andReturn();
-
-        System.out.println(result.getResponse().getContentAsString());
     }
 
     @Test
-    @DisplayName("Test 003 - getFollowersById with order")
+    @DisplayName("Test 014 - getFollowersById: Ordered descending.")
     void userFollowersByIdWithOrderDesc() throws Exception {
         MvcResult result = mockMvc.perform(get("/users/{userId}/followers/list", 3).param("order", "name_desc"))
                 .andExpect(status().isOk())
                 .andReturn();
-
-        System.out.println(result.getResponse().getContentAsString());
     }
 
     @Test
-    @DisplayName("Test 003 - getFollowedById")
+    @DisplayName("Test 015 - getFollowedById: getFollowedById correctamente.")
     void userFollowedById() throws Exception {
         MvcResult result = mockMvc.perform(get("/users/{userId}/followed/list", 3))
                 .andExpect(status().isOk())
                 .andReturn();
-
-        System.out.println(result.getResponse().getContentAsString());
     }
 
     @Test
-    @DisplayName("Test 003 - userFollowersCountDto: getFollowersById no se encontraron seguidores para el vendedor")
+    @DisplayName("Test 016 - userFollowersCountDto: getFollowersById no se encontraron seguidores para el vendedor.")
     void userFollowedByIdWithoutFollowers() throws Exception {
         ErrorDto errorDTO = new ErrorDto("El usuario no sigue a ningún vendedor", 404);
 
@@ -276,27 +233,21 @@ public class UserControllerTest {
         String errorExpected = writer.writeValueAsString(errorDTO);
         MvcResult result = mockMvc.perform(get("/users/{userId}/followed/list", 8))
                 .andExpect(status().isNotFound())
-                .andDo(mvcResult -> {
-                    System.out.println(mvcResult.getResponse().getContentAsString());
-                })
                 .andReturn();
 
         assertEquals(errorExpected, result.getResponse().getContentAsString(StandardCharsets.UTF_8));
-        System.out.println(result.getResponse().getContentAsString());
     }
 
     @Test
-    @DisplayName("Test 003 - getFollowersById with order")
+    @DisplayName("Test 017 - getFollowersById: With order ascending.")
     void userFollowedByIdWithOrderAsc() throws Exception {
         MvcResult result = mockMvc.perform(get("/users/{userId}/followed/list", 3).param("order", "name_asc"))
                 .andExpect(status().isOk())
                 .andReturn();
-
-        System.out.println(result.getResponse().getContentAsString());
     }
 
     @Test
-    @DisplayName("Test 003 - getFollowersById with order")
+    @DisplayName("Test 018 - getFollowersById: With order descending.")
     void userFollowedByIdWithOrderDesc() throws Exception {
         MvcResult result = mockMvc.perform(get("/users/{userId}/followed/list", 3).param("order", "name_desc"))
                 .andExpect(status().isOk())

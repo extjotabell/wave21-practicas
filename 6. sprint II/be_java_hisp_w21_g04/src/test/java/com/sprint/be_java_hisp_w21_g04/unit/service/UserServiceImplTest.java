@@ -29,6 +29,7 @@ public class UserServiceImplTest {
     UserRepositoryImpl userRepository;
     @InjectMocks
     UserServiceImpl userService;
+
     @Test
     @DisplayName("T0001 - Caso ideal (US-0001)")
     void followUserPerfectCase() {

@@ -35,12 +35,11 @@ public class PostControllerTest {
     MockMvc mockMvc;
 
     @Test
-    @DisplayName("Test PostController getAll")
+    @DisplayName("Test 001 PostController: getAll Posts")
     void postControllerGetAllPosts() throws Exception {
         MvcResult result = mockMvc.perform(get("/products/getAll"))
                 .andExpect(status().isOk())
                 .andReturn();
-        System.out.println(result.getResponse().getContentAsString());
     }
 /*
     @Test
@@ -83,7 +82,7 @@ public class PostControllerTest {
     }*/
 
     @Test
-    @DisplayName("Test 003 - sellerFollowedListPosts")
+    @DisplayName("Test 002 - sellerFollowedListPosts: No hay publicaciones de los vendedores que sigues")
     void followerdUserPosts() throws Exception {
         ErrorDto errorDTO = new ErrorDto("Los vendedores que sigues no tienen publicaciones", 400);
 
@@ -94,12 +93,8 @@ public class PostControllerTest {
         String errorExpected = writer.writeValueAsString(errorDTO);
         MvcResult result = mockMvc.perform(get("/products/followed/{userId}/list", 2))
                 .andExpect(status().isBadRequest())
-                .andDo(mvcResult -> {
-                    System.out.println(mvcResult.getResponse().getContentAsString());
-                })
                 .andReturn();
 
         assertEquals(errorExpected, result.getResponse().getContentAsString(StandardCharsets.UTF_8));
-        System.out.println(result.getResponse().getContentAsString());
     }
 }
