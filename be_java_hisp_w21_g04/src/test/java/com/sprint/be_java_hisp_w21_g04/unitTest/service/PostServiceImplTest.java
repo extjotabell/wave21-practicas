@@ -72,7 +72,6 @@ public class PostServiceImplTest {
         when(userRepository.getById(userId)).thenReturn(user);
         when(postRepository.getSellerFollowed(userId)).thenReturn(mockResult);
 
-
         //Act
         SellerFollowedListPostResponseDto result = postService.sellerFollowedListPosts(userId, order);
 
@@ -112,7 +111,6 @@ public class PostServiceImplTest {
         when(userRepository.getById(userId)).thenReturn(user);
         when(postRepository.getSellerFollowed(userId)).thenReturn(mockResult);
 
-
         //Act
         SellerFollowedListPostResponseDto result = postService.sellerFollowedListPosts(userId, order);
 
@@ -141,9 +139,7 @@ public class PostServiceImplTest {
         Product product6 = new Product(1, "Camiseta", "T Shirt", "Adidas", "White", "");
         expectedPosts.add(new PostResponseDto(3, LocalDate.now().minusDays(20), product6, 4, 120.0));
 
-
         when(postRepository.getAll()).thenReturn(mockResult);
-
 
         //Act
         List<PostResponseDto> result = postService.getAll();
