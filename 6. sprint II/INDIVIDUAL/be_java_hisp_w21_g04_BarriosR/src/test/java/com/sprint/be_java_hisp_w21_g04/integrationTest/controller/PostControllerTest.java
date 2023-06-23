@@ -17,8 +17,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -101,7 +99,7 @@ public class PostControllerTest {
     }
 
     @Test
-    @DisplayName("T-0004: Prueba de integracion agregando post para un usuario camino OK")
+    @DisplayName("T-0004: Prueba de integracion validando un post para un usuario con la fecha no puede estar vacia")
     void postDateNotEmptyTest() throws Exception {
 
         //Arrange
@@ -129,7 +127,7 @@ public class PostControllerTest {
     }
 
     @Test
-    @DisplayName("T-0004: Prueba de integracion lista de publicaciones de un vendedor seguido ")
+    @DisplayName("T-0005: Prueba de integracion generando la excepcion los vendedores que sigues no tienen publicaciones")
     void sellerFollowedListPostsByDateTest() throws Exception {
 
         //Arrange

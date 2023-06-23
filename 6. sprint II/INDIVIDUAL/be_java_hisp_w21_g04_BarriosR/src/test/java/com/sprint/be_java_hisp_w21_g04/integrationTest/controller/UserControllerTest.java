@@ -1,6 +1,5 @@
 package com.sprint.be_java_hisp_w21_g04.integrationTest.controller;
 
-import com.sprint.be_java_hisp_w21_g04.entity.User;
 import com.sprint.be_java_hisp_w21_g04.repository.user.UserRepositoryImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -176,7 +175,7 @@ public class UserControllerTest {
     }
 
     @Test
-    @DisplayName("T-0002: Prueba de integracion generando la excepcion 404 Not Found al no encontrar resultados de seguidos")
+    @DisplayName("T-0003: Prueba de integracion generando la excepcion 404 Not Found al no encontrar resultados de seguidos")
     void userFollowTestNotFount() throws Exception {
 
         //Arrange
