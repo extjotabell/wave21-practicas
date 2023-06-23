@@ -1,5 +1,6 @@
 package com.sprint.be_java_hisp_w21_g04.integrationTest.controller;
 
+import com.sprint.be_java_hisp_w21_g04.entity.User;
 import com.sprint.be_java_hisp_w21_g04.repository.user.UserRepositoryImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -9,7 +10,9 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
@@ -18,6 +21,9 @@ public class UserControllerTest {
 
     @Autowired
     private MockMvc _mockMvc;
+
+    @Mock
+    UserRepositoryImpl _userRepository;
 
     // Requerimientos incrementales (Desarrollo INDIVIDUAL) - Pruebas de integracion obteniendo listado de seguidores y Seguidos por ID
 
@@ -88,14 +94,14 @@ public class UserControllerTest {
 
     @Test
     @DisplayName("T-0002: Prueba de integracion obteniendo listado de seguidos por ID con el parametro de ordenamiento camino Ok")
-    void getFollowedByIdWithParamOrderTest() throws Exception{
+    void getFollowedByIdWithParamOrderTest() throws Exception {
 
         //Arrange
         int userId = 4;
 
         //Act & Assert
-        _mockMvc.perform(get("/users/{userId}/followed/list",userId)
-                        .param("order","name_asc"))
+        _mockMvc.perform(get("/users/{userId}/followed/list", userId)
+                        .param("order", "name_asc"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json"))
                 .andReturn();
@@ -104,13 +110,13 @@ public class UserControllerTest {
 
     @Test
     @DisplayName("T-0002: Prueba de integracion obteniendo listado de seguidos por ID sin el parametro de ordenamiento camino Ok")
-    void getFollowedByIdWithoutParamOrderTest() throws Exception{
+    void getFollowedByIdWithoutParamOrderTest() throws Exception {
 
         //Arrange
         int userId = 4;
 
         //Act & Assert
-        _mockMvc.perform(get("/users/{userId}/followed/list",userId))
+        _mockMvc.perform(get("/users/{userId}/followed/list", userId))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json"))
                 .andReturn();
@@ -150,6 +156,66 @@ public class UserControllerTest {
                 .andReturn();
 
     }
+
+    // Bonus (Desarrollo Individual EXTRA) - Pruebas de integracion con el fin de lograr un coverage mayor o igual al 75%
+    @Test
+    @DisplayName("T-0003: Prueba de integracion siguiendo a un vendedor, solo si el usuario y el vendedor existen")
+    void userFollowTest() throws Exception {
+
+        //Arrange
+        int userId = 4;
+        int userIdToFollow = 1;
+
+        //Act & Assert
+        _mockMvc.perform(post("/users/{userId}/follow/{userIdToFollow}", userId, userIdToFollow))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.message").value("Has seguido a JohnDoe"))
+                .andExpect(content().contentType("application/json"))
+                .andReturn();
+
+    }
+
+
+    @Test
+    @DisplayName("T-0004: Prueba de integracion de la cantidad de usuarios que siguen a un vendedor")
+    void userFollowersCountDto() throws Exception {
+
+        //Arrange
+        int userId = 3;
+
+        //Act & Assert
+        var response = _mockMvc.perform(get("/users/{userId}/followers/count", userId))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json"))
+                .andReturn();
+
+        //Assert
+        assertEquals("{\"user_id\":3,\"user_name\":\"MikeJohnson\",\"followers_count\":1}",response.getResponse().getContentAsString());
+    }
+
+    @Test
+    @DisplayName("T-0005: Prueba de integracion que permite a un usuario dejar de seguir a un vendedor")
+    void userUnfollow () throws Exception{
+
+        //Arrange
+        int userId = 4;
+        int userIdToFollow = 1;
+        int userIdToUnfollow = 1;
+
+        // Sigo a un vendedor
+        _mockMvc.perform(post("/users/{userId}/follow/{userIdToFollow}", userId, userIdToFollow));
+
+        //Act & Assert
+        _mockMvc.perform(post("/users/{userId}/unfollow/{userIdToUnfollow}", userId, userIdToUnfollow))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.message").value("Has dejado de seguir a JohnDoe"))
+                .andExpect(content().contentType("application/json"))
+                .andReturn();
+
+    }
+
+
+
 
 
 }
