@@ -213,6 +213,22 @@ Date:   Fri Jun 16 15:58:20 2023 -0600
 - [ ] Implementar DTO para el mensaje de respuesta de la historia US 0005
 - [ ] Mejora de restricciones en los posts (en especial US 0005)
 
+## Desarrollo individual
+
+Además de los tests existentes, se ha realizado desarrollo adicional para
+mejorar la cobertura y calidad de pruebas. A continuación, se detalla el desarrollo
+adicional realizado:
+
+### Test de integración:
+Se han realizado test de inetgración para estos controllers:
+  - PostController: para lograr el porcentaje ovjetivo de cobertura, implementé
+    un test a cada metodo del controller, además, tuve en cuenta cada uno de los
+    posibles errores o excepciones que podian surgir. En algunos casos utilicé la clase
+    ObjectWriter para poder convertir a String y validar algunos DTO de errores, no lo
+    hice en todos los metodos ya que no era necesario y sería bastante repetitivo.
+  - UserController: basicamente hice la misma práctica que en el anterior, solo que en 
+    este caso tuve mas excepciones por validar.
+
 ### Agradecimientos:
 - Gracias a nuestra Scrum Master, JOY por toda la paciencia. 
 - A Carlos (Charlie) por su enseñanza en git y a todos por su trabajo!! 
