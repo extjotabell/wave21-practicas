@@ -8,7 +8,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.ObjectWriter;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import net.bytebuddy.asm.Advice;
+import org.json.JSONObject;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,9 +93,7 @@ public class UserControllerTests {
         ErrorDTO error = new ErrorDTO("Color can't contain special characters");
         ErrorDTO error2 = new ErrorDTO("The date cannot be null");
 
-        PostProductDTO post = new PostProductDTO(1, LocalDate.of(2023,06,22), new ProductDTO(1, "Silla Gamer", "Gamer", "Racer", "Red & Black", "Special Edition"), 100, 100d);
-
-
+        PostProductDTO post = new PostProductDTO(1, null, new ProductDTO(1, "Silla Gamer", "Gamer", "Racer", "Red & Black", "Special Edition"), 100, 100d);
         SimpleModule module = new JavaTimeModule();
         JsonMapper writer = JsonMapper.builder()
                 .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
@@ -100,7 +101,26 @@ public class UserControllerTests {
                 .build();
 
         String jsonPayload = writer.writeValueAsString(post);
-        String responseJson = writer.writeValueAsString(List.of(error,error2));
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        // Crear el objeto JSON
+        ObjectNode json = objectMapper.createObjectNode();
+
+        // Agregar la propiedad "message"
+        json.put("message", "The following errors were found: ");
+
+        // Crear el array de errores
+        ArrayNode errors = objectMapper.createArrayNode();
+
+        // Agregar el mensaje de error al array
+        errors.add(error2.getMessage());
+        errors.add(error.getMessage());
+
+
+        // Agregar el array de errores al objeto JSON
+        json.set("allErrors", errors);
+
+        String responseJson = writer.writeValueAsString(json);
 
         MvcResult mvcResult = mockMvc.perform(post("/products/post")
                         .contentType(MediaType.APPLICATION_JSON)
