@@ -1,6 +1,6 @@
 ### Especificaciones Técnicas
 
-#### 📝 Se implementáron los siguientes tests de integración UserControllerTest:
+#### 📝 Se implementáron test de integración UserControllerTest con los siguientes casos:
 - [x] userFollow
 - [x] userAlreadyFollowed
 - [x] userNotFound
@@ -20,7 +20,7 @@
 - [x] userFollowedByIdWithOrderAsc
 - [x] userFollowedByIdWithOrderDesc
 
-#### 📝 Se implementáron los siguientes tests de integración PostControllerTest:
+#### 📝 Se implementáron test de integración PostControllerTest con los siguientes casos:
 - [x] postControllerGetAllPosts
 - [x] followerdUserPosts
 
