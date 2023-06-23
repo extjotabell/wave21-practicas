@@ -5,14 +5,11 @@ import com.example.be_java_hisp_w21_g1.DTO.Error.ExceptionDTO;
 import com.example.be_java_hisp_w21_g1.DTO.Request.PostProductDTO;
 import com.example.be_java_hisp_w21_g1.DTO.Response.ProductDTO;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.databind.ObjectWriter;
-import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import net.bytebuddy.asm.Advice;
-import org.json.JSONObject;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,22 +22,17 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import java.io.UnsupportedEncodingException;
+
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
+
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import java.time.LocalDate;
 
 
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -92,13 +84,13 @@ public class UserControllerTests {
     }
 
     @Test
+    @DisplayName("[US 0005] - Posting a post with errors in validations")
     public void postWithValidationsNotOk() throws Exception {
 
         ErrorDTO error = new ErrorDTO("Color can't contain special characters");
-        ErrorDTO error2 = new ErrorDTO("The date cannot be null");
-        ExceptionDTO excDTP = new ExceptionDTO("The following errors were found: ", Arrays.asList(error.getMessage(),error2.getMessage()));
+        ExceptionDTO excDTP = new ExceptionDTO("The following errors were found: ", Arrays.asList(error.getMessage()));
 
-        PostProductDTO post = new PostProductDTO(1, null, new ProductDTO(1, "Silla Gamer", "Gamer", "Racer", "Red & Black", "Special Edition"), 100, 100d);
+        PostProductDTO post = new PostProductDTO(1, LocalDate.of(2023,2,2), new ProductDTO(1, "Silla Gamer", "Gamer", "Racer", "Red & Black", "Special Edition"), 100, 100d);
         SimpleModule module = new JavaTimeModule();
         JsonMapper writer = JsonMapper.builder()
                 .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
@@ -122,7 +114,8 @@ public class UserControllerTests {
     }
 
     @Test
-    public void testing() throws Exception {
+    @DisplayName("[US 0005] - Posting a post with validations OK")
+    public void postingOk() throws Exception {
         ProductDTO prod = new ProductDTO(2, "holis", "hola", "A brand", "A color", "A note");
         PostProductDTO post = new PostProductDTO(1, LocalDate.now(), prod, 1, 10.5);
         SimpleModule module = new JavaTimeModule();
@@ -139,10 +132,6 @@ public class UserControllerTests {
                 .andExpect(status().isOk())
                 .andReturn();
     }
-
-
-
-
 
 
 }
