@@ -17,8 +17,6 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultMatcher;
 
-import java.text.SimpleDateFormat;
-
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -55,7 +53,7 @@ public class UserControllerTest {
     }
 
     @Test
-    @DisplayName("Integration Test US01 01 - unfollow user who is not a seller")
+    @DisplayName("Integration Test US07 01 - unfollow user who is not a seller")
     public void testRegisterUnFollowNotSellerUserIntegration() throws Exception{
         errorMessage = new ErrorDTO("This user is not a seller", HttpStatus.BAD_REQUEST);
         ResultMatcher expectedErrorJson = content().json(writer.writeValueAsString(errorMessage));

@@ -69,7 +69,6 @@ public class ProductControllerTest {
                         .content(jsonPayload))
                 .andExpect(status().is4xxClientError())
                 .andExpect(jsonPath("$.description").value("The ProductName field is required"));
-        ;
     }
 
 
