@@ -88,4 +88,17 @@ public class UserControllerTest {
                 .andReturn();
     }
 
+
+    @Test
+    public void testUserUnfollowThrowsException() throws Exception {
+        mockMvc.perform(post("/users/{userId}/unfollow/{userIdToUnfollow}",1,2)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$").exists())
+                .andExpect(jsonPath("$.message").value("No se están siguiendo."))
+                .andExpect(result -> result.getResponse().getContentType().equals("application/json"))
+                .andReturn();
+    }
+
 }
