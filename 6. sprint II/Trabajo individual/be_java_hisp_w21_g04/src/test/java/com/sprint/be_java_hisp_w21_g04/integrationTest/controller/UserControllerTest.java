@@ -50,6 +50,18 @@ public class UserControllerTest {
     }
 
     @Test
+    public void testGetFollowedByIdWithFollowedOk() throws Exception {
+        mockMvc.perform(get("/users/{userId}/followed/list",4)
+                        .param("order", "name_asc")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").exists())
+                .andExpect(result -> result.getResponse().getContentType().equals("application/json"))
+                .andReturn();
+    }
+
+    @Test
     public void testGetFollowersByIdWithFollowersThrowsException() throws Exception {
         mockMvc.perform(get("/users/{userId}/followers/list",1)
                         .param("order", "name_asc")
