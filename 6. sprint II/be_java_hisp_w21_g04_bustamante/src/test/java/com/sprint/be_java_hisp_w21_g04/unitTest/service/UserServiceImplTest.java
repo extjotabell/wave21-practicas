@@ -568,4 +568,28 @@ public class UserServiceImplTest {
         assertThrows(UserNotFoundException.class, () -> userService.getFollowersCount(userId));
     }
 
+
+    @Test
+    @DisplayName("T0009 - Caso ideal donde se consigue la lista de seguidores de un usuario")
+    public void getFollowersByIdPerfectCase() {
+        // Arrange
+        int userId = 1;
+        User user1 = new User(1,"DavidWilson",new ArrayList<>(), new ArrayList<>());
+        List<Integer> followerIds = new ArrayList<>();
+        followerIds.add(2);
+        followerIds.add(3);
+
+        when(userRepository.getFollowersById(userId)).thenReturn(followerIds);
+        when(userRepository.getById(anyInt())).thenReturn(user1);
+
+
+        // Act
+        FollowersResponseDto result = userService.getFollowersById(userId);
+
+        // Assert
+        Assertions.assertEquals(userId, result.getUserId());
+        Assertions.assertEquals(user1.getUserName(), result.getUserName());
+        Assertions.assertEquals(2, result.getFollowers().size());
+
+    }
 }
