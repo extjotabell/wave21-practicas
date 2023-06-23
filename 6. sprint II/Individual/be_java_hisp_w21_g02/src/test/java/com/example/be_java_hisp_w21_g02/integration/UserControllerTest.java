@@ -27,7 +27,7 @@ public class UserControllerTest {
     @DisplayName("Integration Test Follow user - ok")
     void followUserOk() throws Exception {
 
-        mockMvc.perform(post("/users/{userId}/follow/{userIdToFollow}",1,2))
+        mockMvc.perform(post("/users/{userId}/follow/{userIdToFollow}",1,10))
                 .andDo(print())
                 .andExpect(status().isOk());
 
@@ -37,7 +37,7 @@ public class UserControllerTest {
     @DisplayName("Integration Test Follow - follower user not exists")
     void followUserUserNotExists() throws Exception {
 
-        mockMvc.perform(post("/users/{userId}/follow/{userIdToFollow}",400,2))
+        mockMvc.perform(post("/users/{userId}/follow/{userIdToFollow}",400,10))
                 .andDo(print())
                 .andExpect(status().is4xxClientError())
                 //.andExpect(content().contentType("application/json"))

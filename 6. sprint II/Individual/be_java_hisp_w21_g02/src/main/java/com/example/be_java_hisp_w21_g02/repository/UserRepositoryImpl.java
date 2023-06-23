@@ -86,7 +86,7 @@ public class UserRepositoryImpl implements IUserRepository{
         User user10 = new User(10, "GabrielaMonzon", new HashSet<>(), new HashSet<>(), new ArrayList<>());
 
         //to integration test followUserOK
-        user2.setPosts(List.of(new Post(2, 1, LocalDate.now().minusDays(1), 3, 50D, new Product())));
+        user10.setPosts(List.of(new Post(2, 1, LocalDate.now().minusDays(1), 3, 50D, new Product())));
 
         dataUser.put(user1.getId(), user1);
         dataUser.put(user2.getId(), user2);
