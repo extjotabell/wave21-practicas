@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.sprint.be_java_hisp_w21_g04.dto.response.*;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -32,7 +33,8 @@ public class UserControllerTest {
     MockMvc mockMvc;
 
     @Test
-    void postOk() throws Exception {
+    @DisplayName("Siguiendo a un usuario con exito")
+    void followUser() throws Exception {
 
         ResponseDto responseDto = new ResponseDto("Has seguido a JaneSmith");
 
@@ -53,6 +55,7 @@ public class UserControllerTest {
     }
 
     @Test
+    @DisplayName("Excepcion al seguir a un usuario que no existe")
     void followUserNotFound() throws Exception {
 
         UserNotFoundDto userNotFoundDto = new UserNotFoundDto("Usuario no encontrado.",404);
@@ -74,6 +77,7 @@ public class UserControllerTest {
     }
 
     @Test
+    @DisplayName("Excepcion al seguir a un usuario que ya se sigue")
     void followUserAlreadyFollowed() throws Exception {
 
         ErrorDto errorDto = new ErrorDto("Ya se estÃ¡n siguiendo.",400);
@@ -95,6 +99,7 @@ public class UserControllerTest {
     }
 
     @Test
+    @DisplayName("Excepcion al seguirte a ti mismo")
     void followUserFollowNotAllowed() throws Exception {
 
         ErrorDto errorDto = new ErrorDto("No puedes seguirte a ti mismo.",400);
@@ -116,6 +121,7 @@ public class UserControllerTest {
     }
 
     @Test
+    @DisplayName("Obtener numero de seguidores de un usuario con exito")
     void getFollowersCountOk() throws Exception{
 
         UserFollowersCountDto userFollowersCountDto = new UserFollowersCountDto(3,"MikeJohnson",1);
@@ -137,6 +143,7 @@ public class UserControllerTest {
     }
 
     @Test
+    @DisplayName("Excepcion al obtener numero de seguidores de un usuario que no existe")
     void getFollowersCountUserNotFound() throws Exception{
 
         UserNotFoundDto userNotFoundDto = new UserNotFoundDto("Usuario no encontrado.",404);
@@ -158,6 +165,7 @@ public class UserControllerTest {
     }
 
     @Test
+    @DisplayName("Dejar de seguir a un usuario con exito")
     void unfollowUserOk() throws Exception {
 
         ResponseDto responseDto = new ResponseDto("Has dejado de seguir a MikeJohnson");
@@ -179,6 +187,7 @@ public class UserControllerTest {
     }
 
     @Test
+    @DisplayName("Exception al dejar de seguir a un usuario que no existe")
     void unfollowUserNotFound() throws Exception {
 
         UserNotFoundDto userNotFoundDto = new UserNotFoundDto("Usuario no encontrado.",404);
@@ -200,6 +209,7 @@ public class UserControllerTest {
     }
 
     @Test
+    @DisplayName("Excepcion al dejar de seguirte a ti mismo")
     void unfollowUserUnfollowNotAllowed() throws Exception{
 
         ErrorDto errorDto = new ErrorDto("No puedes dejar de seguirte a ti mismo.",400);
@@ -221,6 +231,7 @@ public class UserControllerTest {
     }
 
     @Test
+    @DisplayName("Excecpcion cuando se intenta dejar de seguir a un usuario que no se esta siguiendo")
     void unfollowUserNotFollowed() throws Exception{
 
         ErrorDto errorDto = new ErrorDto("No se estÃ¡n siguiendo.",400);
@@ -242,6 +253,7 @@ public class UserControllerTest {
     }
 
     @Test
+    @DisplayName("Obeteniendo lista de seguidores de un usuario con exito")
     void getFollowersOk() throws Exception {
 
         List<UserResponseDto> followers = Arrays.asList(new UserResponseDto(5, "DavidWilson"));
@@ -265,6 +277,7 @@ public class UserControllerTest {
     }
 
     @Test
+    @DisplayName("Excepcion al obtener lista de seguidores de un usuario que no existe")
     void getFollowersNotFound() throws Exception {
 
         ErrorDto errorDto = new ErrorDto("No se encontraron seguidores para el vendedor",404);
@@ -286,6 +299,7 @@ public class UserControllerTest {
     }
 
     @Test
+    @DisplayName("Excepcion al obtener lista de seguidores de un usuario que no existe")
     void getFollowersUserNotFound() throws Exception {
 
         ErrorDto errorDto = new ErrorDto("Vendedor no registrado",400);
@@ -307,6 +321,7 @@ public class UserControllerTest {
     }
 
     @Test
+    @DisplayName("Obteniendo lista de seguidores de un usuario ordenada por nombre de usuario de forma ascendente")
     void getFollowersByIdSortedAscOK() throws Exception {
 
         List<UserResponseDto> followers = Arrays.asList(new UserResponseDto(5, "DavidWilson"));
@@ -331,6 +346,7 @@ public class UserControllerTest {
     }
 
     @Test
+    @DisplayName("Obteniendo lista de seguidores de un usuario ordenada por nombre de usuario de forma descendente")
     void getFollowersByIdSortedDescOK() throws Exception {
 
         List<UserResponseDto> followers = Arrays.asList(new UserResponseDto(5, "DavidWilson"));
@@ -355,6 +371,7 @@ public class UserControllerTest {
     }
 
     @Test
+    @DisplayName("Excepcion al obtener lista de seguidores de un usuario con un ordenamiento inxorrecto")
     void getFollowersByIdSortedNoOK() throws Exception {
 
         ErrorDto errorDto = new ErrorDto("Ordenamiento invalido",400);
@@ -377,6 +394,7 @@ public class UserControllerTest {
     }
 
     @Test
+    @DisplayName("Excepcion al obtener lista de seguidores de un usuario ordenanda que no existe")
     void getFollowersByIdSortedUserNotFound() throws Exception {
 
         ErrorDto errorDto = new ErrorDto("Vendedor no registrado",400);
@@ -399,6 +417,7 @@ public class UserControllerTest {
     }
 
     @Test
+    @DisplayName("Excepcion al obtener lista de seguidos de un usuario con exito")
     void getFollowedOk() throws Exception {
 
         List<UserResponseDto> followers = Arrays.asList(new UserResponseDto(1, "JohnDoe"));
@@ -422,6 +441,7 @@ public class UserControllerTest {
     }
 
     @Test
+    @DisplayName("Excepcion al obtener lista de seguidos de un usuario que no sigue a ningun vendedor")
     void getFollowedNotFound() throws Exception {
 
         ErrorDto errorDto = new ErrorDto("El usuario no sigue a ningÃºn vendedor",404);
@@ -443,6 +463,7 @@ public class UserControllerTest {
     }
 
     @Test
+    @DisplayName("Excepcion al obtener lista de seguidos de un usuario que no existe")
     void getFollowedUserNotFound() throws Exception {
 
         ErrorDto errorDto = new ErrorDto("Usuario no registrado",400);
@@ -465,6 +486,7 @@ public class UserControllerTest {
 
 
     @Test
+    @DisplayName("Obteniendo lista de seguidos de un usuario ordenada por nombre de usuario de forma ascendente")
     void getFollowedByIdSortedAscOK() throws Exception {
 
         List<UserResponseDto> followed = Arrays.asList(new UserResponseDto(1, "JohnDoe"));
@@ -489,6 +511,7 @@ public class UserControllerTest {
     }
 
     @Test
+    @DisplayName("Obteniedno lista de seguidos de un usuario ordenada por nombre de usuario de forma descendente")
     void getFollowedByIdSortedDescOK() throws Exception {
 
         List<UserResponseDto> followed = Arrays.asList(new UserResponseDto(1, "JohnDoe"));
@@ -513,6 +536,7 @@ public class UserControllerTest {
     }
 
     @Test
+    @DisplayName("Excepcion al obtener lista de seguidos de un usuario con ordenamiento invalido")
     void getFollowedByIdSortedNoOK() throws Exception {
 
         ErrorDto errorDto = new ErrorDto("Ordenamiento invalido",400);
@@ -535,6 +559,7 @@ public class UserControllerTest {
     }
 
     @Test
+    @DisplayName("Excepcion al obtener lista ordenada de seguidos de un usuario que no existe")
     void getFollowedByIdSortedUserNotFound() throws Exception {
 
         ErrorDto errorDto = new ErrorDto("Usuario no registrado",400);
