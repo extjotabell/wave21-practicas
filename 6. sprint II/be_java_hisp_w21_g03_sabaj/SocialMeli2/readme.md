@@ -121,3 +121,20 @@ Responsabilidad: Grupal
 | T-0007 | Verificar que la cantidad de seguidores de un determinado usuario sea correcta. (US-0002)                                                                            | Devuelve el cálculo correcto del total de la cantidad de seguidores que posee un usuario.<br>Notifica la no existencia del usuario al querer obtener cantidad de seguidores mediante una excepción.                                                                                                    | Mercedes Sabaj<br>Fabrizzio Camera     |
 | T-0008 | Verificar que la consulta de publicaciones realizadas en las últimas dos semanas de un determinado vendedor sean efectivamente de las últimas dos semanas. (US-0006) | Devuelve únicamente los datos de las publicaciones que tengan fecha de publicación dentro de las últimas dos semanas a partir del día de la fecha.<br>(Test de Repositorio)                                                                                                                            | Gabriel Antonietti<br>Nahuel De Bellis |
 
+
+### Test de Integración 
+
+Responsabilidad: Individual
+
+Agrego tests de integración para las clases del package "controller": PostController y UserController.  
+Se alcanzo un coverage de: 
+- 80% en métodos 
+- 84% en lineas de código.
+
+| **Test**                              | **Test name**     | **Resultado esperado** |
+|---------------------------------------|-------------------|------------------------|
+| IT01. Create new post with valid data | createValidPost() | OK - 200               |
+| IT02. Try to follow yourself          | followYourself()  | Bad Request - 400      |
+| IT03. Follow a user                   | followValidUser() | OK - 200               |
+| IT04. Unfollow a user                 | unfollowUser()    | OK - 200               |
+
