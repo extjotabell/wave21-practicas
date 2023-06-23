@@ -23,7 +23,7 @@ public class UserControllerTest {
 
 
     @Test
-    @DisplayName("Integration Test US02 T-0010 01 - Fail User not seller")
+    @DisplayName("Integration Test US02 T-0010 01 - User not seller")
     void getFollowersCountFail() throws Exception{
         MvcResult mvcResult = mockMvc.perform(get("/users/2/followers/count"))
                 .andExpect(status().isBadRequest())
