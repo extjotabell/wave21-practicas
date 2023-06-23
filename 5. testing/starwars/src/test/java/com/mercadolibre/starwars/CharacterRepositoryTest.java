@@ -12,8 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
@@ -29,12 +28,14 @@ public class CharacterRepositoryTest {
     @Test
     void findAllByNameContainsTest(){
         List<CharacterDTO> espected = new ArrayList<>();
-        espected.add(new CharacterDTO("Biggs Darklighter",183,84,"black","light","brown","24BBY","male", "Tatooine", "Human"));
+        espected.add(new CharacterDTO("Darth Vader",202,136,"none","white","yellow","41.9BBY","male", "Tatooine", "Human"));
+        espected.add(new CharacterDTO("Darth Maul",175,80,"none","red","yellow","54BBY","male", "Dathomir", "Zabrak"));
 
-        List<CharacterDTO> characterDTOS = service.findAllByNameContains("Biggs Darklighter");
+        List<CharacterDTO> characterDTOS = service.findAllByNameContains("Darth ");
 
-        assertEquals(espected,characterDTOS);
+        assertArrayEquals(espected.toArray(),characterDTOS.toArray());
     }
+
 
 
 }
