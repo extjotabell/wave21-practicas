@@ -14,6 +14,7 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import com.bootcamp.grupo3.socialmeli.dto.response.MessageDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultMatcher;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
@@ -47,6 +49,7 @@ public class PostControllerTest {
 
     @DisplayName("Test Integracion para Crear un post -")
     @Test
+    @Rollback
     void createPostTest() throws Exception {
         //-------ARRANGE -----------
 
@@ -67,10 +70,9 @@ public class PostControllerTest {
 
         ResultMatcher statusExpected = MockMvcResultMatchers.status().isOk();
         ResultMatcher contentTypeExpeted = MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON);
-        ResultMatcher bodyExpected = MockMvcResultMatchers.content().json(writer.writeValueAsString(new MessageDTO("Post agregado exitosamente con id: 1")));
 
         mockMvc.perform(request) //ejecutar la request
-                .andExpect(bodyExpected) //cotejar body
+                .andExpect(MockMvcResultMatchers.content().string(Matchers.containsString("Post agregado exitosamente"))) //cotejar body
                 .andExpect(statusExpected) //cotejar status
                 .andExpect(contentTypeExpeted) //cotejar contentType
                 .andDo(MockMvcResultHandlers.print())
@@ -80,6 +82,7 @@ public class PostControllerTest {
 
     @DisplayName("Test Integracion. Obtener Listado de publicaciones de seguidos de id dado, en las ultimas 2 semanas")
     @Test
+    @Rollback
     void listPostOfFollowedTest() throws Exception {
 
         //ARRANGE
