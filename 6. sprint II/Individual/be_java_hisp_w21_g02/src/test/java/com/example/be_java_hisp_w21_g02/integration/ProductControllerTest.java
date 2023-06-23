@@ -2,8 +2,6 @@ package com.example.be_java_hisp_w21_g02.integration;
 
 import com.example.be_java_hisp_w21_g02.dto.ProductDTO;
 import com.example.be_java_hisp_w21_g02.dto.request.PostRequestDTO;
-import com.example.be_java_hisp_w21_g02.model.Product;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
@@ -22,7 +20,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import java.math.BigInteger;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
