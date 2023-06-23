@@ -99,9 +99,4 @@ public class ExceptionConfig {
         );
     }
 
-//    @ExceptionHandler(Exception.class)
-//    public ResponseEntity<?> generalException(Exception e){
-//        ErrorDto error = new ErrorDto(e.getMessage(), 500);
-//        return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
-//    }
 }

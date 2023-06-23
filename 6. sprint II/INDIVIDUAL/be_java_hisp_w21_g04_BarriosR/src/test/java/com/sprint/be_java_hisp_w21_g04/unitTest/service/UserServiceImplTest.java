@@ -4,7 +4,6 @@ import com.sprint.be_java_hisp_w21_g04.entity.User;
 import com.sprint.be_java_hisp_w21_g04.exception.*;
 import com.sprint.be_java_hisp_w21_g04.repository.user.UserRepositoryImpl;
 import com.sprint.be_java_hisp_w21_g04.service.user.UserServiceImpl;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,6 +26,7 @@ public class UserServiceImplTest {
     UserRepositoryImpl userRepository;
     @InjectMocks
     UserServiceImpl userService;
+
     @Test
     @DisplayName("T0001 - Caso ideal (US-0001)")
     void followUserPerfectCase() {

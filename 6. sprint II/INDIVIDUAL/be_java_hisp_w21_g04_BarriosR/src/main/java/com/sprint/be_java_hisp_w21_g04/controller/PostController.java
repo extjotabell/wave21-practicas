@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -29,7 +28,8 @@ public class PostController {
     }
 
     @GetMapping("/followed/{userId}/list")
-    public ResponseEntity<SellerFollowedListPostResponseDto> sellerFollowedListPosts(@PathVariable Integer userId, @RequestParam(required = false, value = "order", defaultValue = "date_asc") String order){
+    public ResponseEntity<SellerFollowedListPostResponseDto> sellerFollowedListPosts(@PathVariable Integer userId,
+                                                                                     @RequestParam(required = false, value = "order", defaultValue = "date_asc") String order){
         return new ResponseEntity<>(this._service.sellerFollowedListPosts(userId, order), HttpStatus.OK);
     }
 

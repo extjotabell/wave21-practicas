@@ -14,13 +14,13 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class Post {
 
-    private int userId;
+    private Integer userId;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private LocalDate date;
     private Product product;
-    private int category;
-    private double price;
-    private boolean hasPromo;
-    private double discount;
+    private Integer category;
+    private Double price;
+    private Boolean hasPromo;
+    private Double discount;
 
 }

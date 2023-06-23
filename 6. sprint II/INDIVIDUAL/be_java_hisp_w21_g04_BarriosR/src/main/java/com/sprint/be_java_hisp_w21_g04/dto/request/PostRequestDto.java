@@ -13,12 +13,14 @@ import jakarta.validation.Valid;
 
 import java.time.LocalDate;
 
-@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
+
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class PostRequestDto {
+
      @NotNull(message = "El id del usuario no puede estar vacío.")
      @Positive(message = "El id del usuario debe ser mayor a cero.")
      private Integer userId;
