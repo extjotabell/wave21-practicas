@@ -21,7 +21,7 @@ public class UserControllerTest {
     MockMvc mockMvc;
 
     @Test
-    @DisplayName("Test que espera excepción al obtener los seguidos de un usuario que no sigue a nadie")
+    @DisplayName("Test que espera excepción al obtener los seguidos por un usuario que no sigue a nadie")
     public void testGetFollowedByIdWithFollowedThrowsException() throws Exception {
         mockMvc.perform(get("/users/{userId}/followed/list",1)
                         .param("order", "name_asc")
@@ -35,7 +35,7 @@ public class UserControllerTest {
     }
 
     @Test
-    @DisplayName("Test de caso exitoso al obtener los seguidos de un usuario")
+    @DisplayName("Test de caso exitoso al obtener los seguidos por un usuario")
     public void testGetFollowedByIdWithFollowedOk() throws Exception {
         mockMvc.perform(get("/users/{userId}/followed/list",4)
                         .param("order", "name_asc")
@@ -62,7 +62,7 @@ public class UserControllerTest {
     }
 
     @Test
-    @DisplayName("Test que espera excepción al obtener los seguidos de un usuario cuando el ordenamiento es inválido")
+    @DisplayName("Test que espera excepción al obtener los seguidos por un usuario cuando el ordenamiento es inválido")
     public void testGetFollowedByIdWithInvalidSortThrowsException() throws Exception {
         mockMvc.perform(get("/users/{userId}/followed/list",1)
                         .param("order", "name_")

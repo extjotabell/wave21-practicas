@@ -24,6 +24,39 @@ La aplicación "SocialMeli" es una plataforma innovadora que te permite seguir y
 
 ## Sprint 2:
 
+## Parte individual:
+
+### Test realizados en la parte individual:
+
+Estos test fueron creados en la carpeta de test "IntegrationTest" para testear los controladores de Post y de User
+
+Para testear UserController creé 8 test:
+1. ``testGetFollowedByIdWithFollowedThrowsException``: Test que espera excepción al obtener los seguidos por un usuario que no sigue nadie
+2. ``testGetFollowedByIdWithFollowedOk``: Test de caso exitoso al obtener los seguidos por un usuario
+3. ``testGetFollowersByIdWithFollowersThrowsException``: Test que espera excepción al obtener los seguidores de un usuario que no tiene seguidores
+4. ``testGetFollowedByIdWithInvalidSortThrowsException``: Test que espera excepción al obtener los seguidos por un usuario cuando el ordenamiento es inválido
+5. ``testGetFollowersByIdWithInvalidSortThrowsException``: Test que espera excepción al obtener los seguidores de un usuario cuando el ordenamiento es inválido
+6. ``testUserUnfollowThrowsException``: Test que espera excepción al intentar dejar de seguir a un usuario que no se sigue
+7. ``testUserFollowersCountWithFollowers``: Test de caso exitoso al obtener la cantidad de seguidores de un usuario
+8. ``testUserFollowThrowsException``: Test que espera una excepción cuando un usuario se intenta seguir a sí mismo
+
+Para testear PostController creé 3 test:
+1. ``testPostOk``: Test de caso exitoso al agregar un post
+2. ``testPostOkThrowExceptionByInvalidColor``: Test que espera una excepción al agregar un post con un dato inválido, en este caso el color
+3. ``testSellerFollowedListPostsOk``: Test de caso exitoso al obtener todos los posts de los seguidos por un usuario
+
+* Aquí utilicé dos métodos adicionales ``getPostResponseDTO`` y ``getPostResponseDTOError`` que me devuelven post para usar en los test
+
+Estos test se ejecutaron de forma correcta 
+
+![img_1.png](test.png)
+
+De esta forma se logró un coverage del 75% en total del proyecto
+
+![coverage.png](coverage.png)
+
+## Parte grupal
+
 ### Decisiones de equipo:
 - Se tomó como decisión de equipo permitir al usuario poder publicar un producto cuantas veces quisiera, sin considerar las validaciones de (fecha, productName, userId, etc...)
 
@@ -206,8 +239,7 @@ Date:   Fri Jun 16 15:58:20 2023 -0600
 - ``US 0009`` (Grupo 3): ``GET``
   - /products/followed/{userId}/list?order=date_asc 
   - /products/followed/{userId}/list?order=date_desc
-   
-       
+
 ### Mejoras futuras:
 - [ ] Validar cuando un usuario no existe en las historias US 0005 y US 0006.
 - [ ] Implementar DTO para el mensaje de respuesta de la historia US 0005
