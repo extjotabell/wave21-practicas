@@ -9,7 +9,6 @@ import com.example.be_java_hisp_w21_g1.Exception.UserNotSellerException;
 import com.example.be_java_hisp_w21_g1.Model.Post;
 import com.example.be_java_hisp_w21_g1.Model.User;
 import com.example.be_java_hisp_w21_g1.Repository.IUserRepository;
-import com.example.be_java_hisp_w21_g1.Repository.UserRepository;
 import com.example.be_java_hisp_w21_g1.Utils.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

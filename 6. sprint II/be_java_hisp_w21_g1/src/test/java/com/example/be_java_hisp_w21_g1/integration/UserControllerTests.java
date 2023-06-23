@@ -1,6 +1,7 @@
 package com.example.be_java_hisp_w21_g1.integration;
 
 import com.example.be_java_hisp_w21_g1.DTO.Error.ErrorDTO;
+import com.example.be_java_hisp_w21_g1.DTO.Error.ExceptionDTO;
 import com.example.be_java_hisp_w21_g1.DTO.Request.PostProductDTO;
 import com.example.be_java_hisp_w21_g1.DTO.Response.ProductDTO;
 
@@ -27,6 +28,8 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -90,8 +93,10 @@ public class UserControllerTests {
 
     @Test
     public void postWithValidationsNotOk() throws Exception {
+
         ErrorDTO error = new ErrorDTO("Color can't contain special characters");
         ErrorDTO error2 = new ErrorDTO("The date cannot be null");
+        ExceptionDTO excDTP = new ExceptionDTO("The following errors were found: ", Arrays.asList(error.getMessage(),error2.getMessage()));
 
         PostProductDTO post = new PostProductDTO(1, null, new ProductDTO(1, "Silla Gamer", "Gamer", "Racer", "Red & Black", "Special Edition"), 100, 100d);
         SimpleModule module = new JavaTimeModule();
@@ -102,25 +107,7 @@ public class UserControllerTests {
 
         String jsonPayload = writer.writeValueAsString(post);
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        // Crear el objeto JSON
-        ObjectNode json = objectMapper.createObjectNode();
-
-        // Agregar la propiedad "message"
-        json.put("message", "The following errors were found: ");
-
-        // Crear el array de errores
-        ArrayNode errors = objectMapper.createArrayNode();
-
-        // Agregar el mensaje de error al array
-        errors.add(error2.getMessage());
-        errors.add(error.getMessage());
-
-
-        // Agregar el array de errores al objeto JSON
-        json.set("allErrors", errors);
-
-        String responseJson = writer.writeValueAsString(json);
+        String responseJson = writer.writeValueAsString(excDTP);
 
         MvcResult mvcResult = mockMvc.perform(post("/products/post")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -152,6 +139,9 @@ public class UserControllerTests {
                 .andExpect(status().isOk())
                 .andReturn();
     }
+
+
+
 
 
 
