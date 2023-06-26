@@ -1,5 +1,4 @@
-<style>h1{color:yellow}</style>
-<h1>SOCIAL MELI 🚚 📦</h1>
+<h1>SOCIAL MELI 🚚 📦</h>
 <h3 align="justify">SOCIAL MELI lo mejor de ambos mundos</h3>
 
 <p align="justify">
@@ -34,7 +33,6 @@ Con SocialMeli, puedes tener un control total sobre tus seguidores y seguir de c
 </p>
 
 ---
-<style>h2{color:yellow}</style>
 <h2 align="justify">Sprint II - Parte Individual</h2>
 <p align="justify">
 El apartado individual tiene como finalidad tomar como base el proyecto desarrollado de manera grupal, 
@@ -47,11 +45,80 @@ lograda con los tests unitarios.
 ### **Endpoints**:    
 Se agregaron todas las validaciones en la carpeta Validations dentro del archivo json de postman (Sprint 2 Postman.json)
 
-### fotos de los endpoint
-### agregar endpoint
-### **imagen de los tests**
-### **Agregar imagen de los coverage > 75% creo**
-### agregar jacoco con imagenes
+### Test de integración hechos:
+- En la carpeta integrationtest se encuentran PostIntegrationTest y UserIntegrationTest.
+- PostIntegrationTest testea:
 
+ ```
+@Test
+    @DisplayName("Desarrollo Individual - sellerFollowedListPost - Camino Triste")
+    public void followerUserPost() throws Exception {
+        ErrorDto errorDto = new ErrorDto("Los vendedores que sigues no tienen publicaciones", 400);
+        ObjectWriter writer = new ObjectMapper()
+                .configure(SerializationFeature.WRAP_ROOT_VALUE, false)
+                .writer();
 
+        String ErrorExpected = writer.writeValueAsString(errorDto);
+        MvcResult result = mockMvc.perform(get("/products/followed/{userId}/list", 6))
+                .andExpect(status().isBadRequest())
+                .andDo((mvcResult) ->{
+                    System.out.println(mvcResult.getResponse().getContentAsString());
+                })
+                .andReturn();
+        assertEquals(ErrorExpected, result.getResponse().getContentAsString(StandardCharsets.UTF_8));
+        System.out.println(result.getResponse().getContentAsString());
+    }
+```
 
+- UserIntegrationTest testea:
+
+```
+@Test
+    @DisplayName("Desarrollo Individual - Follow user Camino Feliz")
+    void followUserPerfectCase() throws Exception {
+        // Arrange
+        int userId = 1;
+        int userIdToFollow = 2;
+
+        // Act & Assert
+        mockMvc.perform(MockMvcRequestBuilders.post("/users/{userId}/follow/{userIdToFollow}", userId, userIdToFollow)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("Has seguido a JaneSmith"));
+    }
+```
+
+```
+@Test
+    @DisplayName("Desarrollo Individual - Follow user Camino Semi Triste")
+    void followUserBadCase() throws Exception {
+        // Arrange
+        int userId = 3;
+        int userIdToFollow = 1;
+
+        // Act & Assert
+        mockMvc.perform(MockMvcRequestBuilders.post("/users/{userId}/follow/{userIdToFollow}", userId, userIdToFollow)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("Ya se están siguiendo."));
+    }
+```
+
+```
+@Test
+    @DisplayName("Desarrollo Individual - Unfollow user Camino Feliz")
+    void unfollowUserPerfectCase() throws Exception {
+        // Arrange
+        int userId = 4;
+        int userIdToUnfollow = 3;
+
+        // Act & Assert
+        mockMvc.perform(MockMvcRequestBuilders.post("/users/{userId}/unfollow/{userIdToUnfollow}", userId, userIdToUnfollow)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("Has dejado de seguir a MikeJohnson"));
+    }
+```
+
+### **COVERAGE**:
+<img width="1512" alt="Captura de pantalla 2023-06-23 a la(s) 15 03 20" src="https://github.com/extjotabell/wave21-practicas/assets/133799616/ecb8dda4-0846-4534-b90a-eaac5df90cee">
