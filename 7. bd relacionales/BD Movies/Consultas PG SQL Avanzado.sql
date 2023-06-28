@@ -28,7 +28,7 @@ GROUP BY ser.title;
 -- Mostrar el nombre de todos los géneros y la cantidad total de películas por cada uno, siempre que sea mayor o igual a 3.
 SELECT
 g.name
-,count(m.id) "Cant. Peliculas"
+,count(m.id) AS "Cant. Peliculas"
 FROM genres g
 INNER JOIN movies m ON m.genre_id = g.id
 GROUP BY g.name
@@ -40,5 +40,5 @@ a.first_name
 ,a.last_name
 FROM actors a
 INNER JOIN actor_movie am ON a.id = am.actor_id
-INNER JOIN movies m ON m.id = am.movie_id AND LOWER(m.title) like "%guerra de las galaxias%";
+INNER JOIN movies m ON (m.id = am.movie_id AND LOWER(m.title) like "%guerra de las galaxias%");
  
