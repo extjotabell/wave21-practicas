@@ -1,0 +1,25 @@
+1. ¿A qué se denomina JOIN en una base de datos y para qué se utiliza?
+R: Es utilizado para poder manipular datos de más de una tabla, los tipos de Joins pueden ser unión, intersección (más común) y parcial.
+
+2.Explicar dos tipos de JOIN.
+R:
+- Inner Join se refiere a la intersección de ambas tablas.
+- Left Join se refiere a la intersección + los campos de la tabla de la izquierda
+- Right Join se refiere a la intersección + los campos de la tabla de la derecha
+- Full Join se refiere a todos los campos de ambas tablas.
+
+3. ¿Para qué se utiliza el GROUP BY?
+Agrupa varias filas en una sola (las que son iguales) en concordancia con el campo que le esblezcamos.
+
+4. ¿Para qué se utiliza el HAVING?
+Va siempre acompañada con el GROUP BY y se usa para agregar condiciones sobre los campos agrupados.
+
+
+5.Escribir una consulta genérica para cada uno de los siguientes diagramas:
+
+
+SELECT mo.title, ac.first_name, ac.last_name
+FROM movies mo INNER JOIN actors ac
+ON mo.id = ac.favorite_movie_id;
+
+SELECT ac.first_name, ac.last_name, mo.title FROM movies mo LEFT JOIN actors ac ON mo.id = ac.favorite_movie_id;
