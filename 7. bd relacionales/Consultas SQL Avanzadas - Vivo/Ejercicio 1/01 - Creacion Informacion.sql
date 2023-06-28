@@ -1,5 +1,5 @@
 -- Inserción de datos en la tabla DEPARTAMENTO
-INSERT INTO departamento (depto_nro, nombre_depto, localidad)
+INSERT INTO departamentos (depto_nro, nombre_depto, localidad)
 VALUES
   ('D-000-1', 'Software', 'Los Tigres'),
   ('D-000-2', 'Sistemas', 'Guadalupe'),
@@ -7,7 +7,7 @@ VALUES
   ('D-000-4', 'Ventas', 'Plata');
 
 -- Inserción de datos en la tabla EMPLEADO
-INSERT INTO empleado (cod_emp, nombre, apellido, puesto, fecha_alta, salario, comision, depto_nro)
+INSERT INTO empleados (cod_emp, nombre, apellido, puesto, fecha_alta, salario, comision, depto_nro)
 VALUES
   ('E-0001', 'César', 'Piñero', 'Vendedor', '2018-05-12', 80000, 15000, 'D-000-4'),
   ('E-0002', 'Yosep', 'Kowaleski', 'Analista', '2015-07-14', 140000, 0, 'D-000-2'),

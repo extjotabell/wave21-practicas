@@ -1,14 +1,14 @@
 use empresa;
 
 -- Creación de la tabla DEPARTAMENTO
-CREATE TABLE departamento (
+CREATE TABLE departamentos (
   depto_nro VARCHAR(10) PRIMARY KEY,
   nombre_depto VARCHAR(50),
   localidad VARCHAR(50)
 );
 
 -- Creación de la tabla EMPLEADO
-CREATE TABLE empleado (
+CREATE TABLE empleados (
   cod_emp VARCHAR(10) PRIMARY KEY,
   nombre VARCHAR(50),
   apellido VARCHAR(50),
