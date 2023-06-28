@@ -1,0 +1,15 @@
+GRUPO #1
+
+a. ¿Cuál es la primary key para la tabla de clientes? Justificar respuesta
+
+R: cliente_id, es el campo que identifica al cliente, es autoincremental y no puede ser nulo.
+
+
+b. ¿Cuál es la primary key para la tabla de planes de internet? Justificar respuesta.
+
+R: tipo_plan_id, es el campo que identifica al tipo_plan, es autoincremental y no puede ser nulo.
+
+
+c. ¿Cómo serían las relaciones entre tablas? ¿En qué tabla debería haber foreign key? ¿A qué campo de qué tabla hace referencia dicha foreign key? Justificar respuesta.
+
+R: Las FK tanto de cliente como de tipo_plan están reflejadas en la tabla plan, cliente y tipo_plan tiene una relación de 1 a muchos con plan.
