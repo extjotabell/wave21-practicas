@@ -1,1 +1,0 @@
-USE movies_db;
