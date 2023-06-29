@@ -21,13 +21,14 @@ INSERT INTO Estudiante VALUES (null, "Juan", "Martínez", "Belgrano 654", "Biolo
 INSERT INTO Estudiante VALUES (null, "Ana", "Fernández", "Sarmiento 987", "Física", 26);
 
 -- INSERTANDO LIBRO
-INSERT INTO Libro VALUES (null, "Harry Potter", "Salamanca", 1);
+INSERT INTO Libro VALUES (null, "Harry Potter", "Salamandra", 1);
 INSERT INTO Libro VALUES (null, "Cien Años de soledad", "Planeta", 1);
-INSERT INTO Libro VALUES (null, "Harry Potter y la Piedra Filosofal", "Salamanca", 2);
+INSERT INTO Libro VALUES (null, "Harry Potter y la Piedra Filosofal", "Salamandra", 2);
 INSERT INTO Libro VALUES (null, "1984", "Debolsillo", 3);
 INSERT INTO Libro VALUES (null, "El Gran Gatsby", "Anagrama", 4);
 INSERT INTO Libro VALUES (null, "Don Quijote de la Mancha", "Cervantes", 5);
 INSERT INTO Libro VALUES (null, "Orgullo y prejuicio", "Austral", 6);
+
 
 -- INSERTANDO LIBROAUTOR
 INSERT INTO LIBROAUTOR VALUES (null,1,1);
@@ -69,22 +70,66 @@ SELECT
 
 
 -- ¿Qué libros no son del área de internet?
+SELECT Titulo FROM LIBRO WHERE Area != 1;
 
 -- Listar los libros de la editorial Salamandra.
+SELECT Titulo FROM LIBRO WHERE Editorial = "Salamandra";
 
 -- Listar los datos de los estudiantes cuya edad es mayor al promedio.
+WITH PROMEDIO AS (
+	SELECT 
+    AVG(Edad) AS PROM_EDAD 
+    FROM ESTUDIANTE)
+    
+SELECT 
+	E.* 
+	FROM ESTUDIANTE AS E 
+    CROSS JOIN PROMEDIO AS P 
+    WHERE P.PROM_EDAD < E.Edad;
 
 -- Listar los nombres de los estudiantes cuyo apellido comience con la letra G.
+SELECT Nombre FROM Estudiante WHERE Apellido LIKE "G%";
 
--- Listar los autores del libro “El Universo: Guía de viaje”. (Se debe listar solamente los nombres).
+-- Listar los autores del libro “Harry Potter”. (Se debe listar solamente los nombres).
+SELECT 
+	Nombre 
+    FROM AUTOR 
+    INNER JOIN 
+    LIBROAUTOR ON LIBROAUTOR.AUTOR_IdAutor = AUTOR.IdAutor
+    INNER JOIN
+	LIBRO ON LIBRO.IdLibro = LIBROAUTOR.LIBRO_idLibro
+    WHERE LIBRO.Titulo = "Harry Potter";
 
--- ¿Qué libros se prestaron al lector “Filippo Galli”?
+-- ¿Qué libros se prestaron al lector “Jorge Perez”?
+SELECT
+	DISTINCT
+	LIBRO.Titulo FROM LIBRO
+	INNER JOIN PRESTAMO ON LIBRO.idLibro = PRESTAMO.LIBRO_idLibro
+	INNER JOIN Estudiante ON PRESTAMO.ESTUDIANTE_IdLector = Estudiante.IdLector 
+    WHERE Estudiante.Nombre = 'Jorge' AND Estudiante.Apellido = 'Perez' ;
 
 -- Listar el nombre del estudiante de menor edad.
+	SELECT Nombre FROM Estudiante ORDER BY EDAD LIMIT 1; 
 
 -- Listar nombres de los estudiantes a los que se prestaron libros de Base de Datos.
+SELECT
+	DISTINCT
+	ESTUDIANTE.Nombre FROM LIBRO
+	INNER JOIN PRESTAMO ON LIBRO.idLibro = PRESTAMO.LIBRO_idLibro
+	INNER JOIN Estudiante ON PRESTAMO.ESTUDIANTE_IdLector = Estudiante.IdLector 
+    WHERE LIBRO.Titulo LIKE 'Harry Potter';
 
--- Listar los libros que pertenecen a la autora J.K. Rowling.
+-- Listar los libros que pertenecen a la autora María López.
+	SELECT 
+		LIBRO.* 
+		FROM LIBRO
+        INNER JOIN LIBROAUTOR ON LIBRO.idLibro = LIBROAUTOR.LIBRO_idLibro
+        INNER JOIN AUTOR ON LIBROAUTOR.AUTOR_IdAutor = AUTOR.IdAutor
+        WHERE AUTOR.Nombre = 'María López';
 
 -- Listar títulos de los libros que debían devolverse el 16/07/2021.
+	SELECT
+		LIBRO.Titulo FROM LIBRO
+		INNER JOIN PRESTAMO ON LIBRO.idLibro = PRESTAMO.LIBRO_idLibro
+		WHERE PRESTAMO.FechaDevolucion <= '2022-05-03';
 
