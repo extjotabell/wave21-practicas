@@ -1,12 +1,14 @@
 package com.sprint.be_java_hisp_w21_g04.service.post;
 
 import com.sprint.be_java_hisp_w21_g04.dto.request.PostRequestDto;
+import com.sprint.be_java_hisp_w21_g04.dto.request.PromoProductCountDto;
 import com.sprint.be_java_hisp_w21_g04.dto.response.PostResponseDto;
 import com.sprint.be_java_hisp_w21_g04.dto.response.SellerFollowedListPostResponseDto;
 import com.sprint.be_java_hisp_w21_g04.entity.Post;
 import com.sprint.be_java_hisp_w21_g04.entity.User;
 import com.sprint.be_java_hisp_w21_g04.exception.EmptySellerFollowedList;
 import com.sprint.be_java_hisp_w21_g04.exception.IllegalDataException;
+import com.sprint.be_java_hisp_w21_g04.exception.PostAlreadyExist;
 import com.sprint.be_java_hisp_w21_g04.exception.UserNotFoundException;
 import com.sprint.be_java_hisp_w21_g04.repository.post.IPostRepository;
 import com.sprint.be_java_hisp_w21_g04.repository.user.IUserRepository;
@@ -33,6 +35,21 @@ public class PostServiceImpl implements IPostService{
         User user = this._userRepository.getById(post.getUserId());
         if(user==null) throw new UserNotFoundException("El usuario no existe");
         this._repository.post(modelMapper.map(post, Post.class));
+    }
+
+    @Override
+    public void promoPost(PostRequestDto post) {
+        List<PostResponseDto> posts = this._repository.getAll().stream().
+                filter(post1 -> post1.getUserId() == post.getUserId() && post1.getDate().equals(post.getDate()) && post1.getProduct().getProductId() == post.getProduct().getProductId())
+                .map(post1 -> modelMapper.map(post, PostResponseDto.class))
+                .toList();
+        if(!posts.isEmpty()) throw new PostAlreadyExist("Ya existe un post para este producto");
+        this._repository.promoPost(modelMapper.map(post, Post.class));
+    }
+
+    @Override
+    public int getPromoProductCount(int userId) {
+        return this._repository.getPromoProductCount(userId);
     }
 
     @Override

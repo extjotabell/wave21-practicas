@@ -55,8 +55,18 @@ public class PostRepositoryImpl implements IPostRepository {
     }
 
     @Override
+    public void promoPost(Post post) {
+        this.posts.add(post);
+    }
+
+    @Override
     public List<Post> getAll() {
         return this.posts;
+    }
+
+    @Override
+    public int getPromoProductCount(int userId) {
+        return (int) this.posts.stream().filter(post -> post.getUserId() == userId && post.isHasPromo()).count();
     }
 
     @Override
