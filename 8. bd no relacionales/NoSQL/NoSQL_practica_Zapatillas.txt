@@ -1,0 +1,48 @@
+//En Postman se da de alta el Index zapatillas:
+PUT http://localhost:9200/zapatillas
+{
+        "mappings":{
+            "properties":{
+                "id":{
+                    "type": "text"
+                },
+                "modelo":{
+                    "type": "text"
+                },
+                "costo":{
+                    "type": "integer"
+                }
+            }
+        }
+}
+//Fin postman
+
+GET zapatillas/_search
+{
+  "query":{
+    "match_all":{
+      
+    }
+  }
+}
+
+POST zapatillas/_doc/zap1
+{
+  "id":"2",
+  "modelo":"Nike Air",
+  "costo":2000
+}
+
+POST zapatillas/_doc/zap2
+{
+  "id":"2",
+  "modelo":"Topper Blue",
+  "costo":1000
+}
+
+POST zapatillas/_doc/zap3
+{
+  "id":"3",
+  "modelo":"Blundstone",
+  "costo":3000
+}
