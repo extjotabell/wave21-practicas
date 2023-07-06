@@ -44,22 +44,43 @@ CREATE TABLE prestamo (
   FOREIGN KEY(id_libro) REFERENCES libro(id_libro)
 );
 
-INSERT INTO estudiante VALUES
-(1, " Alan", "Brado","Calle Falsa 123","Ingenieria",22),
+INSERT INTO estudiante VALUES 
+(1, " Fillipo", "Galli","Calle Falsa 123","Ingenieria",22),
 (2, " Elba", "Rtulo","Calle Falsa 321","Ingenieria",32),
 (3, " Jose", "Zito","Calle Falseta 123","Ingenieria",42),
 (4, " Sara", "Tera","Calle Falsa 123","Matematica",25),
-(5, " Roman", "Tristelme","Bonita","Contabilidad",26);
+(5, " Roman", "Tristelme","Bonita","Contabilidad",26),
+(6, 'David', 'Davis', '654 Cedar St', 'Informatica', 20),
+(7, 'Pedro', 'Trel', '654 Cedar St', 'Informatica', 20);
 
-
-
-INSERT INTO Libro (id_libro, titulo, editorial, area) VALUES
-(1, 'El gran Gatsby', 'Scribner', 'Ficción'),
-(2, 'Cien años de soledad', 'Sudamericana', 'Realismo mágico'),
-(3, 'Orgullo y prejuicio', 'Tapa blanda', 'Clásico'),
+INSERT INTO Libro  VALUES
+(1, 'El Universo: Guía de viaje', 'Salamandra', 'Ficción'),
+(2, 'Cien años de soledad', 'Sudamericana', 'Internet'),
+(3, 'Orgullo y prejuicio', 'Tapa blanda', 'Internet'),
 (4, '1984', 'Secker & Warburg', 'Ciencia ficción'),
-(5, 'Matar a un ruiseñor', 'J. B. Lippincott & Co.', 'Drama');
+(5, 'Matar a un ruiseñor', 'Salamandra', 'Drama');
 
 
+INSERT INTO autor VALUES 
+(1, 'John Smith', 'USA'),
+(2, 'Maria Garcia', 'Italia'),
+(3, 'Li Wei', 'Francia'),
+(4, 'Hiroshi Tanaka', 'Argentina'),
+(5, 'Anna Müller', 'Francia');
 
+INSERT INTO prestamo VALUES 
+(1, 1, '2023-06-15', '2023-06-22', TRUE),
+(2, 3, '2023-06-16', NULL, FALSE),
+(3, 2, '2023-06-17', '2023-06-24', TRUE),
+(4, 4, '2023-06-18', NULL, FALSE),
+(5, 5, '2023-06-19', '2023-06-26', TRUE),
+(1, 4, '2021-07-16', NULL, FALSE);
+
+INSERT INTO libro_autor VALUES 
+(1, 1),
+(1, 2),
+(3, 3),
+(4, 4),
+(2, 1)
+(5, 5);
 
