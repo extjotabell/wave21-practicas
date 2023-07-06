@@ -1,14 +1,13 @@
-package com.example.demoDB.service;
+package com.JoyeriaLasPerlas.demoDBJoyeria.service;
 
-import com.example.demoDB.model.Student;
+import com.JoyeriaLasPerlas.demoDBJoyeria.model.Joya;
 
 import java.util.List;
 
-public interface IStudentService {
-    public List<Student> getStudent();
-
-    public void saveStudent (Student stu);
-    public void deleteStudent (long id);
-    public Student findStudent (long id);
+public interface IJoyaService {
+    public List<Joya> getJoya();
+    public void saveJoya (Joya joya);
+    public void deleteJoya (Integer id);
+    public Joya findJoya (Integer id);
 
 }

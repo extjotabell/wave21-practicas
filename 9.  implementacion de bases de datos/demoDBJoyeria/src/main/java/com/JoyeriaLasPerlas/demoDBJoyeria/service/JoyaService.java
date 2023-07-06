@@ -1,41 +1,44 @@
-package com.example.demoDB.service;
+package com.JoyeriaLasPerlas.demoDBJoyeria.service;
 
-import com.example.demoDB.model.Student;
-import com.example.demoDB.repository.IStudentRepository;
-
+import com.JoyeriaLasPerlas.demoDBJoyeria.model.Joya;
+import com.JoyeriaLasPerlas.demoDBJoyeria.repository.IJoyaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
-public class StudentService implements IStudentService{
-    private final IStudentRepository stuRepo;
+public class JoyaService implements IJoyaService {
+    private final IJoyaRepository joyaRepo;
 
-    public StudentService(IStudentRepository stuRepo) {
-        this.stuRepo = stuRepo;
+    public JoyaService(IJoyaRepository stuRepo) {
+        this.joyaRepo = stuRepo;
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<Student> getStudent() {
-        List<Student> studentList = stuRepo.findAll();
-        return studentList;
+    public List<Joya> getJoya() {
+        List<Joya> joyaList = joyaRepo.findAll();
+        List<Joya> joyasDisponibles = joyaList.stream().filter(joya -> joya.getVentaONo().equals(true)).toList();
+        return joyasDisponibles;
     }
 
     @Override
-    public void saveStudent(Student stu) {
-        stuRepo.save(stu);
+    public void saveJoya(Joya stu) {
+        joyaRepo.save(stu);
     }
 
     @Override
-    public void deleteStudent(long id) {
-        stuRepo.deleteById(id);
+    public void deleteJoya(Integer id) {
+        Joya joya = joyaRepo.findById(id).orElse(null);
+        joya.setVentaONo(false);
+        joyaRepo.save(joya);
     }
 
     @Override
-    public Student findStudent(long id) {
-        Student stu = stuRepo.findById(id).orElse(null);
+    public Joya findJoya(Integer id) {
+        Joya stu = joyaRepo.findById(id).orElse(null);
         return stu;
     }
 }
