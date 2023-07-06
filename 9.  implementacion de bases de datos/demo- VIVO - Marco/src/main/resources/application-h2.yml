@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    password:
+    url: jdbc:h2:mem:demo_jpa
+    username: user
+  h2:
+    console:
+      enabled: true
+  sql:
+    init:
+      data-locations:
+      - classpath:carga_sql/person.sql #PEOPLE NOT PERSONS
+      - classpath:carga_sql/invoice.sql
+      mode: always
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    defer-datasource-initialization: true
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
