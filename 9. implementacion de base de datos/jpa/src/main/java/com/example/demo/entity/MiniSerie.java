@@ -21,7 +21,7 @@ public class MiniSerie {
   @Column(name = "nombre", length = 20)
   String name;
 
-  @Column(name = "rating", length = 20)
+  @Column(name = "rating", length = 3)
   Double rating;
 
   @Column(name = "premios", length = 3)

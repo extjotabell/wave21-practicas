@@ -17,6 +17,7 @@ public class MiniSerieService implements IMiniSerieService {
   @Override
   public MiniSerieIdDTO createMiniSerie(final MiniSerieDTO miniSerieDto) {
     MiniSerie miniSerie = new MiniSerie();
+
     miniSerie.setName(miniSerieDto.name());
     miniSerie.setAmountOfAwards(miniSerieDto.awards());
     miniSerie.setRating(miniSerieDto.rating());
