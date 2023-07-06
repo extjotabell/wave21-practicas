@@ -1,0 +1,7 @@
+repos:
+  - repo: https://github.com/mercadolibre/fury_datasec-git-hooks
+    rev: 1.0.1
+    hooks:
+      - id: pre_commit_hook
+        stages: [ commit ]
+        verbose: true
