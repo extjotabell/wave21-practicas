@@ -9,4 +9,8 @@ import java.util.List;
 public interface VehicleService {
     List<VehiculoDto> getAllVehicle();
     RespVehicleDto saveVehicle(VehiculoDto dto);
+    RespVehicleDto deleteCart(Long id);
+    RespVehicleDto getVehicleById(Long id);
+    RespPatentsListDto getAllPlates();
+    List<RespPatentAndBrandAndModelDto> getAllPatentAndBrandAndModel();
 }

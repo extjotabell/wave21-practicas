@@ -2,6 +2,7 @@ package com.example.segurosApi.dto;
 
 import com.example.segurosApi.model.Vehiculo;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;

@@ -30,17 +30,34 @@ public class VehicleServiceImpl implements VehicleService {
     @Override
     public RespVehicleDto saveVehicle(VehiculoDto dto) {
         Vehiculo vehiculo = mapper.map(dto, Vehiculo.class);
+        Vehiculo vehiculoSaved;
         try{
             vehiculo.getSiniestros()
                     .forEach(s -> s.setVehiculo(vehiculo));
-            vehicleRepository.save(vehiculo);
+            vehiculoSaved = vehicleRepository.save(vehiculo);
         }
         catch (Exception e){
             throw new RuntimeException("Algo pasa... " + e.getMessage());
         }
 
 
-        return new RespVehicleDto("Vehiculo guardado con exito", dto);
+        return new RespVehicleDto("Vehiculo guardado con exito", mapper.map(vehiculoSaved, VehiculoDto.class));
+    }
+
+    @Override
+    public RespVehicleDto deleteCart(Long id) {
+        vehicleRepository.deleteById(id);
+        return new RespVehicleDto("Vehiculo eliminado exito", null);
+    }
+
+    @Override
+    public RespVehicleDto getVehicleById(Long id){
+        Optional<Vehiculo> persistedVehicle =  vehicleRepository.findById(id);
+        if (!persistedVehicle.isPresent()) {
+            throw new RuntimeException("Algo pasa... " + "El vehiculo con el ID ingresado no existe");
+        }
+
+        return null;
     }
 
 

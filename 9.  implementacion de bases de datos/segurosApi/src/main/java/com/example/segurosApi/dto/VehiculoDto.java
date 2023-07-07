@@ -3,6 +3,7 @@ package com.example.segurosApi.dto;
 import com.example.segurosApi.model.Siniestro;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.core.JsonFactory;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
