@@ -1,0 +1,1 @@
+insert into factura(fecha) values ( '1992-07-10' )
