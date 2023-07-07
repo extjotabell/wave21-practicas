@@ -13,13 +13,12 @@ import lombok.Setter;
 @Getter @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class MiniSerie {
+public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
-    private String name;
-    private Double rate;
-    private int amountOfAwards;
-
+    private Long idStudent;
+    private String firstName;
+    private String lastName;
+    private String dni;
 
 }

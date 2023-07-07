@@ -32,17 +32,5 @@ public ResponseEntity<StudentDTO> findStudentByID(@PathVariable Long id){
     return ResponseEntity.ok(stuService.findbyId(id));
 }
 
-@DeleteMapping("/delete/{id}")
-public ResponseEntity<String> deleteStudent(@PathVariable Long id){
-    stuService.delete(id);
-    return ResponseEntity.ok("El usuario se ha eliminado exitosamente");
-}
-
-
-@PostMapping("/update")
-public ResponseEntity<String> updateStudent(@RequestBody StudentDTO student){
-    stuService.update(student);
-    return ResponseEntity.ok("Se ha actualizado el usuario exitosamente");
-}
 
 }
