@@ -1,0 +1,37 @@
+# ----------------------------------------|  H2-CO Configurations  |-------------------------------------------------- #
+# Habilitar una consola dentro de la web de H2
+spring:
+  h2:
+    console:
+      enabled: true
+      path: /h2A
+
+  datasource:
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+    url: jdbc:h2:mem:joyeria
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    show-sql: true
+    properties:
+      hibernate.format_sql: true
+#  jackson:
+#    property-naming-strategy: SNAKE_CASE
+
+# ----------------------------------------|  MySQL Configurations  |-------------------------------------------------- #
+
+# Conectar con la base de datos a través de la dependencia
+#spring:
+#  datasource:
+#    driverClassName: com.mysql.cj.jdbc.Driver
+#    username: root
+#    password:
+#    url: jdbc:mysql://localhost:3306/demojpa
+#
+#  # El dialecto es la versión del lenguaje SQL
+#  jpa:
+#    database-platform: org.hibernate.dialect.MySQLDialect
+#    hibernate:
+#      ddl-auto: create-drop
+#    show-sql: true
