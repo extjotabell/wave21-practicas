@@ -1,0 +1,14 @@
+
+spring:
+  datasource:
+    url: "jdbc:h2:mem:test-case"
+    username: "admin"
+    password: "admin"
+    driver-class-name: "org.h2.Driver"
+  jpa:
+    database-platform: "org.hibernate.dialect.H2Dialect"
+    defer-datasource-initialization: true
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
