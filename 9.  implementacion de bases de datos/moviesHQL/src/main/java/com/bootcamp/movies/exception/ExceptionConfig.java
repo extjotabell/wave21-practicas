@@ -1,7 +1,6 @@
 package com.bootcamp.movies.exception;
 
 import com.bootcamp.movies.dto.MessageDTO;
-import com.bootcamp.movies.dto.response.MessageDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
