@@ -20,6 +20,7 @@ public class CartController {
 
     @GetMapping("/getAll")
     public ResponseEntity<?> getCarts(){
+
         return new ResponseEntity<>(cartService.findAll(), HttpStatus.OK);
     }
 

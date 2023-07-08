@@ -1,17 +1,16 @@
 package com.example.RelacionesJpaW21.service;
 
-import com.example.RelacionesJpaW21.dto.AddressDTO;
-import com.example.RelacionesJpaW21.dto.ListUserDTO;
-import com.example.RelacionesJpaW21.dto.RespUserDTO;
-import com.example.RelacionesJpaW21.dto.UserDTO;
-import com.example.RelacionesJpaW21.entity.OneToOne.Address;
+import com.example.RelacionesJpaW21.dto.*;
+import com.example.RelacionesJpaW21.entity.OneToMany.Cart;
 import com.example.RelacionesJpaW21.entity.OneToOne.User;
 import com.example.RelacionesJpaW21.exception.UserNotFoundException;
 import com.example.RelacionesJpaW21.repository.IUserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService implements IUserService {
@@ -26,25 +25,30 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public ListUserDTO findAll() {
-        List<UserDTO> users = this.userRepository.findAll()
-                .stream()
-                .map(u ->modelMapper.map(u, UserDTO.class))
-                .toList();
+    public List<UserDTO> findAll() {
+        List<User> users = userRepository.findAll();
 
-        return new ListUserDTO(users);
+        List<UserDTO> usersDtos = new ArrayList<>();
+
+        users.stream().forEach( c -> usersDtos.add(modelMapper.map(c,UserDTO.class)));
+
+        return usersDtos;
     }
 
     @Override
     public RespUserDTO insertUser(final UserDTO userDto) {
-        User user = this.modelMapper.map(userDto, User.class);
+
+        User user = modelMapper.map(userDto, User.class);
 
         user.getAddress().setUser(user);
 
         User savedUser = this.userRepository.save(user);
 
-        UserDTO u = this.modelMapper.map(savedUser, UserDTO.class);
-        return new RespUserDTO(u, "Usuario guardado con exito.");
+        RespUserDTO response = new RespUserDTO();
+        response.setUser(modelMapper.map(savedUser, UserDTO.class));
+        response.setMessage("Guardado con éxito...");
+        return response;
+
     }
 
     @Override

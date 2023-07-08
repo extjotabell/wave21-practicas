@@ -8,7 +8,7 @@ import org.hibernate.engine.internal.Cascade;
 @Entity
 @Getter
 @Setter
-@Table(name = "address")
+@Table(name = "Direccion")
 public class Address {
 
     @Id

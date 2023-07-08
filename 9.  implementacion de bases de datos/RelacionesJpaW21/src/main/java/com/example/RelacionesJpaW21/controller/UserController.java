@@ -16,23 +16,23 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    ResponseEntity<?> findAll() {
-        return new ResponseEntity<>(this.userService.findAll(), HttpStatus.OK);
+    ResponseEntity<?> getUsers() {
+        return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("/user/{id}")
     ResponseEntity<?> getUser(@PathVariable final long id) {
-        return new ResponseEntity<>(this.userService.findById(id), HttpStatus.OK);
+        return new ResponseEntity<>(userService.findById(id), HttpStatus.OK);
     }
 
     @PostMapping("/user")
     ResponseEntity<?> createUser(@RequestBody UserDTO u) {
-        return new ResponseEntity<>(this.userService.insertUser(u), HttpStatus.OK);
+        return new ResponseEntity<>(userService.insertUser(u), HttpStatus.OK);
     }
 
     @DeleteMapping("/user/{id}")
     ResponseEntity<String> deleteUser(@PathVariable final long id) {
-        this.userService.deleteUser(id);
+        userService.deleteUser(id);
         return new ResponseEntity<>("borrado", HttpStatus.OK);
     }
 }
