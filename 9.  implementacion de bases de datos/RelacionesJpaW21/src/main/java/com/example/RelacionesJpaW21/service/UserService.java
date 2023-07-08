@@ -1,14 +1,12 @@
 package com.example.RelacionesJpaW21.service;
 
 import com.example.RelacionesJpaW21.dto.*;
-import com.example.RelacionesJpaW21.entity.OneToMany.Cart;
 import com.example.RelacionesJpaW21.entity.OneToOne.User;
 import com.example.RelacionesJpaW21.exception.UserNotFoundException;
 import com.example.RelacionesJpaW21.repository.IUserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,11 +26,9 @@ public class UserService implements IUserService {
     public List<UserDTO> findAll() {
         List<User> users = userRepository.findAll();
 
-        List<UserDTO> usersDtos = new ArrayList<>();
-
-        users.stream().forEach( c -> usersDtos.add(modelMapper.map(c,UserDTO.class)));
-
-        return usersDtos;
+        return users.stream()
+                .map(c -> modelMapper.map(c, UserDTO.class))
+                .collect(Collectors.toList());
     }
 
     @Override
