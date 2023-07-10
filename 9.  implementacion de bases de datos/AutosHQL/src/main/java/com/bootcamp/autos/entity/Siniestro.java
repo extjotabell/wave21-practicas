@@ -1,11 +1,13 @@
 package com.bootcamp.autos.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "siniestro")
+@Data
 public class Siniestro {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

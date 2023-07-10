@@ -1,14 +1,14 @@
 package com.bootcamp.autos.service;
 
-import com.bootcamp.autos.dto.ListMarcaModeloVehiculoDTO;
-import com.bootcamp.autos.dto.ListVehiculoDTO;
-import com.bootcamp.autos.dto.VehiculoDTO;
+import com.bootcamp.autos.dto.*;
+import com.bootcamp.autos.entity.Siniestro;
 import com.bootcamp.autos.entity.Vehiculo;
+import com.bootcamp.autos.exception.VehiculoNotFoundException;
 import com.bootcamp.autos.repository.IVehiculoRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.*;
 
 @Service
 public class VehiculoServiceImp implements IVehiculoService{
@@ -23,36 +23,59 @@ public class VehiculoServiceImp implements IVehiculoService{
     @Override
     public VehiculoDTO saveCar(VehiculoDTO vehiculoDTO) {
         Vehiculo vehiculo = mapper.map(vehiculoDTO, Vehiculo.class);
-        VehiculoDTO response = mapper.map(vehiculoRepository.save(vehiculo));
+        vehiculo.setSiniestros(new HashSet<Siniestro>());
+        VehiculoDTO response = mapper.map(vehiculoRepository.save(vehiculo),VehiculoDTO.class);
+        response.setMessage("Vehiculo registrado con exito");
         return response;
     }
 
     @Override
     public ListVehiculoDTO findAll() {
+        List<VehiculoDTO> response = vehiculoRepository.findAll()
+                .stream()
+                .map(m-> mapper.map(m,VehiculoDTO.class))
+                .toList();
 
-        return new ListVehiculoDTO(vehiculoRepository.findAll()
-                                                     .stream()
-                                                     .map(m-> mapper.map(m,VehiculoDTO.class))
-                                                     .toList());
+        return new ListVehiculoDTO(response);
     }
 
     @Override
-    public VehiculoDTO findById() {
-        return null;
+    public VehiculoDTO findById(Long id) {
+
+        return mapper.map(vehiculoRepository.findById(id)
+                     .orElseThrow(()->new VehiculoNotFoundException("no se encuentra el vehiculo"))
+                     ,VehiculoDTO.class);
     }
 
     @Override
     public VehiculoDTO deleteCar(Long id) {
-        return null;
+        Vehiculo carToDelete = vehiculoRepository.findById(id)
+                                     .orElseThrow(()->new VehiculoNotFoundException("No se encuentra el vehiculo"));
+        vehiculoRepository.delete(carToDelete);
+        return mapper.map(carToDelete,VehiculoDTO.class);
     }
 
     @Override
-    public List<String> findByPatente() {
-        return null;
+    public ListVehiculoPatenteDTO findByPatente() {
+        return new ListVehiculoPatenteDTO(vehiculoRepository.findPatente());
     }
 
     @Override
-    public List<ListMarcaModeloVehiculoDTO> findPatenteAndMarceOrderByAnioFabricacion() {
-        return null;
+    public ListPatenteYModeloDTO findPatenteAndMarceOrderByAnioFabricacion() {
+
+        List<Vehiculo> vehiculos = vehiculoRepository.findPatenteAndMarceOrderByAnioFabricacion();
+
+        return new ListPatenteYModeloDTO(vehiculos.stream()
+                .map(m->mapper.map(m, PatenteModeloVehiculoDTO.class))
+                .toList()
+        );
+
+    }
+
+    @Override
+    public List<PatenteMarcaModeloDTO> findCarWithElevateEconomicLost() {
+        return  vehiculoRepository.findVehiculoByPerdidasEconomicas().stream()
+                                        .map(m->mapper.map(m,PatenteMarcaModeloDTO.class))
+                                        .toList();
     }
 }

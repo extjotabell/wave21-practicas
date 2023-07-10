@@ -1,15 +1,14 @@
 package com.bootcamp.autos.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.List;
 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter @Setter
-public class ListVehiculoDTO {
-    private List<VehiculoDTO> vehiculos;
+public class ListPatenteYModeloDTO {
+    private List<PatenteModeloVehiculoDTO> patenteModeloVehiculoDTOS;
 }

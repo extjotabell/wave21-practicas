@@ -1,9 +1,6 @@
 package com.bootcamp.autos.service;
 
-import com.bootcamp.autos.dto.ListMarcaModeloVehiculoDTO;
-import com.bootcamp.autos.dto.ListVehiculoDTO;
-import com.bootcamp.autos.dto.VehiculoDTO;
-import com.bootcamp.autos.entity.Vehiculo;
+import com.bootcamp.autos.dto.*;
 
 import java.util.List;
 
@@ -11,9 +8,11 @@ public interface IVehiculoService {
 
     VehiculoDTO saveCar(VehiculoDTO vehiculoDTO);
     ListVehiculoDTO findAll();
-    VehiculoDTO findById();
+    VehiculoDTO findById(Long id);
     VehiculoDTO deleteCar (Long id);
-    List<String> findByPatente();
+    ListVehiculoPatenteDTO findByPatente();
 
-    List<ListMarcaModeloVehiculoDTO> findPatenteAndMarceOrderByAnioFabricacion();
+    ListPatenteYModeloDTO findPatenteAndMarceOrderByAnioFabricacion();
+
+    List<PatenteMarcaModeloDTO> findCarWithElevateEconomicLost();
 }
