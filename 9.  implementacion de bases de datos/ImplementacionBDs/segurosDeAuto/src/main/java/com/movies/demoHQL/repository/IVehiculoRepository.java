@@ -18,8 +18,12 @@ public interface IVehiculoRepository extends JpaRepository<Vehiculo, Integer> {
     /*
     @Query("SELECT v.patente, v.marca FROM Vehiculo v ORDER BY añoFab")
 
-    //@Query("FROM Actor")
-    //List<Vehiculo> findAllActors();
+    //@Query("FROM v.patente FROM Vehiculo WHERE cantRuedas > 4 AND añoFab >= '2023'01'01' ")
+
+    //@Query("SELECT v.patente, v.marca, v.modelo FROM Vehiculo v JOIN Siniestro s ON v.id = s.vehiculo_id WHERE s.perdida_economica > 10000")
+
+    //@Query("SELECT v.patente, v.marca, v.modelo FROM Vehiculo v JOIN Siniestro s ON v.id = s.vehiculo_id WHERE s.perdida_economica > 10000")
+
 
     //Actor findByFirstName(String firstName);
 
