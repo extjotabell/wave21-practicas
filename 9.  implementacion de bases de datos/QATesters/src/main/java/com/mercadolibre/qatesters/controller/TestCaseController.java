@@ -31,7 +31,8 @@ public class TestCaseController {
 
     @GetMapping("/{id}")
     public ResponseEntity<TestCase> getTestCaseById(@PathVariable Long id){
-        return ResponseEntity.ok(testCaseRepo.findById(id).orElseThrow(()-> new RuntimeException("No se encuentra ese ID")));
+        return ResponseEntity.ok(testCaseRepo.findById(id)
+                .orElseThrow(()-> new RuntimeException("No se encuentra ese ID")));
     }
 
 }
