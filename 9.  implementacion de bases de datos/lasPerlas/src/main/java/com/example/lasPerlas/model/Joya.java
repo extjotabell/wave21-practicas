@@ -4,17 +4,19 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity
 @Getter @Setter
+@Entity
 @Table (name = "joya")
 public class Joya {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int nro_identificatorio;
-    private String nombre;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private int id;
+    @Column(unique=true)
+    private int identificationNumber;
+    private String name;
     private String material;
-    private int peso;
-    private String particularidad;
-    private boolean posee_piedra;
-    private boolean ventaONo;
+    private int weight;
+    private String particularity;
+    private boolean hasWeight;
+    private boolean saleOrNo;
 }
