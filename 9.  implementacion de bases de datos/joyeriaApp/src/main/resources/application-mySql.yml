@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/joyeria_db
+    password: 37125712
+    username: root
+  sql:
+    init:
+      data-locations:
+        - classpath:carga_sql/person.sql
+        - classpath:carga_sql/invoice.sql
+      mode: always
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true

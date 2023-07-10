@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 public class RespPatentAndBrandAndModelDto {
     private String patent;
     private String marca;

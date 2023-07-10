@@ -1,8 +1,10 @@
 package com.example.segurosApi.service;
 
 import com.example.segurosApi.dto.VehiculoDto;
+import com.example.segurosApi.dto.response.RespPatentAndBrandAndModelDto;
+import com.example.segurosApi.dto.response.RespPatentsListAndModelDto;
+import com.example.segurosApi.dto.response.RespPatentsListDto;
 import com.example.segurosApi.dto.response.RespVehicleDto;
-import com.example.segurosApi.model.Vehiculo;
 
 import java.util.List;
 
@@ -11,6 +13,7 @@ public interface VehicleService {
     RespVehicleDto saveVehicle(VehiculoDto dto);
     RespVehicleDto deleteCart(Long id);
     RespVehicleDto getVehicleById(Long id);
-    RespPatentsListDto getAllPlates();
+    RespPatentsListDto getAllPatents();
     List<RespPatentAndBrandAndModelDto> getAllPatentAndBrandAndModel();
+    List<RespPatentsListAndModelDto> getAllVehicleOrdenByManufacturing();
 }
