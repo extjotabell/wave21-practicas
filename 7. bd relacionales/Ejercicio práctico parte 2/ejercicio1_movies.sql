@@ -34,3 +34,42 @@ select title,rating from movies where title='Toy Story';
 
 -- Mostrar a todos los actores cuyos nombres empiezan con Sam.
 select first_name, last_name from actors where first_name like 'Sam%';
+
+
+-- SQL AVANZADO
+
+-- Mostrar el título y el nombre del género de todas las series.
+select s.title,g.name
+from series as s
+join genres as g
+on s.genre_id=g.id;
+
+-- Mostrar el título de los episodios, el nombre y apellido de los actores que trabajan en cada uno de ellos.
+select e.title as episodio,a.first_name as 'nombre actor',a.last_name as 'apellido actor'
+from episodes as e
+join actor_episode as ae
+join actors as a
+on ae.episode_id=e.id;
+
+-- Mostrar el título de todas las series y el total de temporadas que tiene cada una de ellas.
+select s.title as serie,COUNT(se.title) as temporadas
+from series as s
+join seasons as se
+on s.id=se.serie_id
+group by s.title;
+
+-- Mostrar el nombre de todos los géneros y la cantidad total de películas por cada uno, siempre que sea mayor o igual a 3.
+select g.name as genero,COUNT(m.title) as peliculas
+from movies as m
+join genres as g
+on m.genre_id=g.id
+group by g.name;
+
+-- Mostrar sólo el nombre y apellido de los actores que trabajan en todas las películas de la guerra de las galaxias y que estos no se repitan.
+select ac.first_name, ac.last_name,m.title
+from actor_movie as am
+join movies as m
+join actors as ac
+on am.movie_id=m.id and ac.id=am.actor_id
+where m.title LIKE '%Guerra de las galaxias%';
+
