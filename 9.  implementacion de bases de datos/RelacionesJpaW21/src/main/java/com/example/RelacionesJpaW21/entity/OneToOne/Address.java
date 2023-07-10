@@ -11,6 +11,7 @@ public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String street;
 
     @OneToOne(mappedBy = "address")
     private User user;
