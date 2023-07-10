@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/lasperlas_joyeria
+    username: admin
+    password:
+ # sql:
+ #   init:
+ #     data-locations:
+ #     - classpath:carga_sql/jewerly.sql
+ #     mode: always
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true

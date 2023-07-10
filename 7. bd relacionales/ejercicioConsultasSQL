@@ -1,0 +1,38 @@
+-- Mostrar todos los registros de la tabla de movies. 
+SELECT * FROM movies;
+
+-- Mostrar el nombre, apellido y rating de todos los actores.
+select actors.first_name, actors.last_name from actors;
+
+-- Mostrar el título de todas las series y usar alias para que tanto el nombre de la tabla como el campo estén en esp
+select title as Titulo from series as Serie;
+
+-- Mostrar el nombre y apellido de los actores cuyo rating sea mayor a 7.5.
+select a.first_name as Nombre, a.last_name as Apellido, rating from actors a where a.rating > 7.5;
+
+-- Mostrar el título de las películas, el rating y los premios de las películas con un rating mayor a 7.5 y con más de dos premios
+select m.title, m.rating, m.awards from movies m where m.rating > 7.5 and m.awards > 2;
+
+-- Mostrar el título de las películas y el rating ordenadas por rating en forma ascendente.
+select m.title, m.rating from movies m ORDER BY rating;
+
+-- Mostrar los títulos de las primeras tres películas en la base de datos.
+select  movies.title from movies LIMIT 3; 
+
+-- Mostrar el top 5 de las películas con mayor rating.
+select * from movies where movies.rating > 5 ORDER BY movies.rating DESC LIMIT 5;
+
+-- Listar los primeros 10 actores.
+select a.first_name, a.last_name, a.rating from actors a LIMIT 10;
+
+-- Mostrar el título y rating de todas las películas cuyo título sea de Toy Story.
+select m.title, m.rating from movies m where m.title like "Toy Story%";
+
+-- Mostrar a todos los actores cuyos nombres empiezan con Sam
+select a.first_name, a.last_name, a.rating from actors where actors.first_name like "%Sam";
+
+-- Mostrar el título de las películas que salieron entre el 2004 y 2008
+select movies.title, movies.release_date from movies where movies.release_date between "20040101" AND "20080101";
+-- Traer el título de las películas con el rating mayor a 3, con más de 1 premio y con fecha de lanzamiento entre el año 1988 al 2009. Ordenar los resultados por rating
+select m.title, m.rating, m.awards, m.release_date from movies m where m.rating > 3 AND m.awards > 1 AND m.release_date between "19880101" AND "20080101" order by m.rating;
+

@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:lasperlas_joyeria
+    username: admin
+    password:
+
+  h2:
+    console:
+      enabled: true
+  sql:
+    init:
+      data-locations:
+      - classpath:carga_sql/jewerly.sql
+      mode: always
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
