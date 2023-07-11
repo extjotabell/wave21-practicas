@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
 public class ExceptionConfig {
-    @ExceptionHandler(StudentNotFoundException.class)
+    @ExceptionHandler(ActorNotFoundException.class)
     public ResponseEntity<?> userNotFoundException(Exception e){
         return ResponseEntity.badRequest().body(new MessageDTO(e.getMessage()));
     }

@@ -1,7 +1,7 @@
 package com.bootcamp.autos.repository;
 
-import com.bootcamp.autos.dto.PatenteModeloVehiculoDTO;
 import com.bootcamp.autos.entity.Vehiculo;
+import com.bootcamp.autos.repository.template.PatenteYModeloTemplate;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -13,8 +13,8 @@ public interface IVehiculoRepository extends JpaRepository<Vehiculo, Long> {
     @Query("SELECT v.patente FROM Vehiculo AS v ")
     List<String> findPatente();
 
-    @Query("FROM Vehiculo AS v ORDER BY v.anioFabricacion")
-    List<Vehiculo> findPatenteAndMarceOrderByAnioFabricacion();
+    @Query("SELECT new com.bootcamp.autos.repository.template.PatenteYModeloTemplate(v.patente,v.marca,v.anioFabricacion) FROM Vehiculo AS v ORDER BY v.anioFabricacion")
+    List<PatenteYModeloTemplate> findPatenteAndMarceOrderByAnioFabricacion();
     /*
     @Query("SELECT v.patente FROM Vehiculo AS v WHERE v.cantRuedas>=4 AND v.anioFabricacion =  current_date")
     List<Vehiculo> findVehiculoByAnioFabricacionAndCantRuedas();

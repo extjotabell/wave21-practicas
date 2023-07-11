@@ -5,6 +5,7 @@ import com.bootcamp.autos.entity.Siniestro;
 import com.bootcamp.autos.entity.Vehiculo;
 import com.bootcamp.autos.exception.VehiculoNotFoundException;
 import com.bootcamp.autos.repository.IVehiculoRepository;
+import com.bootcamp.autos.repository.template.PatenteYModeloTemplate;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -13,8 +14,8 @@ import java.util.*;
 @Service
 public class VehiculoServiceImp implements IVehiculoService{
 
-    private IVehiculoRepository vehiculoRepository;
-    private ModelMapper mapper;
+    private final IVehiculoRepository vehiculoRepository;
+    private final ModelMapper mapper;
     public VehiculoServiceImp(IVehiculoRepository vehiculoRepository) {
         this.vehiculoRepository = vehiculoRepository;
         this.mapper = new ModelMapper();
@@ -23,7 +24,7 @@ public class VehiculoServiceImp implements IVehiculoService{
     @Override
     public VehiculoDTO saveCar(VehiculoDTO vehiculoDTO) {
         Vehiculo vehiculo = mapper.map(vehiculoDTO, Vehiculo.class);
-        vehiculo.setSiniestros(new HashSet<Siniestro>());
+        vehiculo.setSiniestros(new HashSet<>());
         VehiculoDTO response = mapper.map(vehiculoRepository.save(vehiculo),VehiculoDTO.class);
         response.setMessage("Vehiculo registrado con exito");
         return response;
@@ -63,7 +64,7 @@ public class VehiculoServiceImp implements IVehiculoService{
     @Override
     public ListPatenteYModeloDTO findPatenteAndMarceOrderByAnioFabricacion() {
 
-        List<Vehiculo> vehiculos = vehiculoRepository.findPatenteAndMarceOrderByAnioFabricacion();
+        List<PatenteYModeloTemplate> vehiculos = vehiculoRepository.findPatenteAndMarceOrderByAnioFabricacion();
 
         return new ListPatenteYModeloDTO(vehiculos.stream()
                 .map(m->mapper.map(m, PatenteModeloVehiculoDTO.class))
