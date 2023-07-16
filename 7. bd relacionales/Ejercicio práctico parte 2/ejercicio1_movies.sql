@@ -73,3 +73,42 @@ join actors as ac
 on am.movie_id=m.id and ac.id=am.actor_id
 where m.title LIKE '%Guerra de las galaxias%';
 
+-- Consultas SQL Avanzadas 2
+
+-- Agregar una película a la tabla movies.
+insert into movies (title,rating,awards,release_date,genre_id) values ('Siempre a tu lado',9.5,1,'2010-03-12',3);
+
+-- Asociar a la película del punto 1. genre el género creado en el punto 2.
+-- no entiendo
+
+-- Modificar la tabla actors para que al menos un actor tenga como favorita la película agregada en el punto 1.
+update actors set favorite_movie_id=(select id from movies where title='Siempre a tu lado') where id=5;
+
+-- Crear una tabla temporal copia de la tabla movies.
+create temporary table copy_movies select * from movies;
+
+-- Eliminar de esa tabla temporal todas las películas que hayan ganado menos de 5 awards.
+delete from copy_movies where awards<5;
+
+-- Obtener la lista de todos los géneros que tengan al menos una película.
+select * from genres where id in (select genre_id from movies group by genre_id);
+
+-- Obtener la lista de actores cuya película favorita haya ganado más de 3 awards.
+select * from actors where favorite_movie_id in (select id from movies where awards>3);
+
+-- Crear un índice sobre el nombre en la tabla movies.
+create unique index id_nombre on movies(title);
+
+-- Chequee que el índice fue creado correctamente.
+show index from movies;
+
+-- En la base de datos movies ¿Existiría una mejora notable al crear índices? Analizar y justificar la respuesta.
+-- creo qe no es necesario, ya que la base de datos es pequeña y las consultas ya se pueden realizar a través del id
+-- no le veo la necesidad de estar buscando por el nombre
+-- de pronto en una base de datos como netflix si sería de gran ayuda ya que la mayoría de los usuarios buscamos las películas por el nombre
+-- o para realizar análisis de datos de inteligencia artificial para generar estadísticas si sería útil
+
+-- ¿En qué otra tabla crearía un índice y por qué? Justificar la respuesta
+-- si la base de datos fuera grande crearía uno también para el nombre de las series, otro dato que es muy buscado por usuarios
+
+
