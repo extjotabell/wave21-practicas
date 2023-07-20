@@ -1,0 +1,16 @@
+a. ¿Cuál es la primary key para la tabla de clientes? Justificar respuesta
+
+En la tabla CLIENTE, el atributo id es la PK de tipo int. Al ser la primary key ya me aseguro que no se va a repetir ni va a ser nulo.
+
+
+b. ¿Cuál es la primary key para la tabla de planes de internet? Justificar respuesta.
+
+En la tabla PLAN, el atributo id es la PK de tipo int.
+
+
+c. ¿Cómo serían las relaciones entre tablas? ¿En qué tabla debería haber foreign key? ¿A qué campo de qué tabla hace referencia dicha foreign key? Justificar respuesta.
+
+La tabla CLIENTE se relaciona con la tabla PLAN a traves de una relacion 1 a muchos. 
+La tabla TIPO_PLAN se relaciona con la tabla PLAN a traves de una relacion 1 a muchos igualmente.
+
+A su vez, en la tabla PLAN tenemos dos FK, una correspondiente al id del cliente y otra al id del tipo del plan, ambos id son PK en sus tablas correspondientes.
